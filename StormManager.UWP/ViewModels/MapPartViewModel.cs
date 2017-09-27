@@ -1,4 +1,3 @@
-using StormManager.Core.Services.LocationService;
 using StormManager.UWP.Common.ExtensionMethods;
 using System;
 using System.Collections.Generic;
@@ -87,27 +86,27 @@ namespace StormManager.UWP.ViewModels
             };
         }
 
-        public async void Map_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        public void Map_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            try
-            {
-                var locationService = await new LocationService().StartAsync();
-                this.MapCentre = locationService.Position.ToGeopoint();
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                Debug.WriteLine(ex.Message);
-#endif
-                this.MapCentre = new Geopoint(new BasicGeoposition()
-                {
-                    // Melbourne GPO
-                    Latitude = -37.813840,
-                    Longitude = 144.963000
-                });
-            }
+//            try
+//            {
+//                var locationService = await new LocationService().StartAsync();
+//                this.MapCentre = locationService.Position.ToGeopoint();
+//            }
+//            catch (Exception ex)
+//            {
+//#if DEBUG
+//                Debug.WriteLine(ex.Message);
+//#endif
+//                this.MapCentre = new Geopoint(new BasicGeoposition()
+//                {
+//                    // Melbourne GPO
+//                    Latitude = -37.813840,
+//                    Longitude = 144.963000
+//                });
+//            }
 
-            this.ZoomLevel = 14;
+//            this.ZoomLevel = 14;
             //this.MapScene = MapScene.CreateFromLocationAndRadius(this.MapCentre, 3000);
         }
     }
