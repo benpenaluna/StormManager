@@ -1,4 +1,5 @@
-﻿using Plugin.Geolocator;
+﻿using System;
+using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace StormManager.Core.Services.LocationService
             var locator = CrossGeolocator.Current;
             locator.DesiredAccuracy = 100;
 
-            return await locator.GetPositionAsync(10000);
+            return await locator.GetPositionAsync(new TimeSpan(10000));
         }
     }
 }

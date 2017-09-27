@@ -9,7 +9,6 @@ namespace StormManager.Core.Services.LocationService
 
         public Position Position => this.Helper.Position;
 
-
         public async Task<LocationService> StartAsync()
         {
             this.Helper = await new LocationHelper().StartAsync();
