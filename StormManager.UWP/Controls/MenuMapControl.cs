@@ -21,56 +21,56 @@ namespace StormManager.UWP.Controls
 
         public Geopoint MapCenter
         {
-            get { return (Geopoint)GetValue(MapCenterProperty); }
-            set { SetValue(MapCenterProperty, value); }
+            get => (Geopoint)GetValue(MapCenterProperty);
+            set => SetValue(MapCenterProperty, value);
         }
         public static readonly DependencyProperty MapCenterProperty =
             DependencyProperty.Register(nameof(MapCenter), typeof(Geopoint), typeof(MenuMapControl), new PropertyMetadata(DefaultCenter));
 
         public string MapServiceToken
         {
-            get { return (string)GetValue(MapServiceTokenProperty); }
-            set { SetValue(MapServiceTokenProperty, value); }
+            get => (string)GetValue(MapServiceTokenProperty);
+            set => SetValue(MapServiceTokenProperty, value);
         }
         public static readonly DependencyProperty MapServiceTokenProperty =
             DependencyProperty.Register(nameof(MapServiceToken), typeof(string), typeof(MenuMapControl), new PropertyMetadata(string.Empty));
 
         public double MapZoomLevel
         {
-            get { return (double)GetValue(MapZoomLevelProperty); }
-            set { SetValue(MapZoomLevelProperty, value); }
+            get => (double)GetValue(MapZoomLevelProperty);
+            set => SetValue(MapZoomLevelProperty, value);
         }
         public static readonly DependencyProperty MapZoomLevelProperty =
             DependencyProperty.Register(nameof(MapZoomLevel), typeof(double), typeof(MenuMapControl), new PropertyMetadata(6.8));
 
         public MapInteractionMode RotateInteractionMode
         {
-            get { return (MapInteractionMode)GetValue(RotateInteractionModeProperty); }
-            set { SetValue(RotateInteractionModeProperty, value); }
+            get => (MapInteractionMode)GetValue(RotateInteractionModeProperty);
+            set => SetValue(RotateInteractionModeProperty, value);
         }
         public static readonly DependencyProperty RotateInteractionModeProperty =
             DependencyProperty.Register(nameof(RotateInteractionMode), typeof(MapInteractionMode), typeof(MenuMapControl), new PropertyMetadata(MapInteractionMode.Auto));
 
         public MapInteractionMode TiltInteractionMode
         {
-            get { return (MapInteractionMode)GetValue(TiltInteractionModeProperty); }
-            set { SetValue(TiltInteractionModeProperty, value); }
+            get => (MapInteractionMode)GetValue(TiltInteractionModeProperty);
+            set => SetValue(TiltInteractionModeProperty, value);
         }
         public static readonly DependencyProperty TiltInteractionModeProperty =
             DependencyProperty.Register(nameof(TiltInteractionMode), typeof(MapInteractionMode), typeof(MenuMapControl), new PropertyMetadata(MapInteractionMode.Auto));
 
         public bool ToggleSwitch3DEnabled
         {
-            get { return (bool)GetValue(ToggleSwitch3DEnabledProperty); }
-            set { SetValue(ToggleSwitch3DEnabledProperty, value); }
+            get => (bool)GetValue(ToggleSwitch3DEnabledProperty);
+            set => SetValue(ToggleSwitch3DEnabledProperty, value);
         }
         public static readonly DependencyProperty ToggleSwitch3DEnabledProperty =
             DependencyProperty.Register(nameof(ToggleSwitch3DEnabled), typeof(bool), typeof(MenuMapControl), new PropertyMetadata(false));
 
         public MapInteractionMode ZoomInteractionMode
         {
-            get { return (MapInteractionMode)GetValue(ZoomInteractionModeProperty); }
-            set { SetValue(ZoomInteractionModeProperty, value); }
+            get => (MapInteractionMode)GetValue(ZoomInteractionModeProperty);
+            set => SetValue(ZoomInteractionModeProperty, value);
         }
         public static readonly DependencyProperty ZoomInteractionModeProperty =
             DependencyProperty.Register(nameof(ZoomInteractionMode), typeof(MapInteractionMode), typeof(MenuMapControl), new PropertyMetadata(MapInteractionMode.Auto));
@@ -97,16 +97,6 @@ namespace StormManager.UWP.Controls
             _aerialWithRoadsStyleRadioButton = GetTemplateChild<MapRadioButton>("AerialWithRoadsStyleRadioButton");
             _terrainStyleRadioButton = GetTemplateChild<MapRadioButton>("TerrainStyleRadioButton");
             _toggleSwitch3D = GetTemplateChild<ToggleSwitch>("ToggleSwitch3D");
-
-
-            //// get position
-            //Geopoint myPoint = new Geopoint(new BasicGeoposition() { Latitude = -37, Longitude = 145 });
-            ////create POI
-            //MapIcon myPOI = new MapIcon { Location = myPoint, NormalizedAnchorPoint = new Point(0.5, 1.0), Title = "My position", ZIndex = 0 };
-            //// add to map and center it
-            //_myMapControl.MapElements.Add(myPOI);
-            //_myMapControl.Center = myPoint;
-            //_myMapControl.ZoomLevel = 10;
         }
 
         private void AttachEvents()
@@ -121,8 +111,7 @@ namespace StormManager.UWP.Controls
 
         private T GetTemplateChild<T>(string name) where T : DependencyObject
         {
-            var child = GetTemplateChild(name) as T;
-            if (child == null)
+            if (!(GetTemplateChild(name) is T child))
                 throw new NullReferenceException(name);
 
             return child;
