@@ -47,7 +47,7 @@ namespace StormManager.UWP.ViewModels
             }
         }
 
-        public string MapServiceToken { get; } = "RYk2BDecUPKigvHYDlDX~zWzHsAAHeBl9sfx8t39TkA~AgrNAiZPi3jxjufKGWpb5NusnYv98Qe0kvTzhPWhiI7VvsvVLOgJaSj-Wmlyx1fv";
+        public string MapServiceToken { get; } = "";
 
         private MapStyle _mapStyle;
         public MapStyle MapStyle
