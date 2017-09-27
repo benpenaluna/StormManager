@@ -12,6 +12,8 @@ namespace StormManager.UWP.Controls
     {
         private MapControl _myMapControl;
         private Button _styleButton;
+        private AutoSuggestBox _directionsSuggestBox;
+
         private MapRadioButton _roadStyleRadioButton;
         private MapRadioButton _aerialStyleRadioButton;
         private MapRadioButton _aerialWithRoadsStyleRadioButton;
@@ -92,6 +94,7 @@ namespace StormManager.UWP.Controls
         {
             _myMapControl = GetTemplateChild<MapControl>("MyMapControl");
             _styleButton = GetTemplateChild<Button>("StyleButton");
+            _directionsSuggestBox = GetTemplateChild<AutoSuggestBox>("DirectionsSuggestBox");
             _roadStyleRadioButton = GetTemplateChild<MapRadioButton>("RoadStyleRadioButton");
             _aerialStyleRadioButton = GetTemplateChild<MapRadioButton>("AerialStyleRadioButton");
             _aerialWithRoadsStyleRadioButton = GetTemplateChild<MapRadioButton>("AerialWithRoadsStyleRadioButton");
@@ -102,6 +105,20 @@ namespace StormManager.UWP.Controls
         private void AttachEvents()
         {
             _myMapControl.Loaded += (s, e) => MapLoaded?.Invoke(s, e);
+
+            AttachSuggestBoxEvents();
+            AttachStyleEvents();
+        }
+
+        private void AttachSuggestBoxEvents()
+        {
+            _directionsSuggestBox.TextChanged += DirectionsSuggestBox_TextChanged;
+            _directionsSuggestBox.SuggestionChosen += DirectionsSuggestBox_SuggestionChosen;
+            _directionsSuggestBox.QuerySubmitted += DirectionsSuggestBox_QuerySubmitted;
+        }
+
+        private void AttachStyleEvents()
+        {
             _roadStyleRadioButton.Checked += MapStylePresenter_Changed;
             _aerialStyleRadioButton.Checked += MapStylePresenter_Changed;
             _aerialWithRoadsStyleRadioButton.Checked += MapStylePresenter_Changed;
@@ -115,6 +132,37 @@ namespace StormManager.UWP.Controls
                 throw new NullReferenceException(name);
 
             return child;
+        }
+
+        private void DirectionsSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            // Only get results when it was a user typing, 
+            // otherwise assume the value got filled in by TextMemberPath 
+            // or the handler for SuggestionChosen.
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                //Set the ItemsSource to be your filtered dataset
+                //sender.ItemsSource = dataset;
+            }
+        }
+
+
+        private void DirectionsSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            // Set sender.Text. You can use args.SelectedItem to build your text string.
+        }
+
+
+        private void DirectionsSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null)
+            {
+                // User selected an item from the suggestion list, take an action on it here.
+            }
+            else
+            {
+                // Use args.QueryText to determine what to do.
+            }
         }
 
         private void MapStylePresenter_Changed(object sender, RoutedEventArgs e)

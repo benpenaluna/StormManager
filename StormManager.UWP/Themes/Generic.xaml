@@ -36,20 +36,24 @@
                                 Canvas.ZIndex="10"
                                 Opacity="0.5" />
 
-                        <TextBox x:Name="DirectionsTextBox"
-                                 Width="400"
-                                 Margin="30,0,0,0"
-                                 Canvas.ZIndex="20"
-                                 RelativePanel.AlignLeftWithPanel="True"
-                                 RelativePanel.AlignVerticalCenterWith="MenuRibbon"/>
+                        <AutoSuggestBox x:Name="DirectionsSuggestBox"
+                                        PlaceholderText="Search"
+                                        QueryIcon="Find"
+                                        Width="400"
+                                        Margin="30,0,0,0"
+                                        Canvas.ZIndex="20"
+                                        RelativePanel.AlignLeftWithPanel="True"
+                                        RelativePanel.AlignVerticalCenterWith="MenuRibbon"/>
 
-                        <Button x:Name="DirectionsButton"
+                        <!--<Button x:Name="DirectionsButton"
+                                FontFamily="Segoe MDL2 Assets"
+                                Content="&#xE11A;"
                                 Height="{Binding Path=Height, ElementName=DirectionsTextBox}"
                                 Width="{Binding Path=Height, ElementName=DirectionsTextBox}"
                                 Background="SteelBlue"
                                 Canvas.ZIndex="20"
                                 RelativePanel.RightOf="DirectionsTextBox"
-                                RelativePanel.AlignVerticalCenterWith="MenuRibbon"/>
+                                RelativePanel.AlignVerticalCenterWith="MenuRibbon"/>-->
 
                         <Button x:Name="StyleButton" Content="Road"
                                 Background="Transparent"
