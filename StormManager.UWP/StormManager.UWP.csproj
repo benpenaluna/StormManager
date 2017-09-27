@@ -97,6 +97,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Exceptions\GeolocationAccessDeniedException.cs" />
     <Compile Include="Common\ExtensionMethods\LocationExtensions.cs" />
     <Compile Include="Controls\IMapStylePresenter.cs" />
     <Compile Include="Controls\MapRadioButton.cs" />
@@ -104,6 +105,9 @@
     <Compile Include="Controls\MenuMapControl.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LocationService\ILocationService.cs" />
+    <Compile Include="Services\LocationService\LocationHelper.cs" />
+    <Compile Include="Services\LocationService\LocationService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\DetailPageViewModel.cs" />
