@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
@@ -31,9 +32,7 @@ namespace StormManager.UWP.ViewModels
                 base.RaisePropertyChanged();
             }
         }
-
-
-
+        
         private MapScene _mapScene;
         public MapScene MapScene
         {
@@ -45,7 +44,7 @@ namespace StormManager.UWP.ViewModels
             }
         }
 
-        public string MapServiceToken { get; } = new MapKeyService().Key;
+        public string MapServiceToken { get; private set; }
 
         private MapStyle _mapStyle;
         public MapStyle MapStyle
@@ -71,6 +70,10 @@ namespace StormManager.UWP.ViewModels
 
         public MapPartViewModel()
         {
+            var mapKeyService = new MapKeyService();
+            Task.Run(() => mapKeyService.StartAsync()).Wait();
+            MapServiceToken = mapKeyService.Key;
+
             var myPoint = new Geopoint(new BasicGeoposition() { Latitude = -37.57702, Longitude = 144.75402 });
             this.MapElements = new List<MapElement>
             {
@@ -82,6 +85,7 @@ namespace StormManager.UWP.ViewModels
                     ZIndex = 0
                 }
             };
+            
         }
 
         public void Map_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)

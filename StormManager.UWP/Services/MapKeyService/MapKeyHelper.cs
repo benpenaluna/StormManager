@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace StormManager.UWP.Services.MapKeyService
 {
     public class MapKeyHelper
     {
-        private readonly string _keyFileLocation = @"C:\Users\Ben\Documents\MapServicesKey.txt";
-
+        private readonly string _keyFileLocation = @"ms-appx:///Assets/key.txt";
+        
         public string Key { get; private set; }
 
         public async Task<MapKeyHelper> StartAsync()
@@ -18,14 +20,17 @@ namespace StormManager.UWP.Services.MapKeyService
 
         private async Task<string> GetMapKeyAsync()
         {
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(_keyFileLocation));
             var key = string.Empty;
             try
             {
-                using (var fs = new FileStream(_keyFileLocation, FileMode.Open))
+                using (IRandomAccessStream stream = await file.OpenReadAsync())
                 {
-                    using (var sr = new StreamReader(fs))
+                    using (var dr = new DataReader(stream))
                     {
-                        key = await sr.ReadLineAsync();
+                        var length = (uint) stream.Size;
+                        await dr.LoadAsync(length);
+                        key = dr.ReadString(length);
                     }
                 }
             }
