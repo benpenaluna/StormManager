@@ -2,11 +2,11 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace StormManager.Standard.Services.MapKeyService
+namespace StormManager.UWP.Services.MapKeyService
 {
     public class MapKeyHelper
     {
-        private readonly string _keyFileLocation = @"C:\Users\Ben\Documents\Visual Studio 2015\Projects\StormManager\MapServicesKey.txt";
+        private readonly string _keyFileLocation = @"C:\Users\Ben\Documents\MapServicesKey.txt";
 
         public string Key { get; private set; }
 
@@ -21,9 +21,12 @@ namespace StormManager.Standard.Services.MapKeyService
             var key = string.Empty;
             try
             {
-                using (var sr = new StreamReader(_keyFileLocation))
+                using (var fs = new FileStream(_keyFileLocation, FileMode.Open))
                 {
-                    key = await sr.ReadLineAsync();
+                    using (var sr = new StreamReader(fs))
+                    {
+                        key = await sr.ReadLineAsync();
+                    }
                 }
             }
             catch (FileNotFoundException)

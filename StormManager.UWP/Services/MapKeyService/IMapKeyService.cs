@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StormManager.Standard.Services.MapKeyService
+namespace StormManager.UWP.Services.MapKeyService
 {
-    interface IMapKeyService
+    internal interface IMapKeyService
     {
         string Key { get; }
     }

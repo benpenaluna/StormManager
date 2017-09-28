@@ -1,11 +1,9 @@
-using StormManager.UWP.Common.ExtensionMethods;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Template10.Mvvm;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls.Maps;
+using StormManager.UWP.Services.MapKeyService;
 
 namespace StormManager.UWP.ViewModels
 {
@@ -47,7 +45,7 @@ namespace StormManager.UWP.ViewModels
             }
         }
 
-        public string MapServiceToken { get; } = "";
+        public string MapServiceToken { get; } = new MapKeyService().Key;
 
         private MapStyle _mapStyle;
         public MapStyle MapStyle
