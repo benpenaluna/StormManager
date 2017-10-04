@@ -19,7 +19,8 @@ namespace StormManager.UWP.Controls
         private MapRadioButton _aerialWithRoadsStyleRadioButton;
         private MapRadioButton _terrainStyleRadioButton;
         private ToggleSwitch _toggleSwitch3D;
-        private static readonly Geopoint DefaultCenter = new Geopoint(new BasicGeoposition() { Latitude = -36.151527, Longitude = 144.765963 });
+        private static Geopoint _defaultCenter;
+        private static MapScene _defaultMapScene;
 
         public Geopoint MapCenter
         {
@@ -27,7 +28,15 @@ namespace StormManager.UWP.Controls
             set => SetValue(MapCenterProperty, value);
         }
         public static readonly DependencyProperty MapCenterProperty =
-            DependencyProperty.Register(nameof(MapCenter), typeof(Geopoint), typeof(MenuMapControl), new PropertyMetadata(DefaultCenter));
+            DependencyProperty.Register(nameof(MapCenter), typeof(Geopoint), typeof(MenuMapControl), new PropertyMetadata(_defaultCenter));
+
+        public MapScene MapScene
+        {
+            get => (MapScene)GetValue(MapSceneProperty);
+            set => SetValue(MapSceneProperty, value);
+        }
+        public static readonly DependencyProperty MapSceneProperty =
+            DependencyProperty.Register(nameof(MapScene), typeof(MapScene), typeof(MenuMapControl), new PropertyMetadata(_defaultMapScene));
 
         public string MapServiceToken
         {
@@ -79,10 +88,17 @@ namespace StormManager.UWP.Controls
 
         public MenuMapControl()
         {
-            this.DefaultStyleKey = typeof(MenuMapControl);
-        }
+            DefaultStyleKey = typeof(MenuMapControl);
+            InitialiseDefaultPropertyValues();
+    }
 
         public event EventHandler<RoutedEventArgs> MapLoaded;
+
+        private static void InitialiseDefaultPropertyValues()
+        {
+            _defaultCenter = new Geopoint(new BasicGeoposition() { Latitude = -36.151527, Longitude = 144.765963 });
+            _defaultMapScene = MapScene.CreateFromLocationAndRadius(_defaultCenter, 40000);
+        }
 
         protected override void OnApplyTemplate()
         {
@@ -105,7 +121,7 @@ namespace StormManager.UWP.Controls
         private void AttachEvents()
         {
             _myMapControl.Loaded += (s, e) => MapLoaded?.Invoke(s, e);
-
+            
             AttachSuggestBoxEvents();
             AttachStyleEvents();
         }

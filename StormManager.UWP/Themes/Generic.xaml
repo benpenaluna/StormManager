@@ -12,6 +12,7 @@
                     <RelativePanel>
                         <maps:MapControl x:Name="MyMapControl"
                                          Center="{TemplateBinding MapCenter}"
+                                         Scene="{TemplateBinding MapScene}"
                                          MapServiceToken="{TemplateBinding MapServiceToken}"
                                          RotateInteractionMode="{TemplateBinding RotateInteractionMode}"
                                          TiltInteractionMode="{TemplateBinding TiltInteractionMode}"
@@ -21,7 +22,6 @@
                                          RelativePanel.AlignLeftWithPanel="True"
                                          RelativePanel.AlignRightWithPanel="True"
                                          RelativePanel.AlignBottomWithPanel="True">
-
                         </maps:MapControl>
 
                         <Border x:Name="MenuRibbon"

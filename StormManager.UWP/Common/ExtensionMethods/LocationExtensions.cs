@@ -1,19 +1,12 @@
-﻿using Plugin.Geolocator.Abstractions;
-using Windows.Devices.Geolocation;
+﻿using Windows.Devices.Geolocation;
 
 namespace StormManager.UWP.Common.ExtensionMethods
 {
     public static class LocationExtensions
     {
-        public static Geopoint ToGeopoint(this Position position)
+        public static Geopoint ToGeopoint(this BasicGeoposition position)
         {
-            var basicGeoPosition = new BasicGeoposition()
-            {
-                Latitude = position.Latitude,
-                Longitude = position.Longitude
-            };
-
-            return new Geopoint(basicGeoPosition);
+            return new Geopoint(position);
         }
     }
 }

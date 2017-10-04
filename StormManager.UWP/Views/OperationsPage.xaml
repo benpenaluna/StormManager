@@ -6,6 +6,8 @@
     xmlns:local="using:StormManager.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:controls="using:Template10.Controls"
     xmlns:vm="using:StormManager.UWP.ViewModels"
@@ -67,9 +69,17 @@
                 </PivotItem.Header>
 
                 <controls1:MenuMapControl x:Name="MyMenuMapControl"
-                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                 TiltInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl"
-                                 MapServiceToken="RYk2BDecUPKigvHYDlDX~zWzHsAAHeBl9sfx8t39TkA~AgrNAiZPi3jxjufKGWpb5NusnYv98Qe0kvTzhPWhiI7VvsvVLOgJaSj-Wmlyx1fv" />
+                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                          TiltInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl"
+                                          MapServiceToken="{Binding MapServiceToken}"
+                                          MapCenter="{Binding MapCentre}"
+                                          MapScene="{Binding MapScene}" >
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="MapLoaded">
+                            <Core:InvokeCommandAction Command="{Binding MapLoadedCommand}" />
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </controls1:MenuMapControl>
 
             </PivotItem>
 

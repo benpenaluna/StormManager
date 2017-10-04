@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Template10.Mvvm;
 using Windows.Devices.Geolocation;
-using Windows.Foundation;
 using Windows.UI.Xaml.Controls.Maps;
+using StormManager.UWP.Common.ExtensionMethods;
+using StormManager.UWP.Services.LocationService;
 using StormManager.UWP.Services.MapKeyService;
 
 namespace StormManager.UWP.ViewModels
@@ -13,7 +16,7 @@ namespace StormManager.UWP.ViewModels
         private Geopoint _mapCentre;
         public Geopoint MapCentre
         {
-            get { return _mapCentre; }
+            get => _mapCentre;
             set
             {
                 _mapCentre = value;
@@ -25,7 +28,7 @@ namespace StormManager.UWP.ViewModels
 
         public IList<MapElement> MapElements
         {
-            get { return _mapElements; }
+            get => _mapElements;
             set
             {
                 _mapElements = value;
@@ -36,7 +39,7 @@ namespace StormManager.UWP.ViewModels
         private MapScene _mapScene;
         public MapScene MapScene
         {
-            get { return _mapScene; }
+            get => _mapScene;
             set
             {
                 _mapScene = value;
@@ -49,7 +52,7 @@ namespace StormManager.UWP.ViewModels
         private MapStyle _mapStyle;
         public MapStyle MapStyle
         {
-            get { return _mapStyle; }
+            get => _mapStyle;
             set
             {
                 _mapStyle = value;
@@ -60,7 +63,7 @@ namespace StormManager.UWP.ViewModels
         private double _zoomLevel;
         public double ZoomLevel
         {
-            get { return _zoomLevel; }
+            get => _zoomLevel;
             set
             {
                 _zoomLevel = value;
@@ -68,48 +71,37 @@ namespace StormManager.UWP.ViewModels
             }
         }
 
+        private ICommand _mapLoadeedCommand; 
+        public ICommand MapLoadedCommand => _mapLoadeedCommand ?? (_mapLoadeedCommand = new DelegateCommand(Map_Loaded));
+
         public MapPartViewModel()
+        {
+            RetrieveMapServiceToken();
+        }
+
+        private void RetrieveMapServiceToken()
         {
             var mapKeyService = new MapKeyService();
             Task.Run(() => mapKeyService.StartAsync()).Wait();
             MapServiceToken = mapKeyService.Key;
-
-            var myPoint = new Geopoint(new BasicGeoposition() { Latitude = -37.57702, Longitude = 144.75402 });
-            this.MapElements = new List<MapElement>
-            {
-                new MapIcon()
-                {
-                    Location = myPoint,
-                    NormalizedAnchorPoint = new Point(0.5, 1.0),
-                    Title = "My House",
-                    ZIndex = 0
-                }
-            };
-            
         }
 
-        public void Map_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void Map_Loaded()
         {
-//            try
-//            {
-//                var locationService = await new LocationService().StartAsync();
-//                this.MapCentre = locationService.Position.ToGeopoint();
-//            }
-//            catch (Exception ex)
-//            {
-//#if DEBUG
-//                Debug.WriteLine(ex.Message);
-//#endif
-//                this.MapCentre = new Geopoint(new BasicGeoposition()
-//                {
-//                    // Melbourne GPO
-//                    Latitude = -37.813840,
-//                    Longitude = 144.963000
-//                });
-//            }
+            await TrySetCurrentLocation(3000);
+        }
 
-//            this.ZoomLevel = 14;
-            //this.MapScene = MapScene.CreateFromLocationAndRadius(this.MapCentre, 3000);
+        private async Task TrySetCurrentLocation(double radiusInMeters = 10000)
+        {
+            ILocationService locationService;
+
+            try { locationService = await new LocationService().StartAsync().ConfigureAwait(false); }
+            catch { return; }
+
+            if (locationService == null) return;
+
+            this.MapCentre = locationService.Position.ToGeopoint();
+            this.MapScene = MapScene.CreateFromLocationAndRadius(this.MapCentre, radiusInMeters);
         }
     }
 }
