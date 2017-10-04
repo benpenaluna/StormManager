@@ -19,8 +19,8 @@ namespace StormManager.UWP.Controls
         private MapRadioButton _aerialWithRoadsStyleRadioButton;
         private MapRadioButton _terrainStyleRadioButton;
         private ToggleSwitch _toggleSwitch3D;
-        private static Geopoint _defaultCenter;
-        private static MapScene _defaultMapScene;
+        private static readonly Geopoint DefaultCenter = new Geopoint(new BasicGeoposition() { Latitude = -36.151527, Longitude = 144.765963 });
+        private static readonly MapScene DefaultMapScene = Windows.UI.Xaml.Controls.Maps.MapScene.CreateFromLocationAndRadius(DefaultCenter, 40000);
 
         public Geopoint MapCenter
         {
@@ -28,7 +28,7 @@ namespace StormManager.UWP.Controls
             set => SetValue(MapCenterProperty, value);
         }
         public static readonly DependencyProperty MapCenterProperty =
-            DependencyProperty.Register(nameof(MapCenter), typeof(Geopoint), typeof(MenuMapControl), new PropertyMetadata(_defaultCenter));
+            DependencyProperty.Register(nameof(MapCenter), typeof(Geopoint), typeof(MenuMapControl), new PropertyMetadata(DefaultCenter));
 
         public MapScene MapScene
         {
@@ -36,7 +36,7 @@ namespace StormManager.UWP.Controls
             set => SetValue(MapSceneProperty, value);
         }
         public static readonly DependencyProperty MapSceneProperty =
-            DependencyProperty.Register(nameof(MapScene), typeof(MapScene), typeof(MenuMapControl), new PropertyMetadata(_defaultMapScene));
+            DependencyProperty.Register(nameof(MapScene), typeof(MapScene), typeof(MenuMapControl), new PropertyMetadata(DefaultMapScene));
 
         public string MapServiceToken
         {
@@ -89,17 +89,10 @@ namespace StormManager.UWP.Controls
         public MenuMapControl()
         {
             DefaultStyleKey = typeof(MenuMapControl);
-            InitialiseDefaultPropertyValues();
-    }
-
-        public event EventHandler<RoutedEventArgs> MapLoaded;
-
-        private static void InitialiseDefaultPropertyValues()
-        {
-            _defaultCenter = new Geopoint(new BasicGeoposition() { Latitude = -36.151527, Longitude = 144.765963 });
-            _defaultMapScene = MapScene.CreateFromLocationAndRadius(_defaultCenter, 40000);
         }
 
+        public event EventHandler<RoutedEventArgs> MapLoaded;
+        
         protected override void OnApplyTemplate()
         {
             InitialiseControlReferences();

@@ -95,7 +95,7 @@ namespace StormManager.UWP.ViewModels
         {
             ILocationService locationService;
 
-            try { locationService = await new LocationService().StartAsync().ConfigureAwait(false); }
+            try { locationService = await new LocationService().StartAsync(); }
             catch { return; }
 
             if (locationService == null) return;
