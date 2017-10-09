@@ -10,7 +10,7 @@ namespace StormManager.UWP.Services.LocationService
         public GeolocationAccessStatus AccessStatus { get; private set; }
         public BasicGeoposition Position { get; private set; }
 
-        public async Task<LocationHelper> StartAsync()
+        public async Task<LocationHelper> CreateAsync()
         {
             try
             {

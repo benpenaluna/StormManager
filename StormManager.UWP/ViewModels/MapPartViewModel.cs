@@ -79,29 +79,29 @@ namespace StormManager.UWP.ViewModels
             RetrieveMapServiceToken();
         }
 
-        private void RetrieveMapServiceToken()
+        private async void RetrieveMapServiceToken()
         {
-            var mapKeyService = new MapKeyService();
-            Task.Run(() => mapKeyService.StartAsync()).Wait();
+            IMapKeyService mapKeyService = await MapKeyService.CreateAsync();
             MapServiceToken = mapKeyService.Key;
         }
 
         private async void Map_Loaded()
         {
-            await TrySetCurrentLocation(3000);
+            await TrySetCurrentLocationAsync(3000);
         }
 
-        private async Task TrySetCurrentLocation(double radiusInMeters = 10000)
+        private async Task<bool> TrySetCurrentLocationAsync(double radiusInMeters = 10000)
         {
             ILocationService locationService;
 
-            try { locationService = await new LocationService().StartAsync(); }
-            catch { return; }
+            try { locationService = await LocationService.CreateAsync(); }
+            catch { return false; }
 
-            if (locationService == null) return;
+            if (locationService == null) return false;
 
             this.MapCentre = locationService.Position.ToGeopoint();
             this.MapScene = MapScene.CreateFromLocationAndRadius(this.MapCentre, radiusInMeters);
+            return true;
         }
     }
 }

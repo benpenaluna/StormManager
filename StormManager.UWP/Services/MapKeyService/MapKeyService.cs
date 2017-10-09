@@ -8,9 +8,15 @@ namespace StormManager.UWP.Services.MapKeyService
 
         public string Key => this.Helper.Key;
 
-        public async Task<MapKeyService> StartAsync()
+        public static Task<MapKeyService> CreateAsync()
         {
-            this.Helper = await new MapKeyHelper().StartAsync();
+            var result = new MapKeyService();
+            return result.InitialiseAsync();
+        }
+
+        private async Task<MapKeyService> InitialiseAsync()
+        {
+            this.Helper = await new MapKeyHelper().CreateAsync();
             return this;
         }
     }

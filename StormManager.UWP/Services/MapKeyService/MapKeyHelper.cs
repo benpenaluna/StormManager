@@ -12,7 +12,7 @@ namespace StormManager.UWP.Services.MapKeyService
         
         public string Key { get; private set; }
 
-        public async Task<MapKeyHelper> StartAsync()
+        public async Task<MapKeyHelper> CreateAsync()
         {
             Key  = await GetMapKeyAsync();
             return this;
