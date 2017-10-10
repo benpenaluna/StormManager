@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Template10.Mvvm;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
+using StormManager.Core.Common.Results;
 using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Services.LocationService;
 using StormManager.UWP.Services.MapKeyService;
@@ -87,21 +88,14 @@ namespace StormManager.UWP.ViewModels
 
         private async void Map_Loaded()
         {
-            await TrySetCurrentLocationAsync(3000);
+            var location = await LocationService.TryGetCurrentLocationAsync();
+            if (location.Success) SetCurrentLocation(location.Result, 3000);
         }
 
-        private async Task<bool> TrySetCurrentLocationAsync(double radiusInMeters = 10000)
+        private void SetCurrentLocation(BasicGeoposition location, double radiusInMeters = 10000)
         {
-            ILocationService locationService;
-
-            try { locationService = await LocationService.CreateAsync(); }
-            catch { return false; }
-
-            if (locationService == null) return false;
-
-            this.MapCentre = locationService.Position.ToGeopoint();
+            this.MapCentre = location.ToGeopoint();
             this.MapScene = MapScene.CreateFromLocationAndRadius(this.MapCentre, radiusInMeters);
-            return true;
         }
     }
 }

@@ -35,6 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Common\Results\ITryGetAsyncResult.cs" />
+    <Compile Include="Common\Results\TryGetAsyncResult.cs" />
     <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService\ILocationService.cs" />
