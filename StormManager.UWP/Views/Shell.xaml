@@ -21,9 +21,9 @@
                     <SymbolIcon Width="48"
                                 Height="48"
                                 Symbol="Home" />
-                    <TextBlock Margin="12,0,0,0"
-                               VerticalAlignment="Center"
-                               Text="Home" />
+                    <TextBlock x:Uid="ShellHome"
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
@@ -32,9 +32,9 @@
                     <SymbolIcon Width="48"
                                 Height="48"
                                 Symbol="Map" />
-                    <TextBlock Margin="12,0,0,0"
-                               VerticalAlignment="Center"
-                               Text="Operations"/>
+                    <TextBlock x:Uid="ShellOperations" 
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
@@ -43,9 +43,9 @@
                     <SymbolIcon Width="48"
                                 Height="48"
                                 Symbol="Clock" />
-                    <TextBlock Margin="12,0,0,0"
-                               VerticalAlignment="Center"
-                               Text="Planning"/>
+                    <TextBlock x:Uid="ShellPlanning" 
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
 
@@ -54,9 +54,9 @@
                     <SymbolIcon Width="48"
                                 Height="48"
                                 Symbol="People" />
-                    <TextBlock Margin="12,0,0,0"
-                               VerticalAlignment="Center"
-                               Text="Logistics"/>
+                    <TextBlock x:Uid="ShellLogistics" 
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.PrimaryButtons>
@@ -78,9 +78,9 @@
                     <SymbolIcon Width="48"
                                 Height="48"
                                 Symbol="Contact" />
-                    <TextBlock Margin="12,0,0,0"
-                               VerticalAlignment="Center"
-                               Text="User profile" />
+                    <TextBlock x:Uid="ShellUserProfile" 
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
             <!--  settingspage button  -->
@@ -94,9 +94,9 @@
                     <SymbolIcon Width="48"
                                 Height="48"
                                 Symbol="Setting" />
-                    <TextBlock Margin="12,0,0,0"
-                               VerticalAlignment="Center"
-                               Text="Settings" />
+                    <TextBlock x:Uid="ShellSettings" 
+                               Margin="12,0,0,0"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.SecondaryButtons>

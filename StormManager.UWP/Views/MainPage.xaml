@@ -49,17 +49,17 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <controls:PageHeader x:Name="pageHeader"
+        <controls:PageHeader x:Name="PageHeader"
+                             x:Uid="MainPageHeader"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True"
-                             Text="Dashboard">
+                             RelativePanel.AlignTopWithPanel="True" >  
 
             <!--  secondary commands  -->
             <controls:PageHeader.SecondaryCommands>
-                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" Label="Settings" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" Label="Privacy" />
-                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" Label="About" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" x:Uid="SettingsAppBarButton" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" x:Uid="PrivacyAppBarButton" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" x:Uid="AboutAppBarButton" />
             </controls:PageHeader.SecondaryCommands>
 
         </controls:PageHeader>
@@ -68,7 +68,7 @@
                        RelativePanel.AlignBottomWithPanel="True"
                        RelativePanel.AlignLeftWithPanel="True"
                        RelativePanel.AlignRightWithPanel="True"
-                       RelativePanel.Below="pageHeader">
+                       RelativePanel.Below="PageHeader">
 
             <StackPanel>
                 <!-- TODO: Change this the Bing Maps Control -->

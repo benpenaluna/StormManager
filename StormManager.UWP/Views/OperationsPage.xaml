@@ -42,7 +42,7 @@
 
         <!--  header  -->
         <controls:PageHeader x:Name="PageHeader"
-                             Content="Operations"
+                             x:Uid="OperationsPageHeader"
                              Frame="{x:Bind Frame}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
@@ -61,11 +61,12 @@
                RelativePanel.AlignBottomWithPanel="True"
                RelativePanel.AlignLeftWithPanel="True"
                RelativePanel.AlignRightWithPanel="True"
-               RelativePanel.Below="PageHeader">
+               RelativePanel.Below="PageHeader">    
 
             <PivotItem DataContext="{Binding MapPartViewModel}" >
                 <PivotItem.Header>
-                    <TextBlock Text="Map" Style="{StaticResource PivotItemHeaderTextBlockStyle}" />
+                    <TextBlock x:Uid="MapPivotItem" 
+                               Style="{StaticResource PivotItemHeaderTextBlockStyle}" />
                 </PivotItem.Header>
 
                 <controls1:MenuMapControl x:Name="MyMenuMapControl"
@@ -80,10 +81,7 @@
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </controls1:MenuMapControl>
-
             </PivotItem>
-
         </Pivot>
-
     </RelativePanel>
 </Page>
