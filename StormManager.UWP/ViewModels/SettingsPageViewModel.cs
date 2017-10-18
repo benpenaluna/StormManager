@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.UI.Xaml;
+using StormManager.UWP.Services.ResourceLoaderService;
 
 namespace StormManager.UWP.ViewModels
 {
@@ -63,13 +64,13 @@ namespace StormManager.UWP.ViewModels
             set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; base.RaisePropertyChanged(); }
         }
 
-        private string _BusyText = "Please wait...";
+        private string _busyText = ResourceLoaderService.GetResourceValue("BusyText");
         public string BusyText
         {
-            get { return _BusyText; }
+            get { return _busyText; }
             set
             {
-                Set(ref _BusyText, value);
+                Set(ref _busyText, value);
                 _ShowBusyCommand.RaiseCanExecuteChanged();
             }
         }
@@ -78,7 +79,7 @@ namespace StormManager.UWP.ViewModels
         public DelegateCommand ShowBusyCommand
             => _ShowBusyCommand ?? (_ShowBusyCommand = new DelegateCommand(async () =>
             {
-                Views.Busy.SetBusy(true, _BusyText);
+                Views.Busy.SetBusy(true, _busyText);
                 await Task.Delay(5000);
                 Views.Busy.SetBusy(false);
             }, () => !string.IsNullOrEmpty(BusyText)));

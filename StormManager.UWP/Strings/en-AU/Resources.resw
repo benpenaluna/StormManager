@@ -121,6 +121,18 @@
     <value>About</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
   </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Storm Manager faciliates the management of multiple storm operations at a local level.</value>
+    <comment>Description of the app</comment>
+  </data>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Storm Manager</value>
+    <comment>Name to be displayed to the user</comment>
+  </data>
+  <data name="BusyText" xml:space="preserve">
+    <value>Please wait...</value>
+    <comment>Text to be displayed when app is busy</comment>
+  </data>
   <data name="MainPageHeader.Text" xml:space="preserve">
     <value>Dashboard</value>
     <comment>Views.MainPage.PageHeader</comment>
@@ -162,7 +174,7 @@
     <comment>Views.Shell.HamburgerButtonInfo</comment>
   </data>
   <data name="ShellUserProfile.Text" xml:space="preserve">
-    <value>User profile</value>
+    <value>User Profile</value>
     <comment>Views.Shell.HamburgerButtonInfo</comment>
   </data>
 </root>
