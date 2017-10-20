@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace StormManager.UWP.Services.ResourceLoaderService
 {
-    public static class ResourceLoaderService
+    public sealed class ResourceLoaderService : IResourceLoaderService
     {
-        public static string GetResourceValue(string name)
+        private static readonly Lazy<ResourceLoaderService> uniqueInstance = new Lazy<ResourceLoaderService>(() => new ResourceLoaderService());
+
+        private ResourceLoaderService() { }
+
+        public static ResourceLoaderService Instance => uniqueInstance.Value;
+
+        public string Value(string name)
         {
             var loader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
             return loader.GetString(name);

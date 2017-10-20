@@ -20,7 +20,7 @@ namespace StormManager.UWP.Services.MapKeyService
 
         private async Task<string> GetMapKeyAsync()
         {
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(_keyFileLocation));
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(_keyFileLocation));
             var key = string.Empty;
             try
             {

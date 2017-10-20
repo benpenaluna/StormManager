@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace StormManager.UWP.Services.MapKeyService
 {
-    public class MapKeyService : IMapKeyService
+    public sealed class MapKeyService : IMapKeyService
     {
         public MapKeyHelper Helper { get; set; }
 
