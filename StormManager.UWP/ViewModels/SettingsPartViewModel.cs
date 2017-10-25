@@ -7,7 +7,7 @@ namespace StormManager.UWP.ViewModels
 {
     public class SettingsPartViewModel : ViewModelBase
     {
-        Services.SettingsServices.SettingsService _settings;
+        readonly Services.SettingsServices.SettingsService _settings;
 
         public SettingsPartViewModel()
         {
@@ -24,7 +24,7 @@ namespace StormManager.UWP.ViewModels
         public bool ShowHamburgerButton
         {
             get => _settings.ShowHamburgerButton;
-            set { _settings.ShowHamburgerButton = value; base.RaisePropertyChanged(); }
+            set { _settings.ShowHamburgerButton = value; RaisePropertyChanged(); }
         }
 
         public bool IsFullScreen
@@ -33,24 +33,21 @@ namespace StormManager.UWP.ViewModels
             set
             {
                 _settings.IsFullScreen = value;
-                base.RaisePropertyChanged();
-                if (value)
-                    ShowHamburgerButton = false;
-                else
-                    ShowHamburgerButton = true;
+                RaisePropertyChanged();
+                ShowHamburgerButton = !value;
             }
         }
 
         public bool UseShellBackButton
         {
             get => _settings.UseShellBackButton;
-            set { _settings.UseShellBackButton = value; base.RaisePropertyChanged(); }
+            set { _settings.UseShellBackButton = value; RaisePropertyChanged(); }
         }
 
         public bool UseLightThemeButton
         {
             get => _settings.AppTheme.Equals(ApplicationTheme.Light);
-            set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; base.RaisePropertyChanged(); }
+            set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; RaisePropertyChanged(); }
         }
 
         private string _busyText = RetrieveResource("BusyText");

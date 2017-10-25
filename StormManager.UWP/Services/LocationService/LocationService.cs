@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using StormManager.Core.Common.Results;
 
@@ -9,7 +8,7 @@ namespace StormManager.UWP.Services.LocationService
     {
         private LocationHelper Helper { get; set; }
 
-        public BasicGeoposition Position => this.Helper.Position;
+        public BasicGeoposition Position => Helper.Position;
 
         public static Task<LocationService> CreateAsync()
         {
@@ -27,7 +26,7 @@ namespace StormManager.UWP.Services.LocationService
 
         private async Task<LocationService> InitialiseAsync()
         {
-            this.Helper = await new LocationHelper().CreateAsync();
+            Helper = await new LocationHelper().CreateAsync();
             return this;
         }
     }

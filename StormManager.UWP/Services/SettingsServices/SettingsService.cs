@@ -8,7 +8,7 @@ namespace StormManager.UWP.Services.SettingsServices
     public class SettingsService
     {
         public static SettingsService Instance { get; } = new SettingsService();
-        Template10.Services.SettingsService.ISettingsHelper _helper;
+        readonly Template10.Services.SettingsService.ISettingsHelper _helper;
         private SettingsService()
         {
             _helper = new Template10.Services.SettingsService.SettingsHelper();
@@ -16,7 +16,7 @@ namespace StormManager.UWP.Services.SettingsServices
 
         public bool UseShellBackButton
         {
-            get { return _helper.Read<bool>(nameof(UseShellBackButton), true); }
+            get => _helper.Read(nameof(UseShellBackButton), true);
             set
             {
                 _helper.Write(nameof(UseShellBackButton), value);
@@ -33,20 +33,20 @@ namespace StormManager.UWP.Services.SettingsServices
             get
             {
                 var theme = ApplicationTheme.Light;
-                var value = _helper.Read<string>(nameof(AppTheme), theme.ToString());
-                return Enum.TryParse<ApplicationTheme>(value, out theme) ? theme : ApplicationTheme.Dark;
+                var value = _helper.Read(nameof(AppTheme), theme.ToString());
+                return Enum.TryParse(value, out theme) ? theme : ApplicationTheme.Dark;
             }
             set
             {
                 _helper.Write(nameof(AppTheme), value.ToString());
-                (Window.Current.Content as FrameworkElement).RequestedTheme = value.ToElementTheme();
+                ((FrameworkElement) Window.Current.Content).RequestedTheme = value.ToElementTheme();
                 Views.Shell.HamburgerMenu.RefreshStyles(value, true);
             }
         }
 
         public TimeSpan CacheMaxDuration
         {
-            get { return _helper.Read<TimeSpan>(nameof(CacheMaxDuration), TimeSpan.FromDays(2)); }
+            get => _helper.Read(nameof(CacheMaxDuration), TimeSpan.FromDays(2));
             set
             {
                 _helper.Write(nameof(CacheMaxDuration), value);
@@ -56,7 +56,7 @@ namespace StormManager.UWP.Services.SettingsServices
 
         public bool ShowHamburgerButton
         {
-            get { return _helper.Read<bool>(nameof(ShowHamburgerButton), true); }
+            get => _helper.Read(nameof(ShowHamburgerButton), true);
             set
             {
                 _helper.Write(nameof(ShowHamburgerButton), value);
@@ -66,7 +66,7 @@ namespace StormManager.UWP.Services.SettingsServices
 
         public bool IsFullScreen
         {
-            get { return _helper.Read<bool>(nameof(IsFullScreen), false); }
+            get => _helper.Read(nameof(IsFullScreen), false);
             set
             {
                 _helper.Write(nameof(IsFullScreen), value);

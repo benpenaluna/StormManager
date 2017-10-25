@@ -1,5 +1,4 @@
-﻿using StormManager.UWP.Annotations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -8,6 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
+using StormManager.UWP.Properties;
 
 // The Templated Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -19,7 +19,7 @@ namespace StormManager.UWP.Controls
 
         public ImageSource MapImageSource
         {
-            get { return (ImageSource)GetValue(MapImageSourceProperty); }
+            get => (ImageSource)GetValue(MapImageSourceProperty);
             set
             {
                 SetValue(MapImageSourceProperty, value);
@@ -34,7 +34,7 @@ namespace StormManager.UWP.Controls
 
         public MapStyle MapStyle
         {
-            get { return (MapStyle)GetValue(MapStyleProperty); }
+            get => (MapStyle)GetValue(MapStyleProperty);
             set
             {
                 SetValue(MapStyleProperty, value);
@@ -47,7 +47,7 @@ namespace StormManager.UWP.Controls
 
         public Stretch Stretch
         {
-            get { return (Stretch)GetValue(StretchProperty); }
+            get => (Stretch)GetValue(StretchProperty);
             set
             {
                 SetValue(StretchProperty, value);

@@ -3,11 +3,7 @@ using System.Threading.Tasks;
 using StormManager.UWP.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
 using Template10.Controls;
-using Template10.Common;
-using System;
-using System.Linq;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Controls;
 
 namespace StormManager.UWP
 {
@@ -15,7 +11,7 @@ namespace StormManager.UWP
     /// https://github.com/Windows-XAML/Template10/wiki
 
     [Bindable]
-    sealed partial class App : BootStrapper
+    sealed partial class App
     {
         public App()
         {

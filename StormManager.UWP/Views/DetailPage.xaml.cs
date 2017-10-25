@@ -1,10 +1,8 @@
-using StormManager.UWP.ViewModels;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Controls;
 
 namespace StormManager.UWP.Views
 {
-    public sealed partial class DetailPage : Page
+    public sealed partial class DetailPage
     {
         public DetailPage()
         {

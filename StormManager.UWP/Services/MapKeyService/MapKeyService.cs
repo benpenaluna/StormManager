@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace StormManager.UWP.Services.MapKeyService
 {
@@ -7,9 +6,9 @@ namespace StormManager.UWP.Services.MapKeyService
     {
         public MapKeyHelper Helper { get; set; }
 
-        public string Key => this.Helper.Key;
+        public string Key => Helper.Key;
 
-        public static Task<MapKeyService> CreateAsync()
+        public static Task<MapKeyService> InstanceAsync()
         {
             var result = new MapKeyService();
             return result.InitialiseAsync();
@@ -17,7 +16,7 @@ namespace StormManager.UWP.Services.MapKeyService
 
         private async Task<MapKeyService> InitialiseAsync()
         {
-            this.Helper = await new MapKeyHelper().CreateAsync();
+            Helper = await new MapKeyHelper().CreateAsync();
             return this;
         }
     }

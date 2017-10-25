@@ -21,7 +21,7 @@ namespace StormManager.UWP.Services.MapKeyService
         private async Task<string> GetMapKeyAsync()
         {
             var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(_keyFileLocation));
-            var key = string.Empty;
+            string key;
             try
             {
                 using (IRandomAccessStream stream = await file.OpenReadAsync())

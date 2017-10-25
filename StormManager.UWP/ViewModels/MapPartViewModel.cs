@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Template10.Mvvm;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
-using StormManager.Core.Common.Results;
 using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Services.LocationService;
 using StormManager.UWP.Services.MapKeyService;
@@ -21,7 +18,7 @@ namespace StormManager.UWP.ViewModels
             set
             {
                 _mapCentre = value;
-                base.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -33,7 +30,7 @@ namespace StormManager.UWP.ViewModels
             set
             {
                 _mapElements = value;
-                base.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
         
@@ -44,7 +41,7 @@ namespace StormManager.UWP.ViewModels
             set
             {
                 _mapScene = value;
-                base.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -57,7 +54,7 @@ namespace StormManager.UWP.ViewModels
             set
             {
                 _mapStyle = value;
-                base.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -68,7 +65,7 @@ namespace StormManager.UWP.ViewModels
             set
             {
                 _zoomLevel = value;
-                base.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -94,8 +91,8 @@ namespace StormManager.UWP.ViewModels
 
         private void SetCurrentLocation(BasicGeoposition location, double radiusInMeters = 10000)
         {
-            this.MapCentre = location.ToGeopoint();
-            this.MapScene = MapScene.CreateFromLocationAndRadius(this.MapCentre, radiusInMeters);
+            MapCentre = location.ToGeopoint();
+            MapScene = MapScene.CreateFromLocationAndRadius(MapCentre, radiusInMeters);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace StormManager.UWP.Controls
         private MapRadioButton _terrainStyleRadioButton;
         private ToggleSwitch _toggleSwitch3D;
         private static readonly Geopoint DefaultCenter = new Geopoint(new BasicGeoposition() { Latitude = -36.151527, Longitude = 144.765963 });
-        private static readonly MapScene DefaultMapScene = Windows.UI.Xaml.Controls.Maps.MapScene.CreateFromLocationAndRadius(DefaultCenter, 40000);
+        private static readonly MapScene DefaultMapScene = MapScene.CreateFromLocationAndRadius(DefaultCenter, 40000);
 
         public Geopoint MapCenter
         {
