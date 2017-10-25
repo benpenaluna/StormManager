@@ -1,51 +1,56 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StormManager.UWP.Common.Exceptions;
 using Xunit;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace StormManager.UWP.Tests.Common.Exceptions
 {
-    [TestClass]
     public class GeolocationAccessDeniedExceptionTests
     {
-        private string _message = "message";
-        private readonly Exception _ex = new Exception(); 
+        private static string _message = "message";
+        private static readonly Exception Ex = new Exception();
+
+        #region Tests
 
         [Fact]
         public void GeolocationAccessDeniedException_Throw()
         {
-            Xunit.Assert.Throws<GeolocationAccessDeniedException>(() => Throw());
+            Assert.Throws<GeolocationAccessDeniedException>(() => Throw());
         }
 
         [Fact]
         public void GeolocationAccessDeniedException_ThrowWithMessage()
         {
-            var ex = Assert.ThrowsException<GeolocationAccessDeniedException>(() => ThrowWithMessage());
-            Assert.AreEqual(_message, ex.Message);
+            var ex = Assert.Throws<GeolocationAccessDeniedException>(() => ThrowWithMessage());
+            Assert.Equal(_message, ex.Message);
         }
 
         [Fact]
         public void GeolocationAccessDeniedException_ThrowWithMessageInnerEx()
         {
-            var ex = Assert.ThrowsException<GeolocationAccessDeniedException>(() => ThrowWithMessageInnerEx());
-            Assert.AreEqual(_message, ex.Message);
-            Assert.AreEqual(_ex, ex.InnerException);
+            var ex = Assert.Throws<GeolocationAccessDeniedException>(() => ThrowWithMessageInnerEx());
+            Assert.Equal(_message, ex.Message);
+            Assert.Equal(Ex, ex.InnerException);
         }
 
-        private void Throw()
+        #endregion
+
+        #region Helper_Methods
+
+        private static void Throw()
         {
             throw new GeolocationAccessDeniedException();
         }
 
-        private void ThrowWithMessage()
+        private static void ThrowWithMessage()
         {
             throw new GeolocationAccessDeniedException(_message);
         }
 
-        private void ThrowWithMessageInnerEx()
+        private static void ThrowWithMessageInnerEx()
         {
-            throw new GeolocationAccessDeniedException(_message, _ex);
+            throw new GeolocationAccessDeniedException(_message, Ex);
         }
+        
+        #endregion
     }
 }
