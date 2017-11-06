@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.Devices.Geolocation;
+using Windows.Foundation;
+using Windows.Services.Maps;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
+using StormManager.UWP.Models.Mapping;
 
 // The Templated Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -21,6 +26,9 @@ namespace StormManager.UWP.Controls
         private ToggleSwitch _toggleSwitch3D;
         private static readonly Geopoint DefaultCenter = new Geopoint(new BasicGeoposition() { Latitude = -36.151527, Longitude = 144.765963 });
         private static readonly MapScene DefaultMapScene = MapScene.CreateFromLocationAndRadius(DefaultCenter, 40000);
+        //private static MapLocation CurrentMapLocation;
+
+        public event EventHandler MapCenterUpdated;
 
         public Geopoint MapCenter
         {
@@ -114,7 +122,7 @@ namespace StormManager.UWP.Controls
         private void AttachEvents()
         {
             _myMapControl.Loaded += (s, e) => MapLoaded?.Invoke(s, e);
-            
+
             AttachSuggestBoxEvents();
             AttachStyleEvents();
         }
@@ -143,30 +151,49 @@ namespace StormManager.UWP.Controls
             return child;
         }
 
-        private void DirectionsSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void DirectionsSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            // Only get results when it was a user typing, 
-            // otherwise assume the value got filled in by TextMemberPath 
-            // or the handler for SuggestionChosen.
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+
+            var result = await MapLocationFinder.FindLocationsAsync(sender.Text, MapCenter, 3);
+
+            //var re = result.Locations.Select(location => location.Address.FormattedAddress).ToList();
+            var displayableResults = new List<MapLocationSuggestion>();
+            foreach (var location in result.Locations)
             {
-                //Set the ItemsSource to be your filtered dataset
-                //sender.ItemsSource = dataset;
+                displayableResults.Add(new MapLocationSuggestion(location));
             }
+
+            _directionsSuggestBox.ItemsSource = displayableResults;
         }
 
-
-        private void DirectionsSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        private async void DirectionsSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             // Set sender.Text. You can use args.SelectedItem to build your text string.
-        }
+            if (args.SelectedItem == null || args.SelectedItem.GetType() != typeof(MapLocationSuggestion)) return;
 
+            var location = (args.SelectedItem as MapLocationSuggestion)?.MapLocation;
+            if (location == null) return;
+
+            var pushpin = new MapIcon
+            {
+                Location = location.Point,
+                NormalizedAnchorPoint = new Point(0.5, 1.0),
+                Title = location.DisplayName,
+                CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible,
+                ZIndex = 0 
+            };
+            // add to map and center it
+            _myMapControl.MapElements.Add(pushpin);
+            _myMapControl.Center = location.Point;
+            _myMapControl.ZoomLevel = 14;
+        }
 
         private void DirectionsSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             if (args.ChosenSuggestion != null)
             {
-                // User selected an item from the suggestion list, take an action on it here.
+                 
             }
             else
             {

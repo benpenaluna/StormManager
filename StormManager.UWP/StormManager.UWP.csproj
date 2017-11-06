@@ -104,6 +104,7 @@
     <Compile Include="Controls\MapRadioButton.cs" />
     <Compile Include="Controls\MapStylePresenter.cs" />
     <Compile Include="Controls\MenuMapControl.cs" />
+    <Compile Include="Models\Mapping\MapLocationSuggestion.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ResourceLoaderService\IResourceLoaderService.cs" />
@@ -221,9 +222,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\StormManager.Core\StormManager.Core.csproj">
       <Project>{396b9c07-e7d7-4ebd-a34e-838756342c8c}</Project>
