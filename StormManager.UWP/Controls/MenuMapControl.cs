@@ -26,7 +26,6 @@ namespace StormManager.UWP.Controls
         private ToggleSwitch _toggleSwitch3D;
         private static readonly Geopoint DefaultCenter = new Geopoint(new BasicGeoposition() { Latitude = -36.151527, Longitude = 144.765963 });
         private static readonly MapScene DefaultMapScene = MapScene.CreateFromLocationAndRadius(DefaultCenter, 40000);
-        //private static MapLocation CurrentMapLocation;
 
         public event EventHandler MapCenterUpdated;
 
@@ -62,11 +61,35 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty MapZoomLevelProperty =
             DependencyProperty.Register(nameof(MapZoomLevel), typeof(double), typeof(MenuMapControl), new PropertyMetadata(6.8));
 
+
+        public double RadiusAroundNewPushPin
+        {
+            get => (double)GetValue(RadiusAroundNewPushPinProperty);
+            set
+            {
+                if (value < 0.0)
+                    throw new ArgumentException(nameof(RadiusAroundNewPushPin) + " must be greater than 0 meters.");
+
+                SetValue(RadiusAroundNewPushPinProperty, value); // TODO: Handle negative values   
+            }
+        }
+        public static readonly DependencyProperty RadiusAroundNewPushPinProperty =
+            DependencyProperty.Register(nameof(RadiusAroundNewPushPin), typeof(double), typeof(MenuMapControl), new PropertyMetadata(1000.0));
+
         public MapInteractionMode RotateInteractionMode
         {
             get => (MapInteractionMode)GetValue(RotateInteractionModeProperty);
             set => SetValue(RotateInteractionModeProperty, value);
         }
+
+        public uint SearchResultsDisplayed
+        {
+            get => (uint)GetValue(SearchResultsDisplayedProperty);
+            set => SetValue(SearchResultsDisplayedProperty, value);
+        }
+        public static readonly DependencyProperty SearchResultsDisplayedProperty =
+            DependencyProperty.Register(nameof(SearchResultsDisplayed), typeof(uint), typeof(MenuMapControl), new PropertyMetadata((uint)3));
+
         public static readonly DependencyProperty RotateInteractionModeProperty =
             DependencyProperty.Register(nameof(RotateInteractionMode), typeof(MapInteractionMode), typeof(MenuMapControl), new PropertyMetadata(MapInteractionMode.Auto));
 
@@ -155,38 +178,44 @@ namespace StormManager.UWP.Controls
         {
             if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
 
-            var result = await MapLocationFinder.FindLocationsAsync(sender.Text, MapCenter, 3);
+            var result = await MapLocationFinder.FindLocationsAsync(sender.Text, MapCenter, SearchResultsDisplayed);
+            DisplayLocationResults(result);
+        }
 
-            //var re = result.Locations.Select(location => location.Address.FormattedAddress).ToList();
-            var displayableResults = new List<MapLocationSuggestion>();
-            foreach (var location in result.Locations)
-            {
-                displayableResults.Add(new MapLocationSuggestion(location));
-            }
-
+        private void DisplayLocationResults(MapLocationFinderResult result)
+        {
+            var displayableResults = result.Locations.Select(location => new MapLocationSuggestion(location)).ToList();
             _directionsSuggestBox.ItemsSource = displayableResults;
         }
 
-        private async void DirectionsSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        private void DirectionsSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            // Set sender.Text. You can use args.SelectedItem to build your text string.
             if (args.SelectedItem == null || args.SelectedItem.GetType() != typeof(MapLocationSuggestion)) return;
 
             var location = (args.SelectedItem as MapLocationSuggestion)?.MapLocation;
             if (location == null) return;
 
+            AddPushPin(location, location.DisplayName);
+        }
+
+        private void AddPushPin(MapLocation location, string title)
+        {
+            if (location == null) throw new ArgumentNullException(nameof(location));
+
             var pushpin = new MapIcon
             {
                 Location = location.Point,
                 NormalizedAnchorPoint = new Point(0.5, 1.0),
-                Title = location.DisplayName,
+                Title = title,
                 CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible,
-                ZIndex = 0 
+                ZIndex = 0
             };
-            // add to map and center it
+            
             _myMapControl.MapElements.Add(pushpin);
-            _myMapControl.Center = location.Point;
-            _myMapControl.ZoomLevel = 14;
+            _myMapControl.Scene = MapScene.CreateFromLocationAndRadius(location.Point, 
+                                                                       RadiusAroundNewPushPin, 
+                                                                       _myMapControl.Heading, 
+                                                                       _myMapControl.Pitch);
         }
 
         private void DirectionsSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
