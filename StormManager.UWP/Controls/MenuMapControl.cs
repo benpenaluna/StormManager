@@ -27,8 +27,6 @@ namespace StormManager.UWP.Controls
         private static readonly Geopoint DefaultCenter = new Geopoint(new BasicGeoposition() { Latitude = -36.151527, Longitude = 144.765963 });
         private static readonly MapScene DefaultMapScene = MapScene.CreateFromLocationAndRadius(DefaultCenter, 40000);
 
-        public event EventHandler MapCenterUpdated;
-
         public Geopoint MapCenter
         {
             get => (Geopoint)GetValue(MapCenterProperty);
@@ -67,8 +65,8 @@ namespace StormManager.UWP.Controls
             get => (double)GetValue(RadiusAroundNewPushPinProperty);
             set
             {
-                if (value < 0.0)
-                    throw new ArgumentException(nameof(RadiusAroundNewPushPin) + " must be greater than 0 meters.");
+                if (value < 1.0)
+                    throw new ArgumentException(nameof(RadiusAroundNewPushPin) + " must be greater than or equal to 1 meters.");
 
                 SetValue(RadiusAroundNewPushPinProperty, value); // TODO: Handle negative values   
             }
