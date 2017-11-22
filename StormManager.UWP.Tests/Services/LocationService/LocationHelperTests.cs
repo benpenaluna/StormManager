@@ -13,19 +13,19 @@ namespace StormManager.UWP.Tests.Services.LocationService
     public class LocationHelperTests
     {
         [Fact]
-        public async Task LocationHelperInstatiates()
+        public async Task LocationHelper_Instatiates_Asyncronously()
         {
             var service = new Mock<ILocationHelper>();
-            service.Setup(x => x.CreateAsync()).Returns(new LocationHelper()
+            service.Setup(x => x.AccessStatus).Returns(GeolocationAccessStatus.Allowed);
+            service.Setup(x => x.Position).Returns(new BasicGeoposition()
             {
-                AccessStatus = GeolocationAccessStatus.Allowed,
-                Position = new BasicGeoposition()
+                Latitude = -66.0,
+                Longitude = 157.0
             });
 
+            var result = await new LocationHelper().CreateAsync(service.Object);
 
-            var actual = await new UWP.Services.LocationService.LocationHelper().CreateAsync();
-
-            Assert.NotNull(actual);
+            Assert.NotNull(result);
         }
     }
 }

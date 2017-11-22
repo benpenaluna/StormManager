@@ -10,7 +10,15 @@ namespace StormManager.UWP.Services.LocationService
         public GeolocationAccessStatus AccessStatus { get; private set; }
         public BasicGeoposition Position { get; private set; }
 
-        public async Task<ILocationHelper> CreateAsync()
+        public async Task<ILocationHelper> CreateAsync(ILocationHelper helper = null)
+        {
+            if (helper == null) { await TryDetermineActualLocation(); }
+            else { SetProvidedAcessStatusAndPosition(helper); }
+
+            return this;
+        }
+
+        private async Task TryDetermineActualLocation()
         {
             try
             {
@@ -21,10 +29,8 @@ namespace StormManager.UWP.Services.LocationService
             {
                 SetReturnProperties(CreateBasicGeoposition(0.0, 0.0), GeolocationAccessStatus.Denied);
             }
-
-            return this;
         }
-        
+
         private static async Task<BasicGeoposition> GetPositionAsync()
         {
             var access = await Geolocator.RequestAccessAsync();
@@ -56,6 +62,12 @@ namespace StormManager.UWP.Services.LocationService
         {
             Position = geoposition;
             AccessStatus = accessStatus;
+        }
+
+        private void SetProvidedAcessStatusAndPosition(ILocationHelper helper)
+        {
+            AccessStatus = helper.AccessStatus;
+            Position = helper.Position;
         }
     }
 }
