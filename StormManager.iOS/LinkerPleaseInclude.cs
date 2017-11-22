@@ -1,16 +1,27 @@
+using System;
 using System.Collections.Specialized;
 using System.Windows.Input;
-using MvvmCross.iOS.Views;
 using Foundation;
+using MvvmCross.Binding.BindingContext;
+using MvvmCross.iOS.Views;
+using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
 using UIKit;
 
 namespace StormManager.iOS
 {
     // This class is never actually executed, but when Xamarin linking is enabled it does ensure types and properties
     // are preserved in the deployed app
-    [Preserve(AllMembers = true)]
+    [Foundation.Preserve(AllMembers = true)]
     public class LinkerPleaseInclude
     {
+		public void Include(MvxTaskBasedBindingContext c)
+        {
+            c.Dispose();
+            var c2 = new MvxTaskBasedBindingContext();
+            c2.Dispose();
+        }
+
         public void Include(UIButton uiButton)
         {
             uiButton.TouchUpInside += (s, e) =>
@@ -104,6 +115,24 @@ namespace StormManager.iOS
         public void Include(System.ComponentModel.INotifyPropertyChanged changed)
         {
             changed.PropertyChanged += (sender, e) => { var test = e.PropertyName; };
+        }
+        
+        public void Include(MvxNavigationService service, IMvxViewModelLoader loader)
+        {
+            service = new MvxNavigationService(null, loader);
+        }
+
+        public void Include(ConsoleColor color)
+        {
+            Console.Write("");
+            Console.WriteLine("");
+            color = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
         }
     }
 }

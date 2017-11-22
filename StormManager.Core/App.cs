@@ -11,7 +11,7 @@ namespace StormManager.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.ContentViewModel>();
+            RegisterAppStart<ViewModels.MainViewModel>();
         }
     }
 }
