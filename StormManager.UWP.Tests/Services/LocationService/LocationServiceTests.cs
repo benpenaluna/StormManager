@@ -40,19 +40,5 @@ namespace StormManager.UWP.Tests.Services.LocationService
             });
             return service;
         }
-
-
-
-
-        //[Fact]
-        //public async Task TryGetCurrentLocationAsync_Test()
-        //{
-        //    var expectedResultType = typeof(BasicGeoposition);
-
-        //    var actual = await UWP.Services.LocationService.LocationService.TryGetCurrentLocationAsync();
-        //    var actualType = actual.Result.GetType();
-
-        //    Assert.Equal(expectedResultType, actualType);
-        //}
     }
 }
