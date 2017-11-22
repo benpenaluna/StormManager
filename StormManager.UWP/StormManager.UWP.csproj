@@ -107,6 +107,7 @@
     <Compile Include="Models\Mapping\MapLocationSuggestion.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LocationService\ILocationHelper.cs" />
     <Compile Include="Services\ResourceLoaderService\IResourceLoaderService.cs" />
     <Compile Include="Services\ResourceLoaderService\ResourceLoaderService.cs" />
     <Compile Include="Services\LocationService\ILocationService.cs" />
