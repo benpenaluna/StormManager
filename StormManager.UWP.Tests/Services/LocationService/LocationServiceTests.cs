@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using StormManager.Core.Common.Results;
-using StormManager.UWP.Common.ExtensionMethods;
+using Moq;
+using StormManager.UWP.Services.LocationService;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.LocationService
@@ -13,22 +9,50 @@ namespace StormManager.UWP.Tests.Services.LocationService
     public class LocationServiceTests
     {
         [Fact]
-        public async Task LocationServiceInstatiates()
+        public async Task LocationService_Can_Create_New_Instatiate()
         {
-            var actual = await UWP.Services.LocationService.LocationService.CreateAsync();
-
-            Assert.NotNull(actual);
+            var service = CreateMockLocationHelper();
+            var result = await UWP.Services.LocationService.LocationService.CreateAsync(service.Object);
+            Assert.NotNull(result);
         }
 
-        [Fact]
-        public async Task TryGetCurrentLocationAsync_Test()
+        [Theory]
+        [InlineData(66.0, -142.0)]
+        public async void LocationService_Position_Is_Determined(double latitude, double longitude)
         {
-            var expectedResultType = typeof(BasicGeoposition);
+            var expected = new BasicGeoposition(){Latitude = latitude, Longitude = longitude};
 
-            var actual = await UWP.Services.LocationService.LocationService.TryGetCurrentLocationAsync();
-            var actualType = actual.Result.GetType();
+            var service = CreateMockLocationHelper(latitude, longitude);
+            ILocationService sut = await UWP.Services.LocationService.LocationService.CreateAsync(service.Object);
+            var result = sut.Position;
 
-            Assert.Equal(expectedResultType, actualType);
+            Assert.Equal(expected, result);
         }
+
+        private static Mock<ILocationHelper> CreateMockLocationHelper(double latitude = 0.0, double longitude = 0.0)
+        {
+            var service = new Mock<ILocationHelper>();
+            service.Setup(x => x.AccessStatus).Returns(GeolocationAccessStatus.Allowed);
+            service.Setup(x => x.Position).Returns(new BasicGeoposition()
+            {
+                Latitude = latitude,
+                Longitude = longitude
+            });
+            return service;
+        }
+
+
+
+
+        //[Fact]
+        //public async Task TryGetCurrentLocationAsync_Test()
+        //{
+        //    var expectedResultType = typeof(BasicGeoposition);
+
+        //    var actual = await UWP.Services.LocationService.LocationService.TryGetCurrentLocationAsync();
+        //    var actualType = actual.Result.GetType();
+
+        //    Assert.Equal(expectedResultType, actualType);
+        //}
     }
 }
