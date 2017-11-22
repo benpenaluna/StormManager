@@ -5,12 +5,12 @@ using StormManager.UWP.Common.Exceptions;
 
 namespace StormManager.UWP.Services.LocationService
 {
-    public class LocationHelper
+    public class LocationHelper : ILocationHelper
     {
         public GeolocationAccessStatus AccessStatus { get; private set; }
         public BasicGeoposition Position { get; private set; }
 
-        public async Task<LocationHelper> CreateAsync()
+        public async Task<ILocationHelper> CreateAsync()
         {
             try
             {

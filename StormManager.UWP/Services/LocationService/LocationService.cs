@@ -7,28 +7,27 @@ namespace StormManager.UWP.Services.LocationService
 {
     public class LocationService : ILocationService
     {
-        private LocationHelper Helper { get; set; }
+        private ILocationHelper Helper { get; set; }
 
         public BasicGeoposition Position => Helper.Position;
 
-        public static Task<LocationService> CreateAsync()
+        public static Task<LocationService> CreateAsync(ILocationHelper helper = null)
         {
             var result = new LocationService();            
-            return result.InitialiseAsync();
+            return result.InitialiseAsync(helper);
+        } 
+
+        private async Task<LocationService> InitialiseAsync(ILocationHelper helper)
+        {
+            Helper = helper ?? await new LocationHelper().CreateAsync();
+            return this;
         }
 
         public static async Task<ITryGetAsyncResult<BasicGeoposition>> TryGetCurrentLocationAsync()
         {
             var locationService = new LocationService {Helper = await new LocationHelper().CreateAsync()};
-            return (locationService.Helper.AccessStatus == GeolocationAccessStatus.Allowed)
-                ? new TryGetAsyncResult<BasicGeoposition>(true, locationService.Position)
-                : new TryGetAsyncResult<BasicGeoposition>(false, locationService.Position);
-        }
-
-        private async Task<LocationService> InitialiseAsync()
-        {
-            Helper = await new LocationHelper().CreateAsync();
-            return this;
+            return new TryGetAsyncResult<BasicGeoposition>(locationService.Helper.AccessStatus == GeolocationAccessStatus.Allowed, 
+                                                           locationService.Position);
         }
     }
 }
