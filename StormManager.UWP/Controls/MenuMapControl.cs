@@ -68,7 +68,7 @@ namespace StormManager.UWP.Controls
                 if (value < 1.0)
                     throw new ArgumentException(nameof(RadiusAroundNewPushPin) + " must be greater than or equal to 1 meters.");
 
-                SetValue(RadiusAroundNewPushPinProperty, value); // TODO: Handle negative values   
+                SetValue(RadiusAroundNewPushPinProperty, value);    
             }
         }
         public static readonly DependencyProperty RadiusAroundNewPushPinProperty =
