@@ -4,19 +4,21 @@ namespace StormManager.UWP.Services.MapKeyService
 {
     public sealed class MapKeyService : IMapKeyService
     {
-        public MapKeyHelper Helper { get; set; }
+        private IMapKeyHelper Helper { get; set; }
 
         public string Key => Helper.Key;
 
-        public static Task<MapKeyService> InstanceAsync()
+        private MapKeyService() { }
+
+        public static Task<MapKeyService> CreateAsync(IMapKeyHelper helper = null)
         {
             var result = new MapKeyService();
-            return result.InitialiseAsync();
+            return result.InitialiseAsync(helper);
         }
 
-        private async Task<MapKeyService> InitialiseAsync()
+        private async Task<MapKeyService> InitialiseAsync(IMapKeyHelper helper)
         {
-            Helper = await new MapKeyHelper().CreateAsync();
+            Helper = helper ?? await new MapKeyHelper().CreateAsync();
             return this;
         }
     }

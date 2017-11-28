@@ -3,40 +3,55 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
+using StormManager.UWP.Common.ExtensionMethods;
 
 namespace StormManager.UWP.Services.MapKeyService
 {
-    public class MapKeyHelper
+    public class MapKeyHelper : IMapKeyHelper
     {
-        private readonly string _keyFileLocation = @"ms-appx:///Assets/key.txt";
-        
+        private const string KeyFileLocation = @"ms-appx:///Assets/key.txt"; // TODO: Do not hardcode this string
+
         public string Key { get; private set; }
 
-        public async Task<MapKeyHelper> CreateAsync()
+        public async Task<IMapKeyHelper> CreateAsync(string key = null)
         {
-            Key = await GetMapKeyAsync();
+            if (key == null)
+            {
+                await GetMapKeyAsync();
+            }
+            else
+            {
+                if (!key.IsValidMapKey()) throw new ArgumentException(key);
+
+                Key = key;
+            }
+             
             return this;
         }
 
-        private async Task<string> GetMapKeyAsync()
-        {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(_keyFileLocation));
+        private static async Task<string> GetMapKeyAsync()
+        { 
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(KeyFileLocation));
             string key;
-            try
+
+            try { key = await ReadKeyFromFile(file); }
+            catch (FileNotFoundException) { return string.Empty; }
+
+            return key;
+        }
+
+        private static async Task<string> ReadKeyFromFile(IRandomAccessStreamReference file)
+        {
+            string key;
+
+            using (IRandomAccessStream stream = await file.OpenReadAsync())
             {
-                using (IRandomAccessStream stream = await file.OpenReadAsync())
+                using (var dr = new DataReader(stream))
                 {
-                    using (var dr = new DataReader(stream))
-                    {
-                        var length = (uint) stream.Size;
-                        await dr.LoadAsync(length);
-                        key = dr.ReadString(length);
-                    }
+                    var length = (uint)stream.Size;
+                    await dr.LoadAsync(length);
+                    key = dr.ReadString(length);
                 }
-            }
-            catch (FileNotFoundException)
-            {
-                return string.Empty;
             }
 
             return key;
