@@ -79,7 +79,7 @@ namespace StormManager.UWP.ViewModels
 
         private async void RetrieveMapServiceToken()
         {
-            IMapKeyService mapKeyService = await MapKeyService.InstanceAsync();
+            IMapKeyService mapKeyService = await MapKeyService.CreateAsync();
             MapServiceToken = mapKeyService.Key;
         }
 
