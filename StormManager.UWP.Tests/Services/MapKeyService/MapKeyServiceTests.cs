@@ -18,22 +18,27 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
         [Fact]
         public async Task MapKeyService_CanCreateAsyncronously()
         {
-            var randomKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, ArbitrarySeed);
+            var randomKey = GetRandomKey();
             var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
             var result = await UWP.Services.MapKeyService.MapKeyService.CreateAsync(service.Object);
+
             Assert.NotNull(result);
         }
 
         [Fact]
         public async void MayKeyService_CanDetermineKeyFollowingConstruction()
         {
-            var randomKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, ArbitrarySeed);
-
+            var randomKey = GetRandomKey();
             var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
             IMapKeyService sut = await UWP.Services.MapKeyService.MapKeyService.CreateAsync(service.Object);
             var result = sut.Key;
 
             Assert.Equal(randomKey, result);
+        }
+
+        private static string GetRandomKey(int seed = ArbitrarySeed)
+        {
+            return MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, seed);
         }
     }
 }
