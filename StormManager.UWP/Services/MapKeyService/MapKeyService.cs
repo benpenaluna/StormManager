@@ -18,7 +18,7 @@ namespace StormManager.UWP.Services.MapKeyService
 
         private async Task<MapKeyService> InitialiseAsync(IMapKeyHelper helper)
         {
-            Helper = helper ?? await new MapKeyHelper().CreateAsync();
+            Helper = helper ?? await new MapKeyHelper().CreateAsync(); // TODO: The object is being constructed twice. Resolve
             return this;
         }
     }

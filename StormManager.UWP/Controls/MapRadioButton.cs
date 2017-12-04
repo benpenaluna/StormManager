@@ -31,7 +31,6 @@ namespace StormManager.UWP.Controls
 
         public List<MapStylePresenter> MapStylePresenters { get; set; }
 
-
         public MapStyle MapStyle
         {
             get => (MapStyle)GetValue(MapStyleProperty);

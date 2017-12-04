@@ -14,7 +14,7 @@ namespace StormManager.UWP.Views
         {
             Instance = this;
             InitializeComponent();
-            _settings = Services.SettingsServices.SettingsService.Instance;
+            _settings = Services.SettingsServices.SettingsService.Create;
         }
 
         public Shell(INavigationService navigationService) : this()

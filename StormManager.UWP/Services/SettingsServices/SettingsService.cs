@@ -2,16 +2,26 @@ using System;
 using Template10.Common;
 using Template10.Utils;
 using Windows.UI.Xaml;
+using Template10.Services.SettingsService;
 
 namespace StormManager.UWP.Services.SettingsServices
 {
     public class SettingsService
     {
-        public static SettingsService Instance { get; } = new SettingsService();
-        readonly Template10.Services.SettingsService.ISettingsHelper _helper;
+        public static SettingsService Create { get; } = new SettingsService();
+
+        //public static SettingsService Create(ISettingsHelper settings = null)
+        //{
+        //    return new SettingsService(settings);
+        //}
+
+        readonly ISettingsHelper _helper;
+
+        //private SettingsService(ISettingsHelper settings = null)
         private SettingsService()
         {
-            _helper = new Template10.Services.SettingsService.SettingsHelper();
+            //_helper = settings ?? new SettingsHelper();
+            _helper = new SettingsHelper();
         }
 
         public bool UseShellBackButton

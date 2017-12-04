@@ -21,7 +21,7 @@ namespace StormManager.UWP
             #region app settings
 
             // some settings must be set in app.constructor
-            var settings = SettingsService.Instance;
+            var settings = SettingsService.Create;
             RequestedTheme = settings.AppTheme;
             CacheMaxDuration = settings.CacheMaxDuration;
             ShowShellBackButton = settings.UseShellBackButton;

@@ -27,7 +27,7 @@ namespace StormManager.UWP.Services.LocationService
 
         public static async Task<ITryGetAsyncResult<BasicGeoposition>> TryGetCurrentLocationAsync(ILocationHelper helper = null)
         {
-            var locationService = new LocationService { Helper = helper ?? await new LocationHelper().CreateAsync() };
+            var locationService = new LocationService { Helper = helper ?? await new LocationHelper().CreateAsync() }; // TODO: LocationHelper being constructed twice. Resolve 
             return new TryGetAsyncResult<BasicGeoposition>(locationService.Helper.AccessStatus == GeolocationAccessStatus.Allowed, 
                                                            locationService.Position);
         }

@@ -1,6 +1,6 @@
 ﻿namespace StormManager.UWP.Services.MapKeyService
 {
-    internal interface IMapKeyService
+    public interface IMapKeyService
     {
         string Key { get; }
     }

@@ -17,7 +17,7 @@ namespace StormManager.UWP.ViewModels
             }
             else
             {
-                _settings = Services.SettingsServices.SettingsService.Instance;
+                _settings = Services.SettingsServices.SettingsService.Create;
             }
         }
 
@@ -74,7 +74,7 @@ namespace StormManager.UWP.ViewModels
 
         private static string RetrieveResource(string name)
         {
-            IResourceLoaderService resource = ResourceLoaderService.Instance;
+            IResourceLoaderService resource = ResourceLoaderService.Create;
             return resource.Value(name);
         }
     }

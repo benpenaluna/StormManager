@@ -2,7 +2,7 @@
 
 namespace StormManager.UWP.Models.Mapping
 {
-    public class MapLocationSuggestion
+    public class MapLocationSuggestion : IMapLocationSuggestion
     {
         public MapLocation MapLocation { get; }
 

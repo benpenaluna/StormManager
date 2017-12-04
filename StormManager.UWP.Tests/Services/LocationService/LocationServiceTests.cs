@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Moq;
 using StormManager.Core.Common.Results;
 using StormManager.UWP.Services.LocationService;
 using Xunit;
@@ -19,7 +18,7 @@ namespace StormManager.UWP.Tests.Services.LocationService
 
         [Theory]
         [InlineData(66.0, -142.0)]
-        public async void LocationService_CanDeterminePositionOnConstruction(double latitude, double longitude)
+        public async void LocationService_CanDeterminePositionFollwingConstruction(double latitude, double longitude)
         {
             var expected = new BasicGeoposition(){Latitude = latitude, Longitude = longitude};
 
