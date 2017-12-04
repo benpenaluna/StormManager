@@ -21,13 +21,13 @@ namespace StormManager.UWP.Services.LocationService
 
         private async Task<LocationService> InitialiseAsync(ILocationHelper helper)
         {
-            Helper = helper ?? await new LocationHelper().CreateAsync();
+            Helper = helper ?? await LocationHelper.CreateAsync();
             return this;
         }
 
         public static async Task<ITryGetAsyncResult<BasicGeoposition>> TryGetCurrentLocationAsync(ILocationHelper helper = null)
         {
-            var locationService = new LocationService { Helper = helper ?? await new LocationHelper().CreateAsync() }; // TODO: LocationHelper being constructed twice. Resolve 
+            var locationService = new LocationService { Helper = helper ?? await LocationHelper.CreateAsync() };
             return new TryGetAsyncResult<BasicGeoposition>(locationService.Helper.AccessStatus == GeolocationAccessStatus.Allowed, 
                                                            locationService.Position);
         }

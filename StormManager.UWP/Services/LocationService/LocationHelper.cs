@@ -11,7 +11,15 @@ namespace StormManager.UWP.Services.LocationService
 
         public BasicGeoposition Position { get; private set; }
 
-        public async Task<ILocationHelper> CreateAsync(ILocationHelper helper = null)
+        private LocationHelper() {}
+
+        public static Task<ILocationHelper> CreateAsync(ILocationHelper helper = null)
+        {
+            var result = new LocationHelper();
+            return result.InitialiseAsync(helper);
+        }
+
+        private async Task<ILocationHelper> InitialiseAsync(ILocationHelper helper = null)
         {
             if (helper == null) { await TryDetermineActualLocation(); }
             else { SetProvidedAcessStatusAndPosition(helper); }

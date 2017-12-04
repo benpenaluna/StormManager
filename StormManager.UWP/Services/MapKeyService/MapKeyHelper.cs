@@ -13,7 +13,15 @@ namespace StormManager.UWP.Services.MapKeyService
 
         public string Key { get; private set; }
 
-        public async Task<IMapKeyHelper> CreateAsync(string key = null)
+        private MapKeyHelper() { }
+
+        public static Task<IMapKeyHelper> CreateAsync(string key = null)
+        {
+            var result = new MapKeyHelper();
+            return result.InitialiseAsync(key);
+        }
+
+        private async Task<IMapKeyHelper> InitialiseAsync(string key = null)
         {
             if (key == null)
             {

@@ -19,7 +19,7 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
         {
             var randomKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, ArbitrarySeed);
             var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
-            var result = await new MapKeyHelper().CreateAsync(service.Object.Key);
+            var result = await MapKeyHelper.CreateAsync(service.Object.Key);
 
             Assert.NotNull(result);
         }
@@ -29,7 +29,7 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
         {
             var randomKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, ArbitrarySeed);
             var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
-            var sut = await new MapKeyHelper().CreateAsync(service.Object.Key);
+            var sut = await MapKeyHelper.CreateAsync(service.Object.Key);
             var result = sut.Key;
 
             Assert.Equal(randomKey, result);
