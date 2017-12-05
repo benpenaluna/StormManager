@@ -50,7 +50,7 @@ namespace StormManager.UWP.ViewModels
             set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; RaisePropertyChanged(); }
         }
 
-        private string _busyText = RetrieveResource("BusyText");
+        private string _busyText = ResourceLoaderService.GetResourceValue("BusyText");
 
         public string BusyText
         {
@@ -71,12 +71,6 @@ namespace StormManager.UWP.ViewModels
                 await Task.Delay(5000);
                 Views.Busy.SetBusy(false);
             }, () => !string.IsNullOrEmpty(BusyText)));
-
-        private static string RetrieveResource(string name)
-        {
-            IResourceLoaderService resource = ResourceLoaderService.Create;
-            return resource.Value(name);
-        }
     }
 }
 

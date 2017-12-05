@@ -25,14 +25,22 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
         }
 
         [Fact]
-        public async void MayKeyHelper_CanDeterminePositionFollowingConstruction()
+        public async void MayKeyHelper_CanDetermineKeyFollowingConstruction()
         {
             var randomKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, ArbitrarySeed);
-            var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
-            var sut = await MapKeyHelper.CreateAsync(service.Object.Key);
+            var sut = await MapKeyHelper.CreateAsync(randomKey);
             var result = sut.Key;
 
             Assert.Equal(randomKey, result);
+        }
+
+        [Fact]
+        public async void MayKeyHelper_InvalidKeyThrowsException()
+        {
+            var randomKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength -1, ArbitrarySeed);
+            var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
+            
+            await Assert.ThrowsAsync<ArgumentException>(async () => await MapKeyHelper.CreateAsync(service.Object.Key));
         }
     }
 }

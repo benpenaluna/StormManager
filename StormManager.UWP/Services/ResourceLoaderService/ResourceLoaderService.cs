@@ -8,9 +8,13 @@ namespace StormManager.UWP.Services.ResourceLoaderService
 
         private ResourceLoaderService() { }
 
-        public static ResourceLoaderService Create => UniqueInstance.Value;
+        public static string GetResourceValue(string name)
+        {
+            IResourceLoaderService resource = UniqueInstance.Value;
+            return resource.RetrieveResource(name);
+        }
 
-        public string Value(string name)
+        public string RetrieveResource(string name)
         {
             var loader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
             return loader.GetString(name);

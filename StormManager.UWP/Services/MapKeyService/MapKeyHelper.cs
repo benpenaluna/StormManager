@@ -9,8 +9,6 @@ namespace StormManager.UWP.Services.MapKeyService
 {
     public class MapKeyHelper : IMapKeyHelper
     {
-        private const string KeyFileLocation = @"ms-appx:///Assets/key.txt"; // TODO: Do not hardcode this string
-
         public string Key { get; private set; }
 
         private MapKeyHelper() { }
@@ -24,22 +22,20 @@ namespace StormManager.UWP.Services.MapKeyService
         private async Task<IMapKeyHelper> InitialiseAsync(string key = null)
         {
             if (key == null)
-            {
-                await GetMapKeyAsync();
-            }
-            else
-            {
-                if (!key.IsValidMapKey()) throw new ArgumentException(key);
+                key = await GetMapKeyAsync();
 
-                Key = key;
-            }
+            if (!key.IsValidMapKey())
+                throw new ArgumentException(key);
+
+            Key = key;  
              
             return this;
         }
 
         private static async Task<string> GetMapKeyAsync()
-        { 
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(KeyFileLocation));
+        {
+            var keyFileLocation = ResourceLoaderService.ResourceLoaderService.GetResourceValue("KeyFileLocation");
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(keyFileLocation));
             string key;
 
             try { key = await ReadKeyFromFile(file); }

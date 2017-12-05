@@ -133,6 +133,10 @@
     <value>Please wait...</value>
     <comment>Text to be displayed when app is busy</comment>
   </data>
+  <data name="KeyFileLocation" xml:space="preserve">
+    <value>ms-appx:///Assets/key.txt</value>
+    <comment>The location of the Bing Maps Key</comment>
+  </data>
   <data name="MainPageHeader.Text" xml:space="preserve">
     <value>Dashboard</value>
     <comment>Views.MainPage.PageHeader</comment>

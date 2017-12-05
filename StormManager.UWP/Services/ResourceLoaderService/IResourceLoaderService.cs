@@ -2,6 +2,6 @@
 {
     public interface IResourceLoaderService
     {
-        string Value(string name);
+        string RetrieveResource(string name);
     }
 }
