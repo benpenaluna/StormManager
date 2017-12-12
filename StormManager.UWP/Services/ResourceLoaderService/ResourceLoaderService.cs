@@ -2,22 +2,19 @@
 
 namespace StormManager.UWP.Services.ResourceLoaderService
 {
-    public sealed class ResourceLoaderService : IResourceLoaderService
+    public sealed class ResourceLoaderService
     {
         private static readonly Lazy<ResourceLoaderService> UniqueInstance = new Lazy<ResourceLoaderService>(() => new ResourceLoaderService());
 
+        private IResourceLoaderHelper Helper { get; set; }
+
         private ResourceLoaderService() { }
 
-        public static string GetResourceValue(string name)
+        public static string GetResourceValue(string name, IResourceLoaderHelper helper = null)
         {
-            IResourceLoaderService resource = UniqueInstance.Value;
-            return resource.RetrieveResource(name);
-        }
-
-        public string RetrieveResource(string name)
-        {
-            var loader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
-            return loader.GetString(name);
+            var resourceLoaderService = UniqueInstance.Value;
+            resourceLoaderService.Helper = helper ?? ResourceLoaderHelper.Create(name);
+            return resourceLoaderService.Helper.ResourceName;
         }
     }
 }

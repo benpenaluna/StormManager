@@ -111,7 +111,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService\ILocationHelper.cs" />
     <Compile Include="Services\MapKeyService\IMapKeyHelper.cs" />
-    <Compile Include="Services\ResourceLoaderService\IResourceLoaderService.cs" />
+    <Compile Include="Services\ResourceLoaderService\IResourceLoaderHelper.cs" />
+    <Compile Include="Services\ResourceLoaderService\ResourceLoaderHelper.cs" />
     <Compile Include="Services\ResourceLoaderService\ResourceLoaderService.cs" />
     <Compile Include="Services\LocationService\ILocationService.cs" />
     <Compile Include="Services\LocationService\LocationHelper.cs" />
