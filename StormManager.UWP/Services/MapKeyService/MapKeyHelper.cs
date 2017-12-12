@@ -24,10 +24,7 @@ namespace StormManager.UWP.Services.MapKeyService
             if (key == null)
                 key = await GetMapKeyAsync();
 
-            if (!key.IsValidMapKey())
-                throw new ArgumentException(key);
-
-            Key = key;  
+            Key = key.IsValidMapKey() ? key : string.Empty;
              
             return this;
         }

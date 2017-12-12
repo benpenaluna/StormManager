@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Services.MapKeyService;
 using StormManager.UWP.Tests.Common.ExtensionMethods;
@@ -18,8 +14,7 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
         public async Task MapKeynHelper_CanCreateAsyncronously()
         {
             var randomKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, ArbitrarySeed);
-            var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
-            var result = await MapKeyHelper.CreateAsync(service.Object.Key);
+            var result = await MapKeyHelper.CreateAsync(randomKey);
 
             Assert.NotNull(result);
         }
@@ -35,12 +30,17 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
         }
 
         [Fact]
-        public async void MayKeyHelper_InvalidKeyThrowsException()
+        public async void MayKeyHelper_KeyPropertyEmptyWhenProvidedInvalidKey()
         {
+            var expected = string.Empty;
+
             var randomKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength -1, ArbitrarySeed);
             var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
+
+            var sut = await MapKeyHelper.CreateAsync(service.Object.Key);
+            var result = sut.Key;
             
-            await Assert.ThrowsAsync<ArgumentException>(async () => await MapKeyHelper.CreateAsync(service.Object.Key));
+            Assert.Equal(expected, result);
         }
     }
 }
