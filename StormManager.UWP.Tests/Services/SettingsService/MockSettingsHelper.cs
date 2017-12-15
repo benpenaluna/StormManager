@@ -41,7 +41,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
             if (typeof(T) == typeof(TimeSpan))
             {
                 TimeSpan.TryParse(recordedValue, out var timeSpan);
-                convertedValue = (T) Convert.ChangeType(timeSpan, typeof(T));
+                convertedValue = recordedValue == null ? otherwise : (T)Convert.ChangeType(timeSpan, typeof(T));
             }
             else
             {
