@@ -1,6 +1,7 @@
 using Template10.Controls;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml;
+using StormManager.UWP.Services.SettingsServices;
 
 namespace StormManager.UWP.Views
 {
@@ -8,13 +9,13 @@ namespace StormManager.UWP.Views
     {
         public static Shell Instance { get; set; }
         public static HamburgerMenu HamburgerMenu => Instance.MyHamburgerMenu;
-        readonly Services.SettingsServices.SettingsService _settings;
+        readonly ISettingsService _settings;
 
         public Shell()
         {
             Instance = this;
             InitializeComponent();
-            _settings = Services.SettingsServices.SettingsService.Create;
+            _settings = Services.SettingsServices.SettingsService.Create();
         }
 
         public Shell(INavigationService navigationService) : this()

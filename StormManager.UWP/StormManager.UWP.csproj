@@ -120,6 +120,9 @@
     <Compile Include="Services\MapKeyService\IMapKeyService.cs" />
     <Compile Include="Services\MapKeyService\MapKeyHelper.cs" />
     <Compile Include="Services\MapKeyService\MapKeyService.cs" />
+    <Compile Include="Services\SettingsServices\UiUpdater.cs" />
+    <Compile Include="Services\SettingsServices\IUiUpdater.cs" />
+    <Compile Include="Services\SettingsServices\ISettingsService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\AboutPartViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

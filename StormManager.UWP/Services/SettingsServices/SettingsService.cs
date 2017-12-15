@@ -6,35 +6,41 @@ using Template10.Services.SettingsService;
 
 namespace StormManager.UWP.Services.SettingsServices
 {
-    public class SettingsService
+    public class SettingsService : ISettingsService
     {
-        public static SettingsService Create { get; } = new SettingsService();
+        public static bool UseShellBackButtonDefault => true;
 
-        //public static SettingsService Create(ISettingsHelper settings = null)
-        //{
-        //    return new SettingsService(settings);
-        //}
+        public static ApplicationTheme AppThemeDefault => ApplicationTheme.Light;
 
-        readonly ISettingsHelper _helper;
+        public static TimeSpan CacheMaxDurationDefault => TimeSpan.FromDays(2);
 
-        //private SettingsService(ISettingsHelper settings = null)
-        private SettingsService()
+        public static bool ShowHamburgerButtonDefault => true;
+
+        public static bool IsFullScreenDefault => false;
+
+
+        public static ISettingsService Create(ISettingsHelper helper = null, IUiUpdater updater = null)
         {
-            //_helper = settings ?? new SettingsHelper();
-            _helper = new SettingsHelper();
+            return new SettingsService(helper, updater);
+        }
+
+        private readonly ISettingsHelper _helper;
+
+        private readonly IUiUpdater _updater;
+
+        private SettingsService(ISettingsHelper helper = null, IUiUpdater updater = null)
+        {
+            _helper = helper ?? new SettingsHelper();
+            _updater = updater ?? UiUpdater.Create();
         }
 
         public bool UseShellBackButton
         {
-            get => _helper.Read(nameof(UseShellBackButton), true);
+            get => _helper.Read(nameof(UseShellBackButton), UseShellBackButtonDefault);
             set
             {
                 _helper.Write(nameof(UseShellBackButton), value);
-                BootStrapper.Current.NavigationService.GetDispatcherWrapper().Dispatch(() =>
-                {
-                    BootStrapper.Current.ShowShellBackButton = value;
-                    BootStrapper.Current.UpdateShellBackButton();
-                });
+                _updater.UpdateUseShellBackButton(value);
             }
         }
 
@@ -42,31 +48,30 @@ namespace StormManager.UWP.Services.SettingsServices
         {
             get
             {
-                var theme = ApplicationTheme.Light;
+                var theme = AppThemeDefault;
                 var value = _helper.Read(nameof(AppTheme), theme.ToString());
                 return Enum.TryParse(value, out theme) ? theme : ApplicationTheme.Dark;
             }
             set
             {
                 _helper.Write(nameof(AppTheme), value.ToString());
-                ((FrameworkElement) Window.Current.Content).RequestedTheme = value.ToElementTheme();
-                Views.Shell.HamburgerMenu.RefreshStyles(value, true);
+                _updater.UpdateAppTheme(value);
             }
         }
 
         public TimeSpan CacheMaxDuration
         {
-            get => _helper.Read(nameof(CacheMaxDuration), TimeSpan.FromDays(2));
+            get => _helper.Read(nameof(CacheMaxDuration), CacheMaxDurationDefault);
             set
             {
                 _helper.Write(nameof(CacheMaxDuration), value);
-                BootStrapper.Current.CacheMaxDuration = value;
+                _updater.UpdateCacheMaxDuration(value);
             }
         }
 
         public bool ShowHamburgerButton
         {
-            get => _helper.Read(nameof(ShowHamburgerButton), true);
+            get => _helper.Read(nameof(ShowHamburgerButton), ShowHamburgerButtonDefault);
             set
             {
                 _helper.Write(nameof(ShowHamburgerButton), value);
@@ -76,7 +81,7 @@ namespace StormManager.UWP.Services.SettingsServices
 
         public bool IsFullScreen
         {
-            get => _helper.Read(nameof(IsFullScreen), false);
+            get => _helper.Read(nameof(IsFullScreen), IsFullScreenDefault);
             set
             {
                 _helper.Write(nameof(IsFullScreen), value);

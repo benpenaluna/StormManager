@@ -109,6 +109,9 @@
     <Compile Include="Services\ResourceLoader\ResourceLoaderHelperMockFactory.cs" />
     <Compile Include="Services\ResourceLoader\ResourceLoaderHelperTests.cs" />
     <Compile Include="Services\ResourceLoader\ResourceLoaderServiceTests.cs" />
+    <Compile Include="Services\SettingsService\MockUiUpdater.cs" />
+    <Compile Include="Services\SettingsService\MockSettingsHelper.cs" />
+    <Compile Include="Services\SettingsService\SettingsServiceTests.cs" />
     <Compile Include="UnitTestApp.xaml.cs">
       <DependentUpon>UnitTestApp.xaml</DependentUpon>
     </Compile>
@@ -170,7 +173,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Services\SettingsService\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

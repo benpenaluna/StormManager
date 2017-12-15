@@ -2,12 +2,14 @@
 using Template10.Mvvm;
 using Windows.UI.Xaml;
 using StormManager.UWP.Services.ResourceLoaderService;
+using StormManager.UWP.Services.SettingsServices;
 
 namespace StormManager.UWP.ViewModels
 {
     public class SettingsPartViewModel : ViewModelBase
     {
-        readonly Services.SettingsServices.SettingsService _settings;
+        //readonly Services.SettingsServices.SettingsService _settings;
+        readonly ISettingsService _settings;
 
         public SettingsPartViewModel()
         {
@@ -17,7 +19,7 @@ namespace StormManager.UWP.ViewModels
             }
             else
             {
-                _settings = Services.SettingsServices.SettingsService.Create;
+                _settings = Services.SettingsServices.SettingsService.Create();
             }
         }
 
