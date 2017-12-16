@@ -48,7 +48,7 @@ namespace StormManager.UWP.Services.LocationService
 
             try
             {
-                var locator = new Geolocator();
+                var locator = new Geolocator {DesiredAccuracy = PositionAccuracy.High};
                 var position = await locator.GetGeopositionAsync();
                 return CreateBasicGeoposition(position.Coordinate.Point.Position.Latitude, position.Coordinate.Point.Position.Longitude);
             }
