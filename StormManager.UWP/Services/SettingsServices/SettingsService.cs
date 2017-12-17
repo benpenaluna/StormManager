@@ -75,7 +75,7 @@ namespace StormManager.UWP.Services.SettingsServices
             set
             {
                 _helper.Write(nameof(ShowHamburgerButton), value);
-                Views.Shell.HamburgerMenu.HamburgerButtonVisibility = value ? Visibility.Visible : Visibility.Collapsed;
+                _updater.UpdateHamburgerButtonDisplay(value);
             }
         }
 
@@ -85,7 +85,7 @@ namespace StormManager.UWP.Services.SettingsServices
             set
             {
                 _helper.Write(nameof(IsFullScreen), value);
-                Views.Shell.HamburgerMenu.IsFullScreen = value;
+                _updater.UpdateFullScreen(value);
             }
         }
     }

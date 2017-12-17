@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
 namespace StormManager.UWP.Services.SettingsServices
@@ -14,5 +10,9 @@ namespace StormManager.UWP.Services.SettingsServices
         void UpdateAppTheme(ApplicationTheme appTheme);
 
         void UpdateCacheMaxDuration(TimeSpan value);
+
+        void UpdateHamburgerButtonDisplay(bool value);
+
+        void UpdateFullScreen(bool value);
     }
 }

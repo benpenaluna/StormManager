@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using Moq;
 using StormManager.UWP.Services.SettingsServices;
 using Xunit;
 
@@ -20,7 +15,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         }
 
         [Fact]
-        public void SettingsService_DefaultUseShellBackButtonReturnsTrue()
+        public void SettingsService_DefaultUseShellBackButton()
         {
             var expected = UWP.Services.SettingsServices.SettingsService.UseShellBackButtonDefault;
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
@@ -32,7 +27,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_UseShellBackButtonSetsAndReturnsValue()
         {
-            const bool expected = false;
+            var expected = !UWP.Services.SettingsServices.SettingsService.UseShellBackButtonDefault;
 
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             sut.UseShellBackButton = expected;
@@ -54,7 +49,9 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_AppThemeSetsAndReturnsValue()
         {
-            const ApplicationTheme expected = ApplicationTheme.Dark;
+            var expected = UWP.Services.SettingsServices.SettingsService.AppThemeDefault == ApplicationTheme.Light
+                ? ApplicationTheme.Dark
+                : ApplicationTheme.Light;
 
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             sut.AppTheme = expected;
@@ -83,6 +80,50 @@ namespace StormManager.UWP.Tests.Services.SettingsService
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             sut.CacheMaxDuration = expected;
             var result = sut.CacheMaxDuration;
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void SettingsService_DefaultShowHamburgerButton()
+        {
+            var expected = UWP.Services.SettingsServices.SettingsService.ShowHamburgerButtonDefault;
+            var sut = SettingsServiceWithTestableHelperAndUiUpdater();
+            var result = sut.ShowHamburgerButton;
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        private void SettingsService_ShowHamburgerButtonSetAndReturnsValue()
+        {
+            var expected = !UWP.Services.SettingsServices.SettingsService.ShowHamburgerButtonDefault;
+
+            var sut = SettingsServiceWithTestableHelperAndUiUpdater();
+            sut.ShowHamburgerButton = expected;
+            var result = sut.ShowHamburgerButton;
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void SettingsService_DefaultIsFullScreen()
+        {
+            var expected = UWP.Services.SettingsServices.SettingsService.IsFullScreenDefault;
+            var sut = SettingsServiceWithTestableHelperAndUiUpdater();
+            var result = sut.IsFullScreen;
+
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        private void SettingsService_IsFullScreenSetAndReturnsValue()
+        {
+            var expected = !UWP.Services.SettingsServices.SettingsService.IsFullScreenDefault;
+
+            var sut = SettingsServiceWithTestableHelperAndUiUpdater();
+            sut.IsFullScreen = expected;
+            var result = sut.IsFullScreen;
 
             Assert.Equal(expected, result);
         }
