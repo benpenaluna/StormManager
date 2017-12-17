@@ -43,12 +43,12 @@ namespace StormManager.UWP.Services.LocationService
         private static async Task<BasicGeoposition> GetPositionAsync()
         {
             var access = await Geolocator.RequestAccessAsync();
-            if (access != GeolocationAccessStatus.Allowed)
+            if (access != GeolocationAccessStatus.Allowed)  
                 throw new GeolocationAccessDeniedException();
 
             try
             {
-                var locator = new Geolocator {DesiredAccuracy = PositionAccuracy.High};
+                var locator = new Geolocator { DesiredAccuracyInMeters = 0 };
                 var position = await locator.GetGeopositionAsync();
                 return CreateBasicGeoposition(position.Coordinate.Point.Position.Latitude, position.Coordinate.Point.Position.Longitude);
             }
