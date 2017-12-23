@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Devices.WiFi;
 using StormManager.UWP.Common.Exceptions;
 
 namespace StormManager.UWP.Services.LocationService
@@ -11,7 +13,9 @@ namespace StormManager.UWP.Services.LocationService
 
         public BasicGeoposition Position { get; private set; }
 
-        private LocationHelper() {}
+        private LocationHelper()
+        {
+        }
 
         public static Task<ILocationHelper> CreateAsync(ILocationHelper helper = null)
         {
@@ -21,8 +25,14 @@ namespace StormManager.UWP.Services.LocationService
 
         private async Task<ILocationHelper> InitialiseAsync(ILocationHelper helper = null)
         {
-            if (helper == null) { await TryDetermineActualLocation(); }
-            else { SetProvidedAcessStatusAndPosition(helper); }
+            if (helper == null)
+            {
+                await TryDetermineActualLocation();
+            }
+            else
+            {
+                SetProvidedAcessStatusAndPosition(helper);
+            }
 
             return this;
         }
@@ -43,14 +53,15 @@ namespace StormManager.UWP.Services.LocationService
         private static async Task<BasicGeoposition> GetPositionAsync()
         {
             var access = await Geolocator.RequestAccessAsync();
-            if (access != GeolocationAccessStatus.Allowed)  
+            if (access != GeolocationAccessStatus.Allowed)
                 throw new GeolocationAccessDeniedException();
 
             try
             {
-                var locator = new Geolocator { DesiredAccuracyInMeters = 0 };
+                var locator = new Geolocator {DesiredAccuracyInMeters = 0};
                 var position = await locator.GetGeopositionAsync();
-                return CreateBasicGeoposition(position.Coordinate.Point.Position.Latitude, position.Coordinate.Point.Position.Longitude);
+                return CreateBasicGeoposition(position.Coordinate.Point.Position.Latitude,
+                    position.Coordinate.Point.Position.Longitude);
             }
             catch
             {
