@@ -1,9 +1,15 @@
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
-using StormManager.UWP.Services.SettingsServices;
 using Windows.ApplicationModel.Activation;
 using Template10.Controls;
 using Windows.UI.Xaml.Data;
+using Autofac;
+using StormManager.UWP.Services.LocationService;
+using StormManager.UWP.Services.MapKeyService;
+using StormManager.UWP.Services.ResourceLoaderService;
+using StormManager.UWP.Services.SettingsServices;
+using Template10.Services.SettingsService;
+using SettingsService = StormManager.UWP.Services.SettingsServices.SettingsService;
 
 namespace StormManager.UWP
 {
@@ -13,6 +19,8 @@ namespace StormManager.UWP
     [Bindable]
     sealed partial class App
     {
+        public static IContainer Container { get; private set; }
+
         public App()
         {
             InitializeComponent();
@@ -21,7 +29,7 @@ namespace StormManager.UWP
             #region app settings
 
             // some settings must be set in app.constructor
-            var settings = SettingsService.Create();
+            var settings = new SettingsService(new SettingsHelper(), new UiUpdater());
             RequestedTheme = settings.AppTheme;
             CacheMaxDuration = settings.CacheMaxDuration;
             ShowShellBackButton = settings.UseShellBackButton;
@@ -30,6 +38,32 @@ namespace StormManager.UWP
             AutoExtendExecutionSession = true;
 
             #endregion
+        }
+
+        public override Task OnInitializeAsync(IActivatedEventArgs args)
+        {
+            var builder = new ContainerBuilder();
+
+            RegisterServices(builder);
+
+            Container = builder.Build();
+
+            //var test = Container.Resolve<Services.SettingsServices.ISettingsService>();
+
+            return Task.FromResult<object>(null);
+        }
+
+        private static void RegisterServices(ContainerBuilder builder)
+        {
+            //builder.RegisterType<LocationService>().As<ILocationService>();
+            //builder.RegisterType<LocationHelper>().As<ILocationHelper>();
+            //builder.RegisterType<MapKeyHelper>().As<IMapKeyHelper>();
+            //builder.RegisterType<MapKeyService>().As<IMapKeyService>();
+            //builder.RegisterType<ResourceLoaderHelper>().As<IResourceLoaderHelper>();
+            //builder.RegisterType<ResourceLoaderService>().AsSelf();
+            builder.RegisterType<SettingsHelper>().As<ISettingsHelper>();
+            builder.RegisterType<UiUpdater>().As<IUiUpdater>();
+            builder.RegisterType<SettingsService>().As<Services.SettingsServices.ISettingsService>();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)

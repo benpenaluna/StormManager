@@ -1,18 +1,27 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using StormManager.UWP.Services.SettingsServices;
+using Template10.Services.SettingsService;
 using Xunit;
+using ISettingsService = StormManager.UWP.Services.SettingsServices.ISettingsService;
 
 namespace StormManager.UWP.Tests.Services.SettingsService
 {
     public class SettingsServiceTests
     {
         [Fact]
-        public void SettingsService_CanCreate()
+        public void SettingsService_CanInstantiate()
         {
-            var result = UWP.Services.SettingsServices.SettingsService.Create();
+            var result = new UWP.Services.SettingsServices.SettingsService(new SettingsHelper(), new UiUpdater());
             Assert.NotNull(result);
         }
+
+        //[Fact]
+        //public void SettingsService_CanCreate()
+        //{
+        //    var result = UWP.Services.SettingsServices.SettingsService.Create();
+        //    Assert.NotNull(result);
+        //}
 
         [Fact]
         public void SettingsService_DefaultUseShellBackButton()
@@ -132,7 +141,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         {
             var settingsHelper = MockSettingsHelper.Create();
             var uiUpdater = MockUiUpdater.Create();
-            return UWP.Services.SettingsServices.SettingsService.Create(settingsHelper, uiUpdater);
+            return new UWP.Services.SettingsServices.SettingsService(settingsHelper, uiUpdater);
         }
     }
 }

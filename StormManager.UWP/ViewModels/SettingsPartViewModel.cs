@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Template10.Mvvm;
 using Windows.UI.Xaml;
+using Autofac;
 using StormManager.UWP.Services.ResourceLoaderService;
 using StormManager.UWP.Services.SettingsServices;
 
@@ -19,7 +20,7 @@ namespace StormManager.UWP.ViewModels
             }
             else
             {
-                _settings = Services.SettingsServices.SettingsService.Create();
+                _settings = App.Container.Resolve<ISettingsService>();
             }
         }
 

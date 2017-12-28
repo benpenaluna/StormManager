@@ -7,13 +7,6 @@ namespace StormManager.UWP.Services.SettingsServices
 {
     public class UiUpdater : IUiUpdater
     {
-        public static IUiUpdater Create()
-        {
-            return new UiUpdater();
-        }
-
-        private UiUpdater() { }
-
         public void UpdateUseShellBackButton(bool value)
         {
             BootStrapper.Current.NavigationService.GetDispatcherWrapper().Dispatch(() =>
