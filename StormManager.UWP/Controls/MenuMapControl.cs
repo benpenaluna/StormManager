@@ -4,12 +4,11 @@ using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Services.Maps;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using StormManager.UWP.Models.Mapping;
-
-// The Templated Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234235
 
 namespace StormManager.UWP.Controls
 {
@@ -18,6 +17,7 @@ namespace StormManager.UWP.Controls
         private MapControl _myMapControl;
         private Button _styleButton;
         private AutoSuggestBox _directionsSuggestBox;
+        private List<MapLocationSuggestion> _lastFoundLocations;
 
         private MapRadioButton _roadStyleRadioButton;
         private MapRadioButton _aerialStyleRadioButton;
@@ -151,7 +151,6 @@ namespace StormManager.UWP.Controls
         private void AttachSuggestBoxEvents()
         {
             _directionsSuggestBox.TextChanged += DirectionsSuggestBox_TextChanged;
-            _directionsSuggestBox.SuggestionChosen += DirectionsSuggestBox_SuggestionChosen;
             _directionsSuggestBox.QuerySubmitted += DirectionsSuggestBox_QuerySubmitted;
         }
 
@@ -167,36 +166,62 @@ namespace StormManager.UWP.Controls
         private T GetTemplateChild<T>(string name) where T : DependencyObject
         {
             if (!(GetTemplateChild(name) is T child))
+            {
                 throw new NullReferenceException(name);
+            }
 
             return child;
         }
 
         private async void DirectionsSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                return;
+            }
 
-            var result = await MapLocationFinder.FindLocationsAsync(sender.Text, MapCenter, SearchResultsDisplayed);
-            DisplayLocationResults(result);
+            var finderResult = await FindLocationsAsync(sender.Text);
+            DisplayAndCacheLocationSuggestions(finderResult);
         }
 
-        private void DisplayLocationResults(MapLocationFinderResult result)
+        private async System.Threading.Tasks.Task<MapLocationFinderResult> FindLocationsAsync(string queryText)
         {
-            var displayableResults = result.Locations.Select(location => new MapLocationSuggestion(location)).ToList();
-            _directionsSuggestBox.ItemsSource = displayableResults;
+            return await MapLocationFinder.FindLocationsAsync(queryText, MapCenter, SearchResultsDisplayed);
         }
 
-        private void DirectionsSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        private void DisplayAndCacheLocationSuggestions(MapLocationFinderResult result)
         {
-            if (args.SelectedItem == null || args.SelectedItem.GetType() != typeof(MapLocationSuggestion)) return;
-
-            var location = (args.SelectedItem as MapLocationSuggestion)?.MapLocation;
-            if (location == null) return;
-
-            AddPushPin(location, location.DisplayName);
+            _lastFoundLocations = result.Locations.Select(location => new MapLocationSuggestion(location)).ToList();
+            _directionsSuggestBox.ItemsSource = _lastFoundLocations;
         }
 
-        private void AddPushPin(MapLocation location, string title)
+        private void DirectionsSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion == null)
+            {
+                TryPinLastFoundLocationToMap(sender.Text);
+            }
+            else
+            {
+                TryPinLocationToMap(args.ChosenSuggestion as MapLocationSuggestion);
+            }
+        }
+
+        private void TryPinLastFoundLocationToMap(string userEnteredLocationName)
+        {
+            if (_lastFoundLocations == null || _lastFoundLocations.Count == 0) return;
+
+            var locations = from loc in _lastFoundLocations
+                           where loc.MapLocation.DisplayName.StartsWith(userEnteredLocationName)
+                           select loc.MapLocation;
+
+            var location = locations.FirstOrDefault();
+            var locationNameToDisplay = location?.DisplayName ?? "";
+
+            AddPushPinAndSetScene(location, locationNameToDisplay);
+        }
+
+        private void AddPushPinAndSetScene(MapLocation location, string title)
         {
             if (location == null) throw new ArgumentNullException(nameof(location));
 
@@ -205,27 +230,25 @@ namespace StormManager.UWP.Controls
                 Location = location.Point,
                 NormalizedAnchorPoint = new Point(0.5, 1.0),
                 Title = title,
+                Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/MapIcons/blue_push_pin_32px.png")),
                 CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible,
                 ZIndex = 0
             };
-            
+
             _myMapControl.MapElements.Add(pushpin);
-            _myMapControl.Scene = MapScene.CreateFromLocationAndRadius(location.Point, 
-                                                                       RadiusAroundNewPushPin, 
-                                                                       _myMapControl.Heading, 
-                                                                       _myMapControl.Pitch);
+            SetMapSceneForPushPinAddition(location);
         }
 
-        private void DirectionsSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private void SetMapSceneForPushPinAddition(MapLocation location)
         {
-            if (args.ChosenSuggestion != null)
-            {
-                 
-            }
-            else
-            {
-                // Use args.QueryText to determine what to do.
-            }
+            _myMapControl.Scene = MapScene.CreateFromLocationAndRadius(location.Point, RadiusAroundNewPushPin, _myMapControl.Heading, _myMapControl.Pitch);
+        }
+
+        private void TryPinLocationToMap(MapLocationSuggestion suggestion)
+        {
+            var location = suggestion.MapLocation;
+            
+            AddPushPinAndSetScene(location, location.DisplayName);
         }
 
         private void MapStylePresenter_Changed(object sender, RoutedEventArgs e)
