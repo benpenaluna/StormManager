@@ -1,5 +1,7 @@
 ﻿// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
+using Windows.UI.Xaml.Navigation;
+
 namespace StormManager.UWP.Views
 {
     /// <summary>
@@ -10,6 +12,7 @@ namespace StormManager.UWP.Views
         public OperationsPage()
         {
             InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
     }
 }
