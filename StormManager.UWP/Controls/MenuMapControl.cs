@@ -212,8 +212,8 @@ namespace StormManager.UWP.Controls
             if (_lastFoundLocations == null || _lastFoundLocations.Count == 0) return;
 
             var locations = from loc in _lastFoundLocations
-                           where loc.MapLocation.DisplayName.StartsWith(userEnteredLocationName)
-                           select loc.MapLocation;
+                            where loc.MapLocation.DisplayName.StartsWith(userEnteredLocationName)
+                            select loc.MapLocation;
 
             var location = locations.FirstOrDefault();
             var locationNameToDisplay = location?.DisplayName ?? "";
@@ -224,7 +224,12 @@ namespace StormManager.UWP.Controls
         private void AddPushPinAndSetScene(MapLocation location, string title)
         {
             if (location == null) throw new ArgumentNullException(nameof(location));
+            AddPushPin(location, title);
+            SetMapSceneForPushPinAddition(location);
+        }
 
+        private void AddPushPin(MapLocation location, string title)
+        {
             var pushpin = new MapIcon
             {
                 Location = location.Point,
@@ -236,7 +241,6 @@ namespace StormManager.UWP.Controls
             };
 
             _myMapControl.MapElements.Add(pushpin);
-            SetMapSceneForPushPinAddition(location);
         }
 
         private void SetMapSceneForPushPinAddition(MapLocation location)
