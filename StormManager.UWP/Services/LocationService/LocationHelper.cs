@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.Devices.WiFi;
 using StormManager.UWP.Common.Exceptions;
 
 namespace StormManager.UWP.Services.LocationService
@@ -13,10 +11,8 @@ namespace StormManager.UWP.Services.LocationService
 
         public BasicGeoposition Position { get; private set; }
 
-        private LocationHelper()
-        {
-        }
-
+        private LocationHelper() { }
+        
         public static Task<ILocationHelper> CreateAsync(ILocationHelper helper = null)
         {
             var result = new LocationHelper();
@@ -54,7 +50,9 @@ namespace StormManager.UWP.Services.LocationService
         {
             var access = await Geolocator.RequestAccessAsync();
             if (access != GeolocationAccessStatus.Allowed)
+            {
                 throw new GeolocationAccessDeniedException();
+            }
 
             try
             {

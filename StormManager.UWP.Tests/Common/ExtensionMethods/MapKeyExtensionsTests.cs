@@ -43,8 +43,8 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
             var undersizeKeyLength = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength - 1, seed);
             var oversizeKeyLength = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength + 1, seed);
 
-            Assert.Equal(false, undersizeKeyLength.IsValidMapKey());
-            Assert.Equal(false, oversizeKeyLength.IsValidMapKey());
+            Assert.False(undersizeKeyLength.IsValidMapKey());
+            Assert.False(oversizeKeyLength.IsValidMapKey());
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         {
             var invalidKey = InvalidKey(MapKeyExtensions.MapKeyLength);
 
-            Assert.Equal(false, invalidKey.IsValidMapKey());
+            Assert.False(invalidKey.IsValidMapKey());
         }
 
         [Theory]
@@ -63,10 +63,8 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         {
             var validKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, seed);
 
-            Assert.Equal(true, validKey.IsValidMapKey());
+            Assert.True(validKey.IsValidMapKey());
         }
-
-        
 
         private static string InvalidKey(int size)
         {
