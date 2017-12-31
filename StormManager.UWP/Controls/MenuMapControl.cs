@@ -8,6 +8,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Media.Imaging;
 using StormManager.UWP.Models.Mapping;
 
 namespace StormManager.UWP.Controls
@@ -18,6 +19,7 @@ namespace StormManager.UWP.Controls
         private Button _styleButton;
         private AutoSuggestBox _directionsSuggestBox;
         private List<MapLocationSuggestion> _lastFoundLocations;
+        private Dictionary<DependencyObject, MapLocation> _mapIconLocations;
 
         private MapRadioButton _roadStyleRadioButton;
         private MapRadioButton _aerialStyleRadioButton;
@@ -118,6 +120,7 @@ namespace StormManager.UWP.Controls
         public MenuMapControl()
         {
             DefaultStyleKey = typeof(MenuMapControl);
+            _mapIconLocations = new Dictionary<DependencyObject, MapLocation>();
         }
 
         public event EventHandler<RoutedEventArgs> MapLoaded;
@@ -143,6 +146,7 @@ namespace StormManager.UWP.Controls
         private void AttachEvents()
         {
             _myMapControl.Loaded += (s, e) => MapLoaded?.Invoke(s, e);
+            //_myMapControl.CenterChanged += Map_CenterChanged;
 
             AttachSuggestBoxEvents();
             AttachStyleEvents();
@@ -230,17 +234,30 @@ namespace StormManager.UWP.Controls
 
         private void AddPushPin(MapLocation location, string title)
         {
-            var pushpin = new MapIcon
-            {
-                Location = location.Point,
-                NormalizedAnchorPoint = new Point(0.5, 1.0),
-                Title = title,
-                Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/MapIcons/blue_push_pin_32px.png")),
-                CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible,
-                ZIndex = 0
-            };
+            //var pushpin = new MapIcon
+            //{
+            //    Location = location.Point,
+            //    NormalizedAnchorPoint = new Point(0.5, 1.0),
+            //    Title = title,
+            //    Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/MapIcons/blue_push_pin_32px.png")),
+            //    CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible,
+            //    ZIndex = 0
+            //};
 
-            _myMapControl.MapElements.Add(pushpin);
+            //_myMapControl.MapElements.Add(pushpin);
+
+            var grid = new Grid();
+            var image = new Image();
+            var bitmapImage = new BitmapImage()
+            {
+                UriSource = new Uri("ms-appx:///Assets/MapIcons/red_push_pin_32px.png")
+            };
+            image.Source = bitmapImage;
+            grid.Children.Add(image);
+            _myMapControl.Children.Add(grid);
+            MapControl.SetLocation(grid, location.Point);
+            MapControl.SetNormalizedAnchorPoint(grid, new Point(0.5, 1.0));
+            //_mapIconLocations.Add(grid, location);
         }
 
         private void SetMapSceneForPushPinAddition(MapLocation location)
@@ -254,6 +271,15 @@ namespace StormManager.UWP.Controls
             
             AddPushPinAndSetScene(location, location.DisplayName);
         }
+
+        //private void Map_CenterChanged(MapControl map, object sender)
+        //{
+        //    foreach (var keyValuePair in _mapIconLocations)
+        //    {
+        //        MapControl.SetLocation(keyValuePair.Key, keyValuePair.Value.Point);
+        //        MapControl.SetNormalizedAnchorPoint(keyValuePair.Key, new Point(0.5, 1.0));
+        //    }
+        //}
 
         private void MapStylePresenter_Changed(object sender, RoutedEventArgs e)
         {
