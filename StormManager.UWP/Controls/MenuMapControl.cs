@@ -19,7 +19,6 @@ namespace StormManager.UWP.Controls
         private Button _styleButton;
         private AutoSuggestBox _directionsSuggestBox;
         private List<MapLocationSuggestion> _lastFoundLocations;
-        private Dictionary<DependencyObject, MapLocation> _mapIconLocations;
 
         private MapRadioButton _roadStyleRadioButton;
         private MapRadioButton _aerialStyleRadioButton;
@@ -146,8 +145,7 @@ namespace StormManager.UWP.Controls
         private void AttachEvents()
         {
             _myMapControl.Loaded += (s, e) => MapLoaded?.Invoke(s, e);
-            //_myMapControl.CenterChanged += Map_CenterChanged;
-
+            
             AttachSuggestBoxEvents();
             AttachStyleEvents();
         }
@@ -234,18 +232,6 @@ namespace StormManager.UWP.Controls
 
         private void AddPushPin(MapLocation location, string title)
         {
-            //var pushpin = new MapIcon
-            //{
-            //    Location = location.Point,
-            //    NormalizedAnchorPoint = new Point(0.5, 1.0),
-            //    Title = title,
-            //    Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/MapIcons/blue_push_pin_32px.png")),
-            //    CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible,
-            //    ZIndex = 0
-            //};
-
-            //_myMapControl.MapElements.Add(pushpin);
-
             var grid = new Grid();
             var image = new Image();
             var bitmapImage = new BitmapImage()
@@ -255,9 +241,11 @@ namespace StormManager.UWP.Controls
             image.Source = bitmapImage;
             grid.Children.Add(image);
             _myMapControl.Children.Add(grid);
-            MapControl.SetLocation(grid, location.Point);
+
+            var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);
+
+            MapControl.SetLocation(grid, position);
             MapControl.SetNormalizedAnchorPoint(grid, new Point(0.5, 1.0));
-            //_mapIconLocations.Add(grid, location);
         }
 
         private void SetMapSceneForPushPinAddition(MapLocation location)
@@ -271,15 +259,6 @@ namespace StormManager.UWP.Controls
             
             AddPushPinAndSetScene(location, location.DisplayName);
         }
-
-        //private void Map_CenterChanged(MapControl map, object sender)
-        //{
-        //    foreach (var keyValuePair in _mapIconLocations)
-        //    {
-        //        MapControl.SetLocation(keyValuePair.Key, keyValuePair.Value.Point);
-        //        MapControl.SetNormalizedAnchorPoint(keyValuePair.Key, new Point(0.5, 1.0));
-        //    }
-        //}
 
         private void MapStylePresenter_Changed(object sender, RoutedEventArgs e)
         {
