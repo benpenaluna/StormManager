@@ -153,6 +153,10 @@
     <value>Privacy</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
   </data>
+  <data name="PushPinImageRedLocation" xml:space="preserve">
+    <value>ms-appx:///Assets/MapIcons/red_push_pin_32px.png</value>
+    <comment>The location of the red map push pin image</comment>
+  </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>

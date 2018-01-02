@@ -4,7 +4,6 @@ using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Services.Maps;
-using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
@@ -119,7 +118,6 @@ namespace StormManager.UWP.Controls
         public MenuMapControl()
         {
             DefaultStyleKey = typeof(MenuMapControl);
-            _mapIconLocations = new Dictionary<DependencyObject, MapLocation>();
         }
 
         public event EventHandler<RoutedEventArgs> MapLoaded;
@@ -218,34 +216,25 @@ namespace StormManager.UWP.Controls
                             select loc.MapLocation;
 
             var location = locations.FirstOrDefault();
-            var locationNameToDisplay = location?.DisplayName ?? "";
+            //var locationNameToDisplay = location?.DisplayName ?? "";
 
-            AddPushPinAndSetScene(location, locationNameToDisplay);
+            AddPushPinAndSetScene(location);
         }
 
-        private void AddPushPinAndSetScene(MapLocation location, string title)
+        private void AddPushPinAndSetScene(MapLocation location)
         {
             if (location == null) throw new ArgumentNullException(nameof(location));
-            AddPushPin(location, title);
+            AddPushPin(location);
             SetMapSceneForPushPinAddition(location);
         }
 
-        private void AddPushPin(MapLocation location, string title)
+        private void AddPushPin(MapLocation location)
         {
-            var grid = new Grid();
-            var image = new Image();
-            var bitmapImage = new BitmapImage()
-            {
-                UriSource = new Uri("ms-appx:///Assets/MapIcons/red_push_pin_32px.png")
-            };
-            image.Source = bitmapImage;
-            grid.Children.Add(image);
-            _myMapControl.Children.Add(grid);
-
+            var iconWithCollapsableDescription = new MapIconControl();
+            _myMapControl.Children.Add(iconWithCollapsableDescription);
             var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);
-
-            MapControl.SetLocation(grid, position);
-            MapControl.SetNormalizedAnchorPoint(grid, new Point(0.5, 1.0));
+            MapControl.SetLocation(iconWithCollapsableDescription, position);
+            MapControl.SetNormalizedAnchorPoint(iconWithCollapsableDescription, new Point(0.5, 1.0));
         }
 
         private void SetMapSceneForPushPinAddition(MapLocation location)
@@ -257,7 +246,7 @@ namespace StormManager.UWP.Controls
         {
             var location = suggestion.MapLocation;
             
-            AddPushPinAndSetScene(location, location.DisplayName);
+            AddPushPinAndSetScene(location);
         }
 
         private void MapStylePresenter_Changed(object sender, RoutedEventArgs e)

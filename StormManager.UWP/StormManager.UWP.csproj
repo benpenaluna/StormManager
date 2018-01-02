@@ -102,6 +102,7 @@
     <Compile Include="Common\ExtensionMethods\LocationExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyExtensions.cs" />
     <Compile Include="Controls\IMapStylePresenter.cs" />
+    <Compile Include="Controls\MapIconControl.cs" />
     <Compile Include="Controls\MapRadioButton.cs" />
     <Compile Include="Controls\MapStylePresenter.cs" />
     <Compile Include="Controls\MenuMapControl.cs" />
