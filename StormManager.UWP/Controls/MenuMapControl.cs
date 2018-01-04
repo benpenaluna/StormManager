@@ -224,11 +224,11 @@ namespace StormManager.UWP.Controls
         private void AddPushPinAndSetScene(MapLocation location)
         {
             if (location == null) throw new ArgumentNullException(nameof(location));
-            AddPushPin(location);
+            AddMapIcon(location);
             SetMapSceneForPushPinAddition(location);
         }
 
-        private void AddPushPin(MapLocation location)
+        private void AddMapIcon(MapLocation location)
         {
             var iconWithCollapsableDescription = new MapIconControl();
             _myMapControl.Children.Add(iconWithCollapsableDescription);

@@ -101,6 +101,7 @@
     <Compile Include="Common\Exceptions\GeolocationAccessDeniedException.cs" />
     <Compile Include="Common\ExtensionMethods\LocationExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyExtensions.cs" />
+    <Compile Include="Common\ExtensionMethods\TimeSpanExtensions.cs" />
     <Compile Include="Controls\IMapStylePresenter.cs" />
     <Compile Include="Controls\MapIconControl.cs" />
     <Compile Include="Controls\MapRadioButton.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Models\Mapping\IMapLocationSuggestion.cs" />
     <Compile Include="Models\Mapping\MapLocationSuggestion.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService\ILocationHelper.cs" />
     <Compile Include="Services\MapKeyService\IMapKeyHelper.cs" />
@@ -169,7 +171,17 @@
     <Content Include="Assets\MapIcons\blue_push_pin_32px.png" />
     <Content Include="Assets\Capture.PNG" />
     <Content Include="Assets\key.txt" />
+    <Content Include="Assets\MapIcons\red_push_pin_10pc_32px.png" />
+    <Content Include="Assets\MapIcons\red_push_pin_20pc_32px.png" />
+    <Content Include="Assets\MapIcons\red_push_pin_30pc_32px.png" />
     <Content Include="Assets\MapIcons\red_push_pin_32px.png" />
+    <Content Include="Assets\MapIcons\red_push_pin_40pc_32px.png" />
+    <Content Include="Assets\MapIcons\red_push_pin_50pc_32px.png" />
+    <Content Include="Assets\MapIcons\red_push_pin_60pc_32px.png" />
+    <Content Include="Assets\MapIcons\red_push_pin_70pc_32px.png" />
+    <Content Include="Assets\MapIcons\red_push_pin_80pc_32px.png" />
+    <Content Include="Assets\MapIcons\red_push_pin_90pc_32px.png" />
+    <Content Include="Assets\MapIcons\white_push_pin_32px.png" />
     <Content Include="Help.htm" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
