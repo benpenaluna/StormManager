@@ -99,6 +99,7 @@
     <Compile Include="Common\ExtensionMethods\LocationExtensionsTests.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyExtensionsTests.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyGenerator.cs" />
+    <Compile Include="Common\ExtensionMethods\TimeSpanExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService\LocationHelperTests.cs" />
     <Compile Include="Services\LocationService\LocationServiceTests.cs" />
