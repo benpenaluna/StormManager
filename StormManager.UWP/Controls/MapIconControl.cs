@@ -6,41 +6,20 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Media.Animation;
 using StormManager.UWP.Annotations;
 using StormManager.UWP.Common.ExtensionMethods;
-using StormManager.UWP.Services.ResourceLoaderService;
 
 namespace StormManager.UWP.Controls
 {
-    public sealed class MapIconControl : Control, INotifyPropertyChanged
+    public sealed partial class MapIconControl : Control, INotifyPropertyChanged
     {
-        private static readonly Image DefaultImage = new Image
-        {
-            Source = new BitmapImage
-            {
-                UriSource = new Uri(ResourceLoaderService.GetResourceValue("PushPinImageRed100pcLocation"))
-            }
-        };
+        private Storyboard _myStoryboard;
+        private ColorAnimation _descriptionBorderBackgroundAnimation;
+        private ColorAnimation _descriptionBorderAnimation;
+        private ColorAnimation _mapIconFillPathAnimation;
 
-
-        // TODO: Abstarct this string so that anything that implements IEnumerable can be used, and decided upon at run-time
-        private static readonly string[] MapIconImageUpdates = {
-            "PushPinImageRed10pcLocation",
-            "PushPinImageRed20pcLocation",
-            "PushPinImageRed30pcLocation",
-            "PushPinImageRed40pcLocation",
-            "PushPinImageRed50pcLocation",
-            "PushPinImageRed60pcLocation",
-            "PushPinImageRed70pcLocation",
-            "PushPinImageRed90pcLocation",
-            "PushPinImageRed90pcLocation",
-            "PushPinImageRed100pcLocation"
-        };
-
-        private int _mapIconImageUpdatesIndexPointer;
-
-        private readonly DispatcherTimer _timer = new DispatcherTimer(); 
+        public AnimateColor AllowAnimateColor { get; set; }
 
         public Brush DescriptionBackgroundColor
         {
@@ -50,13 +29,13 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty DescriptionBackgroundColorProperty =
             DependencyProperty.Register(nameof(DescriptionBackgroundColor), typeof(Brush), typeof(MapIconControl), new PropertyMetadata(new SolidColorBrush(Colors.White)));
 
-        public Brush DescriptionBorderColor
-        {
-            get => (Brush)GetValue(DescriptionBorderColorProperty);
-            set => SetValue(DescriptionBorderColorProperty, value);
-        }
-        public static readonly DependencyProperty DescriptionBorderColorProperty =
-            DependencyProperty.Register(nameof(DescriptionBorderColor), typeof(Brush), typeof(MapIconControl), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
+        //public SolidColorBrush DescriptionBorderAndMapIconColor
+        //{
+        //    get => (SolidColorBrush)GetValue(DescriptionBorderAndMapIconColorProperty);
+        //    set => SetValue(DescriptionBorderAndMapIconColorProperty, value);
+        //}
+        //public static readonly DependencyProperty DescriptionBorderAndMapIconColorProperty =
+        //    DependencyProperty.Register(nameof(DescriptionBorderAndMapIconColor), typeof(SolidColorBrush), typeof(MapIconControl), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
 
         public CornerRadius DescriptionBorderCornerRadius
         {
@@ -90,17 +69,29 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty DescriptionVisibleProperty =
             DependencyProperty.Register(nameof(DescriptionVisible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Collapsed));
 
-        public ImageSource MapIconImage
+        public Color? FromColor
         {
-            get => (ImageSource)GetValue(MapIconImageProperty);
-            set
-            {
-                SetValue(MapIconImageProperty, value);
-                OnPropertyChanged(nameof(MapIconImage));
-            }
+            get => (Color?)GetValue(FromColorProperty);
+            set => SetValue(FromColorProperty, value);
         }
-        public static readonly DependencyProperty MapIconImageProperty =
-            DependencyProperty.Register(nameof(MapIconImage), typeof(ImageSource), typeof(MapIconControl), new PropertyMetadata(DefaultImage.Source));
+        public static readonly DependencyProperty FromColorProperty =
+            DependencyProperty.Register(nameof(FromColor), typeof(Color?), typeof(MapIconControl), new PropertyMetadata(Colors.Yellow));
+
+        public Brush MapIconBorderBrush
+        {
+            get => (Brush)GetValue(MapIconBorderBrushProperty);
+            set => SetValue(MapIconBorderBrushProperty, value);
+        }
+        public static readonly DependencyProperty MapIconBorderBrushProperty =
+            DependencyProperty.Register(nameof(MapIconBorderBrush), typeof(Brush), typeof(MapIconControl), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
+
+        public double MapIconBorderThickness
+        {
+            get => (double)GetValue(MapIconBorderThicknessProperty);
+            set => SetValue(MapIconBorderThicknessProperty, value);
+        }
+        public static readonly DependencyProperty MapIconBorderThicknessProperty =
+            DependencyProperty.Register(nameof(MapIconBorderThickness), typeof(double), typeof(MapIconControl), new PropertyMetadata(1.0));
 
         public string NotificationTimeDisplayedToUser
         {
@@ -111,10 +102,18 @@ namespace StormManager.UWP.Controls
             DependencyProperty.Register(nameof(NotificationTimeDisplayedToUser), typeof(string), typeof(MapIconControl), new PropertyMetadata("0 seconds ago"));
 
         public DateTime NotificationTimeUtc { get; set; }
+        
+        public Color? ToColor
+        {
+            get => (Color?)GetValue(ToColorProperty);
+            set => SetValue(ToColorProperty, value);
+        }
+        public static readonly DependencyProperty ToColorProperty =
+            DependencyProperty.Register(nameof(ToColor), typeof(Color?), typeof(MapIconControl), new PropertyMetadata(Colors.Blue));
 
         public MapIconControl()
         {
-            Initialise(DateTime.UtcNow); 
+            Initialise(DateTime.UtcNow);
         }
 
         public MapIconControl(DateTime notificationTimeUtc)
@@ -126,50 +125,56 @@ namespace StormManager.UWP.Controls
         {
             DefaultStyleKey = typeof(MapIconControl);
             NotificationTimeUtc = notificationTimeUtc;
+            AllowAnimateColor = AnimateColor.Aminate;
         }
 
         protected override void OnApplyTemplate()
         {
+            InitialiseControlReferences();
             AttachEvents();
-            StartMapIconImageUpdates();
+            TriggerStartUpEvents();
+        }
+
+        private void InitialiseControlReferences()
+        {
+            _myStoryboard = GetTemplateChild<Storyboard>("MyStoryboard");
+            _descriptionBorderBackgroundAnimation = GetTemplateChild<ColorAnimation>("DescriptionBorderBackgroundAnimation");
+            _descriptionBorderAnimation = GetTemplateChild<ColorAnimation>("DescriptionBorderAnimation");
+            _mapIconFillPathAnimation = GetTemplateChild<ColorAnimation>("MapIconFillPathAnimation");
+        }
+
+        private T GetTemplateChild<T>(string name) where T : DependencyObject
+        {
+            if (!(GetTemplateChild(name) is T child))
+            {
+                throw new NullReferenceException(name);
+            }
+
+            return child;
         }
 
         private void AttachEvents()
         {
             Tapped += MapIconControl_Tapped;
-            _timer.Tick += Timer_Tick;
         }
 
-        private void Timer_Tick(object sender, object e)
+        private void TriggerStartUpEvents()
         {
-            if (_mapIconImageUpdatesIndexPointer >= MapIconImageUpdates.Length)
+            if (AllowAnimateColor == AnimateColor.Aminate)
             {
-                _timer.Stop();
-                _timer.Tick -= Timer_Tick;
-                return;
+                SetColorAnimationProperties(_descriptionBorderBackgroundAnimation);
+                SetColorAnimationProperties(_mapIconFillPathAnimation);
+                SetColorAnimationProperties(_descriptionBorderAnimation);
+                _myStoryboard.Begin();
             }
-
-            UpdateMapIconImage();
         }
 
-        private void UpdateMapIconImage()
+        private void SetColorAnimationProperties(ColorAnimation colorAnimation)
         {
-            var newImage = new Image
-            {
-                Source = new BitmapImage
-                {
-                    UriSource = new Uri(ResourceLoaderService.GetResourceValue(MapIconImageUpdates[_mapIconImageUpdatesIndexPointer++]))
-                }
-            };
-            MapIconImage = newImage.Source;
+            colorAnimation.From = FromColor;
+            colorAnimation.To = ToColor;
         }
 
-        private void StartMapIconImageUpdates()
-        {
-            _timer.Interval = new TimeSpan(0, 0, 2); // TODO: Structure this so that it is configurable at runtime, and takes into account the difference in time between notification time and creation of the pin  
-            _timer.Start();
-        }
-        
         private void MapIconControl_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (DescriptionVisible == Visibility.Collapsed)
@@ -179,7 +184,7 @@ namespace StormManager.UWP.Controls
 
             DescriptionVisible = DescriptionVisible == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
-        
+
         private string DetermineNotificationTimeDisplay()
         {
             var timeSinceNotification = DateTime.UtcNow - NotificationTimeUtc;

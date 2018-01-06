@@ -140,6 +140,16 @@ namespace StormManager.UWP.Controls
             _toggleSwitch3D = GetTemplateChild<ToggleSwitch>("ToggleSwitch3D");
         }
 
+        private T GetTemplateChild<T>(string name) where T : DependencyObject
+        {
+            if (!(GetTemplateChild(name) is T child))
+            {
+                throw new NullReferenceException(name);
+            }
+
+            return child;
+        }
+
         private void AttachEvents()
         {
             _myMapControl.Loaded += (s, e) => MapLoaded?.Invoke(s, e);
@@ -161,16 +171,6 @@ namespace StormManager.UWP.Controls
             _aerialWithRoadsStyleRadioButton.Checked += MapStylePresenter_Changed;
             _terrainStyleRadioButton.Checked += MapStylePresenter_Changed;
             _toggleSwitch3D.Toggled += ToggleSwitch3D_Toggled;
-        }
-
-        private T GetTemplateChild<T>(string name) where T : DependencyObject
-        {
-            if (!(GetTemplateChild(name) is T child))
-            {
-                throw new NullReferenceException(name);
-            }
-
-            return child;
         }
 
         private async void DirectionsSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

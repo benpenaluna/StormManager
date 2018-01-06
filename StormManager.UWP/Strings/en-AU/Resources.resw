@@ -153,50 +153,6 @@
     <value>Privacy</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
   </data>
-  <data name="PushPinImageRed100pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_32px.png</value>
-    <comment>The location of the red (100%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed10pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_10pc_32px.png</value>
-    <comment>The location of the red (10%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed20pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_20pc_32px.png</value>
-    <comment>The location of the red (20%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed30pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_30pc_32px.png</value>
-    <comment>The location of the red (30%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed40pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_40pc_32px.png</value>
-    <comment>The location of the red (40%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed50pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_50pc_32px.png</value>
-    <comment>The location of the red (50%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed60pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_60pc_32px.png</value>
-    <comment>The location of the red (60%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed70pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_70pc_32px.png</value>
-    <comment>The location of the red (70%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed80pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_80pc_32px.png</value>
-    <comment>The location of the red (80%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageRed90pcLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/red_push_pin_90pc_32px.png</value>
-    <comment>The location of the red (90%) map push pin image</comment>
-  </data>
-  <data name="PushPinImageWhiteLocation" xml:space="preserve">
-    <value>ms-appx:///Assets/MapIcons/white_push_pin_32px.png</value>
-    <comment>The location of the white map push pin image</comment>
-  </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
