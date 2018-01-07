@@ -18,6 +18,7 @@ namespace StormManager.UWP.Controls
         private ColorAnimation _descriptionBorderBackgroundAnimation;
         private ColorAnimation _descriptionBorderAnimation;
         private ColorAnimation _mapIconFillPathAnimation;
+        private ColorAnimation _headingForegroundAniation;
         private SolidColorBrush _headingForeground;
 
         private DispatcherTimer _headingForegroundChangeTimer;
@@ -136,6 +137,7 @@ namespace StormManager.UWP.Controls
             _descriptionBorderBackgroundAnimation = GetTemplateChild<ColorAnimation>("DescriptionBorderBackgroundAnimation");
             _descriptionBorderAnimation = GetTemplateChild<ColorAnimation>("DescriptionBorderAnimation");
             _mapIconFillPathAnimation = GetTemplateChild<ColorAnimation>("MapIconFillPathAnimation");
+            _headingForegroundAniation = GetTemplateChild<ColorAnimation>("HeadingForegroundAniation");
             _headingForeground = GetTemplateChild<SolidColorBrush>("HeadingForeground");
         }
 
@@ -165,21 +167,17 @@ namespace StormManager.UWP.Controls
                 // TODO: REFACTOR THIS AND MAKE IT READABLE!
 
                 _headingForeground.Color = Converters.ColorToConstrastColorConverter.ConvertToConstractColor(FromColor);
+                _headingForegroundAniation.From = _headingForeground.Color;
                 var contrastChangeFactor = ContrastColorChangeFactor(FromColor, ToColor);
                 if (contrastChangeFactor != null)
                 {
-                    _headingForegroundChangeTimer = new DispatcherTimer();
-
                     var interval = (int) (20000 * contrastChangeFactor); // TODO: 'Bind' '20000' to the Duration property when created 
-                    _headingForegroundChangeTimer.Interval = new TimeSpan(0, 0, 0, 0, interval);
-
-                    _headingForegroundChangeTimer.Tick += (s, e) =>
-                    {
-                        _headingForeground.Color = _headingForeground.Color == Colors.White ? Colors.Black : Colors.White;
-                        _headingForegroundChangeTimer.Stop();
-                    };
-
-                    _headingForegroundChangeTimer.Start();
+                    _headingForegroundAniation.To = _headingForeground.Color == Colors.White ? Colors.Black : Colors.White;
+                    _headingForegroundAniation.BeginTime = new TimeSpan(0, 0, 0, 0, interval);
+                }
+                else
+                {
+                    _headingForegroundAniation.To = _headingForeground.Color;
                 }
 
                 _myStoryboard.Begin();

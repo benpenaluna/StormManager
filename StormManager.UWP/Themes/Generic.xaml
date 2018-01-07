@@ -124,6 +124,10 @@
                                                 Storyboard.TargetName="MapIconFillPath"
                                                 Storyboard.TargetProperty="Color" 
                                                 Duration="0:0:20" />
+                                <ColorAnimation x:Name="HeadingForegroundAniation"
+                                                Storyboard.TargetName="HeadingForeground"
+                                                Storyboard.TargetProperty="Color" 
+                                                Duration="0:0:1" />
                             </Storyboard>
                         </StackPanel.Resources>
                         <Border Background="{TemplateBinding DescriptionBackgroundColor}"
