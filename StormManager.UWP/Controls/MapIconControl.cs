@@ -18,6 +18,9 @@ namespace StormManager.UWP.Controls
         private ColorAnimation _descriptionBorderBackgroundAnimation;
         private ColorAnimation _descriptionBorderAnimation;
         private ColorAnimation _mapIconFillPathAnimation;
+        private SolidColorBrush _headingForeground;
+
+        private DispatcherTimer _headingForegroundChangeTimer;
 
         public AnimateColor AllowAnimateColor { get; set; }
 
@@ -28,14 +31,6 @@ namespace StormManager.UWP.Controls
         }
         public static readonly DependencyProperty DescriptionBackgroundColorProperty =
             DependencyProperty.Register(nameof(DescriptionBackgroundColor), typeof(Brush), typeof(MapIconControl), new PropertyMetadata(new SolidColorBrush(Colors.White)));
-
-        //public SolidColorBrush DescriptionBorderAndMapIconColor
-        //{
-        //    get => (SolidColorBrush)GetValue(DescriptionBorderAndMapIconColorProperty);
-        //    set => SetValue(DescriptionBorderAndMapIconColorProperty, value);
-        //}
-        //public static readonly DependencyProperty DescriptionBorderAndMapIconColorProperty =
-        //    DependencyProperty.Register(nameof(DescriptionBorderAndMapIconColor), typeof(SolidColorBrush), typeof(MapIconControl), new PropertyMetadata(new SolidColorBrush(Colors.Red)));
 
         public CornerRadius DescriptionBorderCornerRadius
         {
@@ -69,13 +64,13 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty DescriptionVisibleProperty =
             DependencyProperty.Register(nameof(DescriptionVisible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Collapsed));
 
-        public Color? FromColor
+        public Color FromColor
         {
-            get => (Color?)GetValue(FromColorProperty);
+            get => (Color)GetValue(FromColorProperty);
             set => SetValue(FromColorProperty, value);
         }
         public static readonly DependencyProperty FromColorProperty =
-            DependencyProperty.Register(nameof(FromColor), typeof(Color?), typeof(MapIconControl), new PropertyMetadata(Colors.Yellow));
+            DependencyProperty.Register(nameof(FromColor), typeof(Color), typeof(MapIconControl), new PropertyMetadata(Colors.LightBlue));
 
         public Brush MapIconBorderBrush
         {
@@ -103,13 +98,13 @@ namespace StormManager.UWP.Controls
 
         public DateTime NotificationTimeUtc { get; set; }
         
-        public Color? ToColor
+        public Color ToColor
         {
-            get => (Color?)GetValue(ToColorProperty);
+            get => (Color)GetValue(ToColorProperty);
             set => SetValue(ToColorProperty, value);
         }
         public static readonly DependencyProperty ToColorProperty =
-            DependencyProperty.Register(nameof(ToColor), typeof(Color?), typeof(MapIconControl), new PropertyMetadata(Colors.Blue));
+            DependencyProperty.Register(nameof(ToColor), typeof(Color), typeof(MapIconControl), new PropertyMetadata(Colors.Blue));
 
         public MapIconControl()
         {
@@ -141,6 +136,7 @@ namespace StormManager.UWP.Controls
             _descriptionBorderBackgroundAnimation = GetTemplateChild<ColorAnimation>("DescriptionBorderBackgroundAnimation");
             _descriptionBorderAnimation = GetTemplateChild<ColorAnimation>("DescriptionBorderAnimation");
             _mapIconFillPathAnimation = GetTemplateChild<ColorAnimation>("MapIconFillPathAnimation");
+            _headingForeground = GetTemplateChild<SolidColorBrush>("HeadingForeground");
         }
 
         private T GetTemplateChild<T>(string name) where T : DependencyObject
@@ -163,10 +159,32 @@ namespace StormManager.UWP.Controls
             if (AllowAnimateColor == AnimateColor.Aminate)
             {
                 SetColorAnimationProperties(_descriptionBorderBackgroundAnimation);
-                SetColorAnimationProperties(_mapIconFillPathAnimation);
                 SetColorAnimationProperties(_descriptionBorderAnimation);
+                SetColorAnimationProperties(_mapIconFillPathAnimation);
+
+                // TODO: REFACTOR THIS AND MAKE IT READABLE!
+
+                _headingForeground.Color = Converters.ColorToConstrastColorConverter.ConvertToConstractColor(FromColor);
+                var contrastChangeFactor = ContrastColorChangeFactor(FromColor, ToColor);
+                if (contrastChangeFactor != null)
+                {
+                    _headingForegroundChangeTimer = new DispatcherTimer();
+
+                    var interval = (int) (20000 * contrastChangeFactor); // TODO: 'Bind' '20000' to the Duration property when created 
+                    _headingForegroundChangeTimer.Interval = new TimeSpan(0, 0, 0, 0, interval);
+
+                    _headingForegroundChangeTimer.Tick += (s, e) =>
+                    {
+                        _headingForeground.Color = _headingForeground.Color == Colors.White ? Colors.Black : Colors.White;
+                        _headingForegroundChangeTimer.Stop();
+                    };
+
+                    _headingForegroundChangeTimer.Start();
+                }
+
                 _myStoryboard.Begin();
             }
+            // TODO: What about when AllowAnimateColor is 'Static'?
         }
 
         private void SetColorAnimationProperties(ColorAnimation colorAnimation)
@@ -200,6 +218,59 @@ namespace StormManager.UWP.Controls
             }
 
             return timeSinceNotification < TimeSpan.FromHours(24) ? timeSinceNotification.HoursMinutesFormat() : timeSinceNotification.DaysHoursFormat();
+        }
+
+        // TODO: Move ContrastColorChangeFactor to a more suitable location (and test it) - It doesn't belong in this class
+        private double? ContrastColorChangeFactor(Color fromColor, Color toColor) 
+        {
+            // TODO: Refactor this method and make it readable
+            var fromColorContrastValue = Converters.ColorToConstrastColorConverter.ContrastValue(fromColor);
+            var toColorContrastValue = Converters.ColorToConstrastColorConverter.ContrastValue(toColor);
+
+            if ((fromColorContrastValue <= 128 && toColorContrastValue <= 128) ||
+                (fromColorContrastValue > 128 && toColorContrastValue > 128))
+            {
+                return null;
+            }
+            
+            var factor = 0.5;
+            var lowColor = fromColorContrastValue < toColorContrastValue ? fromColor : toColor;
+            var highColor = fromColorContrastValue < toColorContrastValue ? toColor : fromColor;
+
+            var midColor = FindMidColor(fromColor, toColor);
+
+            var factorAlteration = 0.25;
+            var midColorContrastValue = Converters.ColorToConstrastColorConverter.ContrastValue(midColor);
+            while (midColorContrastValue < 127.0 || midColorContrastValue > 128.0)
+            {
+                if (midColorContrastValue > 127.5)
+                {
+                    highColor = midColor;
+                    factor -= factorAlteration; 
+                }
+                else
+                {
+                    lowColor = midColor;
+                    factor += factorAlteration;
+                }
+
+                midColor = FindMidColor(lowColor, highColor);
+                midColorContrastValue = Converters.ColorToConstrastColorConverter.ContrastValue(midColor);
+
+                factorAlteration /= 2.0;
+            }
+
+            return factor;
+        }
+
+        // TODO: Move FindMidColor to a more suitable location (and test it) - It doesn't belong in this class
+        private Color FindMidColor(Color color1, Color color2)
+        {
+            var a = Convert.ToByte(Math.Min(color1.A, color2.A) + Math.Abs(color1.A - color2.A) / 2);
+            var r = Convert.ToByte(Math.Min(color1.R, color2.R) + Math.Abs(color1.R - color2.R) / 2);
+            var g = Convert.ToByte(Math.Min(color1.G, color2.G) + Math.Abs(color1.G - color2.G) / 2);
+            var b = Convert.ToByte(Math.Min(color1.B, color2.B) + Math.Abs(color1.B - color2.B) / 2);
+            return Color.FromArgb(a, r, g, b);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

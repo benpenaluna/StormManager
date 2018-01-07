@@ -146,10 +146,7 @@
                                                HorizontalAlignment="Center"
                                                Visibility="Visible" >
                                         <TextBlock.Foreground>
-                                            <SolidColorBrush Color="{Binding ElementName=DescriptionBorderBackground, 
-                                                                             Path=Color, 
-                                                                             Converter={StaticResource ColorConverter}}" />
-                                            <!--TODO: Ensure that foreground conversion works properly-->
+                                            <SolidColorBrush x:Name="HeadingForeground" />
                                         </TextBlock.Foreground>
                                     </TextBlock>
                                 </Border>
