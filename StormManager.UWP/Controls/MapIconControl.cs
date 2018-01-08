@@ -1,18 +1,15 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using StormManager.UWP.Annotations;
 using StormManager.UWP.Common.ExtensionMethods;
 
 namespace StormManager.UWP.Controls
 {
-    public sealed partial class MapIconControl : Control, INotifyPropertyChanged
+    public sealed partial class MapIconControl : Control
     {
         private Storyboard _myStoryboard;
         private ColorAnimation _descriptionBorderBackgroundAnimation;
@@ -21,7 +18,7 @@ namespace StormManager.UWP.Controls
         private ColorAnimation _headingForegroundAniation;
         private SolidColorBrush _headingForeground;
 
-        private DispatcherTimer _headingForegroundChangeTimer;
+        //private DispatcherTimer _headingForegroundChangeTimer;
 
         public AnimateColor AllowAnimateColor { get; set; }
 
@@ -168,10 +165,10 @@ namespace StormManager.UWP.Controls
 
                 _headingForeground.Color = Converters.ColorToConstrastColorConverter.ConvertToConstractColor(FromColor);
                 _headingForegroundAniation.From = _headingForeground.Color;
-                var contrastChangeFactor = ContrastColorChangeFactor(FromColor, ToColor);
+                var contrastChangeFactor = Converters.ColorToConstrastColorConverter.ContrastColorChangeFactor(FromColor, ToColor);
                 if (contrastChangeFactor != null)
                 {
-                    var interval = (int) (20000 * contrastChangeFactor); // TODO: 'Bind' '20000' to the Duration property when created 
+                    var interval = (int) (20000 * contrastChangeFactor - 500); // TODO: 'Bind' '20000' to the Duration property when created 
                     _headingForegroundAniation.To = _headingForeground.Color == Colors.White ? Colors.Black : Colors.White;
                     _headingForegroundAniation.BeginTime = new TimeSpan(0, 0, 0, 0, interval);
                 }
@@ -216,67 +213,6 @@ namespace StormManager.UWP.Controls
             }
 
             return timeSinceNotification < TimeSpan.FromHours(24) ? timeSinceNotification.HoursMinutesFormat() : timeSinceNotification.DaysHoursFormat();
-        }
-
-        // TODO: Move ContrastColorChangeFactor to a more suitable location (and test it) - It doesn't belong in this class
-        private double? ContrastColorChangeFactor(Color fromColor, Color toColor) 
-        {
-            // TODO: Refactor this method and make it readable
-            var fromColorContrastValue = Converters.ColorToConstrastColorConverter.ContrastValue(fromColor);
-            var toColorContrastValue = Converters.ColorToConstrastColorConverter.ContrastValue(toColor);
-
-            if ((fromColorContrastValue <= 128 && toColorContrastValue <= 128) ||
-                (fromColorContrastValue > 128 && toColorContrastValue > 128))
-            {
-                return null;
-            }
-            
-            var factor = 0.5;
-            var lowColor = fromColorContrastValue < toColorContrastValue ? fromColor : toColor;
-            var highColor = fromColorContrastValue < toColorContrastValue ? toColor : fromColor;
-
-            var midColor = FindMidColor(fromColor, toColor);
-
-            var factorAlteration = 0.25;
-            var midColorContrastValue = Converters.ColorToConstrastColorConverter.ContrastValue(midColor);
-            while (midColorContrastValue < 127.0 || midColorContrastValue > 128.0)
-            {
-                if (midColorContrastValue > 127.5)
-                {
-                    highColor = midColor;
-                    factor -= factorAlteration; 
-                }
-                else
-                {
-                    lowColor = midColor;
-                    factor += factorAlteration;
-                }
-
-                midColor = FindMidColor(lowColor, highColor);
-                midColorContrastValue = Converters.ColorToConstrastColorConverter.ContrastValue(midColor);
-
-                factorAlteration /= 2.0;
-            }
-
-            return factor;
-        }
-
-        // TODO: Move FindMidColor to a more suitable location (and test it) - It doesn't belong in this class
-        private Color FindMidColor(Color color1, Color color2)
-        {
-            var a = Convert.ToByte(Math.Min(color1.A, color2.A) + Math.Abs(color1.A - color2.A) / 2);
-            var r = Convert.ToByte(Math.Min(color1.R, color2.R) + Math.Abs(color1.R - color2.R) / 2);
-            var g = Convert.ToByte(Math.Min(color1.G, color2.G) + Math.Abs(color1.G - color2.G) / 2);
-            var b = Convert.ToByte(Math.Min(color1.B, color2.B) + Math.Abs(color1.B - color2.B) / 2);
-            return Color.FromArgb(a, r, g, b);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

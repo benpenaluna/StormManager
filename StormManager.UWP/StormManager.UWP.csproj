@@ -98,7 +98,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ConversionHelpers\ContrastFactorApproximationHelper.cs" />
+    <Compile Include="Converters\ConversionHelpers\IContrastFactorApproximationHelper.cs" />
     <Compile Include="Common\Exceptions\GeolocationAccessDeniedException.cs" />
+    <Compile Include="Common\ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\LocationExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\TimeSpanExtensions.cs" />
