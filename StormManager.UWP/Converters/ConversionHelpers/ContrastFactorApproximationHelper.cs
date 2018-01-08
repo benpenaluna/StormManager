@@ -5,6 +5,8 @@ namespace StormManager.UWP.Converters.ConversionHelpers
 {
     public class ContrastFactorApproximationHelper : IContrastFactorApproximationHelper
     {
+        //TODO: This class needs to be tested
+
         public double Factor { get; set; }
 
         public double Exponent { get; set; }
