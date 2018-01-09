@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Activation;
 using Template10.Controls;
 using Windows.UI.Xaml.Data;
 using Autofac;
+using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Converters.ConversionHelpers;
 using StormManager.UWP.Services.LocationService;
 using StormManager.UWP.Services.MapKeyService;
@@ -67,6 +68,7 @@ namespace StormManager.UWP
             builder.RegisterType<SettingsService>().As<Services.SettingsServices.ISettingsService>();
 
             builder.RegisterType<ContrastFactorApproximationHelper>().As<IContrastFactorApproximationHelper>();
+            builder.RegisterType<ColorAnimationHelper>().As<IColorAnimationHelper>();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)

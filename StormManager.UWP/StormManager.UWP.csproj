@@ -98,6 +98,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ControlHelpers\ColorAnimationHelper.cs" />
+    <Compile Include="Controls\ControlHelpers\IColorAnimationHelper.cs" />
     <Compile Include="Converters\ConversionHelpers\ContrastFactorApproximationHelper.cs" />
     <Compile Include="Converters\ConversionHelpers\IContrastFactorApproximationHelper.cs" />
     <Compile Include="Common\Exceptions\GeolocationAccessDeniedException.cs" />

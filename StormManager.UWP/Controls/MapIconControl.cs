@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Autofac;
 using StormManager.UWP.Common.ExtensionMethods;
+using StormManager.UWP.Controls.ControlHelpers;
 
 namespace StormManager.UWP.Controls
 {
@@ -18,9 +23,11 @@ namespace StormManager.UWP.Controls
         private ColorAnimation _headingForegroundAniation;
         private SolidColorBrush _headingForeground;
 
-        //private DispatcherTimer _headingForegroundChangeTimer;
+        private List<ColorAnimation> ColorAnimations;
 
         public AnimateColor AllowAnimateColor { get; set; }
+
+        public IColorAnimationHelper ColorAnimationHelper { get; set; }
 
         public Brush DescriptionBackgroundColor
         {
@@ -62,13 +69,13 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty DescriptionVisibleProperty =
             DependencyProperty.Register(nameof(DescriptionVisible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Collapsed));
 
-        public Color FromColor
-        {
-            get => (Color)GetValue(FromColorProperty);
-            set => SetValue(FromColorProperty, value);
-        }
-        public static readonly DependencyProperty FromColorProperty =
-            DependencyProperty.Register(nameof(FromColor), typeof(Color), typeof(MapIconControl), new PropertyMetadata(Colors.LightBlue));
+        //public Color FromColor
+        //{
+        //    get => (Color)GetValue(FromColorProperty);
+        //    set => SetValue(FromColorProperty, value);
+        //}
+        //public static readonly DependencyProperty FromColorProperty =
+        //    DependencyProperty.Register(nameof(FromColor), typeof(Color), typeof(MapIconControl), new PropertyMetadata(Colors.LightBlue));
 
         public Brush MapIconBorderBrush
         {
@@ -96,29 +103,30 @@ namespace StormManager.UWP.Controls
 
         public DateTime NotificationTimeUtc { get; set; }
         
-        public Color ToColor
-        {
-            get => (Color)GetValue(ToColorProperty);
-            set => SetValue(ToColorProperty, value);
-        }
-        public static readonly DependencyProperty ToColorProperty =
-            DependencyProperty.Register(nameof(ToColor), typeof(Color), typeof(MapIconControl), new PropertyMetadata(Colors.Blue));
+        //public Color ToColor
+        //{
+        //    get => (Color)GetValue(ToColorProperty);
+        //    set => SetValue(ToColorProperty, value);
+        //}
+        //public static readonly DependencyProperty ToColorProperty =
+        //    DependencyProperty.Register(nameof(ToColor), typeof(Color), typeof(MapIconControl), new PropertyMetadata(Colors.Blue));
 
-        public MapIconControl()
+        public MapIconControl(IColorAnimationHelper colorAnimationHelper = null)
         {
-            Initialise(DateTime.UtcNow);
-        }
-
-        public MapIconControl(DateTime notificationTimeUtc)
-        {
-            Initialise(notificationTimeUtc);
+            Initialise(DateTime.UtcNow, colorAnimationHelper);
         }
 
-        private void Initialise(DateTime notificationTimeUtc)
+        public MapIconControl(DateTime notificationTimeUtc, IColorAnimationHelper colorAnimationHelper = null)
+        {
+            Initialise(notificationTimeUtc, colorAnimationHelper);
+        }
+
+        private void Initialise(DateTime notificationTimeUtc, IColorAnimationHelper colorAnimationHelper)
         {
             DefaultStyleKey = typeof(MapIconControl);
             NotificationTimeUtc = notificationTimeUtc;
             AllowAnimateColor = AnimateColor.Aminate;
+            ColorAnimationHelper = colorAnimationHelper ?? App.Container.Resolve<IColorAnimationHelper>();
         }
 
         protected override void OnApplyTemplate()
@@ -155,37 +163,72 @@ namespace StormManager.UWP.Controls
 
         private void TriggerStartUpEvents()
         {
+            ColorAnimations = new List<ColorAnimation> { _descriptionBorderBackgroundAnimation, _descriptionBorderAnimation, _mapIconFillPathAnimation };
+
             if (AllowAnimateColor == AnimateColor.Aminate)
             {
-                SetColorAnimationProperties(_descriptionBorderBackgroundAnimation);
-                SetColorAnimationProperties(_descriptionBorderAnimation);
-                SetColorAnimationProperties(_mapIconFillPathAnimation);
-
-                // TODO: REFACTOR THIS AND MAKE IT READABLE!
-
-                _headingForeground.Color = Converters.ColorToConstrastColorConverter.ConvertToConstractColor(FromColor);
-                _headingForegroundAniation.From = _headingForeground.Color;
-                var contrastChangeFactor = Converters.ColorToConstrastColorConverter.ContrastColorChangeFactor(FromColor, ToColor);
-                if (contrastChangeFactor != null)
-                {
-                    var interval = (int) (20000 * contrastChangeFactor - 500); // TODO: 'Bind' '20000' to the Duration property when created 
-                    _headingForegroundAniation.To = _headingForeground.Color == Colors.White ? Colors.Black : Colors.White;
-                    _headingForegroundAniation.BeginTime = new TimeSpan(0, 0, 0, 0, interval);
-                }
-                else
-                {
-                    _headingForegroundAniation.To = _headingForeground.Color;
-                }
-
-                _myStoryboard.Begin();
+                AnimatePinAndDescriptionColor();
             }
             // TODO: What about when AllowAnimateColor is 'Static'?
         }
 
-        private void SetColorAnimationProperties(ColorAnimation colorAnimation)
+        private void AnimatePinAndDescriptionColor()
         {
-            colorAnimation.From = FromColor;
-            colorAnimation.To = ToColor;
+            SetColorAnimationProperties();
+            SetHeadingForegroundProperties();
+
+            _myStoryboard.Begin();
+        }
+
+        private void SetColorAnimationProperties()
+        {
+            foreach (var colorAnimation in ColorAnimations)
+            {
+                colorAnimation.From = ColorAnimationHelper.FromColor;
+                colorAnimation.To = ColorAnimationHelper.ToColor;
+                colorAnimation.Duration = ColorAnimationHelper.Duration;
+            }
+        }
+
+        private void SetHeadingForegroundProperties()
+        {
+            SetHeadingForegroundAnimationFromColor();
+
+            var contrastChangeFactor = Converters.ColorToConstrastColorConverter.ContrastColorChangeFactor(ColorAnimationHelper.FromColor, ColorAnimationHelper.ToColor);
+            var contrastColorChangeRequired = contrastChangeFactor != null;
+            if (contrastColorChangeRequired)
+            {
+                SetBeginTimeForContrastChange(contrastChangeFactor);
+            }
+
+            SetHeadingForegroundAnimationToColor(contrastColorChangeRequired);
+        }
+
+        private void SetHeadingForegroundAnimationFromColor()
+        {
+            _headingForeground.Color = Converters.ColorToConstrastColorConverter.ConvertToConstractColor(ColorAnimationHelper.FromColor);
+            _headingForegroundAniation.From = _headingForeground.Color;
+        }
+
+        private void SetBeginTimeForContrastChange(double? contrastChangeFactor)
+        {
+            if (contrastChangeFactor == null) return;
+
+            var intervalInMilliseconds = (int)(ColorAnimationHelper.Duration.TotalMilliseconds * contrastChangeFactor -
+                                               _headingForegroundAniation.Duration.TimeSpan.TotalMilliseconds / 2);
+            _headingForegroundAniation.BeginTime = new TimeSpan(0, 0, 0, 0, intervalInMilliseconds);
+        }
+
+        private void SetHeadingForegroundAnimationToColor(bool changeRequired)
+        {
+            if (changeRequired)
+            {
+                _headingForegroundAniation.To = _headingForeground.Color == Colors.White ? Colors.Black : Colors.White;
+            }
+            else
+            {
+                _headingForegroundAniation.To = _headingForegroundAniation.From;
+            }
         }
 
         private void MapIconControl_Tapped(object sender, TappedRoutedEventArgs e)

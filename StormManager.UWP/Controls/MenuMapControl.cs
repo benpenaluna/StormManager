@@ -4,10 +4,12 @@ using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Services.Maps;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Media.Imaging;
+using Autofac;
+using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Models.Mapping;
 
 namespace StormManager.UWP.Controls
@@ -230,7 +232,9 @@ namespace StormManager.UWP.Controls
 
         private void AddMapIcon(MapLocation location)
         {
-            var iconWithCollapsableDescription = new MapIconControl();
+            var colorAnimationHelper = App.Container.Resolve<IColorAnimationHelper>();
+            colorAnimationHelper.Initialise(Colors.LightBlue, Colors.Blue, new TimeSpan(0, 0, 20)); // TODO: Put this into a factory and make duration part of the app settings
+            var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper);
             _myMapControl.Children.Add(iconWithCollapsableDescription);
             var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);
             MapControl.SetLocation(iconWithCollapsableDescription, position);
