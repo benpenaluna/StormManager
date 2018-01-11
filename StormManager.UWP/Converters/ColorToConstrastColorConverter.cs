@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Autofac;
@@ -36,14 +32,14 @@ namespace StormManager.UWP.Converters
             return 0.30 * color.R + 0.59 * color.G + 0.11 * color.B;
         }
 
-        public static double? ContrastColorChangeFactor(Color fromColor, Color toColor)
+        public static double? ContrastColorChangeFactor(Color fromColor, Color toColor, IContrastFactorApproximationHelper helper = null)
         {
             if (!MidPointExists(ContrastValue(fromColor), ContrastValue(toColor)))
             {
                 return null;
             }
 
-            return ApproximateFactorUsingBiSection(fromColor, toColor);
+            return ApproximateFactorUsingBiSection(fromColor, toColor, helper);
         }
 
         public static bool MidPointExists(double fromColorContrastValue, double toColorContrastValue)
@@ -52,9 +48,12 @@ namespace StormManager.UWP.Converters
                    (fromColorContrastValue > MidPoint && toColorContrastValue <= MidPoint);
         }
 
-        private static double ApproximateFactorUsingBiSection(Color fromColor, Color toColor)
+        private static double ApproximateFactorUsingBiSection(Color fromColor, Color toColor, IContrastFactorApproximationHelper helper = null)
         {
-            var helper = App.Container.Resolve<IContrastFactorApproximationHelper>();
+            if (helper == null)
+            {
+                helper = App.Container.Resolve<IContrastFactorApproximationHelper>();
+            }
             helper.Initialise(fromColor, toColor);
 
             var midColorContrastValue = ContrastValue(helper.MidColor);
