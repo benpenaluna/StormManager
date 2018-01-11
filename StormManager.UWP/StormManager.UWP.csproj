@@ -98,8 +98,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ControlHelpers\ColorAnimationHelper.cs" />
+    <Compile Include="Controls\ControlHelpers\BuildingDamageColorAnimation.cs" />
+    <Compile Include="Controls\ControlHelpers\ColorAnimationType.cs" />
     <Compile Include="Controls\ControlHelpers\IColorAnimationHelper.cs" />
+    <Compile Include="Controls\ControlHelpers\JobTypeColorAnimation.cs" />
+    <Compile Include="Controls\ControlHelpers\JobTypeColorAnimationFactory.cs" />
+    <Compile Include="Controls\ControlHelpers\FloodColorAnimation.cs" />
+    <Compile Include="Controls\ControlHelpers\TreeDownColorAnimation.cs" />
     <Compile Include="Converters\ConversionHelpers\ContrastFactorApproximationHelper.cs" />
     <Compile Include="Converters\ConversionHelpers\IContrastFactorApproximationHelper.cs" />
     <Compile Include="Common\Exceptions\GeolocationAccessDeniedException.cs" />

@@ -101,7 +101,6 @@
     <Compile Include="Common\ExtensionMethods\MapKeyExtensionsTests.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyGenerator.cs" />
     <Compile Include="Common\ExtensionMethods\TimeSpanExtensionTests.cs" />
-    <Compile Include="Controls\ControlHelpersTests\ColorAnimationHelperTests.cs" />
     <Compile Include="Converters\ColorToConstrastColorConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService\LocationHelperTests.cs" />
@@ -175,7 +174,9 @@
       <Name>StormManager.UWP</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\ControlHelpersTests\" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

@@ -68,7 +68,7 @@ namespace StormManager.UWP
             builder.RegisterType<SettingsService>().As<Services.SettingsServices.ISettingsService>();
 
             builder.RegisterType<ContrastFactorApproximationHelper>().As<IContrastFactorApproximationHelper>();
-            builder.RegisterType<ColorAnimationHelper>().As<IColorAnimationHelper>();
+            //builder.RegisterType<BuildingDamageColorAnimation>().As<IColorAnimationHelper>();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)

@@ -9,10 +9,8 @@ namespace StormManager.UWP.Controls.ControlHelpers
 {
     public interface IColorAnimationHelper
     {
-        Color FromColor { get; set; }
-        Color ToColor { get; set; }
-        TimeSpan Duration { get; set; }
-
-        void Initialise(Color fromColor, Color toColor, TimeSpan duration);
+        Color FromColor { get; }
+        Color ToColor { get; }
+        TimeSpan Duration { get; }
     }
 }
