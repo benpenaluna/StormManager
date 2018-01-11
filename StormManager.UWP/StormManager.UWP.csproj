@@ -111,7 +111,6 @@
     <Compile Include="Controls\IMapStylePresenter.cs" />
     <Compile Include="Controls\MapIconControl.cs" />
     <Compile Include="Controls\MapRadioButton.cs" />
-    <Compile Include="Controls\MapStylePresenter.cs" />
     <Compile Include="Controls\MenuMapControl.cs" />
     <Compile Include="Converters\ColorToConstrastColorConverter.cs" />
     <Compile Include="Models\Mapping\IMapLocationSuggestion.cs" />

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
@@ -8,8 +7,6 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using StormManager.UWP.Properties;
-
-// The Templated Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234235
 
 namespace StormManager.UWP.Controls
 {
@@ -29,8 +26,6 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty MapImageSourceProperty =
             DependencyProperty.Register(nameof(MapImageSource), typeof(ImageSource), typeof(MapRadioButton), new PropertyMetadata(DefaultImageSource));
 
-        public List<MapStylePresenter> MapStylePresenters { get; set; }
-
         public MapStyle MapStyle
         {
             get => (MapStyle)GetValue(MapStyleProperty);
@@ -40,7 +35,6 @@ namespace StormManager.UWP.Controls
                 OnPropertyChanged(nameof(MapStyle));
             }
         }
-
         public static readonly DependencyProperty MapStyleProperty =
             DependencyProperty.Register(nameof(MapStyle), typeof(MapStyle), typeof(MapRadioButton), new PropertyMetadata(MapStyle.Road));
 

@@ -3,7 +3,6 @@ using Windows.UI.Xaml.Media;
 
 namespace StormManager.UWP.Controls
 {
-
     public interface IMapStylePresenter
     {
         ImageSource MapImageSource { get; set; }

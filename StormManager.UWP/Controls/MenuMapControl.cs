@@ -233,7 +233,7 @@ namespace StormManager.UWP.Controls
         private void AddMapIcon(MapLocation location)
         {
             var colorAnimationHelper = App.Container.Resolve<IColorAnimationHelper>();
-            colorAnimationHelper.Initialise(Colors.LightBlue, Colors.Blue, new TimeSpan(0, 0, 20)); // TODO: Put this into a factory and make duration part of the app settings
+            colorAnimationHelper.Initialise(Color.FromArgb(255, 0, 216, 0), Color.FromArgb(255, 0, 217, 0), new TimeSpan(0, 0, 20)); // TODO: Put this into a factory and make duration part of the app settings
             var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper);
             _myMapControl.Children.Add(iconWithCollapsableDescription);
             var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);
