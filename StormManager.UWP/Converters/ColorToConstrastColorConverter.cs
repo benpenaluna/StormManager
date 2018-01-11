@@ -78,5 +78,24 @@ namespace StormManager.UWP.Converters
 
             return helper.Factor;
         }
+
+        public static Color LightenColor(Color baseColor, double factor)
+        {
+            if (factor < 0 || factor > 1)
+            {
+                throw new ArgumentOutOfRangeException(string.Format("{0} must be between 0 and 1", nameof(factor)));
+            }
+
+            var a = LightenedValue(baseColor.A, factor);
+            var r = LightenedValue(baseColor.R, factor);
+            var g = LightenedValue(baseColor.G, factor);
+            var b = LightenedValue(baseColor.B, factor);
+            return Color.FromArgb(a, r, g, b);
+        }
+
+        private static byte LightenedValue(byte value, double factor)
+        {
+            return (byte)(value + factor * (255 - value));
+        }
     }
 }

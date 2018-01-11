@@ -74,7 +74,7 @@ namespace StormManager.UWP.Tests.Converters
         }
 
         [Fact]
-        public void olorToConstrastColorConverter_ContrastColorChangeFactorCorrect()
+        public void ColorToConstrastColorConverter_ContrastColorChangeFactorCorrect()
         {
             foreach (var pair in ColorContrastPairs)
             {
@@ -97,6 +97,42 @@ namespace StormManager.UWP.Tests.Converters
         {
             var result = ColorToConstrastColorConverter.MidPointExists(input1, input2);
             Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(255, 127, 229, 41, 0.5)]
+        [InlineData(255, 19, 162, 181, 0.25)]
+        [InlineData(255, 255, 255, 224, 1)]
+        public void LightenColor_IsAccurate(byte a, byte r, byte g, byte b, double factor)
+        {
+            var baseColor = Color.FromArgb(a, r, g, b);
+            var expected = ExpectedLightenedColor(baseColor, factor);
+            
+            var result = ColorToConstrastColorConverter.LightenColor(baseColor, factor);
+
+            Assert.Equal(expected, result);
+        }
+
+        private static Color ExpectedLightenedColor(Color baseColor, double factor)
+        {
+            var a = LightenedValue(baseColor.A, factor);
+            var r = LightenedValue(baseColor.R, factor);
+            var g = LightenedValue(baseColor.G, factor);
+            var b = LightenedValue(baseColor.B, factor);
+            return Color.FromArgb(a, r, g, b);
+        }
+
+        private static byte LightenedValue(byte value, double factor)
+        {
+            return (byte)(value + factor * (255 - value));
+        }
+
+        [Theory]
+        [InlineData(1.2)]
+        [InlineData(-1.2)]
+        public void ColorToConstrastColorConverter_ThrowsWhenFactorOutOfRange(double factor)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => ColorToConstrastColorConverter.LightenColor(Colors.Red, factor));
         }
     }
 }
