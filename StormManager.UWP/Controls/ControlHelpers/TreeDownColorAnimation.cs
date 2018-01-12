@@ -7,10 +7,8 @@ namespace StormManager.UWP.Controls.ControlHelpers
     {
         public TreeDownColorAnimation()
         {
-            var green = Colors.Green;
-
-            FromColor = ColorToConstrastColorConverter.LightenColor(green, 0.5);
-            ToColor = green;
+            FromColor = Colors.LightGreen;
+            ToColor = Colors.Green;
         }
     }
 }

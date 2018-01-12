@@ -225,7 +225,11 @@ namespace StormManager.UWP.Controls
 
         private void AddPushPinAndSetScene(MapLocation location)
         {
-            if (location == null) throw new ArgumentNullException(nameof(location));
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
             AddMapIcon(location);
             SetMapSceneForPushPinAddition(location);
         }

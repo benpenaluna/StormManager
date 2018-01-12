@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.UI;
-using Castle.Components.DictionaryAdapter;
-using StormManager.UWP.Annotations;
 using StormManager.UWP.Converters;
 using StormManager.UWP.Converters.ConversionHelpers;
 using Xunit;
