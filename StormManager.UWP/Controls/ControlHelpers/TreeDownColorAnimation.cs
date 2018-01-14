@@ -3,7 +3,7 @@ using Windows.UI;
 
 namespace StormManager.UWP.Controls.ControlHelpers
 {
-    public class TreeDownColorAnimation : JobTypeColorAnimation 
+    public class TreeDownColorAnimation : ColorAnimationHelper
     {
         public TreeDownColorAnimation()
         {

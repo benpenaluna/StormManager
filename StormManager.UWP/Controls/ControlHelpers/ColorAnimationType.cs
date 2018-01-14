@@ -2,6 +2,7 @@
 {
     public enum ColorAnimationType
     {
+        Default,
         BuildingDamage,
         Flood,
         TreeDown

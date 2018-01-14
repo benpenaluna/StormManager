@@ -7,12 +7,13 @@ namespace StormManager.UWP.Controls.ControlHelpers
     {
         private static Dictionary<ColorAnimationType, Type> AnimationToTypeMapping => new Dictionary<ColorAnimationType, Type>
         {
+            {ColorAnimationType.Default, typeof(DefaultColorAnimation) },
             {ColorAnimationType.BuildingDamage, typeof(BuildingDamageColorAnimation) },
             {ColorAnimationType.Flood, typeof(FloodColorAnimation) },
             {ColorAnimationType.TreeDown, typeof(TreeDownColorAnimation) }
         };
         
-        public static IColorAnimationHelper Create(ColorAnimationType colorAnimationType)
+        public static IMapIconControlHelper Create(ColorAnimationType colorAnimationType)
         {
             AnimationToTypeMapping.TryGetValue(colorAnimationType, out var value);
 
@@ -21,7 +22,8 @@ namespace StormManager.UWP.Controls.ControlHelpers
                 throw new ArgumentNullException();
             }
 
-            return (IColorAnimationHelper)Activator.CreateInstance(value);
+            var colorAnimationTypeInstance = (IColorAnimationHelper)Activator.CreateInstance(value);
+            return MapIconControlHelper.Create(colorAnimationTypeInstance);
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,11 +21,11 @@ namespace StormManager.UWP.Controls
         private ColorAnimation _headingForegroundAniation;
         private SolidColorBrush _headingForeground;
 
-        private List<ColorAnimation> ColorAnimations;
+        private List<ColorAnimation> _colorAnimations;
 
-        public AnimateColor AllowAnimateColor { get; set; }
+        public AnimateColor AllowAnimateColor => MapIconControlHelper.ColorAnimationSettings.AnimateColor;
 
-        public IColorAnimationHelper ColorAnimationHelper { get; set; }
+        public IMapIconControlHelper MapIconControlHelper { get; set; }
 
         public Brush DescriptionBackgroundColor
         {
@@ -69,14 +67,6 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty DescriptionVisibleProperty =
             DependencyProperty.Register(nameof(DescriptionVisible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Collapsed));
 
-        //public Color FromColor
-        //{
-        //    get => (Color)GetValue(FromColorProperty);
-        //    set => SetValue(FromColorProperty, value);
-        //}
-        //public static readonly DependencyProperty FromColorProperty =
-        //    DependencyProperty.Register(nameof(FromColor), typeof(Color), typeof(MapIconControl), new PropertyMetadata(Colors.LightBlue));
-
         public Brush MapIconBorderBrush
         {
             get => (Brush)GetValue(MapIconBorderBrushProperty);
@@ -101,32 +91,18 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty NotificationTimeDisplayedToUserProperty =
             DependencyProperty.Register(nameof(NotificationTimeDisplayedToUser), typeof(string), typeof(MapIconControl), new PropertyMetadata("0 seconds ago"));
 
-        public DateTime NotificationTimeUtc { get; set; }
+        public DateTime NotificationTimeUtc => MapIconControlHelper.NotificationTimeUtc;
         
-        //public Color ToColor
-        //{
-        //    get => (Color)GetValue(ToColorProperty);
-        //    set => SetValue(ToColorProperty, value);
-        //}
-        //public static readonly DependencyProperty ToColorProperty =
-        //    DependencyProperty.Register(nameof(ToColor), typeof(Color), typeof(MapIconControl), new PropertyMetadata(Colors.Blue));
-
-        public MapIconControl(IColorAnimationHelper colorAnimationHelper = null)
+        public MapIconControl(IMapIconControlHelper mapIconControlHelper = null)
         {
-            Initialise(DateTime.UtcNow, colorAnimationHelper);
+            Initialise(mapIconControlHelper);
         }
 
-        public MapIconControl(DateTime notificationTimeUtc, IColorAnimationHelper colorAnimationHelper = null)
-        {
-            Initialise(notificationTimeUtc, colorAnimationHelper);
-        }
-
-        private void Initialise(DateTime notificationTimeUtc, IColorAnimationHelper colorAnimationHelper)
+        private void Initialise(IMapIconControlHelper mapIconControlHelper = null)
         {
             DefaultStyleKey = typeof(MapIconControl);
-            NotificationTimeUtc = notificationTimeUtc;
-            AllowAnimateColor = AnimateColor.Aminate;
-            ColorAnimationHelper = colorAnimationHelper ?? App.Container.Resolve<IColorAnimationHelper>();
+
+            MapIconControlHelper = mapIconControlHelper ?? App.Container.Resolve<IMapIconControlHelper>();
         }
 
         protected override void OnApplyTemplate()
@@ -163,13 +139,13 @@ namespace StormManager.UWP.Controls
 
         private void TriggerStartUpEvents()
         {
-            ColorAnimations = new List<ColorAnimation> { _descriptionBorderBackgroundAnimation, _descriptionBorderAnimation, _mapIconFillPathAnimation };
+            _colorAnimations = new List<ColorAnimation> { _descriptionBorderBackgroundAnimation, _descriptionBorderAnimation, _mapIconFillPathAnimation };
 
             if (AllowAnimateColor == AnimateColor.Aminate)
             {
                 AnimatePinAndDescriptionColor();
             }
-            // TODO: What about when AllowAnimateColor is 'Static'?
+            // TODO: What about when AnimateColor is 'Static'?
         }
 
         private void AnimatePinAndDescriptionColor()
@@ -182,11 +158,11 @@ namespace StormManager.UWP.Controls
 
         private void SetColorAnimationProperties()
         {
-            foreach (var colorAnimation in ColorAnimations)
+            foreach (var colorAnimation in _colorAnimations)
             {
-                colorAnimation.From = ColorAnimationHelper.FromColor;
-                colorAnimation.To = ColorAnimationHelper.ToColor;
-                colorAnimation.Duration = ColorAnimationHelper.Duration;
+                colorAnimation.From = MapIconControlHelper.ColorAnimationSettings.FromColor;
+                colorAnimation.To = MapIconControlHelper.ColorAnimationSettings.ToColor;
+                colorAnimation.Duration = MapIconControlHelper.ColorAnimationSettings.Duration;
             }
         }
 
@@ -194,7 +170,8 @@ namespace StormManager.UWP.Controls
         {
             SetHeadingForegroundAnimationFromColor();
 
-            var contrastChangeFactor = Converters.ColorToConstrastColorConverter.ContrastColorChangeFactor(ColorAnimationHelper.FromColor, ColorAnimationHelper.ToColor);
+            var contrastChangeFactor = Converters.ColorToConstrastColorConverter.
+                ContrastColorChangeFactor(MapIconControlHelper.ColorAnimationSettings.FromColor, MapIconControlHelper.ColorAnimationSettings.ToColor);
             var contrastColorChangeRequired = contrastChangeFactor != null;
             if (contrastColorChangeRequired)
             {
@@ -206,7 +183,7 @@ namespace StormManager.UWP.Controls
 
         private void SetHeadingForegroundAnimationFromColor()
         {
-            _headingForeground.Color = Converters.ColorToConstrastColorConverter.ConvertToConstractColor(ColorAnimationHelper.FromColor);
+            _headingForeground.Color = Converters.ColorToConstrastColorConverter.ConvertToConstractColor(MapIconControlHelper.ColorAnimationSettings.FromColor);
             _headingForegroundAniation.From = _headingForeground.Color;
         }
 
@@ -214,7 +191,7 @@ namespace StormManager.UWP.Controls
         {
             if (contrastChangeFactor == null) return;
 
-            var intervalInMilliseconds = (int)(ColorAnimationHelper.Duration.TotalMilliseconds * contrastChangeFactor -
+            var intervalInMilliseconds = (int)(MapIconControlHelper.ColorAnimationSettings.Duration.TotalMilliseconds * contrastChangeFactor -
                                                _headingForegroundAniation.Duration.TimeSpan.TotalMilliseconds / 2);
             _headingForegroundAniation.BeginTime = new TimeSpan(0, 0, 0, 0, intervalInMilliseconds);
         }

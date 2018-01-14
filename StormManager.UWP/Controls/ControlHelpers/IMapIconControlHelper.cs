@@ -7,11 +7,10 @@ using Windows.UI;
 
 namespace StormManager.UWP.Controls.ControlHelpers
 {
-    public interface IColorAnimationHelper
+    public interface IMapIconControlHelper
     {
-        MapIconControl.AnimateColor AnimateColor { get; set; }
-        Color FromColor { get; }
-        Color ToColor { get; }
-        TimeSpan Duration { get; }
+        DateTime NotificationTimeUtc { get; set; }
+
+        IColorAnimationHelper ColorAnimationSettings { get; set; }
     }
 }

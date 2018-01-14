@@ -4,11 +4,9 @@ using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Services.Maps;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
-using Autofac;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Models.Mapping;
 
@@ -236,7 +234,7 @@ namespace StormManager.UWP.Controls
 
         private void AddMapIcon(MapLocation location)
         {
-            var colorAnimationHelper = JobTypeColorAnimationFactory.Create(ColorAnimationType.TreeDown);
+            var colorAnimationHelper = JobTypeColorAnimationFactory.Create(ColorAnimationType.Default);
             var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper);
             _myMapControl.Children.Add(iconWithCollapsableDescription);
             var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);

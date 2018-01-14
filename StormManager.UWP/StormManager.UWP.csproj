@@ -99,9 +99,12 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ControlHelpers\BuildingDamageColorAnimation.cs" />
+    <Compile Include="Controls\ControlHelpers\ColorAnimationHelper.cs" />
     <Compile Include="Controls\ControlHelpers\ColorAnimationType.cs" />
+    <Compile Include="Controls\ControlHelpers\DefaultColorAnimation.cs" />
     <Compile Include="Controls\ControlHelpers\IColorAnimationHelper.cs" />
-    <Compile Include="Controls\ControlHelpers\JobTypeColorAnimation.cs" />
+    <Compile Include="Controls\ControlHelpers\IMapIconControlHelper.cs" />
+    <Compile Include="Controls\ControlHelpers\MapIconControlHelper.cs" />
     <Compile Include="Controls\ControlHelpers\JobTypeColorAnimationFactory.cs" />
     <Compile Include="Controls\ControlHelpers\FloodColorAnimation.cs" />
     <Compile Include="Controls\ControlHelpers\TreeDownColorAnimation.cs" />
@@ -112,7 +115,7 @@
     <Compile Include="Common\ExtensionMethods\LocationExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\TimeSpanExtensions.cs" />
-    <Compile Include="Controls\AnimateColor.cs" />
+    <Compile Include="Controls\ControlHelpers\AnimateColor.cs" />
     <Compile Include="Controls\IMapStylePresenter.cs" />
     <Compile Include="Controls\MapIconControl.cs" />
     <Compile Include="Controls\MapRadioButton.cs" />

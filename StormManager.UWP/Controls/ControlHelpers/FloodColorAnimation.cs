@@ -2,7 +2,7 @@
 
 namespace StormManager.UWP.Controls.ControlHelpers
 {
-    public class FloodColorAnimation : JobTypeColorAnimation 
+    public class FloodColorAnimation : ColorAnimationHelper
     {
         public FloodColorAnimation()
         {
