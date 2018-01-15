@@ -143,10 +143,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.5</Version>
+      <Version>6.0.6</Version>
     </PackageReference>
     <PackageReference Include="Moq">
-      <Version>4.7.145</Version>
+      <Version>4.8.1</Version>
     </PackageReference>
     <PackageReference Include="MSTest.TestAdapter">
       <Version>1.2.0</Version>
