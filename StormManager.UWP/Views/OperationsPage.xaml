@@ -71,6 +71,9 @@
                                           MapCenter="{Binding MapCentre}"
                                           MapScene="{Binding MapScene}" >
                     <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="MapLoading">
+                            <core:InvokeCommandAction Command="{Binding MapLoadingCommand}" />
+                        </core:EventTriggerBehavior>
                         <core:EventTriggerBehavior EventName="MapLoaded">
                             <core:InvokeCommandAction Command="{Binding MapLoadedCommand}" />
                         </core:EventTriggerBehavior>

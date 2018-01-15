@@ -68,7 +68,7 @@ namespace StormManager.UWP
             builder.RegisterType<SettingsService>().As<Services.SettingsServices.ISettingsService>();
 
             builder.RegisterType<ContrastFactorApproximationHelper>().As<IContrastFactorApproximationHelper>();
-            //builder.RegisterType<BuildingDamageColorAnimation>().As<IMapIconControlHelper>();
+            builder.RegisterType<MapIconControlHelper>().As<IMapIconControlHelper>();
             builder.RegisterType<ColorAnimationHelper>().As<IColorAnimationHelper>();
         }
 

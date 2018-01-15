@@ -69,8 +69,13 @@ namespace StormManager.UWP.ViewModels
             }
         }
 
-        private ICommand _mapLoadeedCommand; 
-        public ICommand MapLoadedCommand => _mapLoadeedCommand ?? (_mapLoadeedCommand = new DelegateCommand(Map_Loaded));
+        private ICommand _mapLoadingCommand;
+        public ICommand MapLoadingCommand => _mapLoadingCommand ?? (_mapLoadingCommand = new DelegateCommand(Map_Loading));
+
+        private static void Map_Loading()
+        {
+            Views.Busy.SetBusy(true, "Map Loading");
+        }
 
         public MapPartViewModel()
         {
@@ -83,16 +88,21 @@ namespace StormManager.UWP.ViewModels
             MapServiceToken = mapKeyService.Key;
         }
 
-        private async void Map_Loaded()
+        private ICommand _mapLoadedCommand;
+        public ICommand MapLoadedCommand => _mapLoadedCommand ?? (_mapLoadedCommand = new DelegateCommand(Map_Loaded));
+
+        private static void Map_Loaded()
         {
-            var location = await LocationService.TryGetCurrentLocationAsync();
-            if (location.Success) SetCurrentLocation(location.Result, 3000);
+            //var location = await LocationService.TryGetCurrentLocationAsync();
+            //if (location.Success) SetCurrentLocation(location.Result, 3000);
+
+            Views.Busy.SetBusy(false);
         }
 
-        private void SetCurrentLocation(BasicGeoposition location, double radiusInMeters = 10000)
-        {
-            MapCentre = location.ToGeopoint();
-            MapScene = MapScene.CreateFromLocationAndRadius(MapCentre, radiusInMeters);
-        }
+        //private void SetCurrentLocation(BasicGeoposition location, double radiusInMeters = 10000)
+        //{
+        //    MapCentre = location.ToGeopoint();
+        //    MapScene = MapScene.CreateFromLocationAndRadius(MapCentre, radiusInMeters);
+        //}
     }
 }

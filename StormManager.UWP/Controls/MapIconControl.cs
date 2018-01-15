@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -6,13 +7,12 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using Autofac;
 using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Controls.ControlHelpers;
 
 namespace StormManager.UWP.Controls
 {
-    public sealed partial class MapIconControl : Control
+    public sealed class MapIconControl : Control
     {
         private Storyboard _myStoryboard;
         private ColorAnimation _descriptionBorderBackgroundAnimation;

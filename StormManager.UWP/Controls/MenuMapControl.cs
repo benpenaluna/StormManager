@@ -119,6 +119,8 @@ namespace StormManager.UWP.Controls
         {
             DefaultStyleKey = typeof(MenuMapControl);
         }
+        
+        public event EventHandler<object> MapLoading;
 
         public event EventHandler<RoutedEventArgs> MapLoaded;
         
@@ -139,7 +141,7 @@ namespace StormManager.UWP.Controls
             _terrainStyleRadioButton = GetTemplateChild<MapRadioButton>("TerrainStyleRadioButton");
             _toggleSwitch3D = GetTemplateChild<ToggleSwitch>("ToggleSwitch3D");
         }
-
+        
         private T GetTemplateChild<T>(string name) where T : DependencyObject
         {
             if (!(GetTemplateChild(name) is T child))
@@ -152,6 +154,7 @@ namespace StormManager.UWP.Controls
 
         private void AttachEvents()
         {
+            _myMapControl.Loading += (s, e) => MapLoading?.Invoke(s, e);
             _myMapControl.Loaded += (s, e) => MapLoaded?.Invoke(s, e);
             
             AttachSuggestBoxEvents();

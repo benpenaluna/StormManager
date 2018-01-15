@@ -24,12 +24,12 @@ namespace StormManager.UWP.Controls.ControlHelpers
             }
         }
 
-        private MapIconControlHelper(IColorAnimationHelper helper)
+        public MapIconControlHelper(IColorAnimationHelper helper = null)
         {
             ColorAnimationSettings = helper ?? App.Container.Resolve<IColorAnimationHelper>();
         }
 
-        public static IMapIconControlHelper Create(IColorAnimationHelper helper)
+        public static IMapIconControlHelper Create(IColorAnimationHelper helper = null)
         {
             return new MapIconControlHelper(helper);
         }

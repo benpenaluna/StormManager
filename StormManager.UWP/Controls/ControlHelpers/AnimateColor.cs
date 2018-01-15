@@ -1,11 +1,8 @@
-﻿namespace StormManager.UWP.Controls
+﻿namespace StormManager.UWP.Controls.ControlHelpers
 {
-    public sealed partial class MapIconControl
+    public enum AnimateColor
     {
-        public enum AnimateColor
-        {
-            Aminate,
-            Static
-        }
+        Aminate,
+        Static
     }
 }

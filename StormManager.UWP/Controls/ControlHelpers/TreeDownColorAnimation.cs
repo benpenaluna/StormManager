@@ -1,5 +1,4 @@
-﻿using StormManager.UWP.Converters;
-using Windows.UI;
+﻿using Windows.UI;
 
 namespace StormManager.UWP.Controls.ControlHelpers
 {
