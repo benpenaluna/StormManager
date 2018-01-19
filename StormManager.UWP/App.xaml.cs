@@ -23,6 +23,9 @@ namespace StormManager.UWP
     {
         public static IContainer Container { get; private set; }
 
+        private static IMapKeyService _mapKeyService;
+        public static string MapKey => _mapKeyService.Key;
+
         public App()
         {
             InitializeComponent();
@@ -86,6 +89,7 @@ namespace StormManager.UWP
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             // TODO: add your long-running task here
+            _mapKeyService = await MapKeyService.CreateAsync();
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
         }
     }

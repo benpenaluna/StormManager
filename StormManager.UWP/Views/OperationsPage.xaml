@@ -67,7 +67,7 @@
 
                 <controls1:MenuMapControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                           TiltInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl"
-                                          MapServiceToken="{Binding MapServiceToken}"
+                                          MapServiceToken="{Binding MapServiceToken, Mode=TwoWay}"
                                           MapCenter="{Binding MapCentre}"
                                           MapScene="{Binding MapScene}" >
                     <interactivity:Interaction.Behaviors>
