@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using Windows.Services.Maps;
 using StormManager.Core.Common.Results;
 
 namespace StormManager.UWP.Services.LocationService

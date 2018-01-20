@@ -1,16 +1,12 @@
-﻿
-    <Page
-    x:Class="StormManager.UWP.Views.OperationsPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-    xmlns:controls="using:Template10.Controls"
-    xmlns:vm="using:StormManager.UWP.ViewModels"
-    xmlns:controls1="using:StormManager.UWP.Controls"
-    mc:Ignorable="d">
+﻿<Page x:Class="StormManager.UWP.Views.OperationsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:vm="using:StormManager.UWP.ViewModels"
+      xmlns:controls1="using:StormManager.UWP.Controls"
+      mc:Ignorable="d">
 
     <Page.DataContext>
         <vm:OperationsPageViewModel  />
@@ -74,4 +70,4 @@
             </PivotItem>
         </Pivot>
     </RelativePanel>
-</Page>
+</Page> 

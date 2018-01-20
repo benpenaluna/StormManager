@@ -2,7 +2,6 @@ using Template10.Controls;
 using Template10.Services.NavigationService;
 using Windows.UI.Xaml;
 using Autofac;
-using Autofac.Core;
 using StormManager.UWP.Services.SettingsServices;
 
 namespace StormManager.UWP.Views

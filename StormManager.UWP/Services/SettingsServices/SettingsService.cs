@@ -1,6 +1,4 @@
 using System;
-using Template10.Common;
-using Template10.Utils;
 using Windows.UI.Xaml;
 using Autofac;
 using Template10.Services.SettingsService;
@@ -19,27 +17,14 @@ namespace StormManager.UWP.Services.SettingsServices
 
         public static bool IsFullScreenDefault => false;
 
-        //public static ISettingsService Create(ISettingsHelper helper = null, IUiUpdater updater = null)
-        //{
-        //    return new SettingsService(helper, updater);
-        //}
-
         private readonly ISettingsHelper _helper;
 
         private readonly IUiUpdater _updater;
-
-        //public SettingsService(ISettingsHelper helper = null, IUiUpdater updater = null)
-        //{
-        //    _helper = helper ?? new SettingsHelper();
-        //    _updater = updater ?? UiUpdater.Create();
-        //}
 
         public SettingsService(ISettingsHelper helper = null, IUiUpdater updater = null)
         {
             _helper = helper ?? App.Container.Resolve<ISettingsHelper>();
             _updater = updater ?? App.Container.Resolve<IUiUpdater>();
-            //_helper = helper ?? new SettingsHelper();
-            //_updater = updater ?? UiUpdater.Create();
         }
 
         public bool UseShellBackButton

@@ -32,7 +32,7 @@ namespace StormManager.UWP.Views
         {
             WindowWrapper.Current().Dispatcher.Dispatch(() =>
             {
-                var modal = Window.Current.Content as ModalDialog;
+                var modal = Window.Current.Content as ModalDialog ?? new ModalDialog();
                 if (!(modal.ModalContent is Busy view))
                     modal.ModalContent = view = new Busy();
                 modal.IsModal = view.IsBusy = busy;

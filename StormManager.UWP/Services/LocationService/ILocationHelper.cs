@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Windows.Devices.Geolocation;
+﻿using Windows.Devices.Geolocation;
 
 namespace StormManager.UWP.Services.LocationService
 {
