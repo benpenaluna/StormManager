@@ -67,18 +67,10 @@
 
                 <controls1:MenuMapControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                           TiltInteractionMode="GestureAndControl" ZoomInteractionMode="GestureAndControl"
-                                          MapServiceToken="{Binding MapServiceToken, Mode=TwoWay}"
-                                          MapCenter="{Binding MapCentre}"
-                                          MapScene="{Binding MapScene}" >
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="MapLoading">
-                            <core:InvokeCommandAction Command="{Binding MapLoadingCommand}" />
-                        </core:EventTriggerBehavior>
-                        <core:EventTriggerBehavior EventName="MapLoaded">
-                            <core:InvokeCommandAction Command="{Binding MapLoadedCommand}" />
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
-                </controls1:MenuMapControl>
+                                          MapServiceToken="{Binding MapServiceToken, Mode=OneTime}"
+                                          MapCenter="{Binding MapCentre, Mode=TwoWay}"
+                                          MapScene="{Binding MapScene, Mode=TwoWay}" />
+                    
             </PivotItem>
         </Pivot>
     </RelativePanel>
