@@ -23,9 +23,16 @@ namespace StormManager.UWP.Controls
 
         private List<ColorAnimation> _colorAnimations;
 
+        private readonly MenuFlyoutItem _removeMenuFlyoutItem = new MenuFlyoutItem
+        {
+            Text = "Remove"
+        };
+
         public AnimateColor AllowAnimateColor => MapIconControlHelper.ColorAnimationSettings.AnimateColor;
 
         public IMapIconControlHelper MapIconControlHelper { get; set; }
+
+        public event EventHandler<RoutedEventArgs> RemoveClicked; 
 
         public Brush DescriptionBackgroundColor
         {
@@ -135,6 +142,31 @@ namespace StormManager.UWP.Controls
         private void AttachEvents()
         {
             Tapped += MapIconControl_Tapped;
+            ContextRequested += MapIconControl_ContextRequested;
+        }
+
+        private void MapIconControl_Tapped(object sender, TappedRoutedEventArgs args)
+        {
+            if (DescriptionVisible == Visibility.Collapsed)
+            {
+                NotificationTimeDisplayedToUser = DetermineNotificationTimeDisplay();
+            }
+
+            DescriptionVisible = DescriptionVisible == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private void MapIconControl_ContextRequested(UIElement sender, ContextRequestedEventArgs args)
+        {
+            var menuFlyout = new MenuFlyout();
+            menuFlyout.Items?.Add(_removeMenuFlyoutItem);
+
+            args.TryGetPosition(sender, out var pointerPosition);
+            menuFlyout.ShowAt(sender, pointerPosition);
+
+            if (RemoveClicked != null)
+            {
+                _removeMenuFlyoutItem.Click += (s, e) => RemoveClicked(sender, e);
+            }
         }
 
         private void TriggerStartUpEvents()
@@ -206,16 +238,6 @@ namespace StormManager.UWP.Controls
             {
                 _headingForegroundAniation.To = _headingForegroundAniation.From;
             }
-        }
-
-        private void MapIconControl_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (DescriptionVisible == Visibility.Collapsed)
-            {
-                NotificationTimeDisplayedToUser = DetermineNotificationTimeDisplay();
-            }
-
-            DescriptionVisible = DescriptionVisible == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private string DetermineNotificationTimeDisplay()

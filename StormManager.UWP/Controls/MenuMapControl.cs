@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml.Input;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Models.Mapping;
+using Template10.Mvvm;
 
 namespace StormManager.UWP.Controls
 {
@@ -187,7 +190,7 @@ namespace StormManager.UWP.Controls
             DisplayAndCacheLocationSuggestions(finderResult);
         }
 
-        private async System.Threading.Tasks.Task<MapLocationFinderResult> FindLocationsAsync(string queryText)
+        private async Task<MapLocationFinderResult> FindLocationsAsync(string queryText)
         {
             return await MapLocationFinder.FindLocationsAsync(queryText, MapCenter, SearchResultsDisplayed);
         }
@@ -239,12 +242,20 @@ namespace StormManager.UWP.Controls
         {
             var colorAnimationHelper = JobTypeColorAnimationFactory.Create(ColorAnimationType.Default);
             var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper);
+
             _myMapControl.Children.Add(iconWithCollapsableDescription);
             var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);
             MapControl.SetLocation(iconWithCollapsableDescription, position);
             MapControl.SetNormalizedAnchorPoint(iconWithCollapsableDescription, new Point(0.5, 1.0));
+
+            iconWithCollapsableDescription.RemoveClicked += MapIconControlRemoveClicked;
         }
 
+        private void MapIconControlRemoveClicked(object sender, RoutedEventArgs args)
+        {
+            _myMapControl.Children.Remove(sender as UIElement);
+        }
+        
         private void SetMapSceneForPushPinAddition(MapLocation location)
         {
             _myMapControl.Scene = MapScene.CreateFromLocationAndRadius(location.Point, RadiusAroundNewPushPin, _myMapControl.Heading, _myMapControl.Pitch);

@@ -5,6 +5,31 @@
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:converters="using:StormManager.UWP.Converters">
 
+    <Style x:Name="TextBlockBaseStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Black" /> <!--TODO: Bind this to the control-->
+    </Style>
+
+    <Style x:Name="TextBlockHeadingStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Name="TextBlockSubHeadingStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+        <Setter Property="FontStyle" Value="Italic" />
+        <Setter Property="Margin" Value="5,5,5,5" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Name="TextBlockLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="5,0,0,5" />
+    </Style>
+
+    <Style x:Name="TextBlockUserTextStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+        <Setter Property="Margin" Value="5,0,5,5" />
+    </Style>
+
     <Style TargetType="controls:MenuMapControl" >
         <Setter Property="Template">
             <Setter.Value>
@@ -55,7 +80,9 @@
                                 RelativePanel.RightOf="DirectionsTextBox"
                                 RelativePanel.AlignVerticalCenterWith="MenuRibbon"/>-->
 
+                        <!--TODO: Bind Content-->
                         <Button x:Name="StyleButton" Content="Road"
+                                Foreground="#FF343434"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Margin="0,0,30,0"
@@ -109,134 +136,125 @@
             <Setter.Value>
                 <ControlTemplate TargetType="controls:MapIconControl">
                     <StackPanel>
-                        <StackPanel.Resources>
-                            <converters:ColorToConstrastColorConverter x:Key="ColorConverter"/>
-                            <Storyboard x:Name="MyStoryboard">
-                                <ColorAnimation x:Name="DescriptionBorderBackgroundAnimation"
-                                                Storyboard.TargetName="DescriptionBorderBackground"
-                                                Storyboard.TargetProperty="Color" />
-                                <ColorAnimation x:Name="DescriptionBorderAnimation"
-                                                Storyboard.TargetName="DescriptionBorder"
-                                                Storyboard.TargetProperty="Color" />
-                                <ColorAnimation x:Name="MapIconFillPathAnimation"
-                                                Storyboard.TargetName="MapIconFillPath"
-                                                Storyboard.TargetProperty="Color" />
-                                <ColorAnimation x:Name="HeadingForegroundAniation"
-                                                Storyboard.TargetName="HeadingForeground"
-                                                Storyboard.TargetProperty="Color" 
-                                                Duration="0:0:1" />
-                            </Storyboard>
-                        </StackPanel.Resources>
-                        <Border Background="{TemplateBinding DescriptionBackgroundColor}"
-                                BorderThickness="{TemplateBinding DescriptionBorderThickness}"
-                                Padding="{TemplateBinding DescriptionBorderPadding}"
-                                CornerRadius="{TemplateBinding DescriptionBorderCornerRadius}"
-                                Visibility="{TemplateBinding DescriptionVisible}" >
-                            <Border.BorderBrush>
-                                <SolidColorBrush x:Name="DescriptionBorder" />
-                            </Border.BorderBrush>
-                            <StackPanel>
-                                <Border Padding="5,0,5,5">
-                                    <Border.Background>
-                                        <SolidColorBrush x:Name="DescriptionBorderBackground" />
-                                    </Border.Background>
-                                    <TextBlock x:Name="Heading" 
-                                               Text="S888888888 - Building Damage"
-                                               FontWeight="Bold"
-                                               FontSize="18"
-                                               HorizontalAlignment="Center"
-                                               Visibility="Visible" >
-                                        <TextBlock.Foreground>
-                                            <SolidColorBrush x:Name="HeadingForeground" />
-                                        </TextBlock.Foreground>
-                                    </TextBlock>
-                                </Border>
-                                <TextBlock x:Name="SubHeading" 
-                                           Text="19 BindMe Street, Textinxaml"
-                                           Foreground="Black"
-                                           FontStyle="Italic"
-                                           Margin="5,5,5,5"
-                                           HorizontalAlignment="Center" />
-                                <Grid Visibility="Visible">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock x:Name="TextLine1Label" 
-                                               Text="Status:"
-                                               Foreground="Black"
-                                               FontWeight="Bold"
-                                               Margin="5,0,0,5" />
-                                    <TextBlock x:Name="TextLine1Text"
-                                               Grid.Column="1"
-                                               Text="Assessed"
-                                               Foreground="Black"
-                                               Margin="5,0,5,5" />
-                                </Grid>
-                                <Grid Visibility="Visible">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock x:Name="TextLine2Label" 
-                                               Text="Notified:"
-                                               Foreground="Black"
-                                               FontWeight="Bold"
-                                               Margin="5,0,0,5" />
-                                    <TextBlock x:Name="TextLine2Text"
-                                               Grid.Column="1"
-                                               Text="{TemplateBinding NotificationTimeDisplayedToUser}"
-                                               Foreground="Black"
-                                               Margin="5,0,5,5" />
-                                </Grid>
-                            </StackPanel>
-                        </Border>
-                        
-                        <Grid x:Name="MapIconImage" HorizontalAlignment="Center">
-                            <Path>
-                                <Path.Fill>
-                                    <SolidColorBrush x:Name="MapIconFillPath" />
-                                </Path.Fill>
-                                <Path.Data>
-                                    <PathGeometry>
-                                        <PathFigure StartPoint="11 32">
-                                            <LineSegment Point="3 19.25" />
-                                            <BezierSegment Point1="-5 2.5" Point2="11 2" Point3="11 2.25" />
-                                            <LineSegment Point="11 6" />
-                                            <ArcSegment Size ="5 5" Point="11 16" />
-                                            <ArcSegment Size ="5 5" Point="11 6" />
-                                            <LineSegment Point="11 2.25" />
-                                            <BezierSegment Point1="11 2" Point2="27 2.5"  Point3="19 19.25" />
-                                            <LineSegment Point="11 32" />
-                                        </PathFigure>
-                                    </PathGeometry>
-                                </Path.Data>
-                            </Path>
-                            <Path Stroke="{TemplateBinding MapIconBorderBrush}"
-                                  StrokeThickness="{TemplateBinding MapIconBorderThickness}"
-                                  StrokeLineJoin="Round">
-                                <Path.Data>
-                                    <PathGeometry>
-                                        <PathFigure StartPoint="11 32" >
-                                            <LineSegment Point="3 19.25" />
-                                            <BezierSegment Point1="-8.75 -3.75" Point2="30.75 -3.75"  Point3="19 19.25" />
-                                            <LineSegment Point="11 32" />
-                                        </PathFigure>
-                                    </PathGeometry>
-                                </Path.Data>
-                            </Path>
-                            <Path Stroke="{TemplateBinding MapIconBorderBrush}"
-                                  StrokeThickness="{TemplateBinding MapIconBorderThickness}"
-                                  StrokeLineJoin="Round" >
-                                <Path.Data>
-                                    <PathGeometry>
-                                        <PathFigure StartPoint="6 11">
-                                            <ArcSegment Size ="5 5" Point="6 10.99" IsLargeArc="True" />
-                                        </PathFigure>
-                                    </PathGeometry>
-                                </Path.Data>
-                            </Path>
-                        </Grid>
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <converters:ColorToConstrastColorConverter x:Key="ColorConverter"/>
+                                <Storyboard x:Name="MyStoryboard">
+                                    <ColorAnimation x:Name="DescriptionBorderBackgroundAnimation"
+                                                    Storyboard.TargetName="DescriptionBorderBackground"
+                                                    Storyboard.TargetProperty="Color" />
+                                    <ColorAnimation x:Name="DescriptionBorderAnimation"
+                                                    Storyboard.TargetName="DescriptionBorder"
+                                                    Storyboard.TargetProperty="Color" />
+                                    <ColorAnimation x:Name="MapIconFillPathAnimation"
+                                                    Storyboard.TargetName="MapIconFillPath"
+                                                    Storyboard.TargetProperty="Color" />
+                                    <ColorAnimation x:Name="HeadingForegroundAniation"
+                                                    Storyboard.TargetName="HeadingForeground"
+                                                    Storyboard.TargetProperty="Color" 
+                                                    Duration="0:0:1" />
+                                </Storyboard>
+                            </StackPanel.Resources>
+                            <Border Background="{TemplateBinding DescriptionBackgroundColor}"
+                                    BorderThickness="{TemplateBinding DescriptionBorderThickness}"
+                                    Padding="{TemplateBinding DescriptionBorderPadding}"
+                                    CornerRadius="{TemplateBinding DescriptionBorderCornerRadius}"
+                                    Visibility="{TemplateBinding DescriptionVisible}" >
+                                <Border.BorderBrush>
+                                    <SolidColorBrush x:Name="DescriptionBorder" />
+                                </Border.BorderBrush>
+                                <StackPanel>
+                                    <Border Padding="5,0,5,5">
+                                        <Border.Background>
+                                            <SolidColorBrush x:Name="DescriptionBorderBackground" />
+                                        </Border.Background>
+                                        <TextBlock x:Name="Heading" 
+                                                   Text="S888888888 - Building Damage"
+                                                   Style="{StaticResource TextBlockHeadingStyle}"
+                                                   Visibility="Visible" > <!--TODO: Bind Text-->
+                                            <TextBlock.Foreground>
+                                                <SolidColorBrush x:Name="HeadingForeground" />
+                                            </TextBlock.Foreground>
+                                        </TextBlock>
+                                    </Border>
+                                    <TextBlock x:Name="SubHeading" 
+                                               Text="19 BindMe Street, Textinxaml"
+                                               Style="{StaticResource TextBlockSubHeadingStyle}" />
+                                    <Grid Visibility="Visible">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="TextLine1Label" 
+                                                   Text="Status:"
+                                                   Style="{StaticResource TextBlockLabelStyle}" />
+                                        <TextBlock x:Name="TextLine1Text"
+                                                   Grid.Column="1"
+                                                   Text="Assessed"
+                                                   Style="{StaticResource TextBlockUserTextStyle}" /> <!--TODO: Make Text bindable-->
+                                    </Grid>
+                                    <Grid Visibility="Visible">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="TextLine2Label" 
+                                                   Text="Notified:"
+                                                   Style="{StaticResource TextBlockLabelStyle}" />
+                                        <TextBlock x:Name="TextLine2Text"
+                                                   Grid.Column="1"
+                                                   Text="{TemplateBinding NotificationTimeDisplayedToUser}"
+                                                   Style="{StaticResource TextBlockUserTextStyle}" />
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <Grid x:Name="MapIconImage" HorizontalAlignment="Center">
+                                <Path>
+                                    <Path.Fill>
+                                        <SolidColorBrush x:Name="MapIconFillPath" />
+                                    </Path.Fill>
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="11 32">
+                                                <LineSegment Point="3 19.25" />
+                                                <BezierSegment Point1="-5 2.5" Point2="11 2" Point3="11 2.25" />
+                                                <LineSegment Point="11 6" />
+                                                <ArcSegment Size ="5 5" Point="11 16" />
+                                                <ArcSegment Size ="5 5" Point="11 6" />
+                                                <LineSegment Point="11 2.25" />
+                                                <BezierSegment Point1="11 2" Point2="27 2.5"  Point3="19 19.25" />
+                                                <LineSegment Point="11 32" />
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path Stroke="{TemplateBinding MapIconBorderBrush}"
+                              StrokeThickness="{TemplateBinding MapIconBorderThickness}"
+                              StrokeLineJoin="Round">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="11 32" >
+                                                <LineSegment Point="3 19.25" />
+                                                <BezierSegment Point1="-8.75 -3.75" Point2="30.75 -3.75"  Point3="19 19.25" />
+                                                <LineSegment Point="11 32" />
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path Stroke="{TemplateBinding MapIconBorderBrush}"
+                              StrokeThickness="{TemplateBinding MapIconBorderThickness}"
+                              StrokeLineJoin="Round" >
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="6 11">
+                                                <ArcSegment Size ="5 5" Point="6 10.99" IsLargeArc="True" />
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                            </Grid>
+                        </StackPanel>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>

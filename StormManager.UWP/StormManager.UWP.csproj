@@ -102,6 +102,7 @@
     <Compile Include="Controls\ControlHelpers\ColorAnimationHelper.cs" />
     <Compile Include="Controls\ControlHelpers\ColorAnimationType.cs" />
     <Compile Include="Controls\ControlHelpers\DefaultColorAnimation.cs" />
+    <Compile Include="Controls\ControlHelpers\FlyoutHelper.cs" />
     <Compile Include="Controls\ControlHelpers\IColorAnimationHelper.cs" />
     <Compile Include="Controls\ControlHelpers\IMapIconControlHelper.cs" />
     <Compile Include="Controls\ControlHelpers\MapIconControlHelper.cs" />

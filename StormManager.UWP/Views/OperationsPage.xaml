@@ -9,7 +9,7 @@
       mc:Ignorable="d">
 
     <Page.DataContext>
-        <vm:OperationsPageViewModel  />
+        <vm:OperationsPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -40,7 +40,16 @@
                              Frame="{x:Bind Frame}"
                              RelativePanel.AlignLeftWithPanel="True"
                              RelativePanel.AlignRightWithPanel="True"
-                             RelativePanel.AlignTopWithPanel="True" />
+                             RelativePanel.AlignTopWithPanel="True" >
+
+            <!--  secondary commands  -->
+            <!--TODO: This is exactly the same as the MainPage SecondaryCommands. Abstract these if used in final solution-->
+            <controls:PageHeader.SecondaryCommands>  
+                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" x:Uid="SettingsAppBarButton" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" x:Uid="PrivacyAppBarButton" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" x:Uid="AboutAppBarButton" />
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
 
         <Rectangle Fill="{StaticResource CustomColorBrush}"
                    Height="49" Width="Auto"
