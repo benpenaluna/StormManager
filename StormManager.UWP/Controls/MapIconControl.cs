@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Resources;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,10 +24,7 @@ namespace StormManager.UWP.Controls
 
         private List<ColorAnimation> _colorAnimations;
 
-        private readonly MenuFlyoutItem _removeMenuFlyoutItem = new MenuFlyoutItem
-        {
-            Text = "Remove"
-        };
+        private MenuFlyoutItem _removeMenuFlyoutItem = new MenuFlyoutItem();
 
         public AnimateColor AllowAnimateColor => MapIconControlHelper.ColorAnimationSettings.AnimateColor;
 
@@ -110,6 +108,9 @@ namespace StormManager.UWP.Controls
             DefaultStyleKey = typeof(MapIconControl);
 
             MapIconControlHelper = mapIconControlHelper ?? App.Container.Resolve<IMapIconControlHelper>();
+
+            var res = ResourceLoader.GetForCurrentView();
+            _removeMenuFlyoutItem.Text = res.GetString("RemoveMenuFlyoutItem/Text");
         }
 
         protected override void OnApplyTemplate()

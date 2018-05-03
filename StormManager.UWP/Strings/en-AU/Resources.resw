@@ -153,6 +153,10 @@
     <value>Privacy</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
   </data>
+  <data name="RemoveMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Remove</value>
+    <comment>Controls.MenuMapIcon</comment>
+  </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
