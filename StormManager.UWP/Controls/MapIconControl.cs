@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.ApplicationModel.Store;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -15,6 +16,8 @@ namespace StormManager.UWP.Controls
 {
     public sealed class MapIconControl : Control
     {
+        private static readonly ResourceLoader ResLoader = ResourceLoader.GetForCurrentView();
+
         private Storyboard _myStoryboard;
         private ColorAnimation _descriptionBorderBackgroundAnimation;
         private ColorAnimation _descriptionBorderAnimation;
@@ -24,7 +27,7 @@ namespace StormManager.UWP.Controls
 
         private List<ColorAnimation> _colorAnimations;
 
-        private MenuFlyoutItem _removeMenuFlyoutItem = new MenuFlyoutItem();
+        private readonly MenuFlyoutItem _removeMenuFlyoutItem = new MenuFlyoutItem();
 
         public AnimateColor AllowAnimateColor => MapIconControlHelper.ColorAnimationSettings.AnimateColor;
 
@@ -72,6 +75,22 @@ namespace StormManager.UWP.Controls
         public static readonly DependencyProperty DescriptionVisibleProperty =
             DependencyProperty.Register(nameof(DescriptionVisible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Collapsed));
 
+        public string HeadingText
+        {
+            get => (string)GetValue(HeadingTextProperty);
+            set => SetValue(HeadingTextProperty, value);
+        }
+        public static readonly DependencyProperty HeadingTextProperty =
+            DependencyProperty.Register(nameof(HeadingText), typeof(string), typeof(MapIconControl), new PropertyMetadata(ResLoader.GetString("MapIconContol/DefaultHeadingText")));
+
+        public Visibility HeadingVisible
+        {
+            get => (Visibility)GetValue(HeadingVisibleProperty);
+            set => SetValue(HeadingVisibleProperty, value);
+        }
+        public static readonly DependencyProperty HeadingVisibleProperty =
+            DependencyProperty.Register(nameof(HeadingVisible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Visible));
+
         public Brush MapIconBorderBrush
         {
             get => (Brush)GetValue(MapIconBorderBrushProperty);
@@ -94,10 +113,43 @@ namespace StormManager.UWP.Controls
             set => SetValue(NotificationTimeDisplayedToUserProperty, value);
         }
         public static readonly DependencyProperty NotificationTimeDisplayedToUserProperty =
-            DependencyProperty.Register(nameof(NotificationTimeDisplayedToUser), typeof(string), typeof(MapIconControl), new PropertyMetadata("0 seconds ago"));
+            DependencyProperty.Register(nameof(NotificationTimeDisplayedToUser), typeof(string), typeof(MapIconControl), new PropertyMetadata(ResLoader.GetString("MapIconContol/DefaultNotificationTime")));
+
+        public Visibility NotificationTimeVisbible
+        {
+            get => (Visibility)GetValue(NotificationTimeVisbibleProperty);
+            set => SetValue(NotificationTimeVisbibleProperty, value);
+        }
+        public static readonly DependencyProperty NotificationTimeVisbibleProperty =
+            DependencyProperty.Register(nameof(NotificationTimeVisbible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Visible));
 
         public DateTime NotificationTimeUtc => MapIconControlHelper.NotificationTimeUtc;
-        
+
+        public Visibility StatusVisible
+        {
+            get => (Visibility )GetValue(StatusVisibleProperty);
+            set => SetValue(StatusVisibleProperty, value);
+        }
+        public static readonly DependencyProperty StatusVisibleProperty =
+            DependencyProperty.Register(nameof(StatusVisible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Visible));
+
+        public string SubHeadingText
+        {
+            get => (string)GetValue(SubHeadingTextProperty);
+            set => SetValue(SubHeadingTextProperty, value);
+        }
+        public static readonly DependencyProperty SubHeadingTextProperty =
+            DependencyProperty.Register(nameof(SubHeadingText), typeof(string), typeof(MapIconControl), new PropertyMetadata(ResLoader.GetString("MapIconContol/DefaultSubHeadingText")));
+
+
+        public Visibility SubHeadingVisible
+        {
+            get => (Visibility)GetValue(SubHeadingVisibleProperty);
+            set => SetValue(SubHeadingVisibleProperty, value);
+        }
+        public static readonly DependencyProperty SubHeadingVisibleProperty =
+            DependencyProperty.Register(nameof(SubHeadingVisible), typeof(Visibility), typeof(MapIconControl), new PropertyMetadata(Visibility.Visible));
+
         public MapIconControl(IMapIconControlHelper mapIconControlHelper = null)
         {
             Initialise(mapIconControlHelper);
@@ -109,8 +161,7 @@ namespace StormManager.UWP.Controls
 
             MapIconControlHelper = mapIconControlHelper ?? App.Container.Resolve<IMapIconControlHelper>();
 
-            var res = ResourceLoader.GetForCurrentView();
-            _removeMenuFlyoutItem.Text = res.GetString("RemoveMenuFlyoutItem/Text");
+            _removeMenuFlyoutItem.Text = ResLoader.GetString("RemoveMenuFlyoutItem/Text");
         }
 
         protected override void OnApplyTemplate()

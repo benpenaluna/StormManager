@@ -141,6 +141,18 @@
     <value>Dashboard</value>
     <comment>Views.MainPage.PageHeader</comment>
   </data>
+  <data name="MapIconContol.DefaultHeadingText" xml:space="preserve">
+    <value>Default Heading</value>
+    <comment>Controls.MapIconControl</comment>
+  </data>
+  <data name="MapIconContol.DefaultNotificationTime" xml:space="preserve">
+    <value>0 seconds ago</value>
+    <comment>Controls.MapIconControl</comment>
+  </data>
+  <data name="MapIconContol.DefaultSubHeadingText" xml:space="preserve">
+    <value>Default Sub-Heading</value>
+    <comment>Controls.MapIconControl</comment>
+  </data>
   <data name="MapPivotItem.Text" xml:space="preserve">
     <value>Map</value>
     <comment>Views.OperationsPage.Pivot.PivotItem</comment>

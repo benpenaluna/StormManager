@@ -241,7 +241,13 @@ namespace StormManager.UWP.Controls
         private void AddMapIcon(MapLocation location)
         {
             var colorAnimationHelper = JobTypeColorAnimationFactory.Create(ColorAnimationType.Default);
-            var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper);
+            var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper)
+            {
+                HeadingVisible = Visibility.Collapsed,
+                StatusVisible = Visibility.Collapsed,
+                NotificationTimeVisbible = Visibility.Collapsed,
+                SubHeadingText = FormatAddress(location)
+            };
 
             _myMapControl.Children.Add(iconWithCollapsableDescription);
             var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);
@@ -249,6 +255,28 @@ namespace StormManager.UWP.Controls
             MapControl.SetNormalizedAnchorPoint(iconWithCollapsableDescription, new Point(0.5, 1.0));
 
             iconWithCollapsableDescription.RemoveClicked += MapIconControlRemoveClicked;
+        }
+
+        private string FormatAddress(MapLocation location) // TODO: Move this to the LocationService Class and run unit tests
+        {
+            var formattedAddress = location.Address.FormattedAddress;
+
+            if (location.Address.Country != "")
+            {
+                formattedAddress = formattedAddress.Replace(location.Address.Country, "");
+            }
+
+            if (location.Address.PostCode != "")
+            {
+                formattedAddress = formattedAddress.Replace(location.Address.PostCode, "");
+            }
+
+            if (location.Address.Region != "")
+            {
+                formattedAddress = formattedAddress.Replace(location.Address.Region, "");
+            }
+
+            return formattedAddress.TrimEnd(' ', ',');
         }
 
         private void MapIconControlRemoveClicked(object sender, RoutedEventArgs args)

@@ -169,18 +169,19 @@
                                             <SolidColorBrush x:Name="DescriptionBorderBackground" />
                                         </Border.Background>
                                         <TextBlock x:Name="Heading" 
-                                                   Text="S888888888 - Building Damage"
+                                                   Text="{TemplateBinding HeadingText}"
                                                    Style="{StaticResource TextBlockHeadingStyle}"
-                                                   Visibility="Visible" > <!--TODO: Bind Text-->
+                                                   Visibility="{TemplateBinding HeadingVisible}" >
                                             <TextBlock.Foreground>
                                                 <SolidColorBrush x:Name="HeadingForeground" />
                                             </TextBlock.Foreground>
                                         </TextBlock>
                                     </Border>
                                     <TextBlock x:Name="SubHeading" 
-                                               Text="19 BindMe Street, Textinxaml"
-                                               Style="{StaticResource TextBlockSubHeadingStyle}" />
-                                    <Grid Visibility="Visible">
+                                               Text="{TemplateBinding SubHeadingText}"
+                                               Style="{StaticResource TextBlockSubHeadingStyle}"
+                                               Visibility="{TemplateBinding SubHeadingVisible}" />
+                                    <Grid Visibility="{TemplateBinding StatusVisible}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
@@ -193,7 +194,7 @@
                                                    Text="Assessed"
                                                    Style="{StaticResource TextBlockUserTextStyle}" /> <!--TODO: Make Text bindable-->
                                     </Grid>
-                                    <Grid Visibility="Visible">
+                                    <Grid Visibility="{TemplateBinding NotificationTimeVisbible}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
