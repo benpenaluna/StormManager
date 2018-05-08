@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Input;
+using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Models.Mapping;
 using Template10.Mvvm;
@@ -222,23 +223,25 @@ namespace StormManager.UWP.Controls
                             select loc.MapLocation;
 
             var location = locations.FirstOrDefault();
-            //var locationNameToDisplay = location?.DisplayName ?? "";
 
-            AddPushPinAndSetScene(location);
+            AddMapIconAndSetScene(location);
         }
 
-        private void AddPushPinAndSetScene(MapLocation location)
+        private void AddMapIconAndSetScene(MapLocation location)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            AddMapIcon(location);
-            SetMapSceneForPushPinAddition(location);
+            var defaultMapIcon = CreateDefaultMapIcon(location);
+            AddAndPositionMapIcon(defaultMapIcon, location);
+            AttachMapIconEvents(defaultMapIcon);
+
+            SetMapSceneForMapIconAddition(location);
         }
 
-        private void AddMapIcon(MapLocation location)
+        private static MapIconControl CreateDefaultMapIcon(MapLocation location)
         {
             var colorAnimationHelper = JobTypeColorAnimationFactory.Create(ColorAnimationType.Default);
             var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper)
@@ -246,37 +249,24 @@ namespace StormManager.UWP.Controls
                 HeadingVisible = Visibility.Collapsed,
                 StatusVisible = Visibility.Collapsed,
                 NotificationTimeVisbible = Visibility.Collapsed,
-                SubHeadingText = FormatAddress(location)
+                SubHeadingText = location
             };
 
-            _myMapControl.Children.Add(iconWithCollapsableDescription);
-            var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);
-            MapControl.SetLocation(iconWithCollapsableDescription, position);
-            MapControl.SetNormalizedAnchorPoint(iconWithCollapsableDescription, new Point(0.5, 1.0));
-
-            iconWithCollapsableDescription.RemoveClicked += MapIconControlRemoveClicked;
+            return iconWithCollapsableDescription;
         }
 
-        private string FormatAddress(MapLocation location) // TODO: Move this to the LocationService Class and run unit tests
+        private void AddAndPositionMapIcon(MapIconControl icon, MapLocation location)
         {
-            var formattedAddress = location.Address.FormattedAddress;
+            _myMapControl.Children.Add(icon);
 
-            if (location.Address.Country != "")
-            {
-                formattedAddress = formattedAddress.Replace(location.Address.Country, "");
-            }
+            var position = new Geopoint(location.Point.Position, AltitudeReferenceSystem.Terrain);
+            MapControl.SetLocation(icon, position);
+            MapControl.SetNormalizedAnchorPoint(icon, new Point(0.5, 1.0));
+        }
 
-            if (location.Address.PostCode != "")
-            {
-                formattedAddress = formattedAddress.Replace(location.Address.PostCode, "");
-            }
-
-            if (location.Address.Region != "")
-            {
-                formattedAddress = formattedAddress.Replace(location.Address.Region, "");
-            }
-
-            return formattedAddress.TrimEnd(' ', ',');
+        private void AttachMapIconEvents(MapIconControl icon)
+        {
+            icon.RemoveClicked += MapIconControlRemoveClicked;
         }
 
         private void MapIconControlRemoveClicked(object sender, RoutedEventArgs args)
@@ -284,7 +274,7 @@ namespace StormManager.UWP.Controls
             _myMapControl.Children.Remove(sender as UIElement);
         }
         
-        private void SetMapSceneForPushPinAddition(MapLocation location)
+        private void SetMapSceneForMapIconAddition(MapLocation location)
         {
             _myMapControl.Scene = MapScene.CreateFromLocationAndRadius(location.Point, RadiusAroundNewPushPin, _myMapControl.Heading, _myMapControl.Pitch);
         }
@@ -293,7 +283,7 @@ namespace StormManager.UWP.Controls
         {
             var location = suggestion.MapLocation;
             
-            AddPushPinAndSetScene(location);
+            AddMapIconAndSetScene(location);
         }
 
         private void MapStylePresenter_Changed(object sender, RoutedEventArgs e)
