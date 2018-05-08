@@ -249,7 +249,7 @@ namespace StormManager.UWP.Controls
                 HeadingVisible = Visibility.Collapsed,
                 StatusVisible = Visibility.Collapsed,
                 NotificationTimeVisbible = Visibility.Collapsed,
-                SubHeadingText = location
+                SubHeadingText = location.StreetAddressOrCommonPlaceName()
             };
 
             return iconWithCollapsableDescription;
