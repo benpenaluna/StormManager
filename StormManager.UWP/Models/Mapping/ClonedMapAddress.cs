@@ -1,8 +1,4 @@
-﻿using System.Reflection;
-using System.Threading.Tasks;
-using Windows.Services.Maps;
-using Windows.UI.Notifications;
-using StormManager.UWP.Services.LocationService;
+﻿using Windows.Services.Maps;
 
 namespace StormManager.UWP.Models.Mapping
 {
