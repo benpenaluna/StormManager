@@ -1,4 +1,6 @@
-﻿using Windows.Services.Maps;
+﻿using System.Collections.Generic;
+using Windows.Services.Maps;
+using StormManager.UWP.Models.Mapping;
 
 namespace StormManager.UWP.Common.ExtensionMethods
 {
@@ -6,21 +8,26 @@ namespace StormManager.UWP.Common.ExtensionMethods
     {
         public static string StreetAddressOrCommonPlaceName(this MapLocation location)
         {
-            var formattedAddress = location.Address.FormattedAddress;
+            return StreetAddressOrCommonPlaceName(new MapLocationSuggestion(location));
+        }
 
-            if (location.Address.Country != "")
-            {
-                formattedAddress = formattedAddress.Replace(location.Address.Country, "");
-            }
+        public static string StreetAddressOrCommonPlaceName(this IMapLocationSuggestion location)
+        {
+            var formattedAddress = location.MapLocation.Address.FormattedAddress;
 
-            if (location.Address.PostCode != "")
+            var itemsToRemove = new List<string>
             {
-                formattedAddress = formattedAddress.Replace(location.Address.PostCode, "");
-            }
+                location.MapLocation.Address.Country,
+                location.MapLocation.Address.PostCode,
+                location.MapLocation.Address.Region
+            };
 
-            if (location.Address.Region != "")
+            foreach (var item in itemsToRemove)
             {
-                formattedAddress = formattedAddress.Replace(location.Address.Region, "");
+                if (item != "")
+                {
+                    formattedAddress = formattedAddress.Replace(item, "");
+                }
             }
 
             return formattedAddress.TrimEnd(' ', ',');

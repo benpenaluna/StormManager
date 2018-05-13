@@ -1,4 +1,4 @@
-﻿using Windows.Services.Maps;
+﻿    using Windows.Services.Maps;
 
 namespace StormManager.UWP.Models.Mapping
 {

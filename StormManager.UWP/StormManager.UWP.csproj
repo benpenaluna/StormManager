@@ -123,6 +123,9 @@
     <Compile Include="Controls\MapRadioButton.cs" />
     <Compile Include="Controls\MenuMapControl.cs" />
     <Compile Include="Converters\ColorToConstrastColorConverter.cs" />
+    <Compile Include="Models\Mapping\ClonedMapAddress.cs" />
+    <Compile Include="Models\Mapping\IClonedMapAddress.cs" />
+    <Compile Include="Models\Mapping\IClonedMapLocation.cs" />
     <Compile Include="Models\Mapping\IMapLocationSuggestion.cs" />
     <Compile Include="Models\Mapping\MapLocationSuggestion.cs" />
     <Compile Include="Properties\Annotations.cs" />

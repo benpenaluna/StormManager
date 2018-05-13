@@ -100,8 +100,11 @@
     <Compile Include="Common\ExtensionMethods\LocationExtensionsTests.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyExtensionsTests.cs" />
     <Compile Include="Common\ExtensionMethods\MapKeyGenerator.cs" />
+    <Compile Include="Common\ExtensionMethods\MapLocationExtensionsTests.cs" />
     <Compile Include="Common\ExtensionMethods\TimeSpanExtensionTests.cs" />
     <Compile Include="Converters\ColorToConstrastColorConverterTests.cs" />
+    <Compile Include="Models\Mapping\ClonedMapAddressMockFactory.cs" />
+    <Compile Include="Models\Mapping\ClonedMapAddressTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService\LocationHelperTests.cs" />
     <Compile Include="Services\LocationService\LocationServiceTests.cs" />
