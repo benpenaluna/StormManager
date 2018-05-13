@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Moq;
+﻿using Moq;
 using StormManager.UWP.Models.Mapping;
 
 namespace StormManager.UWP.Tests.Models.Mapping

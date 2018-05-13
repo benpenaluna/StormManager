@@ -105,6 +105,8 @@
     <Compile Include="Converters\ColorToConstrastColorConverterTests.cs" />
     <Compile Include="Models\Mapping\ClonedMapAddressMockFactory.cs" />
     <Compile Include="Models\Mapping\ClonedMapAddressTests.cs" />
+    <Compile Include="Models\Mapping\ClonedMapLocationMockFactory.cs" />
+    <Compile Include="Models\Mapping\ClonedMapLocationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LocationService\LocationHelperTests.cs" />
     <Compile Include="Services\LocationService\LocationServiceTests.cs" />
