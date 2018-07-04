@@ -4,6 +4,6 @@ namespace StormManager.UWP.Models.Mapping
 {
     public interface IMapLocationSuggestion
     {
-        MapLocation MapLocation { get; }
+        IClonedMapLocation MapLocation { get; }
     }
 }

@@ -1,11 +1,16 @@
-﻿using Windows.Devices.Geolocation;
+﻿using System.Reflection;
+using Windows.Devices.Geolocation;
+using Windows.Devices.PointOfService;
 using Moq;
+using MvvmCross.Core.ViewModels.Hints;
 using StormManager.UWP.Models.Mapping;
 
 namespace StormManager.UWP.Tests.Models.Mapping
 {
     internal class ClonedMapLocationMockFactory
     {
+        public static readonly string ClonedDisplayName = "Sydney Opera House";
+
         public static Mock<IClonedMapLocation> CreateMockClonedMapLocation()
         {
             var mockAddress = ClonedMapAddressMockFactory.CreateMockClonedMapAddress().Object;
@@ -18,7 +23,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
             var service = new Mock<IClonedMapLocation>();
             service.Setup(x => x.Address).Returns(mockAddress);
             service.Setup(x => x.Description).Returns("The Sydney Opera House is a multi-venue performing arts centre in Sydney, New South Wales, Australia.");
-            service.Setup(x => x.DisplayName).Returns("Syndey Opera House");
+            service.Setup(x => x.DisplayName).Returns(ClonedDisplayName);
             service.Setup(x => x.Point).Returns(new Geopoint(sydneyOperaHouse));
 
             return service;

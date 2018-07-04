@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Reflection;
+using System.Runtime;
 using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 
@@ -14,13 +12,15 @@ namespace StormManager.UWP.Models.Mapping
 
         private readonly IClonedMapLocation _helper;
 
-        public IClonedMapAddress Address => _helper.Address ?? ClonedMapAddress.Create(_mapLocation.Address);
+        private readonly bool _helperProvided;
 
-        public string Description => _helper.Description ?? _mapLocation.Description;
+        public IClonedMapAddress Address => _helperProvided ? _helper.Address : ClonedMapAddress.Create(_mapLocation.Address);
 
-        public string DisplayName => _helper.DisplayName ?? _mapLocation.DisplayName;
+        public string Description => _helperProvided ? _helper.Description : _mapLocation.Description;
 
-        public Geopoint Point => _helper.Point ?? _mapLocation.Point;
+        public string DisplayName => _helperProvided ? _helper.DisplayName : _mapLocation.DisplayName;
+
+        public Geopoint Point => _helperProvided ? _helper.Point : _mapLocation.Point;
 
         private ClonedMapLocation(MapLocation mapLocation)
         {
@@ -30,6 +30,7 @@ namespace StormManager.UWP.Models.Mapping
         private ClonedMapLocation(IClonedMapLocation clonedMapLocation)
         {
             _helper = clonedMapLocation;
+            _helperProvided = true;
         }
 
         public static IClonedMapLocation Create(MapLocation mapLocation)

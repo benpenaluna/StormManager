@@ -125,8 +125,12 @@
     <Compile Include="Converters\ColorToConstrastColorConverter.cs" />
     <Compile Include="Models\Mapping\ClonedMapAddress.cs" />
     <Compile Include="Models\Mapping\ClonedMapLocation.cs" />
+    <Compile Include="Models\Mapping\ClonedMapLocationFinderResult.cs" />
+    <Compile Include="Models\Mapping\FoundMapLocations.cs" />
     <Compile Include="Models\Mapping\IClonedMapAddress.cs" />
     <Compile Include="Models\Mapping\IClonedMapLocation.cs" />
+    <Compile Include="Models\Mapping\IClonedMapLocationFinderResult.cs" />
+    <Compile Include="Models\Mapping\IFoundMapLocations.cs" />
     <Compile Include="Models\Mapping\IMapLocationSuggestion.cs" />
     <Compile Include="Models\Mapping\MapLocationSuggestion.cs" />
     <Compile Include="Properties\Annotations.cs" />

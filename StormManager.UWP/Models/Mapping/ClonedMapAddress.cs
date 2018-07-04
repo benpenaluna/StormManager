@@ -8,37 +8,39 @@ namespace StormManager.UWP.Models.Mapping
 
         private readonly IClonedMapAddress _helper;
 
-        public string BuildingFloor => _helper.BuildingFloor ?? _mapAddress.BuildingFloor;
+        private readonly bool _helperProvided;
 
-        public string BuildingName => _helper.BuildingName ?? _mapAddress.BuildingName;
+        public string BuildingFloor => _helperProvided ? _helper.BuildingFloor : _mapAddress.BuildingFloor;
 
-        public string BuildingRoom => _helper.BuildingRoom ?? _mapAddress.BuildingRoom;
+        public string BuildingName => _helperProvided ? _helper.BuildingName : _mapAddress.BuildingName;
 
-        public string BuildingWing => _helper.BuildingWing ?? _mapAddress.BuildingWing;
+        public string BuildingRoom => _helperProvided ? _helper.BuildingRoom : _mapAddress.BuildingRoom;
 
-        public string Continent => _helper.Continent ?? _mapAddress.Continent;
+        public string BuildingWing => _helperProvided ? _helper.BuildingWing : _mapAddress.BuildingWing;
 
-        public string Country => _helper.Country ?? _mapAddress.Country;
+        public string Continent => _helperProvided ? _helper.Continent : _mapAddress.Continent;
 
-        public string CountryCode => _helper.CountryCode ?? _mapAddress.CountryCode;
+        public string Country => _helperProvided ? _helper.Country : _mapAddress.Country;
 
-        public string District => _helper.District ?? _mapAddress.District;
+        public string CountryCode => _helperProvided ? _helper.CountryCode : _mapAddress.CountryCode;
 
-        public string FormattedAddress => _helper.FormattedAddress ?? _mapAddress.FormattedAddress;
+        public string District => _helperProvided ? _helper.District : _mapAddress.District;
 
-        public string Neighborhood => _helper.Neighborhood ?? _mapAddress.Neighborhood;
+        public string FormattedAddress => _helperProvided ? _helper.FormattedAddress : _mapAddress.FormattedAddress;
 
-        public string PostCode => _helper.PostCode ?? _mapAddress.PostCode;
+        public string Neighborhood => _helperProvided ? _helper.Neighborhood : _mapAddress.Neighborhood;
 
-        public string Region => _helper.Region ?? _mapAddress.Region;
+        public string PostCode => _helperProvided ? _helper.PostCode : _mapAddress.PostCode;
 
-        public string RegionCode => _helper.RegionCode ?? _mapAddress.RegionCode;
+        public string Region => _helperProvided ? _helper.Region : _mapAddress.Region;
 
-        public string Street => _helper.Street ?? _mapAddress.Street;
+        public string RegionCode => _helperProvided ? _helper.RegionCode : _mapAddress.RegionCode;
 
-        public string StreetNumber => _helper.StreetNumber ?? _mapAddress.StreetNumber;
+        public string Street => _helperProvided ? _helper.Street : _mapAddress.Street;
 
-        public string Town => _helper.Town ?? _mapAddress.Town;
+        public string StreetNumber => _helperProvided ? _helper.StreetNumber : _mapAddress.StreetNumber;
+
+        public string Town => _helperProvided ? _helper.Town : _mapAddress.Town;
 
         private ClonedMapAddress(MapAddress address)
         {
@@ -48,6 +50,7 @@ namespace StormManager.UWP.Models.Mapping
         private ClonedMapAddress(IClonedMapAddress clonedAddress)
         {
             _helper = clonedAddress;
+            _helperProvided = true;
         }
 
         public static IClonedMapAddress Create(MapAddress address)

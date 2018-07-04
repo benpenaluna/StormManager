@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Data;
 using Autofac;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Converters.ConversionHelpers;
+using StormManager.UWP.Models.Mapping;
 using StormManager.UWP.Services.MapKeyService;
 using StormManager.UWP.Services.SettingsServices;
 using Template10.Services.SettingsService;
@@ -71,6 +72,7 @@ namespace StormManager.UWP
             builder.RegisterType<ContrastFactorApproximationHelper>().As<IContrastFactorApproximationHelper>();
             builder.RegisterType<MapIconControlHelper>().As<IMapIconControlHelper>();
             builder.RegisterType<ColorAnimationHelper>().As<IColorAnimationHelper>();
+            builder.RegisterType<FoundMapLocations>().As<IFoundMapLocations>();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)

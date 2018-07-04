@@ -6,7 +6,7 @@ namespace StormManager.UWP.Common.ExtensionMethods
 {
     public static class MapLocationExtensions
     {
-        public static string StreetAddressOrCommonPlaceName(this MapLocation location)
+        public static string StreetAddressOrCommonPlaceName(this IClonedMapLocation location)
         {
             return StreetAddressOrCommonPlaceName(new MapLocationSuggestion(location));
         }

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Store;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Input;
+using Autofac;
 using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Models.Mapping;
-using Template10.Mvvm;
 
 namespace StormManager.UWP.Controls
 {
@@ -21,7 +21,7 @@ namespace StormManager.UWP.Controls
         private MapControl _myMapControl;
         private Button _styleButton;
         private AutoSuggestBox _directionsSuggestBox;
-        private List<MapLocationSuggestion> _lastFoundLocations;
+        private readonly IFoundMapLocations _lastFoundMapLocations = FoundMapLocations.Create();
 
         private MapRadioButton _roadStyleRadioButton;
         private MapRadioButton _aerialStyleRadioButton;
@@ -187,7 +187,7 @@ namespace StormManager.UWP.Controls
                 return;
             }
 
-            var finderResult = await FindLocationsAsync(sender.Text);
+             var finderResult = await FindLocationsAsync(sender.Text);
             DisplayAndCacheLocationSuggestions(finderResult);
         }
 
@@ -198,8 +198,12 @@ namespace StormManager.UWP.Controls
 
         private void DisplayAndCacheLocationSuggestions(MapLocationFinderResult result)
         {
-            _lastFoundLocations = result.Locations.Select(location => new MapLocationSuggestion(location)).ToList();
-            _directionsSuggestBox.ItemsSource = _lastFoundLocations;
+            _lastFoundMapLocations.UpdateLocations(result);
+
+            if (_directionsSuggestBox.ItemsSource == null)
+            {
+                _directionsSuggestBox.ItemsSource = _lastFoundMapLocations.Locations;
+            }
         }
 
         private void DirectionsSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -216,18 +220,15 @@ namespace StormManager.UWP.Controls
 
         private void TryPinLastFoundLocationToMap(string userEnteredLocationName)
         {
-            if (_lastFoundLocations == null || _lastFoundLocations.Count == 0) return;
+            if (_lastFoundMapLocations.IsLocationsListEmpty)
+            {
+                return;
+            }
 
-            var locations = from loc in _lastFoundLocations
-                            where loc.MapLocation.DisplayName.StartsWith(userEnteredLocationName)
-                            select loc.MapLocation;
-
-            var location = locations.FirstOrDefault();
-
-            AddMapIconAndSetScene(location);
+            AddMapIconAndSetScene(_lastFoundMapLocations.LastLocation(userEnteredLocationName));
         }
 
-        private void AddMapIconAndSetScene(MapLocation location)
+        private void AddMapIconAndSetScene(IClonedMapLocation location)
         {
             if (location == null)
             {
@@ -241,7 +242,7 @@ namespace StormManager.UWP.Controls
             SetMapSceneForMapIconAddition(location);
         }
 
-        private static MapIconControl CreateDefaultMapIcon(MapLocation location)
+        private static MapIconControl CreateDefaultMapIcon(IClonedMapLocation location)
         {
             var colorAnimationHelper = JobTypeColorAnimationFactory.Create(ColorAnimationType.Default);
             var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper)
@@ -255,7 +256,7 @@ namespace StormManager.UWP.Controls
             return iconWithCollapsableDescription;
         }
 
-        private void AddAndPositionMapIcon(MapIconControl icon, MapLocation location)
+        private void AddAndPositionMapIcon(MapIconControl icon, IClonedMapLocation location)
         {
             _myMapControl.Children.Add(icon);
 
@@ -274,7 +275,7 @@ namespace StormManager.UWP.Controls
             _myMapControl.Children.Remove(sender as UIElement);
         }
         
-        private void SetMapSceneForMapIconAddition(MapLocation location)
+        private void SetMapSceneForMapIconAddition(IClonedMapLocation location)
         {
             _myMapControl.Scene = MapScene.CreateFromLocationAndRadius(location.Point, RadiusAroundNewPushPin, _myMapControl.Heading, _myMapControl.Pitch);
         }
