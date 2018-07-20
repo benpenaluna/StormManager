@@ -32,11 +32,13 @@
 
             <!-- TextBlock Styles -->
 
-            <Style x:Name="PivotItemHeaderTextBlockStyle" TargetType="TextBlock">
+            <!--<Style x:Name="PivotItemHeaderTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="18" />
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="Margin" Value="5,-2,0,0" />
-            </Style>
+            </Style>-->
+
+            <!-- RadioButton Styles -->
 
             <Style x:Key="MapRadioButtonStyle" TargetType="controls1:MapRadioButton">
                 <Setter Property="Background" Value="Transparent"/>
@@ -167,6 +169,17 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style x:Key="PivotItemStyle" TargetType="PivotItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 

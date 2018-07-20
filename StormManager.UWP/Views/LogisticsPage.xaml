@@ -4,9 +4,89 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
+    xmlns:vm="using:StormManager.UWP.ViewModels"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <vm:LogisticsPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
-    </Grid>
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="AdaptiveVisualStateGroup">
+                <VisualState x:Name="VisualStateNarrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NarrowMinWidth}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="VisualStateNormal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource NormalMinWidth}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="VisualStateWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource WideMinWidth}" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <!--  header  -->
+        <controls:PageHeader x:Name="PageHeader"
+                             x:Uid="LogisticsPageHeader"
+                             Frame="{x:Bind Frame}"
+                             RelativePanel.AlignLeftWithPanel="True"
+                             RelativePanel.AlignRightWithPanel="True"
+                             RelativePanel.AlignTopWithPanel="True" >
+
+            <!--  secondary commands  -->
+            <!--TODO: This is exactly the same as the MainPage SecondaryCommands. Abstract these if used in final solution-->
+            <controls:PageHeader.SecondaryCommands>
+                <AppBarButton Click="{x:Bind ViewModel.GotoSettings}" x:Uid="SettingsAppBarButton" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoPrivacy}" x:Uid="PrivacyAppBarButton" />
+                <AppBarButton Click="{x:Bind ViewModel.GotoAbout}" x:Uid="AboutAppBarButton" />
+            </controls:PageHeader.SecondaryCommands>
+        </controls:PageHeader>
+
+        <Rectangle Fill="{StaticResource CustomColorBrush}"
+                   Height="49" Width="Auto"
+                   Margin="-1,-1,0,0"
+                   RelativePanel.AlignLeftWithPanel="True"
+                   RelativePanel.AlignRightWithPanel="True"
+                   RelativePanel.Below="PageHeader" />
+
+        <Pivot EntranceNavigationTransitionInfo.IsTargetElement="True"
+               RelativePanel.AlignBottomWithPanel="True"
+               RelativePanel.AlignLeftWithPanel="True"
+               RelativePanel.AlignRightWithPanel="True"
+               RelativePanel.Below="PageHeader">
+
+            <PivotItem DataContext="{Binding VehiclesPartViewModel}" >
+                <PivotItem.Header>
+                    <TextBlock x:Uid="VehiclesPivotItem" />
+                </PivotItem.Header>
+            </PivotItem>
+
+            <PivotItem DataContext="{Binding PeoplePartViewModel}" >
+                <PivotItem.Header>
+                    <TextBlock x:Uid="PeoplePivotItem" />
+                </PivotItem.Header>
+            </PivotItem>
+
+            <PivotItem DataContext="{Binding AssignmentsPartViewModel}" >
+                <PivotItem.Header>
+                    <TextBlock x:Uid="AssignmentsPivotItem" />
+                </PivotItem.Header>
+            </PivotItem>
+
+            <PivotItem DataContext="{Binding DutyTimesPartViewModel}" >
+                <PivotItem.Header>
+                    <TextBlock x:Uid="DutyTimesPivotItem" />
+                </PivotItem.Header>
+            </PivotItem>
+        </Pivot>
+    </RelativePanel>
 </Page>

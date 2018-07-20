@@ -2,17 +2,14 @@
 
 namespace StormManager.UWP.ViewModels
 {
-    public class OperationsPageViewModel : ViewModelBase
+    public class OperationsPageViewModel : PageViewModel
     {
         public MapPartViewModel MapPartViewModel { get; } = new MapPartViewModel();
 
-        public void GotoSettings() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 0);
+        public RfaPartViewModel RfaPartViewModel { get; } = new RfaPartViewModel();
 
-        public void GotoPrivacy() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 1);
+        public TaskAssignmentPartViewModel TaskAssignmentPartViewModel { get; } = new TaskAssignmentPartViewModel();
 
-        public void GotoAbout() =>
-            NavigationService.Navigate(typeof(Views.SettingsPage), 2);
+        public DebriefPartViewModel DebriefPartViewModel { get; } = new DebriefPartViewModel();
     }
 }

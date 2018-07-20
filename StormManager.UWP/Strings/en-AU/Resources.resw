@@ -129,13 +129,29 @@
     <value>Storm Manager</value>
     <comment>Name to be displayed to the user</comment>
   </data>
+  <data name="AssignmentsPivotItem.Text" xml:space="preserve">
+    <value>Assignments</value>
+    <comment>Views.LogisticsPage.Pivot.PivotItem</comment>
+  </data>
   <data name="BusyText" xml:space="preserve">
     <value>Please wait...</value>
     <comment>Text to be displayed when app is busy</comment>
   </data>
+  <data name="DebriefPivotItem.Text" xml:space="preserve">
+    <value>Debrief</value>
+    <comment>Views.OperationsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="DutyTimesPivotItem.Text" xml:space="preserve">
+    <value>Duty Times</value>
+    <comment>Views.LogisticsPage.Pivot.PivotItem</comment>
+  </data>
   <data name="KeyFileLocation" xml:space="preserve">
     <value>ms-appx:///Assets/key.txt</value>
     <comment>The location of the Bing Maps Key</comment>
+  </data>
+  <data name="LogisticsPageHeader.Content" xml:space="preserve">
+    <value>Logistics</value>
+    <comment>Views.LogisticsPage.PageHeader</comment>
   </data>
   <data name="MainPageHeader.Text" xml:space="preserve">
     <value>Dashboard</value>
@@ -161,13 +177,29 @@
     <value>Operations</value>
     <comment>Views.OperationsPage.PageHeader</comment>
   </data>
+  <data name="PeoplePivotItem.Text" xml:space="preserve">
+    <value>People</value>
+    <comment>Views.LogisticsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="PlanningPageHeader.Content" xml:space="preserve">
+    <value>Planning</value>
+    <comment>Views.PlanningPage.PageHeader</comment>
+  </data>
   <data name="PrivacyAppBarButton.Label" xml:space="preserve">
     <value>Privacy</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
   </data>
+  <data name="ReconnaissancePivotItem.Text" xml:space="preserve">
+    <value>Reconnaissance</value>
+    <comment>Views.PlanningPage.Pivot.PivotItem</comment>
+  </data>
   <data name="RemoveMenuFlyoutItem.Text" xml:space="preserve">
     <value>Remove</value>
     <comment>Controls.MenuMapIcon</comment>
+  </data>
+  <data name="RfaPivotItem.Text" xml:space="preserve">
+    <value>Requests For Assistance</value>
+    <comment>Views.OperationsPage.Pivot.PivotItem</comment>
   </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
@@ -196,5 +228,21 @@
   <data name="ShellUserProfile.Text" xml:space="preserve">
     <value>User Profile</value>
     <comment>Views.Shell.HamburgerButtonInfo</comment>
+  </data>
+  <data name="SmeacsPivotItem.Text" xml:space="preserve">
+    <value>SMEACS</value>
+    <comment>Views.PlanningPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="TaskAssignmentPivotItem.Text" xml:space="preserve">
+    <value>Task Assignments</value>
+    <comment>Views.OperationsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="VehiclesPivotItem.Text" xml:space="preserve">
+    <value>Vehicles</value>
+    <comment>Views.LogisticsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="WeatherPivotItem.Text" xml:space="preserve">
+    <value>Weather</value>
+    <comment>Views.PlanningPage.Pivot.PivotItem</comment>
   </data>
 </root>

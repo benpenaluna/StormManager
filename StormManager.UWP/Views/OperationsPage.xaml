@@ -62,12 +62,11 @@
                RelativePanel.AlignBottomWithPanel="True"
                RelativePanel.AlignLeftWithPanel="True"
                RelativePanel.AlignRightWithPanel="True"
-               RelativePanel.Below="PageHeader">    
+               RelativePanel.Below="PageHeader">
 
             <PivotItem DataContext="{Binding MapPartViewModel}" >
                 <PivotItem.Header>
-                    <TextBlock x:Uid="MapPivotItem" 
-                               Style="{StaticResource PivotItemHeaderTextBlockStyle}" />
+                    <TextBlock x:Uid="MapPivotItem" />
                 </PivotItem.Header>
 
                 <controls1:MenuMapControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -75,7 +74,30 @@
                                           MapServiceToken="{Binding MapServiceToken, Mode=OneTime}"
                                           MapCenter="{Binding MapCentre, Mode=TwoWay}"
                                           MapScene="{Binding MapScene, Mode=TwoWay}" />
-                    
+            </PivotItem>
+
+            <PivotItem DataContext="{Binding RfaPartViewModel}" >
+                <PivotItem.Header>
+                    <TextBlock x:Uid="RfaPivotItem" />
+                </PivotItem.Header>
+                
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </PivotItem>
+
+            <PivotItem DataContext="{Binding TaskAssignmentPartViewModel}" >
+                <PivotItem.Header>
+                    <TextBlock x:Uid="TaskAssignmentPivotItem" />
+                </PivotItem.Header>
+
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </PivotItem>
+
+            <PivotItem DataContext="{Binding DebriefPartViewModel}" >
+                <PivotItem.Header>
+                    <TextBlock x:Uid="DebriefPivotItem" />
+                </PivotItem.Header>
+
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             </PivotItem>
         </Pivot>
     </RelativePanel>

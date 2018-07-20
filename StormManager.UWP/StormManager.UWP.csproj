@@ -152,12 +152,25 @@
     <Compile Include="Services\SettingsServices\ISettingsService.cs" />
     <Compile Include="Services\SettingsServices\SettingsService.cs" />
     <Compile Include="ViewModels\AboutPartViewModel.cs" />
+    <Compile Include="ViewModels\AssignmentsPartViewModel.cs" />
+    <Compile Include="ViewModels\DebriefPartViewModel.cs" />
+    <Compile Include="ViewModels\DutyTimesPartViewModel.cs" />
+    <Compile Include="ViewModels\LogisticsPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\DetailPageViewModel.cs" />
     <Compile Include="ViewModels\MapPartViewModel.cs" />
     <Compile Include="ViewModels\OperationsPageViewModel.cs" />
+    <Compile Include="ViewModels\PageViewModel.cs" />
+    <Compile Include="ViewModels\PeoplePartViewModel.cs" />
+    <Compile Include="ViewModels\PlanningPageViewModel.cs" />
+    <Compile Include="ViewModels\ReconnaissancePartViewModel.cs" />
+    <Compile Include="ViewModels\RfaPartViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPartViewModel.cs" />
+    <Compile Include="ViewModels\SmeacsPartViewModel.cs" />
+    <Compile Include="ViewModels\TaskAssignmentPartViewModel.cs" />
+    <Compile Include="ViewModels\VehiclesPartViewModel.cs" />
+    <Compile Include="ViewModels\WeatherPartViewModel.cs" />
     <Compile Include="Views\Busy.xaml.cs">
       <DependentUpon>Busy.xaml</DependentUpon>
     </Compile>
