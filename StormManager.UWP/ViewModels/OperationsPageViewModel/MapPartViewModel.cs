@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Template10.Mvvm;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
+using Template10.Mvvm;
 
-namespace StormManager.UWP.ViewModels
+namespace StormManager.UWP.ViewModels.OperationsPageViewModel
 {
     public class MapPartViewModel : ViewModelBase
     {

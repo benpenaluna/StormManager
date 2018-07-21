@@ -6,10 +6,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
     xmlns:vm="using:StormManager.UWP.ViewModels"
+    xmlns:logisticsPageViewModel="using:StormManager.UWP.ViewModels.LogisticsPageViewModel"
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <vm:LogisticsPageViewModel x:Name="ViewModel" />
+        <logisticsPageViewModel:LogisticsPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

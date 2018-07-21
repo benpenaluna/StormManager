@@ -1,6 +1,6 @@
-﻿namespace StormManager.UWP.ViewModels
+﻿namespace StormManager.UWP.ViewModels.PlanningPageViewModel
 {
-    public class PlanningPageViewModel : PageViewModel
+    public class PlanningPageViewModel : PageViewModel, IPlanningPageViewModel
     {
         public SmeacsPartViewModel SmeacsPartViewModel { get; } = new SmeacsPartViewModel();
 

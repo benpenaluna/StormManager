@@ -1,6 +1,6 @@
-﻿namespace StormManager.UWP.ViewModels
+﻿namespace StormManager.UWP.ViewModels.LogisticsPageViewModel
 {
-    public class LogisticsPageViewModel : PageViewModel
+    public class LogisticsPageViewModel : PageViewModel, ILogisticsPageViewModel
     {
         public VehiclesPartViewModel VehiclesPartViewModel { get; } = new VehiclesPartViewModel();
 

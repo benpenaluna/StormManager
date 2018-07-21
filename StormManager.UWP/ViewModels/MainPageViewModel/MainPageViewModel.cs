@@ -1,13 +1,13 @@
-using Template10.Mvvm;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Template10.Services.NavigationService;
 using Windows.UI.Xaml.Navigation;
+using Template10.Mvvm;
+using Template10.Services.NavigationService;
 
-namespace StormManager.UWP.ViewModels
+namespace StormManager.UWP.ViewModels.MainPageViewModel
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModelBase, IMainPageViewModel
     {
         public MainPageViewModel()
         {

@@ -6,10 +6,11 @@
       xmlns:controls="using:Template10.Controls"
       xmlns:vm="using:StormManager.UWP.ViewModels"
       xmlns:controls1="using:StormManager.UWP.Controls"
+      xmlns:operationsPageViewModel="using:StormManager.UWP.ViewModels.OperationsPageViewModel"
       mc:Ignorable="d">
 
     <Page.DataContext>
-        <vm:OperationsPageViewModel x:Name="ViewModel" />
+        <operationsPageViewModel:OperationsPageViewModel x:Name="ViewModel" />
     </Page.DataContext>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

@@ -1,7 +1,7 @@
 ﻿using System;
 using Template10.Mvvm;
 
-namespace StormManager.UWP.ViewModels
+namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class AboutPartViewModel : ViewModelBase
     {

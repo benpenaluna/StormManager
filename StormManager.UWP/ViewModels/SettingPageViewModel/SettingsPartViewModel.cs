@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Template10.Mvvm;
 using Windows.UI.Xaml;
 using Autofac;
 using StormManager.UWP.Services.ResourceLoaderService;
 using StormManager.UWP.Services.SettingsServices;
+using Template10.Mvvm;
 
-namespace StormManager.UWP.ViewModels
+namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class SettingsPartViewModel : ViewModelBase
     {

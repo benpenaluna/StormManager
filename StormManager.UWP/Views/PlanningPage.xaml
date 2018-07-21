@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Template10.Controls"
-    xmlns:vm="using:StormManager.UWP.ViewModels"
+    xmlns:vm="using:StormManager.UWP.ViewModels.PlanningPageViewModel"
     mc:Ignorable="d">
 
     <Page.DataContext>
