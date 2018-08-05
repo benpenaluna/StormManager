@@ -1,6 +1,6 @@
-﻿CREATE TABLE [dbo].[MemberDetails]
+﻿CREATE TABLE [dbo].[Members]
 (
-	[MemberId] VARCHAR(8) NOT NULL PRIMARY KEY, 
+	[Id] VARCHAR(8) NOT NULL PRIMARY KEY, 
     [FirstName] VARCHAR(100) NULL, 
     [Surname] VARCHAR(100) NULL, 
     [Position] VARCHAR(50) NULL, 

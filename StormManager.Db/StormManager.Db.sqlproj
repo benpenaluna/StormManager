@@ -7,7 +7,7 @@
     <Name>StormManager.Db</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{b1f4f17d-3540-4fc6-a2dd-fe3b8d9c0832}</ProjectGuid>
+    <ProjectGuid>{064d05cd-0009-4594-bc0c-c1859471f764}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
@@ -17,7 +17,7 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -61,12 +61,15 @@
     <Folder Include="Data" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\MemberDetails.sql" />
+    <Build Include="Tables\Members.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Data\Script.SampleData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="StormManager.Db.publish.xml" />
+    <RefactorLog Include="StormManager.Db.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StormManager_1.Db.publish.xml" />
   </ItemGroup>
 </Project>
