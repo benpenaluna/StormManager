@@ -124,6 +124,12 @@
       <DependentUpon>201808050606491_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StormManager.Models\StormManager.Models.csproj">
+      <Project>{e2184d34-9608-4bd9-86ee-68d4bc5d7eb2}</Project>
+      <Name>StormManager.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
