@@ -15,7 +15,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresBuildingFloor_ReturnsClonedValue()
+        public void ClonedMapAddressBuildingFloor_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.BuildingFloor;
 
@@ -26,7 +26,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresBuildingName_ReturnsClonedValue()
+        public void ClonedMapAddressBuildingName_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.BuildingName;
 
@@ -37,7 +37,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresBuildingRoom_ReturnsClonedValue()
+        public void ClonedMapAddressBuildingRoom_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.BuildingRoom;
 
@@ -48,7 +48,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresBuildingWing_ReturnsClonedValue()
+        public void ClonedMapAddressBuildingWing_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.BuildingWing;
 
@@ -59,7 +59,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresContinent_ReturnsClonedValue()
+        public void ClonedMapAddressContinent_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.Continent;
 
@@ -70,7 +70,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresCountry_ReturnsClonedValue()
+        public void ClonedMapAddressCountry_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.Country;
 
@@ -81,7 +81,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresCountryCode_ReturnsClonedValue()
+        public void ClonedMapAddressCountryCode_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.CountryCode;
 
@@ -92,7 +92,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresDistrict_ReturnsClonedValue()
+        public void ClonedMapAddressDistrict_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.District;
 
@@ -103,7 +103,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresFormattedAddress_ReturnsClonedValue()
+        public void ClonedMapAddressFormattedAddress_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.FormattedAddress;
 
@@ -114,7 +114,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresNeighborhood_ReturnsClonedValue()
+        public void ClonedMapAddressNeighborhood_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.Neighborhood;
 
@@ -125,7 +125,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresPostCode_ReturnsClonedValue()
+        public void ClonedMapAddressPostCode_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.PostCode;
 
@@ -136,7 +136,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresRegion_ReturnsClonedValue()
+        public void ClonedMapAddressRegion_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.Region;
 
@@ -147,7 +147,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresRegionCode_ReturnsClonedValue()
+        public void ClonedMapAddressRegionCode_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.RegionCode;
 
@@ -158,7 +158,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresStreet_ReturnsClonedValue()
+        public void ClonedMapAddressStreet_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.Street;
 
@@ -169,7 +169,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresStreetNumber_ReturnsClonedValue()
+        public void ClonedMapAddressStreetNumber_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.StreetNumber;
 
@@ -180,7 +180,7 @@ namespace StormManager.UWP.Tests.Models.Mapping
         }
 
         [Fact]
-        public void ClonedMapAddresTown_ReturnsClonedValue()
+        public void ClonedMapAddressTown_ReturnsClonedValue()
         {
             var expected = MockedClonedMapAddress.Town;
 
