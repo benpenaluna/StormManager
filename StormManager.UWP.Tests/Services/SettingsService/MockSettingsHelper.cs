@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Template10.Services.SettingsService;
+using StormManager.UWP.Services.SettingsServices;
 
 namespace StormManager.UWP.Tests.Services.SettingsService
 {

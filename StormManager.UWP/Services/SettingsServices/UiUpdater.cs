@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
-using Template10.Common;
-using Template10.Utils;
+using StormManager.UWP.Common;
+using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Services.SettingsServices
 {

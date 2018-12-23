@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
-using Template10.Mvvm;
+using StormManager.UWP.Mvvm;
 
 namespace StormManager.UWP.ViewModels.OperationsPageViewModel
 {

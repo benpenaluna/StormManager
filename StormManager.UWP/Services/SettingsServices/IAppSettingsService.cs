@@ -1,0 +1,14 @@
+﻿using System;
+using Windows.UI.Xaml;
+
+namespace StormManager.UWP.Services.SettingsServices
+{
+    public interface IAppSettingsService
+    {
+        bool UseShellBackButton { get; set; }
+        ApplicationTheme AppTheme { get; set; }
+        TimeSpan CacheMaxDuration { get; set; }
+        bool ShowHamburgerButton { get; set; }
+        bool IsFullScreen { get; set; }
+    }
+}

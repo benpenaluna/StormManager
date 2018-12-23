@@ -1,6 +1,6 @@
-using Template10.Common;
-using Template10.Controls;
 using Windows.UI.Xaml;
+using StormManager.UWP.Common;
+using StormManager.UWP.Controls;
 
 namespace StormManager.UWP.Views
 {

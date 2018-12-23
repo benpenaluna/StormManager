@@ -1,86 +1,184 @@
-using System;
-using Windows.UI.Xaml;
-using Autofac;
-using Template10.Services.SettingsService;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using Windows.Foundation.Collections;
+using Windows.Storage;
 
 namespace StormManager.UWP.Services.SettingsServices
 {
+    // https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-SettingsService
     public class SettingsService : ISettingsService
     {
-        public static bool UseShellBackButtonDefault => true;
+        private static ISettingsService _local;
+        public static ISettingsService Local => _local ?? (_local = Create(SettingsStrategies.Local));
 
-        public static ApplicationTheme AppThemeDefault => ApplicationTheme.Light;
+        private static ISettingsService _roaming;
+        public static ISettingsService Roaming => _roaming ?? (_roaming = Create(SettingsStrategies.Roam));
 
-        public static TimeSpan CacheMaxDurationDefault => TimeSpan.FromDays(2);
-
-        public static bool ShowHamburgerButtonDefault => true;
-
-        public static bool IsFullScreenDefault => false;
-
-        private readonly ISettingsHelper _helper;
-
-        private readonly IUiUpdater _updater;
-
-        public SettingsService(ISettingsHelper helper = null, IUiUpdater updater = null)
+        /// <summary>
+        /// Creates an <c>ISettingsService</c> object targeting the requested (optional) <paramref name="folderName"/>
+        /// in the <paramref name="strategy"/> container.
+        /// </summary>
+        /// <param name="strategy">Roaming or Local</param>
+        /// <param name="folderName">Name of the settings folder to use</param>
+        /// <param name="createFolderIfNotExists"><c>true</c> to create the folder if it isn't already there, false otherwise.</param>
+        /// <returns></returns>
+        public static ISettingsService Create(SettingsStrategies strategy, string folderName = null, bool createFolderIfNotExists = true)
         {
-            _helper = helper ?? App.Container.Resolve<ISettingsHelper>();
-            _updater = updater ?? App.Container.Resolve<IUiUpdater>();
+            ApplicationDataContainer rootContainer;
+            switch (strategy)
+            {
+                case SettingsStrategies.Local:
+                    rootContainer = ApplicationData.Current.LocalSettings;
+                    break;
+                case SettingsStrategies.Roam:
+                    rootContainer = ApplicationData.Current.RoamingSettings;
+                    break;
+                default:
+                    throw new ArgumentException($"Unsupported Settings Strategy: {strategy}", nameof(strategy));
+            }
+
+            ApplicationDataContainer targetContainer = rootContainer;
+            if (!string.IsNullOrWhiteSpace(folderName))
+            {
+                try
+                {
+                    targetContainer = rootContainer.CreateContainer(folderName, createFolderIfNotExists ? ApplicationDataCreateDisposition.Always : ApplicationDataCreateDisposition.Existing);
+                }
+                catch (Exception)
+                {
+                    throw new KeyNotFoundException($"No folder exists named '{folderName}'");
+                }
+            }
+
+            return new SettingsService(targetContainer);
         }
 
-        public bool UseShellBackButton
+        protected ApplicationDataContainer Container { get; private set; }
+        public IPropertySet Values { get; private set; }
+
+        public IPropertyMapping Converters { get; set; } = new JsonMapping();
+
+        private SettingsService(ApplicationDataContainer container)
         {
-            get => _helper.Read(nameof(UseShellBackButton), UseShellBackButtonDefault);
-            set
+            Container = container;
+            Values = container.Values;
+        }
+
+        public ISettingsService Open(string folderName, bool createFolderIfNotExists = true)
+        {
+            ApplicationDataContainer targetContainer;
+            try
             {
-                _helper.Write(nameof(UseShellBackButton), value);
-                _updater.UpdateUseShellBackButton(value);
+                targetContainer = Container.CreateContainer(folderName, createFolderIfNotExists ? ApplicationDataCreateDisposition.Always : ApplicationDataCreateDisposition.Existing);
+            }
+            catch (Exception)
+            {
+                throw new KeyNotFoundException($"No folder exists named '{folderName}'");
+            }
+
+            var service = new SettingsService(targetContainer);
+            service.Converters = Converters;
+            return service;
+        }
+
+        public bool Exists(string key) => Values.ContainsKey(key);
+
+        public void Remove(string key)
+        {
+            if (Values.ContainsKey(key))
+                Values.Remove(key);
+            if (Container.Containers.ContainsKey(key))
+                Container.DeleteContainer(key);
+        }
+
+        public void Clear(bool deleteSubContainers = true)
+        {
+            Values.Clear();
+            if (deleteSubContainers)
+            {
+                foreach (var container in Container.Containers.ToArray())
+                {
+                    Container.DeleteContainer(container.Key);
+                }
             }
         }
 
-        public ApplicationTheme AppTheme
+        const int MaxValueSize = 8000;
+
+        public void Write<T>(string key, T value)
         {
-            get
+            var type = typeof(T);
+            if (value != null)
             {
-                var theme = AppThemeDefault;
-                var value = _helper.Read(nameof(AppTheme), theme.ToString());
-                return Enum.TryParse(value, out theme) ? theme : ApplicationTheme.Dark;
+                type = value.GetType();
             }
-            set
+            var converter = Converters.GetConverter(type);
+            var container = new ApplicationDataCompositeValue();
+            var converted = converter.ToStore(value, type);
+            if (converted != null)
             {
-                _helper.Write(nameof(AppTheme), value.ToString());
-                _updater.UpdateAppTheme(value);
+                var valueLength = converted.Length;
+                if (valueLength > MaxValueSize)
+                {
+                    int count = (valueLength - 1) / MaxValueSize + 1;
+                    container["Count"] = count;
+                    for (int part = 0; part < count; part++)
+                    {
+                        string partValue = converted.Substring(part * MaxValueSize, Math.Min(MaxValueSize, valueLength));
+                        container["Part" + part] = partValue;
+                        valueLength = valueLength - MaxValueSize;
+                    }
+                }
+                else
+                    container["Value"] = converted;
             }
+            if ((type != typeof(string) && !type.GetTypeInfo().IsValueType) || (type != typeof(T)))
+            {
+                container["Type"] = type.AssemblyQualifiedName;
+            }
+            Values[key] = container;
         }
 
-        public TimeSpan CacheMaxDuration
+        public T Read<T>(string key, T fallback = default(T))
         {
-            get => _helper.Read(nameof(CacheMaxDuration), CacheMaxDurationDefault);
-            set
+            try
             {
-                _helper.Write(nameof(CacheMaxDuration), value);
-                _updater.UpdateCacheMaxDuration(value);
+                if (Values.ContainsKey(key))
+                {
+                    var container = Values[key] as ApplicationDataCompositeValue;
+                    var type = typeof(T);
+                    if (container.ContainsKey("Type"))
+                    {
+                        type = Type.GetType((string)container["Type"]);
+                    }
+                    string value = null;
+                    if (container.ContainsKey("Value"))
+                    {
+                        value = container["Value"] as string;
+                    }
+                    else if (container.ContainsKey("Count"))
+                    {
+                        int count = (int)container["Count"];
+                        var sb = new StringBuilder(count * MaxValueSize);
+                        for (int statePart = 0; statePart < count; statePart++)
+                        {
+                            sb.Append(container["Part" + statePart]);
+                        }
+                        value = sb.ToString();
+                    }
+                    var converter = Converters.GetConverter(type);
+                    var converted = (T)converter.FromStore(value, type);
+                    return converted;
+                }
+                return fallback;
             }
-        }
-
-        public bool ShowHamburgerButton
-        {
-            get => _helper.Read(nameof(ShowHamburgerButton), ShowHamburgerButtonDefault);
-            set
+            catch
             {
-                _helper.Write(nameof(ShowHamburgerButton), value);
-                _updater.UpdateHamburgerButtonDisplay(value);
-            }
-        }
-
-        public bool IsFullScreen
-        {
-            get => _helper.Read(nameof(IsFullScreen), IsFullScreenDefault);
-            set
-            {
-                _helper.Write(nameof(IsFullScreen), value);
-                _updater.UpdateFullScreen(value);
+                return fallback;
             }
         }
     }
 }
-

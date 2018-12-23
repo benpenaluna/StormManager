@@ -1,14 +1,16 @@
-﻿using System;
-using Windows.UI.Xaml;
-
-namespace StormManager.UWP.Services.SettingsServices
+﻿namespace StormManager.UWP.Services.SettingsServices
 {
+    using Windows.Foundation.Collections;
+    
     public interface ISettingsService
     {
-        bool UseShellBackButton { get; set; }
-        ApplicationTheme AppTheme { get; set; }
-        TimeSpan CacheMaxDuration { get; set; }
-        bool ShowHamburgerButton { get; set; }
-        bool IsFullScreen { get; set; }
+        IPropertyMapping Converters { get; set; }
+        IPropertySet Values { get; }
+        bool Exists(string key);
+        T Read<T>(string key, T fallback = default(T));
+        void Remove(string key);
+        void Write<T>(string key, T value);
+        ISettingsService Open(string folderName, bool createFolderIsNotExists = true);
+        void Clear(bool deleteSubContainers = true);
     }
 }

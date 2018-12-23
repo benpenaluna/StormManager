@@ -3,14 +3,14 @@ using Windows.UI.Xaml;
 using Autofac;
 using StormManager.UWP.Services.ResourceLoaderService;
 using StormManager.UWP.Services.SettingsServices;
-using Template10.Mvvm;
+using StormManager.UWP.Mvvm;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class SettingsPartViewModel : ViewModelBase
     {
-        //readonly Services.SettingsServices.SettingsService _settings;
-        readonly ISettingsService _settings;
+        //readonly Services.SettingsServices.AppAppSettingsService _appSettings;
+        readonly IAppSettingsService _appSettings;
 
         public SettingsPartViewModel()
         {
@@ -20,22 +20,22 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             }
             else
             {
-                _settings = App.Container.Resolve<ISettingsService>();
+                _appSettings = App.Container.Resolve<IAppSettingsService>();
             }
         }
 
         public bool ShowHamburgerButton
         {
-            get => _settings.ShowHamburgerButton;
-            set { _settings.ShowHamburgerButton = value; RaisePropertyChanged(); }
+            get => _appSettings.ShowHamburgerButton;
+            set { _appSettings.ShowHamburgerButton = value; RaisePropertyChanged(); }
         }
 
         public bool IsFullScreen
         {
-            get => _settings.IsFullScreen;
+            get => _appSettings.IsFullScreen;
             set
             {
-                _settings.IsFullScreen = value;
+                _appSettings.IsFullScreen = value;
                 RaisePropertyChanged();
                 ShowHamburgerButton = !value;
             }
@@ -43,14 +43,14 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         public bool UseShellBackButton
         {
-            get => _settings.UseShellBackButton;
-            set { _settings.UseShellBackButton = value; RaisePropertyChanged(); }
+            get => _appSettings.UseShellBackButton;
+            set { _appSettings.UseShellBackButton = value; RaisePropertyChanged(); }
         }
 
         public bool UseLightThemeButton
         {
-            get => _settings.AppTheme.Equals(ApplicationTheme.Light);
-            set { _settings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; RaisePropertyChanged(); }
+            get => _appSettings.AppTheme.Equals(ApplicationTheme.Light);
+            set { _appSettings.AppTheme = value ? ApplicationTheme.Light : ApplicationTheme.Dark; RaisePropertyChanged(); }
         }
 
         private string _busyText = ResourceLoaderService.GetResourceValue("BusyText");

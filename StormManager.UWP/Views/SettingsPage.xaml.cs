@@ -4,13 +4,13 @@ namespace StormManager.UWP.Views
 {
     public sealed partial class SettingsPage
     {
-        readonly Template10.Services.SerializationService.ISerializationService _serializationService;
+        readonly Services.SerializationService.ISerializationService _serializationService;
 
         public SettingsPage()
         {
             InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Required;
-            _serializationService = Template10.Services.SerializationService.SerializationService.Json;
+            _serializationService = Services.SerializationService.SerializationService.Json;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

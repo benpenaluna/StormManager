@@ -1,16 +1,14 @@
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
-using Template10.Controls;
 using Windows.UI.Xaml.Data;
 using Autofac;
+using StormManager.UWP.Controls;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Converters.ConversionHelpers;
 using StormManager.UWP.Models.Mapping;
 using StormManager.UWP.Services.MapKeyService;
 using StormManager.UWP.Services.SettingsServices;
-using Template10.Services.SettingsService;
-using SettingsService = StormManager.UWP.Services.SettingsServices.SettingsService;
 
 namespace StormManager.UWP
 {
@@ -33,7 +31,7 @@ namespace StormManager.UWP
             #region app settings
 
             // some settings must be set in app.constructor
-            var settings = new SettingsService(new SettingsHelper(), new UiUpdater());
+            var settings = new AppAppSettingsService(new SettingsHelper(), new UiUpdater());
             RequestedTheme = settings.AppTheme;
             CacheMaxDuration = settings.CacheMaxDuration;
             ShowShellBackButton = settings.UseShellBackButton;
@@ -52,7 +50,7 @@ namespace StormManager.UWP
 
             Container = builder.Build();
 
-            //var test = Container.Resolve<Services.SettingsServices.ISettingsService>();
+            //var test = Container.Resolve<Services.SettingsServices.IAppSettingsService>();
 
             return Task.FromResult<object>(null);
         }
@@ -67,7 +65,7 @@ namespace StormManager.UWP
             //builder.RegisterType<ResourceLoaderService>().AsSelf();
             builder.RegisterType<SettingsHelper>().As<ISettingsHelper>();
             builder.RegisterType<UiUpdater>().As<IUiUpdater>();
-            builder.RegisterType<SettingsService>().As<Services.SettingsServices.ISettingsService>();
+            builder.RegisterType<AppAppSettingsService>().As<Services.SettingsServices.IAppSettingsService>();
 
             builder.RegisterType<ContrastFactorApproximationHelper>().As<IContrastFactorApproximationHelper>();
             builder.RegisterType<MapIconControlHelper>().As<IMapIconControlHelper>();

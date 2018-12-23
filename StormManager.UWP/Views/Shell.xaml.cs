@@ -1,7 +1,7 @@
-using Template10.Controls;
-using Template10.Services.NavigationService;
 using Windows.UI.Xaml;
 using Autofac;
+using StormManager.UWP.Controls;
+using StormManager.UWP.Services.NavigationService;
 using StormManager.UWP.Services.SettingsServices;
 
 namespace StormManager.UWP.Views
@@ -10,13 +10,13 @@ namespace StormManager.UWP.Views
     {
         public static Shell Instance { get; set; }
         public static HamburgerMenu HamburgerMenu => Instance.MyHamburgerMenu;
-        readonly ISettingsService _settings;
+        readonly IAppSettingsService _appSettings;
 
         public Shell()
         {
             Instance = this;
             InitializeComponent();
-            _settings = App.Container.Resolve<ISettingsService>();
+            _appSettings = App.Container.Resolve<IAppSettingsService>();
         }
 
         public Shell(INavigationService navigationService) : this()
@@ -27,9 +27,9 @@ namespace StormManager.UWP.Views
         public void SetNavigationService(INavigationService navigationService)
         {
             MyHamburgerMenu.NavigationService = navigationService;
-            HamburgerMenu.RefreshStyles(_settings.AppTheme, true);
-            HamburgerMenu.IsFullScreen = _settings.IsFullScreen;
-            HamburgerMenu.HamburgerButtonVisibility = _settings.ShowHamburgerButton ? Visibility.Visible : Visibility.Collapsed;
+            HamburgerMenu.RefreshStyles(_appSettings.AppTheme, true);
+            HamburgerMenu.IsFullScreen = _appSettings.IsFullScreen;
+            HamburgerMenu.HamburgerButtonVisibility = _appSettings.ShowHamburgerButton ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

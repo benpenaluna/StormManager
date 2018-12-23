@@ -1,4 +1,4 @@
-using Template10.Mvvm;
+using StormManager.UWP.Mvvm;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
