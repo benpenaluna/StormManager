@@ -194,6 +194,8 @@
             </DataTemplate>
 
             <DataTemplate x:Name="NavCommandButtonTemplate" x:DataType="local:HamburgerButtonInfo">
+                <!--TODO: Put ToolTipService.ToolTip back into the button-->
+                <!--ToolTipService.ToolTip="{x:Bind Path=(ToolTipService.ToolTip), Mode=OneWay}"-->  
                 <Button Width="{Binding PaneWidth, ElementName=ThisPage}"
                         MinWidth="48"
                         MaxWidth="{x:Bind MaxWidth, Mode=OneWay}"
@@ -209,7 +211,6 @@
                         RightTapped="NavButton_RightTapped"
                         TabIndex="2"
                         Tapped="NavButton_Tapped"
-                        ToolTipService.ToolTip="{x:Bind Path=(ToolTipService.ToolTip), Mode=OneWay}"
                         Visibility="{x:Bind Visibility, Mode=OneWay}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
