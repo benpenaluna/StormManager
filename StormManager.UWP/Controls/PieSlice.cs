@@ -6,6 +6,8 @@ using Windows.UI.Xaml.Shapes;
 
 namespace StormManager.UWP.Controls
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Controls/PiePiece.cs
+
     [Obsolete("Use RingSegment instead")]
     public class PieSlice : Path
     {

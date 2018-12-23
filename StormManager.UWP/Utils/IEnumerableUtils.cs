@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 
 namespace StormManager.UWP.Utils
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Utils/IEnumerableUtils.cs
+
     public static class IEnumerableUtils
     {
         public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> list) => new ObservableCollection<T>(list);

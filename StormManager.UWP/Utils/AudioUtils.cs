@@ -4,6 +4,8 @@ using Windows.Media.Capture;
 
 namespace StormManager.UWP.Utils
 {
+    //Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Utils/AudioUtils.cs
+
     public static class AudioUtils
     {
         public async static Task<bool> RequestMicrophonePermission()

@@ -3,6 +3,8 @@ using System.Runtime.CompilerServices;
 
 namespace StormManager.UWP.Services.LoggingService
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/LoggingService/LoggingService.cs
+
     public delegate void DebugWriteDelegate(string text = null, Severities severity = Severities.Info, Targets target = Targets.Debug, [CallerMemberName]string caller = null);
     
     public enum Severities { Template10, Info, Warning, Error, Critical }

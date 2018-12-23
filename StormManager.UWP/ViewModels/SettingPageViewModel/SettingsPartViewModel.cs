@@ -9,7 +9,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class SettingsPartViewModel : ViewModelBase
     {
-        //readonly Services.SettingsServices.AppAppSettingsService _appSettings;
+        //readonly Services.SettingsServices.AppSettingsService _appSettings;
         readonly IAppSettingsService _appSettings;
 
         public SettingsPartViewModel()

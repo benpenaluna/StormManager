@@ -5,6 +5,7 @@ namespace StormManager.UWP.Mvvm
     // http://codepaste.net/jgxazh
     using System.Diagnostics;
 
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Mvvm/DelegateCommand.cs
     // DOCS: https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-MVVM
     public class DelegateCommand : IChangedCommand
     {

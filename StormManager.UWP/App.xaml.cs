@@ -31,7 +31,7 @@ namespace StormManager.UWP
             #region app settings
 
             // some settings must be set in app.constructor
-            var settings = new AppAppSettingsService(new SettingsHelper(), new UiUpdater());
+            var settings = new AppSettingsService(new SettingsHelper(), new UiUpdater());
             RequestedTheme = settings.AppTheme;
             CacheMaxDuration = settings.CacheMaxDuration;
             ShowShellBackButton = settings.UseShellBackButton;
@@ -65,7 +65,7 @@ namespace StormManager.UWP
             //builder.RegisterType<ResourceLoaderService>().AsSelf();
             builder.RegisterType<SettingsHelper>().As<ISettingsHelper>();
             builder.RegisterType<UiUpdater>().As<IUiUpdater>();
-            builder.RegisterType<AppAppSettingsService>().As<Services.SettingsServices.IAppSettingsService>();
+            builder.RegisterType<AppSettingsService>().As<Services.SettingsServices.IAppSettingsService>();
 
             builder.RegisterType<ContrastFactorApproximationHelper>().As<IContrastFactorApproximationHelper>();
             builder.RegisterType<MapIconControlHelper>().As<IMapIconControlHelper>();

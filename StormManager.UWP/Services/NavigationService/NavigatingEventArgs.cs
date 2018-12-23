@@ -5,6 +5,7 @@ using StormManager.UWP.Common;
 
 namespace StormManager.UWP.Services.NavigationService
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/NavigationService/NavigatingEventArgs.cs
     // DOCS: https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-NavigationService
     public class NavigatingEventArgs : NavigatedEventArgs
     {

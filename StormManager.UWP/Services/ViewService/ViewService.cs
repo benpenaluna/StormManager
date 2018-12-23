@@ -9,6 +9,8 @@ using static StormManager.UWP.Services.LoggingService.LoggingService;
 
 namespace StormManager.UWP.Services.ViewService
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/ViewService/ViewService.cs
+
     public sealed class ViewService : IViewService
     {
         internal static void OnWindowCreated()

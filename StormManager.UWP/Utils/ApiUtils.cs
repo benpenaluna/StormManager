@@ -2,6 +2,8 @@
 
 namespace StormManager.UWP.Utils
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Utils/ApiUtils.cs
+
     public static class ApiUtils
     {
         static bool? isHardwareButtonsApiPresent;

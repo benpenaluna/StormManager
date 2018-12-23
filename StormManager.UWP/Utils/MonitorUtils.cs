@@ -5,6 +5,8 @@ using Windows.UI.ViewManagement;
 
 namespace StormManager.UWP.Utils
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Utils/MonitorUtils.cs
+
     public class MonitorUtils
     {
         public event EventHandler Changed;

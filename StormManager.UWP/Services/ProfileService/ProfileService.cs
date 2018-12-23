@@ -4,6 +4,8 @@ using StormManager.UWP.Mvvm;
 
 namespace StormManager.UWP.Services.ProfileService
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/ProfileService/ProfileService.cs
+
     public class ProfileService : BindableBase
     {
         public ProfileService()

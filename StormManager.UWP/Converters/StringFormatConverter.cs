@@ -4,6 +4,8 @@ using Windows.UI.Xaml.Data;
 
 namespace StormManager.UWP.Converters
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Converters/StringFormatConverter.cs
+
     public class StringFormatConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

@@ -1,4 +1,5 @@
-﻿<UserControl
+﻿ <!--Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Controls/HamburgerMenu.xaml-->
+ <UserControl
     x:Class="StormManager.UWP.Controls.HamburgerMenu"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

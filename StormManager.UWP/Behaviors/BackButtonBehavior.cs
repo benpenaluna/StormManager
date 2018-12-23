@@ -5,6 +5,8 @@ using StormManager.UWP.Common;
 
 namespace StormManager.UWP.Behaviors
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Behaviors/BackButtonBehavior.cs
+
     /// <summary>
     /// Use this behavior to add actions when the user clicks the back button
     /// Usually the shell back button. And, you are not necessarily wanting to 

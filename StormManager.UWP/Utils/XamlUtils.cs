@@ -8,6 +8,8 @@ using Windows.UI.Xaml.Media;
 
 namespace StormManager.UWP.Utils
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Utils/XamlUtils.cs
+
     public static class XamlUtils
     {
         public static T GetResource<T>(string resourceName, T otherwise)

@@ -9,6 +9,8 @@ using StormManager.UWP.Services.ViewService;
 
 namespace StormManager.UWP.Services.NavigationService
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/NavigationService/INavigationService.cs
+
     public interface INavigationService
     {
         void GoBack(NavigationTransitionInfo infoOverride = null);

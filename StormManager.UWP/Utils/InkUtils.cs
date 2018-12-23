@@ -7,6 +7,8 @@ using Windows.UI.Xaml.Controls;
 
 namespace StormManager.UWP.Utils
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Utils/InkUtils.cs
+
     public static class InkUtils
     {
         public async static Task SaveAsync(this InkCanvas inkCanvas, string fileName, StorageFolder folder = null)

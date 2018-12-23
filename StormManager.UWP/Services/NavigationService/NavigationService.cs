@@ -15,6 +15,7 @@ using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Services.NavigationService
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/NavigationService/NavigationService.cs
     // DOCS: https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-NavigationService
     public partial class NavigationService : INavigationService
     {

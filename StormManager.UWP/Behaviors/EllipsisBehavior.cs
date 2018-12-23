@@ -9,6 +9,7 @@ using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Behaviors
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Behaviors/EllipsisBehavior.cs
     // DOCS: https://github.com/Windows-XAML/Template10/wiki/Docs-%7C-XamlBehaviors
     [TypeConstraint(typeof(CommandBar))]
     public class EllipsisBehavior : DependencyObject, IBehavior

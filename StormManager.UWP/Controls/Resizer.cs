@@ -9,6 +9,8 @@ using Windows.UI.Xaml.Media;
 
 namespace StormManager.UWP.Controls
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Controls/Resizer.cs
+
     [TemplatePart(Name = nameof(PART_ROOT), Type = typeof(Grid))]
     [TemplatePart(Name = nameof(PART_THUMB), Type = typeof(Thumb))]
     [TemplatePart(Name = nameof(PART_GRABBER), Type = typeof(Grid))]

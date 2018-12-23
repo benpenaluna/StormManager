@@ -3,6 +3,8 @@ using System.Runtime.CompilerServices;
 
 namespace StormManager.UWP.Services.KeyboardService
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/KeyboardService/KeyboardService.cs
+
     public class KeyboardService
     {
         #region Debug

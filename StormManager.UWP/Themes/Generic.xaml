@@ -32,6 +32,7 @@
         <Setter Property="Margin" Value="5,0,5,5" />
     </Style>
 
+    <!--Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Themes/HamburgerMenu.xaml-->
     <Style TargetType="controls:HamburgerMenu">
         <Setter Property="AccentColor" Value="{ThemeResource SystemAccentColor}" />
         <Setter Property="VisualStateNarrowMinWidth" Value="-1" />
@@ -39,6 +40,7 @@
         <Setter Property="VisualStateWideMinWidth" Value="-1" />
     </Style>
 
+    <!--Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Themes/ModalDialog.xaml-->
     <Style TargetType="controls:ModalDialog">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="ModalBackground">
@@ -134,6 +136,7 @@
         <Setter Property="Width" Value="{ThemeResource AppBarExpandButtonThemeWidth}" />
     </Style>
 
+    <!--Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Themes/PageHeader.xaml-->
     <Style TargetType="controls:PageHeader">
         <Setter Property="BackButtonVisibility" Value="Collapsed" />
         <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundChromeMediumBrush}" />
@@ -1093,6 +1096,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
+    <!--Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Themes/Resizer.xaml-->
     <Style TargetType="controls:Resizer">
         <Setter Property="GrabberBrush" Value="{ThemeResource SystemAccentColor}" />
         <Setter Property="Template">

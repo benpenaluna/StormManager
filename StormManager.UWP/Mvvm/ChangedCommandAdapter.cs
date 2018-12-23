@@ -3,6 +3,8 @@ using System.Windows.Input;
 
 namespace StormManager.UWP.Mvvm
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Mvvm/ChangedCommandAdapter.cs
+
     /// <summary>
     /// Use this to adapt any <see cref="ICommand"/> to <see cref="IChangedCommand"/> with posibility to manually initiate 
     /// <see cref="CanExecuteChanged"/>

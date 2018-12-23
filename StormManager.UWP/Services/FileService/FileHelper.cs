@@ -7,6 +7,8 @@ namespace StormManager.UWP.Services.FileService
 {
     public static class FileHelper
     {
+        // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/FileService/FileHelper.cs
+
         /// <summary>Returns if a file is found in the specified storage strategy</summary>
         /// <param name="key">Path of the file in storage</param>
         /// <param name="location">Location storage strategy</param>

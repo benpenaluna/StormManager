@@ -3,6 +3,8 @@ using System.ComponentModel;
 
 namespace StormManager.UWP.Common
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Common/TypedEventHandler.cs
+
     public delegate void TypedEventHandler<T>(object sender, T e);
 
     public class EventArgs<T> : EventArgs

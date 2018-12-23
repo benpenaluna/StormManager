@@ -10,6 +10,8 @@ using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Controls
 {
+    // https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Controls/HamburgerMenu.PublicProperties.xaml.cs
+
     internal static class Extensions
     {
         public static ChangedEventArgs<T> ToChangedEventArgs<T>(this DependencyPropertyChangedEventArgs e)

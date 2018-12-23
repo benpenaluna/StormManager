@@ -4,6 +4,8 @@ using Windows.Foundation;
 
 namespace StormManager.UWP.Utils
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Utils/UriUtils.cs
+
     public static class UriUtils
     {
         public static Uri GetRoot(this Uri uri)

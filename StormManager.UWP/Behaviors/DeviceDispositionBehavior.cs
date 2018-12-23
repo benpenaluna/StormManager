@@ -6,6 +6,8 @@ using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Behaviors
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Behaviors/DeviceDispositionBehavior.cs
+
     [ContentProperty(Name = nameof(Actions))]
     public class DeviceDispositionBehavior : DependencyObject, IBehavior
     {

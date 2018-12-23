@@ -5,6 +5,8 @@ using StormManager.UWP.Common;
 
 namespace StormManager.UWP.Behaviors
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Behaviors/ThrottledEventTriggerBehavior.cs
+
     /// <summary>
     /// The Throttled Event Behavior attaches to a target's event, and executes child actions at a rate no faster than the throttle set (in milliseconds). 
     /// </summary>

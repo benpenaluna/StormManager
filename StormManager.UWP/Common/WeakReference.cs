@@ -2,6 +2,8 @@
 
 namespace StormManager.UWP.Common
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Common/WeakReference.cs
+
     public class WeakReference<TInstance, TSource, TEventArgs> where TInstance : class
     {
         public WeakReference<TInstance> Reference { get; protected set; }

@@ -2,10 +2,11 @@
 
 namespace StormManager.UWP.Mvvm
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Mvvm/AwaitableDelegateCommand.cs
+
     using System.Collections.Concurrent;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using System.Windows.Input;
     using Windows.UI.Xaml;
 
     public class AwaitableDelegateCommand : IChangedCommand

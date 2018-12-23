@@ -5,6 +5,8 @@ using Windows.UI.Xaml;
 
 namespace StormManager.UWP.Services.KeyboardService
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/KeyboardService/KeyboardHelper.cs
+
     public class KeyboardHelper
     {
         CoreWindow win = Window.Current.CoreWindow;

@@ -10,21 +10,21 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_CanInstantiate()
         {
-            var result = new UWP.Services.SettingsServices.AppAppSettingsService(new SettingsHelper(), new UiUpdater());
+            var result = new UWP.Services.SettingsServices.AppSettingsService(new SettingsHelper(), new UiUpdater());
             Assert.NotNull(result);
         }
 
         //[Fact]
         //public void SettingsService_CanCreate()
         //{
-        //    var result = UWP.Services.SettingsServices.AppAppSettingsService.Create();
+        //    var result = UWP.Services.SettingsServices.AppSettingsService.Create();
         //    Assert.NotNull(result);
         //}
 
         [Fact]
         public void SettingsService_DefaultUseShellBackButton()
         {
-            var expected = UWP.Services.SettingsServices.AppAppSettingsService.UseShellBackButtonDefault;
+            var expected = UWP.Services.SettingsServices.AppSettingsService.UseShellBackButtonDefault;
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             var result = sut.UseShellBackButton;
 
@@ -34,7 +34,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_UseShellBackButtonSetsAndReturnsValue()
         {
-            var expected = !UWP.Services.SettingsServices.AppAppSettingsService.UseShellBackButtonDefault;
+            var expected = !UWP.Services.SettingsServices.AppSettingsService.UseShellBackButtonDefault;
 
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             sut.UseShellBackButton = expected;
@@ -46,7 +46,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_DefaultAppThemeLight()
         {
-            var expected = UWP.Services.SettingsServices.AppAppSettingsService.AppThemeDefault;
+            var expected = UWP.Services.SettingsServices.AppSettingsService.AppThemeDefault;
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             var result = sut.AppTheme;
 
@@ -56,7 +56,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_AppThemeSetsAndReturnsValue()
         {
-            var expected = UWP.Services.SettingsServices.AppAppSettingsService.AppThemeDefault == ApplicationTheme.Light
+            var expected = UWP.Services.SettingsServices.AppSettingsService.AppThemeDefault == ApplicationTheme.Light
                 ? ApplicationTheme.Dark
                 : ApplicationTheme.Light;
 
@@ -70,7 +70,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_DefaultCacheMaxDuration()
         {
-            var expected = UWP.Services.SettingsServices.AppAppSettingsService.CacheMaxDurationDefault;
+            var expected = UWP.Services.SettingsServices.AppSettingsService.CacheMaxDurationDefault;
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             var result = sut.CacheMaxDuration;
 
@@ -80,7 +80,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_CacheMaxDurationSetsAndReturnsValue()
         {
-            var defaultMaxCacheDuration = UWP.Services.SettingsServices.AppAppSettingsService.CacheMaxDurationDefault.Days;
+            var defaultMaxCacheDuration = UWP.Services.SettingsServices.AppSettingsService.CacheMaxDurationDefault.Days;
             var days = defaultMaxCacheDuration == int.MaxValue ? defaultMaxCacheDuration - 1 : defaultMaxCacheDuration + 1;
             var expected = TimeSpan.FromDays(days);
 
@@ -94,7 +94,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_DefaultShowHamburgerButton()
         {
-            var expected = UWP.Services.SettingsServices.AppAppSettingsService.ShowHamburgerButtonDefault;
+            var expected = UWP.Services.SettingsServices.AppSettingsService.ShowHamburgerButtonDefault;
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             var result = sut.ShowHamburgerButton;
 
@@ -104,7 +104,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         private void SettingsService_ShowHamburgerButtonSetAndReturnsValue()
         {
-            var expected = !UWP.Services.SettingsServices.AppAppSettingsService.ShowHamburgerButtonDefault;
+            var expected = !UWP.Services.SettingsServices.AppSettingsService.ShowHamburgerButtonDefault;
 
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             sut.ShowHamburgerButton = expected;
@@ -116,7 +116,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         public void SettingsService_DefaultIsFullScreen()
         {
-            var expected = UWP.Services.SettingsServices.AppAppSettingsService.IsFullScreenDefault;
+            var expected = UWP.Services.SettingsServices.AppSettingsService.IsFullScreenDefault;
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             var result = sut.IsFullScreen;
 
@@ -126,7 +126,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         [Fact]
         private void SettingsService_IsFullScreenSetAndReturnsValue()
         {
-            var expected = !UWP.Services.SettingsServices.AppAppSettingsService.IsFullScreenDefault;
+            var expected = !UWP.Services.SettingsServices.AppSettingsService.IsFullScreenDefault;
 
             var sut = SettingsServiceWithTestableHelperAndUiUpdater();
             sut.IsFullScreen = expected;
@@ -139,7 +139,7 @@ namespace StormManager.UWP.Tests.Services.SettingsService
         {
             var settingsHelper = MockSettingsHelper.Create();
             var uiUpdater = MockUiUpdater.Create();
-            return new AppAppSettingsService(settingsHelper, uiUpdater);
+            return new AppSettingsService(settingsHelper, uiUpdater);
         }
     }
 }

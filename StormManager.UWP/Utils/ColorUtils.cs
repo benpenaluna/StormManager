@@ -3,6 +3,8 @@ using Windows.UI.Xaml.Media;
 
 namespace StormManager.UWP.Utils
 {
+    // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Utils/ColorUtils.cs
+
     public static class ColorUtils
     {
         public static SolidColorBrush ToSolidColorBrush(this Color color) => new SolidColorBrush(color);
