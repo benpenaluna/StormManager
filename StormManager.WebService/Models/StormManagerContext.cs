@@ -1,3 +1,5 @@
+using StormManager.Models.Models;
+
 namespace StormManager.WebService.Models
 {
     using System.Data.Entity;
