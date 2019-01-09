@@ -113,6 +113,7 @@
     <Compile Include="Behaviors\TextBoxEnterKeyBehavior.cs" />
     <Compile Include="Behaviors\ThrottledEventTriggerBehavior.cs" />
     <Compile Include="Behaviors\TimeoutAction.cs" />
+    <Compile Include="Cache\AppCache.cs" />
     <Compile Include="Common\ChangedEventArgs.cs" />
     <Compile Include="Common\DeferralManager.cs" />
     <Compile Include="Common\DispatcherWrapper.cs" />
@@ -248,6 +249,9 @@
     <Compile Include="Services\ViewService\SecondaryViewSynchronizationContextDecorator.cs" />
     <Compile Include="Services\ViewService\ViewLifetimeControl.cs" />
     <Compile Include="Services\ViewService\ViewService.cs" />
+    <Compile Include="Services\WebApiService\IWebApiService.cs" />
+    <Compile Include="Services\WebApiService\WebApiException.cs" />
+    <Compile Include="Services\WebApiService\WebApiService.cs" />
     <Compile Include="Utils\ApiUtils.cs" />
     <Compile Include="Utils\AudioUtils.cs" />
     <Compile Include="Utils\ColorUtils.cs" />
@@ -419,6 +423,10 @@
     <ProjectReference Include="..\StormManager.Core\StormManager.Core.csproj">
       <Project>{396b9c07-e7d7-4ebd-a34e-838756342c8c}</Project>
       <Name>StormManager.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StormManager.Standard\StormManager.Standard.csproj">
+      <Project>{9b705231-e7a8-45ce-b5ad-ebac26d04e59}</Project>
+      <Name>StormManager.Standard</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -244,12 +244,19 @@ namespace StormManager.UWP.Controls
 
         private static MapIconControl CreateDefaultMapIcon(IClonedMapLocation location)
         {
-            var colorAnimationHelper = JobTypeColorAnimationFactory.Create(ColorAnimationType.Default);
+            var colorAnimationHelper = JobTypeColorAnimationFactory.Create(ColorAnimationType.BuildingDamage);
+            //var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper)
+            //{
+            //    HeadingVisible = Visibility.Collapsed,
+            //    StatusVisible = Visibility.Collapsed,
+            //    NotificationTimeVisbible = Visibility.Collapsed,
+            //    SubHeadingText = location.StreetAddressOrCommonPlaceName()
+            //};
             var iconWithCollapsableDescription = new MapIconControl(colorAnimationHelper)
             {
-                HeadingVisible = Visibility.Collapsed,
-                StatusVisible = Visibility.Collapsed,
-                NotificationTimeVisbible = Visibility.Collapsed,
+                HeadingVisible = Visibility.Visible,
+                StatusVisible = Visibility.Visible,
+                NotificationTimeVisbible = Visibility.Visible,
                 SubHeadingText = location.StreetAddressOrCommonPlaceName()
             };
 

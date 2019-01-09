@@ -1,3 +1,4 @@
+using System;
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
@@ -9,6 +10,7 @@ using StormManager.UWP.Converters.ConversionHelpers;
 using StormManager.UWP.Models.Mapping;
 using StormManager.UWP.Services.MapKeyService;
 using StormManager.UWP.Services.SettingsServices;
+using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP
 {
@@ -22,6 +24,15 @@ namespace StormManager.UWP
 
         private static IMapKeyService _mapKeyService;
         public static string MapKey => _mapKeyService.Key;
+
+        private static string _connectionSting = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID=sqladmin;Password=PythoN98*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
+
+        public static string ConnectionString
+        {
+            get => _connectionSting;
+            set => _connectionSting = value;
+        }
+
 
         public App()
         {
@@ -71,6 +82,8 @@ namespace StormManager.UWP
             builder.RegisterType<MapIconControlHelper>().As<IMapIconControlHelper>();
             builder.RegisterType<ColorAnimationHelper>().As<IColorAnimationHelper>();
             builder.RegisterType<FoundMapLocations>().As<IFoundMapLocations>();
+
+            //builder.RegisterType<WebApiService>().As<IWebApiService>();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)
@@ -89,6 +102,8 @@ namespace StormManager.UWP
             // TODO: add your long-running task here
             _mapKeyService = await MapKeyService.CreateAsync();
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
+
+            await Cache.AppCache.GetMembersAsync();
         }
     }
 }

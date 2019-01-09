@@ -7,10 +7,12 @@ namespace StormManager.WebService.Migrations
     {
         public override void Up()
         {
+            
         }
         
         public override void Down()
         {
+            
         }
     }
 }

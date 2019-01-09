@@ -7,13 +7,13 @@ namespace StormManager.WebService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialModel : IMigrationMetadata
+    public sealed partial class GetAllMembersStoredProcedure : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(GetAllMembersStoredProcedure));
         
         string IMigrationMetadata.Id
         {
-            get { return "201808050606491_InitialModel"; }
+            get { return "201901090953134_GetAllMembersStoredProcedure"; }
         }
         
         string IMigrationMetadata.Source
