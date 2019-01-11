@@ -25,7 +25,7 @@ namespace StormManager.UWP
         private static IMapKeyService _mapKeyService;
         public static string MapKey => _mapKeyService.Key;
 
-        private static string _connectionSting = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID=sqladmin;Password=PythoN98*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
+        private static string _connectionSting = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID=sqladmin;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
 
         public static string ConnectionString
         {

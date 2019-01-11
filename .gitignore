@@ -8,6 +8,8 @@
 *.userosscache
 *.sln.docstates
 key.txt
+serverkey.txt
+web.config
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
