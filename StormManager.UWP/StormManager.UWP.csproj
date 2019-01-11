@@ -231,6 +231,10 @@
     <Compile Include="Services\SerializationService\ISerializationService.cs" />
     <Compile Include="Services\SerializationService\JsonSerializationService.cs" />
     <Compile Include="Services\SerializationService\SerializationService.cs" />
+    <Compile Include="Services\ServerKeyService\IServerKeyHelper.cs" />
+    <Compile Include="Services\ServerKeyService\IServerKeyService.cs" />
+    <Compile Include="Services\ServerKeyService\ServerKeyHelper.cs" />
+    <Compile Include="Services\ServerKeyService\ServerKeyService.cs" />
     <Compile Include="Services\SettingsServices\IPropertyMapping.cs" />
     <Compile Include="Services\SettingsServices\ISettingsHelper.cs" />
     <Compile Include="Services\SettingsServices\ISettingsService.cs" />

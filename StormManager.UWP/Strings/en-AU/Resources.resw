@@ -201,6 +201,10 @@
     <value>Requests For Assistance</value>
     <comment>Views.OperationsPage.Pivot.PivotItem</comment>
   </data>
+  <data name="ServerKeyFileLocation" xml:space="preserve">
+    <value>ms-appx:///Assets/serverkey.txt</value>
+    <comment>The location of the Server Id and Password</comment>
+  </data>
   <data name="SettingsAppBarButton.Label" xml:space="preserve">
     <value>Settings</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
