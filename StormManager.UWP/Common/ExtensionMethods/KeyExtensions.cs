@@ -2,7 +2,7 @@
 
 namespace StormManager.UWP.Common.ExtensionMethods
 {
-    public static class MapKeyExtensions
+    public static class KeyExtensions
     {
         public static int MapKeyLength => 108;
 
@@ -12,7 +12,6 @@ namespace StormManager.UWP.Common.ExtensionMethods
 
         public static bool IsValidMapKey(this string key)
         {
-            
             return key.Length == MapKeyLength && key.ToCharArray().Select(c => (int) c).All(i => i >= MinAsciiValue && i <= MaxAsciiValue);
         }
     }

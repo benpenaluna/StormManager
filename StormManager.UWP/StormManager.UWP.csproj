@@ -163,7 +163,7 @@
     <Compile Include="Common\Exceptions\GeolocationAccessDeniedException.cs" />
     <Compile Include="Common\ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\LocationExtensions.cs" />
-    <Compile Include="Common\ExtensionMethods\MapKeyExtensions.cs" />
+    <Compile Include="Common\ExtensionMethods\KeyExtensions.cs" />
     <Compile Include="Common\ExtensionMethods\TimeSpanExtensions.cs" />
     <Compile Include="Controls\ControlHelpers\AnimateColor.cs" />
     <Compile Include="Controls\IMapStylePresenter.cs" />

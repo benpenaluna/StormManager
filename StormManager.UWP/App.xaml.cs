@@ -94,7 +94,7 @@ namespace StormManager.UWP
             _mapKeyService = await MapKeyService.CreateAsync();
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
 
-            await Cache.AppCache.GetMembersAsync();
+            //await Cache.AppCache.GetMembersAsync();
         }
     }
 }

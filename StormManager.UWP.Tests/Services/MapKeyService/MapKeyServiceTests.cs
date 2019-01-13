@@ -38,7 +38,7 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
 
         private static string GetRandomKey(int seed = ArbitrarySeed)
         {
-            return MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, seed);
+            return KeyGenerator.GenerateValidKey(KeyExtensions.MapKeyLength, seed);
         }
     }
 }

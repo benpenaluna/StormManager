@@ -14,7 +14,7 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         public void MapKeyLength_Returns108()
         {
             const int expected = 108;
-            var actual = MapKeyExtensions.MapKeyLength;
+            var actual = KeyExtensions.MapKeyLength;
             Assert.Equal(expected, actual);
         }
 
@@ -22,7 +22,7 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         public void MaxAsciiValue_Returns126()
         {
             const int expected = 126;
-            var actual = MapKeyExtensions.MaxAsciiValue ;
+            var actual = KeyExtensions.MaxAsciiValue ;
             Assert.Equal(expected, actual);
         }
 
@@ -30,7 +30,7 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         public void MinAsciiValue_Returns33()
         {
             const int expected = 33;
-            var actual = MapKeyExtensions.MinAsciiValue;
+            var actual = KeyExtensions.MinAsciiValue;
             Assert.Equal(expected, actual);
         }
 
@@ -40,8 +40,8 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         [InlineData(42)]
         public void IsValidMapKey_InvalidLength(int seed)
         {
-            var undersizeKeyLength = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength - 1, seed);
-            var oversizeKeyLength = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength + 1, seed);
+            var undersizeKeyLength = KeyGenerator.GenerateValidKey(KeyExtensions.MapKeyLength - 1, seed);
+            var oversizeKeyLength = KeyGenerator.GenerateValidKey(KeyExtensions.MapKeyLength + 1, seed);
 
             Assert.False(undersizeKeyLength.IsValidMapKey());
             Assert.False(oversizeKeyLength.IsValidMapKey());
@@ -50,7 +50,7 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         [Fact]
         public void IsValidMapKey_InvalidCharacters()
         {
-            var invalidKey = InvalidKey(MapKeyExtensions.MapKeyLength);
+            var invalidKey = InvalidKey(KeyExtensions.MapKeyLength);
 
             Assert.False(invalidKey.IsValidMapKey());
         }
@@ -61,7 +61,7 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         [InlineData(42)]
         public void IsValidMapKey_ValidKey(int seed)
         {
-            var validKey = MapKeyGenerator.GenerateValidKey(MapKeyExtensions.MapKeyLength, seed);
+            var validKey = KeyGenerator.GenerateValidKey(KeyExtensions.MapKeyLength, seed);
 
             Assert.True(validKey.IsValidMapKey());
         }
