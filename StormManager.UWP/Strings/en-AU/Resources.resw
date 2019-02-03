@@ -145,6 +145,10 @@
     <value>Duty Times</value>
     <comment>Views.LogisticsPage.Pivot.PivotItem</comment>
   </data>
+  <data name="JobTypesPivotItem.Text" xml:space="preserve">
+    <value>Job Types</value>
+    <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
   <data name="KeyFileLocation" xml:space="preserve">
     <value>ms-appx:///Assets/key.txt</value>
     <comment>The location of the Bing Maps Key</comment>
