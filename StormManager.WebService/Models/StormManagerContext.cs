@@ -13,5 +13,6 @@ namespace StormManager.WebService.Models
         }
 
         public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<JobType> JobTypes { get; set; }
     }
 }

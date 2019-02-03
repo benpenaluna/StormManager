@@ -88,6 +88,14 @@
     <Compile Include="Migrations\201901090953134_GetAllMembersStoredProcedure.Designer.cs">
       <DependentUpon>201901090953134_GetAllMembersStoredProcedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902022348556_AddJobTypesTable.cs" />
+    <Compile Include="Migrations\201902022348556_AddJobTypesTable.Designer.cs">
+      <DependentUpon>201902022348556_AddJobTypesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902030331371_GetAllJobTypesStoredProcedure.cs" />
+    <Compile Include="Migrations\201902030331371_GetAllJobTypesStoredProcedure.Designer.cs">
+      <DependentUpon>201902030331371_GetAllJobTypesStoredProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,6 +121,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901090953134_GetAllMembersStoredProcedure.resx">
       <DependentUpon>201901090953134_GetAllMembersStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902022348556_AddJobTypesTable.resx">
+      <DependentUpon>201902022348556_AddJobTypesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902030331371_GetAllJobTypesStoredProcedure.resx">
+      <DependentUpon>201902030331371_GetAllJobTypesStoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

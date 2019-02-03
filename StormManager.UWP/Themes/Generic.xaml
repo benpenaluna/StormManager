@@ -1259,7 +1259,7 @@
                                     <ColorAnimation x:Name="MapIconFillPathAnimation"
                                                     Storyboard.TargetName="MapIconFillPath"
                                                     Storyboard.TargetProperty="Color" />
-                                    <ColorAnimation x:Name="HeadingForegroundAniation"
+                                    <ColorAnimation x:Name="HeadingForegroundAnimation"
                                                     Storyboard.TargetName="HeadingForeground"
                                                     Storyboard.TargetProperty="Color" 
                                                     Duration="0:0:1" />

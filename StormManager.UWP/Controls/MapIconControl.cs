@@ -22,7 +22,7 @@ namespace StormManager.UWP.Controls
         private ColorAnimation _descriptionBorderBackgroundAnimation;
         private ColorAnimation _descriptionBorderAnimation;
         private ColorAnimation _mapIconFillPathAnimation;
-        private ColorAnimation _headingForegroundAniation;
+        private ColorAnimation _headingForegroundAnimation;
         private SolidColorBrush _headingForeground;
 
         private List<ColorAnimation> _colorAnimations;
@@ -177,7 +177,7 @@ namespace StormManager.UWP.Controls
             _descriptionBorderBackgroundAnimation = GetTemplateChild<ColorAnimation>("DescriptionBorderBackgroundAnimation");
             _descriptionBorderAnimation = GetTemplateChild<ColorAnimation>("DescriptionBorderAnimation");
             _mapIconFillPathAnimation = GetTemplateChild<ColorAnimation>("MapIconFillPathAnimation");
-            _headingForegroundAniation = GetTemplateChild<ColorAnimation>("HeadingForegroundAniation");
+            _headingForegroundAnimation = GetTemplateChild<ColorAnimation>("HeadingForegroundAnimation");
             _headingForeground = GetTemplateChild<SolidColorBrush>("HeadingForeground");
         }
 
@@ -268,7 +268,7 @@ namespace StormManager.UWP.Controls
         private void SetHeadingForegroundAnimationFromColor()
         {
             _headingForeground.Color = Converters.ColorToConstrastColorConverter.ConvertToConstractColor(MapIconControlHelper.ColorAnimationSettings.FromColor);
-            _headingForegroundAniation.From = _headingForeground.Color;
+            _headingForegroundAnimation.From = _headingForeground.Color;
         }
 
         private void SetBeginTimeForContrastChange(double? contrastChangeFactor)
@@ -276,19 +276,19 @@ namespace StormManager.UWP.Controls
             if (contrastChangeFactor == null) return;
 
             var intervalInMilliseconds = (int)(MapIconControlHelper.ColorAnimationSettings.Duration.TotalMilliseconds * contrastChangeFactor -
-                                               _headingForegroundAniation.Duration.TimeSpan.TotalMilliseconds / 2);
-            _headingForegroundAniation.BeginTime = new TimeSpan(0, 0, 0, 0, intervalInMilliseconds);
+                                               _headingForegroundAnimation.Duration.TimeSpan.TotalMilliseconds / 2);
+            _headingForegroundAnimation.BeginTime = new TimeSpan(0, 0, 0, 0, intervalInMilliseconds);
         }
 
         private void SetHeadingForegroundAnimationToColor(bool changeRequired)
         {
             if (changeRequired)
             {
-                _headingForegroundAniation.To = _headingForeground.Color == Colors.White ? Colors.Black : Colors.White;
+                _headingForegroundAnimation.To = _headingForeground.Color == Colors.White ? Colors.Black : Colors.White;
             }
             else
             {
-                _headingForegroundAniation.To = _headingForegroundAniation.From;
+                _headingForegroundAnimation.To = _headingForegroundAnimation.From;
             }
         }
 

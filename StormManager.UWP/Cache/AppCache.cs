@@ -10,10 +10,16 @@ namespace StormManager.UWP.Cache
         private static IWebApiService _webApiService = new WebApiService();
 
         public static IEnumerable<Member> AllMembers { get; set; }
+        public static IEnumerable<JobType> JobTypes { get; set; }
 
         public static async Task GetMembersAsync()
         {
             AllMembers = await _webApiService.GetAsync<Member>("GetAllMembers");
+        }
+
+        public static async Task GetJobTypesAsync()
+        {
+            JobTypes = await _webApiService.GetAsync<JobType>("GetAllJobTypes");
         }
     }
 }
