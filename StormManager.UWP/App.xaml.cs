@@ -95,6 +95,7 @@ namespace StormManager.UWP
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
 
             //await Cache.AppCache.GetMembersAsync();
+            //await Cache.AppCache.GetJobTypesAsync();
         }
     }
 }
