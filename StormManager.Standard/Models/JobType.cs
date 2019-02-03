@@ -11,7 +11,8 @@ namespace StormManager.Standard.Models
     {
 #region Mapped Properties
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
         public bool IsUsed { get; set; }
         public int NewJobArgb
         {
