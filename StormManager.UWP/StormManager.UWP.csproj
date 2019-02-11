@@ -133,6 +133,7 @@
     <Compile Include="Common\TypedEventHandler.cs" />
     <Compile Include="Common\WeakReference.cs" />
     <Compile Include="Common\WindowWrapper.cs" />
+    <Compile Include="Controls\ColorPickerButton.cs" />
     <Compile Include="Controls\ControlHelpers\BuildingDamageColorAnimation.cs" />
     <Compile Include="Controls\ControlHelpers\ColorAnimationHelper.cs" />
     <Compile Include="Controls\ControlHelpers\ColorAnimationType.cs" />
