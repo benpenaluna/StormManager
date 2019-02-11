@@ -5,7 +5,8 @@
     xmlns:controls="using:StormManager.UWP.Controls"
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns:converters="using:StormManager.UWP.Converters"
-    xmlns:interactivity="using:Microsoft.Xaml.Interactivity">
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core">
 
     <Style x:Name="TextBlockBaseStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="Black" /> <!--TODO: Bind this to the control-->
@@ -1366,6 +1367,69 @@
                                 </Path>
                             </Grid>
                         </StackPanel>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:ColorPickerButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ColorPickerButton">
+                    <StackPanel Margin="10" Width ="100">
+                        <Button x:Name="BaseButton"
+                                Content="{TemplateBinding Content}"  
+                                FontSize="12">
+                            <FlyoutBase.AttachedFlyout>
+                                <Flyout>
+                                    <RelativePanel>
+                                        <ColorPicker x:Name="MyColorPicker"
+                                                     Color="{TemplateBinding Color}"
+                                                     IsColorSliderVisible="True"
+                                                     IsColorChannelTextInputVisible="True"
+                                                     IsHexInputVisible="True"
+                                                     IsAlphaEnabled="True"
+                                                     IsAlphaSliderVisible="True"
+                                                     IsAlphaTextInputVisible="True"/>
+                                        <Grid RelativePanel.Below="MyColorPicker"
+                                                              RelativePanel.AlignLeftWithPanel="True"
+                                                              RelativePanel.AlignRightWithPanel="True">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button x:Name="OkButton"
+                                                    Content="OK"
+                                                    Margin="0,12,2,0" 
+                                                    HorizontalAlignment="Stretch">
+                                                <interactivity:Interaction.Behaviors>
+                                                    <core:EventTriggerBehavior EventName="Tapped">
+                                                        <behaviors:CloseFlyoutAction />
+                                                    </core:EventTriggerBehavior>
+                                                </interactivity:Interaction.Behaviors>
+                                            </Button>
+                                            <Button x:Name="CancelButton" 
+                                                    Content="Cancel"
+                                                    Margin="2,12,0,0" 
+                                                    HorizontalAlignment="Stretch"
+                                                    Grid.Column="1">
+                                                <interactivity:Interaction.Behaviors>
+                                                    <core:EventTriggerBehavior EventName="Tapped">
+                                                        <behaviors:CloseFlyoutAction />
+                                                    </core:EventTriggerBehavior>
+                                                </interactivity:Interaction.Behaviors>
+                                            </Button>
+                                        </Grid>
+                                    </RelativePanel>
+                                </Flyout>
+                            </FlyoutBase.AttachedFlyout>
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <behaviors:OpenFlyoutAction />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                        </Button>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
