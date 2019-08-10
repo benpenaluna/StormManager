@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Store;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Windows.UI;
-using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using StormManager.Standard.Annotations;
 
 namespace StormManager.UWP.Controls
 {
-    public class ColorPickerButton : Control
+    public class ColorPickerButton : Control, INotifyPropertyChanged
     {
         private ColorPicker _myColorPicker;
         private Button _baseButton;
@@ -86,6 +83,14 @@ namespace StormManager.UWP.Controls
         private void CancelButton_Tapped(object sender, TappedRoutedEventArgs args)
         {
             Color = _originalColor;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

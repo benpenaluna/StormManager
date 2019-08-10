@@ -125,6 +125,7 @@
     <Compile Include="Common\ItemPropertyChangedEventArgs.cs" />
     <Compile Include="Common\Mdl2.cs" />
     <Compile Include="Common\NavButtonsHelper.cs" />
+    <Compile Include="Common\ObservableCollectionEx.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\ObservableItemCollection.cs" />
     <Compile Include="Common\StateItemKey.cs" />
@@ -175,6 +176,9 @@
     <Compile Include="Converters\DateTimeOffsetConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Converters\ValueWhenConverter.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Repositories\IJobTypeRepository.cs" />
+    <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Models\JobType.cs" />
     <Compile Include="Models\Mapping\ClonedMapAddress.cs" />
     <Compile Include="Models\Mapping\ClonedMapLocation.cs" />
@@ -194,6 +198,11 @@
     <Compile Include="Mvvm\IBindable.cs" />
     <Compile Include="Mvvm\IChangedCommand.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
+    <Compile Include="Persistence\EntityConfigurations\JobTypeConfiguration.cs" />
+    <Compile Include="Persistence\Repositories\StormManagerContext.cs" />
+    <Compile Include="Persistence\Repositories\JobTypeRepository.cs" />
+    <Compile Include="Persistence\Repositories\Repository.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -406,22 +415,31 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac">
-      <Version>4.8.1</Version>
+      <Version>4.9.3</Version>
     </PackageReference>
     <PackageReference Include="EntityFramework">
       <Version>6.2.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.1.9</Version>
+      <Version>6.2.8</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
-      <Version>2.0.0</Version>
+      <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="MvvmCross.StarterPack">
       <Version>5.7.0</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.1</Version>
+      <Version>12.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Configuration.ConfigurationManager">
+      <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.Common">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SqlClient">
+      <Version>4.6.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Geolocator">
       <Version>4.5.0.6</Version>
@@ -436,6 +454,9 @@
       <Project>{9b705231-e7a8-45ce-b5ad-ebac26d04e59}</Project>
       <Name>StormManager.Standard</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

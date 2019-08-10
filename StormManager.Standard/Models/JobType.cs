@@ -7,19 +7,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StormManager.Standard.Models
 {
-    public class JobType : INotifyPropertyChanged
+    public class JobType
     {
 #region Mapped Properties
-        public int Id { get; set; }
-        public string Category { get; set; }
-        public string SubCategory { get; set; }
-        public bool IsUsed { get; set; }
-        public int NewJobArgb
+        public virtual int Id { get; set; }
+        public virtual string Category { get; set; }
+        public virtual string SubCategory { get; set; }
+        public virtual bool IsUsed { get; set; }
+        public virtual int NewJobArgb
         {
             get => NewJobColor.ToArgb();
             set => NewJobColor = Color.FromArgb(value);
         }
-        public int AgingJobArgb
+        public virtual int AgingJobArgb
         {
             get => AgingJobColor.ToArgb();
             set => AgingJobColor = Color.FromArgb(value);
@@ -30,13 +30,5 @@ namespace StormManager.Standard.Models
         public Color NewJobColor { get; set; }
         public Color AgingJobColor { get; set; }
 #endregion 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

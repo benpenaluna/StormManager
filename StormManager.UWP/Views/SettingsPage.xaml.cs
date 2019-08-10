@@ -1,4 +1,3 @@
-using Windows.UI;
 using Windows.UI.Xaml.Navigation;
 
 namespace StormManager.UWP.Views

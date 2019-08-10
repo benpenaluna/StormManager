@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using StormManager.UWP.Models;
 
 namespace StormManager.UWP.Services.WebApiService
 {
@@ -17,7 +17,7 @@ namespace StormManager.UWP.Services.WebApiService
         {
             try
             {
-                var connectionString = await GetConnectionString();
+                var connectionString = await GetConnectionStringAsync();
                 using (var conn = new SqlConnection(connectionString))
                 {
                     await conn.OpenAsync();
@@ -27,7 +27,7 @@ namespace StormManager.UWP.Services.WebApiService
                         const string jsonOutputParam = "@jsonOutput";
                         using (var cmd = new SqlCommand(storedProcedureName, conn))
                         {
-                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.CommandType = CommandType.StoredProcedure;
 
                             cmd.Parameters.Add(jsonOutputParam, SqlDbType.NVarChar, -1).Direction = ParameterDirection.Output;
 
@@ -63,9 +63,43 @@ namespace StormManager.UWP.Services.WebApiService
             //        throw;
             //    }
             //}
+
+            try
+            {
+                var connectionString = await GetConnectionStringAsync();
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    await conn.OpenAsync();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        using (var cmd = new SqlCommand(storedProcedureName, conn))
+                        {
+                            if (payload.GetType() == typeof(JobType))
+                            {
+                                var test = payload as JobType;
+
+                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = test?.Id;
+                                cmd.Parameters.Add("@category", SqlDbType.NVarChar).Value = ((Standard.Models.JobType) test)?.Category;
+                                cmd.Parameters.Add("@subCategory", SqlDbType.NVarChar).Value = test?.SubCategory;
+                                cmd.Parameters.Add("@isUsed", SqlDbType.Bit).Value = test?.IsUsed;
+                                cmd.Parameters.Add("@newJobArgb", SqlDbType.Int).Value = test?.NewJobArgb;
+                                cmd.Parameters.Add("@agingJobArgb", SqlDbType.Int).Value = test?.AgingJobArgb;
+                            }
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
         }
 
-        private static async Task<string> GetConnectionString()
+        public static async Task<string> GetConnectionStringAsync()
         {
             ServerKeyService.IServerKeyService service = await ServerKeyService.ServerKeyService.CreateAsync();
             return string.Format(ConnectionSting, service.UserId, service.Password);

@@ -1,13 +1,18 @@
 using System;
+using System.Data.Entity;
+using System.Diagnostics;
 using Windows.UI.Xaml;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Data;
 using Autofac;
+using StormManager.UWP.Cache;
 using StormManager.UWP.Controls;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Converters.ConversionHelpers;
+using StormManager.UWP.Models;
 using StormManager.UWP.Models.Mapping;
+using StormManager.UWP.Persistence.Repositories;
 using StormManager.UWP.Services.MapKeyService;
 using StormManager.UWP.Services.SettingsServices;
 using StormManager.UWP.Services.WebApiService;
@@ -95,7 +100,28 @@ namespace StormManager.UWP
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
 
             //await Cache.AppCache.GetMembersAsync();
-            await Cache.AppCache.GetJobTypesAsync();
+            //await AppCache.JobTypes = 
+
+            //var connectionString = await WebApiService.GetConnectionStringAsync();
+            //AppCache.WebApiService = new StormManagerContext(connectionString);
+            //AppCache.WebApiService.JobTypes.Load();
+
+            await AppCache.InitialiseCollections();
+
+            //Debugger.Break();
+
+            //var jobType = new JobType()
+            //{
+            //    Id = 69,
+            //    Category = "Duress",
+            //    SubCategory = "Accidental Activation",
+            //    IsUsed = false,
+            //    NewJobArgb = -9868951,
+            //    AgingJobArgb = -16777216
+            //};
+
+            //var test = new WebApiService();
+            //await test.PutAsync("Update_JobTypes", jobType);
         }
     }
 }

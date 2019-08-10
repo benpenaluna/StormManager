@@ -1380,7 +1380,8 @@
                     <StackPanel Margin="10" Width ="100">
                         <Button x:Name="BaseButton"
                                 Content="{TemplateBinding Content}"  
-                                FontSize="12">
+                                FontSize="12"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
                             <FlyoutBase.AttachedFlyout>
                                 <Flyout>
                                     <RelativePanel>
@@ -1393,8 +1394,8 @@
                                                      IsAlphaSliderVisible="True"
                                                      IsAlphaTextInputVisible="True"/>
                                         <Grid RelativePanel.Below="MyColorPicker"
-                                                              RelativePanel.AlignLeftWithPanel="True"
-                                                              RelativePanel.AlignRightWithPanel="True">
+                                              RelativePanel.AlignLeftWithPanel="True"
+                                              RelativePanel.AlignRightWithPanel="True">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
