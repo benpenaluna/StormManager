@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using Autofac;
 using StormManager.UWP.Cache;
 using StormManager.UWP.Common;
 using StormManager.UWP.Models;
@@ -51,7 +51,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
                 try
                 {
                     //TODO: Create a procedure in the webApiService that handles this, in order to de-couple the view model from the service
-                    IWebApiService webApiService = new WebApiService();
+                    IWebApiService webApiService = App.Container.Resolve<IWebApiService>();
                     await webApiService.PutAsync("Update_JobTypes", (JobType)sender);
                 }
                 catch (Exception exception)

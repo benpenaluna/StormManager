@@ -1,4 +1,6 @@
-﻿using StormManager.UWP.Core;
+﻿using System;
+using System.Threading.Tasks;
+using StormManager.UWP.Core;
 using StormManager.UWP.Core.Repositories;
 using StormManager.UWP.Persistence.Repositories;
 
@@ -6,24 +8,36 @@ namespace StormManager.UWP.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly StormManagerContext _context;
+        public IJobTypeRepository JobTypes { get; private set; }
 
-        public IJobTypeRepository JobTypes { get; }
+        private StormManagerContext _context;
 
-        public UnitOfWork(StormManagerContext context)
+        private UnitOfWork()
         {
-            _context = context;
-            //JobTypes = new JobTypeRepository(context);
+        }
+
+        public static Task<UnitOfWork> CreateAsync()
+        {
+            var result = new UnitOfWork();
+            return result.InitialiseAsync();
+        }
+
+        private async Task<UnitOfWork> InitialiseAsync()
+        {
+            _context = await StormManagerContext.CreateAsync();
+
+            JobTypes = new JobTypeRepository(_context);
+            return this;
         }
 
         public int Complete()
         {
-            return _context.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public void Dispose()
         {
-            _context.Dispose();
+            throw new NotImplementedException();
         }
     }
 }

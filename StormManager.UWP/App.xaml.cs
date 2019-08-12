@@ -1,21 +1,20 @@
-using System;
-using System.Data.Entity;
-using System.Diagnostics;
-using Windows.UI.Xaml;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml.Data;
 using Autofac;
+using System.Threading.Tasks;
 using StormManager.UWP.Cache;
 using StormManager.UWP.Controls;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Converters.ConversionHelpers;
-using StormManager.UWP.Models;
+using StormManager.UWP.Core.Repositories;
 using StormManager.UWP.Models.Mapping;
 using StormManager.UWP.Persistence.Repositories;
 using StormManager.UWP.Services.MapKeyService;
 using StormManager.UWP.Services.SettingsServices;
 using StormManager.UWP.Services.WebApiService;
+using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Data;
+using StormManager.UWP.Core;
+using StormManager.UWP.Persistence;
 
 namespace StormManager.UWP
 {
@@ -29,6 +28,8 @@ namespace StormManager.UWP
 
         private static IMapKeyService _mapKeyService;
         public static string MapKey => _mapKeyService.Key;
+
+        public static IUnitOfWork UnitOfWork { get; set; }
 
         public App()
         {
@@ -79,7 +80,12 @@ namespace StormManager.UWP
             builder.RegisterType<ColorAnimationHelper>().As<IColorAnimationHelper>();
             builder.RegisterType<FoundMapLocations>().As<IFoundMapLocations>();
 
-            //builder.RegisterType<WebApiService>().As<IWebApiService>();
+            builder.RegisterType<JobTypeRepository>().As<IJobTypeRepository>();
+
+            builder.RegisterType<WebApiService>().As<IWebApiService>();
+            //builder.Register((c,p) => new WebApiService(p.Named<string>("connectionString"))).As<IWebApiService>();
+
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)
@@ -99,29 +105,7 @@ namespace StormManager.UWP
             _mapKeyService = await MapKeyService.CreateAsync();
             await NavigationService.NavigateAsync(typeof(Views.MainPage));
 
-            //await Cache.AppCache.GetMembersAsync();
-            //await AppCache.JobTypes = 
-
-            //var connectionString = await WebApiService.GetConnectionStringAsync();
-            //AppCache.WebApiService = new StormManagerContext(connectionString);
-            //AppCache.WebApiService.JobTypes.Load();
-
-            await AppCache.InitialiseCollections();
-
-            //Debugger.Break();
-
-            //var jobType = new JobType()
-            //{
-            //    Id = 69,
-            //    Category = "Duress",
-            //    SubCategory = "Accidental Activation",
-            //    IsUsed = false,
-            //    NewJobArgb = -9868951,
-            //    AgingJobArgb = -16777216
-            //};
-
-            //var test = new WebApiService();
-            //await test.PutAsync("Update_JobTypes", jobType);
+            UnitOfWork = await Persistence.UnitOfWork.CreateAsync();
         }
     }
 }

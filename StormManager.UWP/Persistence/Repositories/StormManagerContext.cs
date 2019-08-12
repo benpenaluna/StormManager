@@ -1,27 +1,31 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using StormManager.UWP.Models;
-using StormManager.UWP.Persistence.EntityConfigurations;
-using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Persistence.Repositories
 {
-    public class StormManagerContext : DbContext
+    public class StormManagerContext : RepoContext
     {
-        public virtual DbSet<JobType> JobTypes { get; set; }
-        
-        //public StormManagerContext(string ConnectionString) : base(Database.DefaultConnectionFactory.CreateConnection(ConnectionString), true)
-        //{
-        //    Configuration.LazyLoadingEnabled = false;
-        //}
+        private static readonly string ConnectionSting = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID={0};Password={1};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
 
-        public StormManagerContext(string ConnectionString) : base(ConnectionString)
+        public virtual RepoSet<JobType> JobTypes { get; set; }
+
+        private StormManagerContext() : base(ConnectionSting)
         {
-            Configuration.LazyLoadingEnabled = false;
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public static Task<StormManagerContext> CreateAsync()
         {
-            modelBuilder.Configurations.Add(new JobTypeConfiguration());
+            var result = new StormManagerContext();
+            return result.InitialiseAsync();
+        }
+
+        private async Task<StormManagerContext> InitialiseAsync()
+        {
+            IEnumerable<JobType> jobTypes = await _webApiService.GetAsync<JobType>("GetAllJobTypes");
+            JobTypes = new RepoSet<JobType>(jobTypes);
+
+            return this;
         }
     }
 }

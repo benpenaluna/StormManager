@@ -199,6 +199,8 @@
     <Compile Include="Mvvm\IChangedCommand.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="Persistence\EntityConfigurations\JobTypeConfiguration.cs" />
+    <Compile Include="Persistence\Repositories\RepoContext.cs" />
+    <Compile Include="Persistence\Repositories\RepoSet.cs" />
     <Compile Include="Persistence\Repositories\StormManagerContext.cs" />
     <Compile Include="Persistence\Repositories\JobTypeRepository.cs" />
     <Compile Include="Persistence\Repositories\Repository.cs" />

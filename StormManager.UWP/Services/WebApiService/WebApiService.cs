@@ -11,8 +11,17 @@ namespace StormManager.UWP.Services.WebApiService
 {
     public partial class WebApiService : IWebApiService
     {
-        private static readonly string ConnectionSting = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID={0};Password={1};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
-        
+        private static string ConnectionSting = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID={0};Password={1};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
+
+        public WebApiService()
+        {
+        }
+
+        public WebApiService(string connectionString)
+        {
+            //ConnectionSting = connectionString;
+        }
+
         public async Task<IEnumerable<T>> GetAsync<T>(string storedProcedureName)
         {
             try

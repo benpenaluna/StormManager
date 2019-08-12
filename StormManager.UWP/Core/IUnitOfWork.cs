@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StormManager.UWP.Core.Repositories;
 
 namespace StormManager.UWP.Core
@@ -10,6 +6,7 @@ namespace StormManager.UWP.Core
     public interface IUnitOfWork : IDisposable
     {
         IJobTypeRepository JobTypes { get; }
+
         int Complete();
     }
 }
