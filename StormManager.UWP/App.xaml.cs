@@ -65,7 +65,7 @@ namespace StormManager.UWP
         {
             builder.RegisterType<SettingsHelper>().As<ISettingsHelper>();
             builder.RegisterType<UiUpdater>().As<IUiUpdater>();
-            builder.RegisterType<AppSettingsService>().As<Services.SettingsServices.IAppSettingsService>();
+            builder.RegisterType<AppSettingsService>().As<IAppSettingsService>();
 
             builder.RegisterType<ContrastFactorApproximationHelper>().As<IContrastFactorApproximationHelper>();
             builder.RegisterType<MapIconControlHelper>().As<IMapIconControlHelper>();
