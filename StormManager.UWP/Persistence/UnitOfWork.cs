@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Autofac;
 using StormManager.UWP.Core;
 using StormManager.UWP.Core.Repositories;
 using StormManager.UWP.Persistence.Repositories;
@@ -26,7 +27,8 @@ namespace StormManager.UWP.Persistence
         {
             _context = await StormManagerContext.CreateAsync();
 
-            JobTypes = new JobTypeRepository(_context);
+            //JobTypes = new JobTypeRepository(_context);
+            JobTypes = App.Container.Resolve<IJobTypeRepository>(new TypedParameter(typeof(StormManagerContext), _context));
             return this;
         }
 
