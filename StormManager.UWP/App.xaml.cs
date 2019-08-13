@@ -1,6 +1,5 @@
 using Autofac;
 using System.Threading.Tasks;
-using StormManager.UWP.Cache;
 using StormManager.UWP.Controls;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Converters.ConversionHelpers;
@@ -15,6 +14,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using StormManager.UWP.Core;
 using StormManager.UWP.Persistence;
+using StormManager.UWP.Services.NetworkAvailableService;
 
 namespace StormManager.UWP
 {
@@ -58,19 +58,11 @@ namespace StormManager.UWP
 
             Container = builder.Build();
 
-            //var test = Container.Resolve<Services.SettingsServices.IAppSettingsService>();
-
             return Task.FromResult<object>(null);
         }
 
         private static void RegisterServices(ContainerBuilder builder)
         {
-            //builder.RegisterType<LocationService>().As<ILocationService>();
-            //builder.RegisterType<LocationHelper>().As<ILocationHelper>();
-            //builder.RegisterType<MapKeyHelper>().As<IMapKeyHelper>();
-            //builder.RegisterType<MapKeyService>().As<IMapKeyService>();
-            //builder.RegisterType<ResourceLoaderHelper>().As<IResourceLoaderHelper>();
-            //builder.RegisterType<ResourceLoaderService>().AsSelf();
             builder.RegisterType<SettingsHelper>().As<ISettingsHelper>();
             builder.RegisterType<UiUpdater>().As<IUiUpdater>();
             builder.RegisterType<AppSettingsService>().As<Services.SettingsServices.IAppSettingsService>();
@@ -83,9 +75,10 @@ namespace StormManager.UWP
             builder.RegisterType<JobTypeRepository>().As<IJobTypeRepository>();
 
             builder.RegisterType<WebApiService>().As<IWebApiService>();
-            //builder.Register((c,p) => new WebApiService(p.Named<string>("connectionString"))).As<IWebApiService>();
+            builder.RegisterType<NetworkAvailableService>().As<INetworkAvailableService>();
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<JobTypeRepository>().As<IJobTypeRepository>();
         }
 
         public override UIElement CreateRootElement(IActivatedEventArgs e)

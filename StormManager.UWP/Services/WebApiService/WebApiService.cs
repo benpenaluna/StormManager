@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Autofac;
 using Newtonsoft.Json;
+using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Models;
+using StormManager.UWP.Services.NetworkAvailableService;
 
 namespace StormManager.UWP.Services.WebApiService
 {
@@ -24,6 +29,9 @@ namespace StormManager.UWP.Services.WebApiService
 
         public async Task<IEnumerable<T>> GetAsync<T>(string storedProcedureName)
         {
+            if (await InternetConnectionExists() == false)
+                throw new InternetConnectionUnavailableException();
+
             try
             {
                 var connectionString = await GetConnectionStringAsync();
@@ -112,6 +120,12 @@ namespace StormManager.UWP.Services.WebApiService
         {
             ServerKeyService.IServerKeyService service = await ServerKeyService.ServerKeyService.CreateAsync();
             return string.Format(ConnectionSting, service.UserId, service.Password);
+        }
+
+        public static async Task<bool> InternetConnectionExists()
+        {
+            var networkAvailableService = App.Container.Resolve<INetworkAvailableService>();
+            return await networkAvailableService.IsInternetAvailable();
         }
     }
 }

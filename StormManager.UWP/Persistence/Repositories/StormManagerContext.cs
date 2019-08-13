@@ -36,7 +36,7 @@ namespace StormManager.UWP.Persistence.Repositories
             }
             catch (InternetConnectionUnavailableException)
             {
-                JobTypes = new RepoSet<JobType>();
+                JobTypes = new RepoSet<JobType>(); // TODO: Load data from Local SqlLite database once configured
             }
         }
     }

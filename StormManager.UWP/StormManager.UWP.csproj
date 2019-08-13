@@ -118,6 +118,7 @@
     <Compile Include="Common\DeferralManager.cs" />
     <Compile Include="Common\DispatcherWrapper.cs" />
     <Compile Include="Common\EventThrottleHelper.cs" />
+    <Compile Include="Common\Exceptions\InternetConnectionUnavailableException.cs" />
     <Compile Include="Common\ExtensionMethods\MapLocationExtensions.cs" />
     <Compile Include="Common\HandledEventArgs.cs" />
     <Compile Include="Common\IDispatcherWrapper.cs" />
@@ -198,7 +199,6 @@
     <Compile Include="Mvvm\IBindable.cs" />
     <Compile Include="Mvvm\IChangedCommand.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
-    <Compile Include="Persistence\EntityConfigurations\JobTypeConfiguration.cs" />
     <Compile Include="Persistence\Repositories\RepoContext.cs" />
     <Compile Include="Persistence\Repositories\RepoSet.cs" />
     <Compile Include="Persistence\Repositories\StormManagerContext.cs" />
