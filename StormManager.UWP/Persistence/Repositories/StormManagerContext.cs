@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Models;
 
 namespace StormManager.UWP.Persistence.Repositories
@@ -22,10 +22,22 @@ namespace StormManager.UWP.Persistence.Repositories
 
         private async Task<StormManagerContext> InitialiseAsync()
         {
-            IEnumerable<JobType> jobTypes = await _webApiService.GetAsync<JobType>("GetAllJobTypes");
-            JobTypes = new RepoSet<JobType>(jobTypes);
-
+            await InitialiseJobTypes();
+            
             return this;
+        }
+
+        private async Task InitialiseJobTypes()
+        {
+            try
+            {
+                var jobTypes = await _webApiService.GetAsync<JobType>("GetAllJobTypes");
+                JobTypes = jobTypes != null ? new RepoSet<JobType>(jobTypes): new RepoSet<JobType>();
+            }
+            catch (InternetConnectionUnavailableException)
+            {
+                JobTypes = new RepoSet<JobType>();
+            }
         }
     }
 }

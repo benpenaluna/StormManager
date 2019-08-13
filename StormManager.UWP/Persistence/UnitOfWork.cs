@@ -27,7 +27,6 @@ namespace StormManager.UWP.Persistence
         {
             _context = await StormManagerContext.CreateAsync();
 
-            //JobTypes = new JobTypeRepository(_context);
             JobTypes = App.Container.Resolve<IJobTypeRepository>(new TypedParameter(typeof(StormManagerContext), _context));
             return this;
         }
