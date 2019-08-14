@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using Autofac;
 using Newtonsoft.Json;
@@ -16,7 +14,7 @@ namespace StormManager.UWP.Services.WebApiService
 {
     public partial class WebApiService : IWebApiService
     {
-        private static string ConnectionSting = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID={0};Password={1};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
+        private static string _connectionString = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID={0};Password={1};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
 
         public WebApiService()
         {
@@ -24,7 +22,7 @@ namespace StormManager.UWP.Services.WebApiService
 
         public WebApiService(string connectionString)
         {
-            //ConnectionSting = connectionString;
+            _connectionString = connectionString;
         }
 
         public async Task<IEnumerable<T>> GetAsync<T>(string storedProcedureName)
@@ -34,8 +32,8 @@ namespace StormManager.UWP.Services.WebApiService
 
             try
             {
-                var connectionString = await GetConnectionStringAsync();
-                using (var conn = new SqlConnection(connectionString))
+                //var connectionString = await GetConnectionStringAsync();
+                using (var conn = new SqlConnection(_connectionString))
                 {
                     await conn.OpenAsync();
 
@@ -83,8 +81,8 @@ namespace StormManager.UWP.Services.WebApiService
 
             try
             {
-                var connectionString = await GetConnectionStringAsync();
-                using (var conn = new SqlConnection(connectionString))
+                //var connectionString = await GetConnectionStringAsync();
+                using (var conn = new SqlConnection(_connectionString))
                 {
                     await conn.OpenAsync();
 
@@ -119,7 +117,7 @@ namespace StormManager.UWP.Services.WebApiService
         public static async Task<string> GetConnectionStringAsync()
         {
             ServerKeyService.IServerKeyService service = await ServerKeyService.ServerKeyService.CreateAsync();
-            return string.Format(ConnectionSting, service.UserId, service.Password);
+            return string.Format(_connectionString, service.UserId, service.Password);
         }
 
         public static async Task<bool> InternetConnectionExists()

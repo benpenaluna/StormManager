@@ -6,5 +6,7 @@ namespace StormManager.UWP.Core.Repositories
     public interface IJobTypeRepository : IRepository<JobType>
     {
         IEnumerable<JobType> GetAllJobTypes();
+
+        void UpdateJobType(JobType jobType);
     }
 }

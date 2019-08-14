@@ -33,7 +33,7 @@ namespace StormManager.UWP.Persistence
 
         public int Complete()
         {
-            throw new NotImplementedException();
+            return _context.SaveChanges();
         }
 
         public void Dispose()

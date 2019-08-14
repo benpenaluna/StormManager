@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Autofac;
 using StormManager.UWP.Core.Repositories;
-using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Persistence.Repositories
 {

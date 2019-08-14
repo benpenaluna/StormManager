@@ -10,7 +10,7 @@ namespace StormManager.UWP.Persistence.Repositories
 
         public virtual RepoSet<JobType> JobTypes { get; set; }
 
-        private StormManagerContext() : base(ConnectionSting)
+        private StormManagerContext()
         {
         }
 
@@ -22,22 +22,35 @@ namespace StormManager.UWP.Persistence.Repositories
 
         private async Task<StormManagerContext> InitialiseAsync()
         {
+            var connectionString = await GetConnectionStringAsync();
+            InitialiseWebApiService(connectionString); // TODO: Exception handling of unable to populate connection string
+
             await InitialiseJobTypes();
-            
             return this;
+        }
+
+        private static async Task<string> GetConnectionStringAsync()
+        {
+            Services.ServerKeyService.IServerKeyService service = await Services.ServerKeyService.ServerKeyService.CreateAsync();
+            return string.Format(ConnectionSting, service.UserId, service.Password);
         }
 
         private async Task InitialiseJobTypes()
         {
             try
             {
-                var jobTypes = await _webApiService.GetAsync<JobType>("GetAllJobTypes");
+                var jobTypes = await WebApiService.GetAsync<JobType>("GetAllJobTypes");  // TODO: Remove literal string
                 JobTypes = jobTypes != null ? new RepoSet<JobType>(jobTypes): new RepoSet<JobType>();
             }
             catch (InternetConnectionUnavailableException)
             {
                 JobTypes = new RepoSet<JobType>(); // TODO: Load data from Local SqlLite database once configured
             }
+        }
+
+        public override int SaveChanges()
+        {
+            return 0;
         }
     }
 }

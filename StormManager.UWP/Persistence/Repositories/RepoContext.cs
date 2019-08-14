@@ -5,11 +5,26 @@ namespace StormManager.UWP.Persistence.Repositories
 {
     public class RepoContext
     {
-        protected IWebApiService _webApiService;
+        protected IWebApiService WebApiService;
+
+        public RepoContext()
+        {
+            
+        }
 
         public RepoContext(string connectionString)
         {
-            _webApiService = App.Container.Resolve<IWebApiService>(new NamedParameter("connectionString", connectionString));
+            InitialiseWebApiService(connectionString);
+        }
+
+        protected IWebApiService InitialiseWebApiService(string connectionString)
+        {
+            return WebApiService = App.Container.Resolve<IWebApiService>(new NamedParameter("connectionString", connectionString));
+        }
+
+        public virtual int SaveChanges()
+        {
+            return 0;
         }
     }
 }
