@@ -1,11 +1,11 @@
 ﻿namespace StormManager.UWP.Persistence.Repositories
 {
-    internal struct RepoChange<TEntity> where TEntity : class
+    public struct StateChange
     {
-        public TEntity Item { get; set; }
+        public object Item { get; set; }
         public DataManipulation DataManipulation { get; set; }
 
-        public RepoChange(TEntity item, DataManipulation dataManipulation)
+        internal StateChange(object item, DataManipulation dataManipulation)
         {
             Item = item;
             DataManipulation = dataManipulation;

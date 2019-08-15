@@ -47,10 +47,5 @@ namespace StormManager.UWP.Persistence.Repositories
                 JobTypes = new RepoSet<JobType>(); // TODO: Load data from Local SqlLite database once configured
             }
         }
-
-        public override int SaveChanges()
-        {
-            return 0;
-        }
     }
 }

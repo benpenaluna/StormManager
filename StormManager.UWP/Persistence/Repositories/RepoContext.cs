@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using StormManager.UWP.Models;
 using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Persistence.Repositories
@@ -24,7 +25,19 @@ namespace StormManager.UWP.Persistence.Repositories
 
         public virtual int SaveChanges()
         {
-            return 0;
+            var stateEntriesWritten = 0;
+
+            while (RepoChanges.Changes.Count > 0)
+            {
+                // TODO: write the logic to persist the changes using stored procedures
+
+                // if transaction successful
+                stateEntriesWritten += 1;
+
+                RepoChanges.Changes.Dequeue();
+            } 
+
+            return stateEntriesWritten;
         }
     }
 }

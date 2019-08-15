@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using StormManager.UWP.Common;
 using StormManager.UWP.Models;
 using StormManager.UWP.Mvvm;
+using StormManager.UWP.Services.NavigationService;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
@@ -76,6 +77,13 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
                 //TODO: Update AppCache.JobTypes
             }
+        }
+
+        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        {
+            App.UnitOfWork.Complete();
+
+            return base.OnNavigatingFromAsync(args);
         }
 
         public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)

@@ -5,13 +5,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using StormManager.UWP.Common;
+using StormManager.UWP.Services.ResourceLoaderService;
 
 namespace StormManager.UWP.Persistence.Repositories
 {
     public class RepoSet<TEntity> : ObservableCollectionEx<TEntity> where TEntity : class, INotifyPropertyChanged
     {
-        private Queue<RepoChange<TEntity>> _changes;
-
         internal RepoSet()
         {
             Initialise();
@@ -24,7 +23,7 @@ namespace StormManager.UWP.Persistence.Repositories
 
         private void Initialise()
         {
-            _changes = new Queue<RepoChange<TEntity>>();
+            RepoChanges.Changes = new Queue<StateChange>();
 
             AttachEvents();
         }
@@ -42,16 +41,8 @@ namespace StormManager.UWP.Persistence.Repositories
 
         private void ItemOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (sender.GetType() != typeof(TEntity))
-                throw new ArgumentException($"{sender} is not of type {typeof(TEntity)}"); // TODO: Move literal string to Resources
-            
-            if (!QueueContains((TEntity)sender))
-                _changes.Enqueue(new RepoChange<TEntity>((TEntity)sender, DataManipulation.Update));
-        }
-
-        private bool QueueContains(TEntity entity)
-        {
-            return _changes.Any(change => change.Item == entity);
+            if (!RepoChanges.QueueContains(sender))
+                RepoChanges.Changes.Enqueue(new StateChange(sender, DataManipulation.Update));
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
