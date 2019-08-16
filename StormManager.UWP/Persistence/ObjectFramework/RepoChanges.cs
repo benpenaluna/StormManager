@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using StormManager.UWP.Persistence.Repositories;
 
-namespace StormManager.UWP.Persistence.Repositories
+namespace StormManager.UWP.Persistence.ObjectFramework
 {
     internal static class RepoChanges
     {

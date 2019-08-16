@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using StormManager.UWP.Common;
-using StormManager.UWP.Services.ResourceLoaderService;
+using StormManager.UWP.Persistence.Repositories;
 
-namespace StormManager.UWP.Persistence.Repositories
+namespace StormManager.UWP.Persistence.ObjectFramework
 {
     public class RepoSet<TEntity> : ObservableCollectionEx<TEntity> where TEntity : class, INotifyPropertyChanged
     {

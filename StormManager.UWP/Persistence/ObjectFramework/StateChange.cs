@@ -1,4 +1,6 @@
-﻿namespace StormManager.UWP.Persistence.Repositories
+﻿using StormManager.UWP.Persistence.Repositories;
+
+namespace StormManager.UWP.Persistence.ObjectFramework
 {
     public struct StateChange
     {
