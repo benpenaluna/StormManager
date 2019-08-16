@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Models;
+using StormManager.UWP.Persistence.ObjectFramework;
 
 namespace StormManager.UWP.Persistence.Repositories
 {

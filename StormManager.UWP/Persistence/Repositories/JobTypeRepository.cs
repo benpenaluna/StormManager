@@ -27,15 +27,6 @@ namespace StormManager.UWP.Persistence.Repositories
                 if (persistedJobTypePropValue.Equals(jobTypePropValue) == false)
                     prop.SetValue(persistedJobType, jobTypePropValue);
             }
-
-
-            //persistedJobType.Category = jobType.Category;
-            //persistedJobType.SubCategory = jobType.SubCategory;
-            //persistedJobType.IsUsed = jobType.IsUsed;
-            //persistedJobType.NewJobArgb = jobType.NewJobArgb;
-            //persistedJobType.AgingJobArgb = jobType.AgingJobArgb;
-            //persistedJobType.NewJobColor = jobType.NewJobColor;
-            //persistedJobType.AgingJobColor = jobType.AgingJobColor;
         } 
 
         public StormManagerContext StormManagerContext => Context as StormManagerContext;

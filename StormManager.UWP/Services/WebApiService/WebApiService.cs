@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Newtonsoft.Json;
 using StormManager.UWP.Common.Exceptions;
-using StormManager.UWP.Models;
+using StormManager.UWP.Persistence.SqlParameters;
 using StormManager.UWP.Services.NetworkAvailableService;
 
 namespace StormManager.UWP.Services.WebApiService
@@ -64,24 +64,8 @@ namespace StormManager.UWP.Services.WebApiService
 
         public async Task PutAsync<T>(string storedProcedureName, T payload)
         {
-            //using (HttpClient http = WrappedHttpClient())
-            //{
-            //    try
-            //    {
-            //        string data = JsonConvert.SerializeObject(payload);
-            //        http.DefaultRequestHeaders.Accept.Add(new HttpMediaTypeWithQualityHeaderValue("application/json"));
-            //        HttpResponseMessage response =
-            //            await http.PutAsync(uri, new HttpStringContent(data, UnicodeEncoding.Utf8, "application/json"));
-            //    }
-            //    catch (Exception)
-            //    {
-            //        throw;
-            //    }
-            //}
-
             try
             {
-                //var connectionString = await GetConnectionStringAsync();
                 using (var conn = new SqlConnection(_connectionString))
                 {
                     await conn.OpenAsync();
@@ -90,34 +74,23 @@ namespace StormManager.UWP.Services.WebApiService
                     {
                         using (var cmd = new SqlCommand(storedProcedureName, conn))
                         {
-                            if (payload.GetType() == typeof(JobType))
-                            {
-                                var test = payload as JobType;
-
-                                cmd.Parameters.Add("@id", SqlDbType.Int).Value = test?.Id;
-                                cmd.Parameters.Add("@category", SqlDbType.NVarChar).Value = ((Standard.Models.JobType) test)?.Category;
-                                cmd.Parameters.Add("@subCategory", SqlDbType.NVarChar).Value = test?.SubCategory;
-                                cmd.Parameters.Add("@isUsed", SqlDbType.Bit).Value = test?.IsUsed;
-                                cmd.Parameters.Add("@newJobArgb", SqlDbType.Int).Value = test?.NewJobArgb;
-                                cmd.Parameters.Add("@agingJobArgb", SqlDbType.Int).Value = test?.AgingJobArgb;
-                            }
+                            cmd.Parameters.AddRange(payload.GetSqlParameters());
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.ExecuteNonQuery();
-
                         }
                     }
                 }
             }
+            catch (ArgumentException e)
+            {
+                Debug.WriteLine("Exception: " + e.Message);
+                throw;
+            }
             catch (Exception eSql)
             {
                 Debug.WriteLine("Exception: " + eSql.Message);
+                throw;
             }
-        }
-
-        public static async Task<string> GetConnectionStringAsync()
-        {
-            ServerKeyService.IServerKeyService service = await ServerKeyService.ServerKeyService.CreateAsync();
-            return string.Format(_connectionString, service.UserId, service.Password);
         }
 
         public static async Task<bool> InternetConnectionExists()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using StormManager.UWP.Core.Repositories;
+using StormManager.UWP.Persistence.ObjectFramework;
 
 namespace StormManager.UWP.Persistence.Repositories
 {

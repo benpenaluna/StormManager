@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using StormManager.UWP.Mvvm;
-using StormManager.UWP.Services.NavigationService;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
@@ -10,10 +10,11 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         public JobTypesPartViewModel JobTypesPartViewModel { get; } = new JobTypesPartViewModel();
         public AboutPartViewModel AboutPartViewModel { get; } = new AboutPartViewModel();
 
-        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
-            JobTypesPartViewModel.OnNavigatingFromAsync(args);
-            return base.OnNavigatingFromAsync(args);
+            await base.OnNavigatedFromAsync(pageState, suspending);
+
+            await JobTypesPartViewModel.OnNavigatedFromAsync(pageState, suspending);
         }
     }
 }

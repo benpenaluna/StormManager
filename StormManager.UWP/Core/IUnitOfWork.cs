@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using StormManager.UWP.Core.Repositories;
 
 namespace StormManager.UWP.Core
@@ -7,6 +8,6 @@ namespace StormManager.UWP.Core
     {
         IJobTypeRepository JobTypes { get; }
 
-        int Complete();
+        Task<int> CompleteAsync();
     }
 }

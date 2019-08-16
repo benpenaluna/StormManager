@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using StormManager.UWP.Common;
 using StormManager.UWP.Models;
 using StormManager.UWP.Mvvm;
-using StormManager.UWP.Services.NavigationService;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
@@ -79,18 +78,11 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             }
         }
 
-        public override Task OnNavigatingFromAsync(NavigatingEventArgs args)
+        public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
-            App.UnitOfWork.Complete();
+            await base.OnNavigatedFromAsync(pageState, suspending);
 
-            return base.OnNavigatingFromAsync(args);
-        }
-
-        public override Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
-        {
-            App.UnitOfWork.Complete();
-
-            return base.OnNavigatedFromAsync(pageState, suspending);
+            await App.UnitOfWork.CompleteAsync();
         }
     }
 }

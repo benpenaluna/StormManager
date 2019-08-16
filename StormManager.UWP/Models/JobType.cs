@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Runtime.CompilerServices;
-using MvvmCross.Platform.Core;
 using StormManager.Standard.Annotations;
 
 namespace StormManager.UWP.Models
@@ -114,8 +114,7 @@ namespace StormManager.UWP.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
+        
         public override bool Equals(object obj)
         {
             return obj.GetType() == typeof(JobType) && Equals(obj as JobType);
