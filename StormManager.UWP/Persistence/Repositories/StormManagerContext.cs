@@ -28,7 +28,7 @@ namespace StormManager.UWP.Persistence.Repositories
             var connectionString = await GetConnectionStringAsync();
             InitialiseWebApiService(connectionString); // TODO: Exception handling of unable to populate connection string
 
-            JobTypes = await InitialiseRepoSet<JobType>(ResourceLoaderService.GetResourceValue("StormManagerContext.GetAllJobTypes"));
+            JobTypes = await InitialiseRepoSet<JobType>(ResourceLoaderService.GetResourceValue("StormManagerContext_GetAllJobTypes"));
             return this;
         }
 

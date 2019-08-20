@@ -249,7 +249,7 @@
     <value>{0} is not a recognised type.</value>
     <comment>Persistence.SqlParameters</comment>
   </data>
-  <data name="StormManagerContext.GetAllJobTypes" xml:space="preserve">
+  <data name="StormManagerContext_GetAllJobTypes" xml:space="preserve">
     <value>GetAllJobTypes</value>
     <comment>Persistence.Repositories.StormManagerContext</comment>
   </data>
