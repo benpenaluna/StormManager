@@ -113,7 +113,6 @@
     <Compile Include="Behaviors\TextBoxEnterKeyBehavior.cs" />
     <Compile Include="Behaviors\ThrottledEventTriggerBehavior.cs" />
     <Compile Include="Behaviors\TimeoutAction.cs" />
-    <Compile Include="Cache\AppCache.cs" />
     <Compile Include="Common\ChangedEventArgs.cs" />
     <Compile Include="Common\DeferralManager.cs" />
     <Compile Include="Common\DispatcherWrapper.cs" />
