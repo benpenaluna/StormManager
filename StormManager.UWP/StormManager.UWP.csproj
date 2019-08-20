@@ -269,8 +269,10 @@
     <Compile Include="Services\ViewService\SecondaryViewSynchronizationContextDecorator.cs" />
     <Compile Include="Services\ViewService\ViewLifetimeControl.cs" />
     <Compile Include="Services\ViewService\ViewService.cs" />
+    <Compile Include="Services\WebApiService\IWebApiHelper.cs" />
     <Compile Include="Services\WebApiService\IWebApiService.cs" />
     <Compile Include="Services\WebApiService\WebApiException.cs" />
+    <Compile Include="Services\WebApiService\WebApiHelper.cs" />
     <Compile Include="Services\WebApiService\WebApiService.cs" />
     <Compile Include="Utils\ApiUtils.cs" />
     <Compile Include="Utils\AudioUtils.cs" />

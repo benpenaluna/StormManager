@@ -13,9 +13,7 @@ namespace StormManager.UWP.Persistence
 
         private StormManagerContext _context;
 
-        private UnitOfWork()
-        {
-        }
+        private UnitOfWork() {}
 
         public static Task<UnitOfWork> CreateAsync()
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Autofac;
-using StormManager.UWP.Persistence.Repositories;
 using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Persistence.ObjectFramework
@@ -10,10 +9,7 @@ namespace StormManager.UWP.Persistence.ObjectFramework
     {
         protected IWebApiService WebApiService;
 
-        public RepoContext()
-        {
-            
-        }
+        public RepoContext() {}
 
         public RepoContext(string connectionString)
         {
