@@ -9,8 +9,8 @@ namespace StormManager.UWP.Persistence.Repositories
 {
     public class StormManagerContext : RepoContext
     {
-        private static readonly string ConnectionSting = "Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID={0};Password={1};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework";
-
+        private static readonly string ConnectionSting = ResourceLoaderService.GetResourceValue("ExternalDbConnectionString");
+        
         public virtual RepoSet<JobType> JobTypes { get; set; }
 
         private StormManagerContext()
