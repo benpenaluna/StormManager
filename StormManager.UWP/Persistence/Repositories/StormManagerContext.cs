@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Models;
 using StormManager.UWP.Persistence.ObjectFramework;
+using StormManager.UWP.Services.ResourceLoaderService;
 
 namespace StormManager.UWP.Persistence.Repositories
 {
@@ -26,7 +28,7 @@ namespace StormManager.UWP.Persistence.Repositories
             var connectionString = await GetConnectionStringAsync();
             InitialiseWebApiService(connectionString); // TODO: Exception handling of unable to populate connection string
 
-            await InitialiseJobTypes();
+            JobTypes = await InitialiseRepoSet<JobType>(ResourceLoaderService.GetResourceValue("StormManagerContext.GetAllJobTypes"));
             return this;
         }
 
@@ -36,16 +38,16 @@ namespace StormManager.UWP.Persistence.Repositories
             return string.Format(ConnectionSting, service.UserId, service.Password);
         }
 
-        private async Task InitialiseJobTypes()
+        private async Task<RepoSet<TEntity>> InitialiseRepoSet<TEntity>(string storedProcedureName) where TEntity : class, INotifyPropertyChanged
         {
             try
             {
-                var jobTypes = await WebApiService.GetAsync<JobType>("GetAllJobTypes");  // TODO: Remove literal string
-                JobTypes = jobTypes != null ? new RepoSet<JobType>(jobTypes): new RepoSet<JobType>();
+                var entityCollection = await WebApiService.GetAsync<TEntity>(storedProcedureName);  
+                return entityCollection != null ? new RepoSet<TEntity>(entityCollection): new RepoSet<TEntity>();
             }
             catch (InternetConnectionUnavailableException)
             {
-                JobTypes = new RepoSet<JobType>(); // TODO: Load data from Local SqlLite database once configured
+                return new RepoSet<TEntity>(); // TODO: Load data from Local SqlLite database once configured
             }
         }
     }

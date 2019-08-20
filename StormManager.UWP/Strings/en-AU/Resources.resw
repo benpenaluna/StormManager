@@ -241,6 +241,10 @@
     <value>SMEACS</value>
     <comment>Views.PlanningPage.Pivot.PivotItem</comment>
   </data>
+  <data name="StormManagerContext.GetAllJobTypes" xml:space="preserve">
+    <value>GetAllJobTypes</value>
+    <comment>Persistence.Repositories.StormManagerContext</comment>
+  </data>
   <data name="TaskAssignmentPivotItem.Text" xml:space="preserve">
     <value>Task Assignments</value>
     <comment>Views.OperationsPage.Pivot.PivotItem</comment>
