@@ -54,28 +54,8 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             if (sender == null || sender.GetType() != typeof(JobType))
                 return;
 
-            if (!PersistedJobTypes.Contains((JobType)sender))
-            {
-                //Debugger.Break();
-
+            if (!PersistedJobTypes.Contains((JobType) sender))
                 App.UnitOfWork.JobTypes.UpdateJobType((JobType) sender);
-
-                //try
-                //{
-                //    TODO: Create a procedure in the webApiService that handles this, in order to de-couple the view model from the service
-                //    IWebApiService webApiService = App.Container.Resolve<IWebApiService>();
-                //    await webApiService.PutAsync("Update_JobTypes", (JobType)sender);  // TODO: Remove literal string
-                //}
-                //catch (Exception exception)
-                //{
-                //     TODO: Handle the exceptions
-                //    Console.WriteLine(exception);
-                //    throw;
-                //}
-
-
-                //TODO: Update AppCache.JobTypes
-            }
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
