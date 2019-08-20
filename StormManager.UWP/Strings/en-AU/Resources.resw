@@ -245,6 +245,10 @@
     <value>SMEACS</value>
     <comment>Views.PlanningPage.Pivot.PivotItem</comment>
   </data>
+  <data name="SqlStorageParameters.ArgumentException" xml:space="preserve">
+    <value>{0} is not a recognised type.</value>
+    <comment>Persistence.SqlParameters</comment>
+  </data>
   <data name="StormManagerContext.GetAllJobTypes" xml:space="preserve">
     <value>GetAllJobTypes</value>
     <comment>Persistence.Repositories.StormManagerContext</comment>

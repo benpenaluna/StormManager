@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using StormManager.UWP.Models;
+using StormManager.UWP.Services.ResourceLoaderService;
 
 namespace StormManager.UWP.Persistence.SqlParameters
 {
@@ -12,7 +13,8 @@ namespace StormManager.UWP.Persistence.SqlParameters
             if (payload.GetType() == typeof(JobType))
                 return GetJobTypeSqlParameters(payload as JobType);
 
-            throw new ArgumentException($"{typeof(T)} is not a recognised type.");
+            var message = ResourceLoaderService.GetResourceValue("SqlStorageParameters.ArgumentException");
+            throw new ArgumentException(string.Format(message, typeof(T)));
         }
 
         private static SqlParameter[] GetJobTypeSqlParameters(JobType payload)
