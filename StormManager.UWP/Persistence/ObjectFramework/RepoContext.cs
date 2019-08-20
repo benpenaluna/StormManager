@@ -27,8 +27,6 @@ namespace StormManager.UWP.Persistence.ObjectFramework
 
         public virtual async Task<int> SaveChangesAsync()
         {
-            await Task.Delay(60);  // TODO: remove this when async tasks are awaited in the method body
-
             // TODO: Think about how to persist changes if network connection is unavailable
 
             var stateEntriesWritten = 0;
