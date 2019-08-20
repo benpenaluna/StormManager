@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using StormManager.UWP.Common;
-using StormManager.UWP.Persistence.Repositories;
 
 namespace StormManager.UWP.Persistence.ObjectFramework
 {
