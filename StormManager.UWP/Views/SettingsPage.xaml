@@ -17,6 +17,9 @@
     </Page.DataContext>
 
     <Page.Resources>
+        <behaviors:JobTypeTemplateSelector x:Name="TemplateSelector"
+                                           OriginalTemplate="{StaticResource JobTypesDataTemplate}"
+                                           AddTemplate ="{StaticResource AddButtonTemplate}" />
         <converter:ValueWhenConverter x:Name="FalseWhenTrueConverter">
             <converter:ValueWhenConverter.When>
                 <x:Boolean>True</x:Boolean>
@@ -28,6 +31,43 @@
                 <x:Boolean>True</x:Boolean>
             </converter:ValueWhenConverter.Otherwise>
         </converter:ValueWhenConverter>
+        <DataTemplate x:Name="JobTypesDataTemplate" x:DataType="data:JobType">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel.Background>
+                    <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStopCollection>
+                                <GradientStop Offset="0" Color="{Binding Color, ElementName=NewJobColorPickerButton, Mode=OneWay}"/>
+                                <GradientStop Offset="1" Color="{Binding Color, ElementName=AgingJobColorPickerButton, Mode=OneWay}"/>
+                            </GradientStopCollection>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <StackPanel Margin="10" Width="300">
+                    <TextBlock Text="{x:Bind Category}" FontSize="16" Margin="10,10,10,0" TextAlignment="Left" />
+                    <TextBlock Text="{x:Bind SubCategory}" FontSize="12" Margin="10,10,10,10" TextAlignment="Left" />
+                    <CheckBox Content="Is Used?" IsChecked="{x:Bind IsUsed, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Margin="10" Width="120">
+                    <controls:ColorPickerButton Name="NewJobColorPickerButton"
+                                                Content="New Job" 
+                                                Color="{x:Bind NewJobColorWindowUi, Mode=TwoWay}"
+                                                HorizontalAlignment="Stretch"/>
+                    <controls:ColorPickerButton Name="AgingJobColorPickerButton"
+                                                Content="Aging Job" 
+                                                Color="{x:Bind AgingJobColorWindowUi, Mode=TwoWay}"/>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Name="AddButtonTemplate" x:DataType="data:JobType">
+            <StackPanel Orientation="Horizontal" Margin="10"
+                        Width="460" Height="120">
+                <StackPanel.Background>
+                    <SolidColorBrush>CornflowerBlue</SolidColorBrush>                     
+                </StackPanel.Background>
+                <TextBlock Text="Add" FontSize="16" Margin="10,10,10,0" TextAlignment="Left" />
+            </StackPanel>
+        </DataTemplate>
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -144,37 +184,11 @@
                     <TextBlock x:Uid="JobTypesPivotItem" />
                 </PivotItem.Header>
                 <ScrollViewer Margin="0,0,-12,0" VerticalScrollBarVisibility="Auto">
-                    <GridView ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}" >
-                        <GridView.ItemTemplate>
-                            <DataTemplate x:Name="JobTypesDatTemplate" x:DataType="data:JobType">
-                                <StackPanel Orientation="Horizontal" Margin="10">
-                                    <StackPanel.Background>
-                                        <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
-                                            <LinearGradientBrush.GradientStops>
-                                                <GradientStopCollection>
-                                                    <GradientStop Offset="0" Color="{Binding Color, ElementName=NewJobColorPickerButton, Mode=OneWay}"/>
-                                                    <GradientStop Offset="1" Color="{Binding Color, ElementName=AgingJobColorPickerButton, Mode=OneWay}"/>
-                                                </GradientStopCollection>
-                                            </LinearGradientBrush.GradientStops>
-                                        </LinearGradientBrush>
-                                    </StackPanel.Background>
-                                    <StackPanel Margin="10" Width="300">
-                                        <TextBlock Text="{x:Bind Category}" FontSize="16" Margin="10,10,10,0" TextAlignment="Left" />
-                                        <TextBlock Text="{x:Bind SubCategory}" FontSize="12" Margin="10,10,10,10" TextAlignment="Left" />
-                                        <CheckBox Content="Is Used?" IsChecked="{x:Bind IsUsed, Mode=TwoWay}"/>
-                                    </StackPanel>
-                                    <StackPanel Margin="10" Width="120">
-                                        <controls:ColorPickerButton Name="NewJobColorPickerButton"
-                                                                    Content="New Job" 
-                                                                    Color="{x:Bind NewJobColorWindowUi, Mode=TwoWay}"
-                                                                    HorizontalAlignment="Stretch"/>
-                                        <controls:ColorPickerButton Name="AgingJobColorPickerButton"
-                                                                    Content="Aging Job" 
-                                                                    Color="{x:Bind AgingJobColorWindowUi, Mode=TwoWay}"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
+                    <GridView x:Name="JobTypesGridView"
+                              ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}" 
+                              ItemTemplateSelector="{StaticResource TemplateSelector}"
+                              IsItemClickEnabled="True"
+                              ItemClick="JobTypesGridView_OnItemClick" >
                     </GridView>
                 </ScrollViewer>
             </PivotItem>

@@ -26,11 +26,18 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         private void InitialiseCollections()
         {
             JobTypes = new ObservableCollectionEx<JobType>();
+            AddDummyJobTypeForAddButton();
+
             PersistedJobTypes = App.UnitOfWork.JobTypes.GetAllJobTypes();
             foreach (var jobType in PersistedJobTypes)
             {
                 JobTypes.Add(new JobType(jobType));
             }
+        }
+
+        private void AddDummyJobTypeForAddButton()
+        {
+            JobTypes.Add(new JobType {Id = 0});
         }
 
         private void AttachEventHandlers()

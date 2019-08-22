@@ -7,9 +7,7 @@ namespace StormManager.UWP.Persistence.Repositories
 {
     public class JobTypeRepository : Repository<JobType>, IJobTypeRepository
     {
-        public JobTypeRepository(StormManagerContext context) : base(context)
-        {
-        }
+        public JobTypeRepository(StormManagerContext context) : base(context) {}
 
         public IEnumerable<JobType> GetAllJobTypes()
         {
