@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using StormManager.Standard.Annotations;
 
@@ -91,20 +89,16 @@ namespace StormManager.UWP.Models
             }
         }
 
-        public JobType()
-        {
-        }
+        public JobType() {}
 
         public JobType(JobType jobType)
         {
-            Id = jobType.Id;
-            Category = jobType.Category;
-            SubCategory = jobType.SubCategory;
-            IsUsed = jobType.IsUsed;
-            NewJobArgb = jobType.NewJobArgb;
-            AgingJobArgb = jobType.AgingJobArgb;
-            NewJobColor = jobType.NewJobColor;
-            AgingJobColor = jobType.AgingJobColor;
+            var jobTypeProperties = jobType.GetType().GetProperties();
+            foreach (var prop in jobTypeProperties)
+            {
+                var jobTypePropValue = prop.GetValue(jobType);
+                prop.SetValue(this, jobTypePropValue);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -122,12 +116,8 @@ namespace StormManager.UWP.Models
 
         protected bool Equals(JobType other)
         {
-            return Id == other.Id &&
-                   Category == other.Category &&
-                   SubCategory == other.SubCategory &&
-                   IsUsed == other.IsUsed &&
-                   NewJobColorWindowUi == other.NewJobColorWindowUi &&
-                   AgingJobColorWindowUi == other.AgingJobColorWindowUi;
+            var jobTypeProperties = GetType().GetProperties();
+            return !(from prop in jobTypeProperties let otherPropValue = prop.GetValue(other) where prop.GetValue(this) == otherPropValue select prop).Any();
         }
 
         public override int GetHashCode()

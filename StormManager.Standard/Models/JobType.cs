@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Data.Common;
+using System.Drawing;
 
 namespace StormManager.Standard.Models
 {
@@ -19,6 +21,8 @@ namespace StormManager.Standard.Models
             get => AgingJobColor.ToArgb();
             set => AgingJobColor = Color.FromArgb(value);
         }
+        public virtual DateTime DateUpdated { get; set; }
+        public virtual string UpdatedBy { get; set; }
 #endregion
 
 #region Not Mapped Properties

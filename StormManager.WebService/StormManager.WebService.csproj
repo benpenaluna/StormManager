@@ -114,6 +114,14 @@
     <Compile Include="Migrations\201903060258225_UpdateJobTypeStoredProcedure1.Designer.cs">
       <DependentUpon>201903060258225_UpdateJobTypeStoredProcedure1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908231024447_AddDateUpdatedToJobTypes.cs" />
+    <Compile Include="Migrations\201908231024447_AddDateUpdatedToJobTypes.Designer.cs">
+      <DependentUpon>201908231024447_AddDateUpdatedToJobTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908231034369_AddUpdatedByColumnToJobTypes.cs" />
+    <Compile Include="Migrations\201908231034369_AddUpdatedByColumnToJobTypes.Designer.cs">
+      <DependentUpon>201908231034369_AddUpdatedByColumnToJobTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -160,6 +168,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903060258225_UpdateJobTypeStoredProcedure1.resx">
       <DependentUpon>201903060258225_UpdateJobTypeStoredProcedure1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908231024447_AddDateUpdatedToJobTypes.resx">
+      <DependentUpon>201908231024447_AddDateUpdatedToJobTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908231034369_AddUpdatedByColumnToJobTypes.resx">
+      <DependentUpon>201908231034369_AddUpdatedByColumnToJobTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
