@@ -130,6 +130,10 @@
     <Compile Include="Migrations\201908231117216_ChangedUpdatedByToRequiredInJobTypes.Designer.cs">
       <DependentUpon>201908231117216_ChangedUpdatedByToRequiredInJobTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.cs" />
+    <Compile Include="Migrations\201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.Designer.cs">
+      <DependentUpon>201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908231117216_ChangedUpdatedByToRequiredInJobTypes.resx">
       <DependentUpon>201908231117216_ChangedUpdatedByToRequiredInJobTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.resx">
+      <DependentUpon>201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
