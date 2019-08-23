@@ -4,21 +4,13 @@ using StormManager.Standard.Annotations;
 
 namespace StormManager.Standard.Models
 {
-   public class Member : INotifyPropertyChanged
+   public class Member
     {
-        public string Id { get; set; }
-        public string FirstName { get; set; }
-        public string Surname { get; set; }
-        public string Position { get; set; }
-        public string Status { get; set; }
-        public string EmailAddress { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public virtual string Id { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual string Surname { get; set; }
+        public virtual string Position { get; set; }
+        public virtual string Status { get; set; }
+        public virtual string EmailAddress { get; set; }
     }
 }
