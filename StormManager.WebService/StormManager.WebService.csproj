@@ -122,6 +122,14 @@
     <Compile Include="Migrations\201908231034369_AddUpdatedByColumnToJobTypes.Designer.cs">
       <DependentUpon>201908231034369_AddUpdatedByColumnToJobTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908231112157_ChangedUpdatedByMaxLengthInJobTypes.cs" />
+    <Compile Include="Migrations\201908231112157_ChangedUpdatedByMaxLengthInJobTypes.Designer.cs">
+      <DependentUpon>201908231112157_ChangedUpdatedByMaxLengthInJobTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908231117216_ChangedUpdatedByToRequiredInJobTypes.cs" />
+    <Compile Include="Migrations\201908231117216_ChangedUpdatedByToRequiredInJobTypes.Designer.cs">
+      <DependentUpon>201908231117216_ChangedUpdatedByToRequiredInJobTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,6 +182,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908231034369_AddUpdatedByColumnToJobTypes.resx">
       <DependentUpon>201908231034369_AddUpdatedByColumnToJobTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908231112157_ChangedUpdatedByMaxLengthInJobTypes.resx">
+      <DependentUpon>201908231112157_ChangedUpdatedByMaxLengthInJobTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908231117216_ChangedUpdatedByToRequiredInJobTypes.resx">
+      <DependentUpon>201908231117216_ChangedUpdatedByToRequiredInJobTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
