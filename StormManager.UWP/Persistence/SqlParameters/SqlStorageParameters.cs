@@ -27,7 +27,9 @@ namespace StormManager.UWP.Persistence.SqlParameters
                 new SqlParameter("@subCategory", SqlDbType.NVarChar) {Value = payload.SubCategory},
                 new SqlParameter("@isUsed", SqlDbType.Bit) {Value = payload.IsUsed},
                 new SqlParameter("@newJobArgb", SqlDbType.Int) {Value = payload.NewJobArgb},
-                new SqlParameter("@agingJobArgb", SqlDbType.Int) {Value = payload.AgingJobArgb}
+                new SqlParameter("@agingJobArgb", SqlDbType.Int) {Value = payload.AgingJobArgb},
+                new SqlParameter("@dateUpdated", SqlDbType.DateTime) {Value = payload.DateUpdated},
+                new SqlParameter("@updatedBy", SqlDbType.NVarChar) {Value = payload.UpdatedBy}
             };
         }
     }

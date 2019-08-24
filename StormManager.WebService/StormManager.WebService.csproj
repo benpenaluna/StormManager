@@ -134,6 +134,18 @@
     <Compile Include="Migrations\201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.Designer.cs">
       <DependentUpon>201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908240304563_CreateAddJobTypeStoredProcedure.cs" />
+    <Compile Include="Migrations\201908240304563_CreateAddJobTypeStoredProcedure.Designer.cs">
+      <DependentUpon>201908240304563_CreateAddJobTypeStoredProcedure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908240321430_UpdateAddJobTypeStoredProcedure.cs" />
+    <Compile Include="Migrations\201908240321430_UpdateAddJobTypeStoredProcedure.Designer.cs">
+      <DependentUpon>201908240321430_UpdateAddJobTypeStoredProcedure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908240327254_ChangeUpdateJobTypeStoredProcedureNewColumns.cs" />
+    <Compile Include="Migrations\201908240327254_ChangeUpdateJobTypeStoredProcedureNewColumns.Designer.cs">
+      <DependentUpon>201908240327254_ChangeUpdateJobTypeStoredProcedureNewColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -195,6 +207,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.resx">
       <DependentUpon>201908231129480_UpdateGetAllJobTypesStoredProcedureForNewColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908240304563_CreateAddJobTypeStoredProcedure.resx">
+      <DependentUpon>201908240304563_CreateAddJobTypeStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908240321430_UpdateAddJobTypeStoredProcedure.resx">
+      <DependentUpon>201908240321430_UpdateAddJobTypeStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908240327254_ChangeUpdateJobTypeStoredProcedureNewColumns.resx">
+      <DependentUpon>201908240327254_ChangeUpdateJobTypeStoredProcedureNewColumns.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
