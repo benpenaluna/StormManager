@@ -116,8 +116,14 @@ namespace StormManager.UWP.Models
 
         protected bool Equals(JobType other)
         {
-            var jobTypeProperties = GetType().GetProperties();
-            return !(from prop in jobTypeProperties let otherPropValue = prop.GetValue(other) where prop.GetValue(this) == otherPropValue select prop).Any();
+            return Id == other.Id &&
+                   Category == other.Category &&
+                   SubCategory == other.SubCategory &&
+                   IsUsed == other.IsUsed &&
+                   NewJobArgb == other.NewJobArgb &&
+                   AgingJobArgb == other.AgingJobArgb &&
+                   DateUpdated == other.DateUpdated &&
+                   UpdatedBy == other.UpdatedBy;
         }
 
         public override int GetHashCode()
