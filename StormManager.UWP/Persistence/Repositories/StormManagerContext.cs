@@ -47,7 +47,7 @@ namespace StormManager.UWP.Persistence.Repositories
 
         private async Task InitialiseStoredProceduresAsync()
         {
-            var routines = await WebApiService.GetAsync<Routine>("GetAll_StoredProcedures");
+            var routines = await WebApiService.GetAsync<Routine>(ResourceLoaderService.GetResourceValue("StormManagerContext_GetAll_StoredProcedures"));
             StoredProcedures = routines;
         }
 
