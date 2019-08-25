@@ -65,7 +65,6 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
                 if (!(addedItem is JobType jobType))
                     continue;
 
-                //App.UnitOfWork.JobTypes.AddJobType(jobType);
                 App.UnitOfWork.JobTypes.Add(jobType);
             }
         }
