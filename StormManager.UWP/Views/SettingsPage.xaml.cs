@@ -21,13 +21,13 @@ namespace StormManager.UWP.Views
             MyPivot.SelectedIndex = index;
         }
 
-        private void JobTypesGridView_OnItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (e.ClickedItem is JobType selection && selection.Id != 0)
-                return;
+        //private void JobTypesGridView_OnItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    if (e.ClickedItem is JobType selection && selection.Id != 0)
+        //        return;
 
-            // TODO: Add logic to add a new Job Type
-            throw new System.NotImplementedException();
-        }
+        //    // TODO: Add logic to add a new Job Type
+        //    throw new System.NotImplementedException();
+        //}
     }
 }

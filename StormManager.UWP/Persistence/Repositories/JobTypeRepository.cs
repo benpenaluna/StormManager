@@ -14,6 +14,11 @@ namespace StormManager.UWP.Persistence.Repositories
             return StormManagerContext.JobTypes;
         }
 
+        public void AddJobType(JobType jobType)
+        {
+            StormManagerContext.JobTypes.Add(jobType);
+        }
+
         public void UpdateJobType(JobType jobType)
         {
             var persistedJobType = StormManagerContext.JobTypes.Single(j => j.Id == jobType.Id);

@@ -49,7 +49,14 @@ namespace StormManager.UWP.Persistence.ObjectFramework
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Debugger.Break();
+            foreach (var addedItem in e.NewItems)
+            {
+                if (!(addedItem is TEntity entity))
+                    continue;
+
+                if (!RepoChanges.QueueContains(entity))
+                    RepoChanges.Changes.Enqueue(new StateChange(entity, DataManipulation.Insertion));
+            }
         }
     }
 }

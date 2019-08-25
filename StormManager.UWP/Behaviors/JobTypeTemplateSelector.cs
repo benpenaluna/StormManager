@@ -11,7 +11,7 @@ namespace StormManager.UWP.Behaviors
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            return item is JobType jobType && jobType.Id == 0 ? AddTemplate : OriginalTemplate;
+            return item is JobType jobType && jobType.Id == -1 ? AddTemplate : OriginalTemplate;
         }
     }
 }

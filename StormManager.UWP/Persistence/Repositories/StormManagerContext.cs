@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using StormManager.Standard.Models.InformationSchema;
 using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Models;
 using StormManager.UWP.Persistence.ObjectFramework;
@@ -13,9 +16,9 @@ namespace StormManager.UWP.Persistence.Repositories
         
         public virtual RepoSet<JobType> JobTypes { get; set; }
 
-        private StormManagerContext()
-        {
-        }
+        private IEnumerable<Routine> StoredProcedures { get; set; }
+
+        private StormManagerContext() {}
 
         public static Task<StormManagerContext> CreateAsync()
         {
@@ -28,7 +31,11 @@ namespace StormManager.UWP.Persistence.Repositories
             var connectionString = await GetConnectionStringAsync();
             InitialiseWebApiService(connectionString); // TODO: Exception handling of unable to populate connection string
 
+            var routines = InitialiseStoredProceduresAsync();
+            await Task.WhenAll(routines);
+
             JobTypes = await InitialiseRepoSet<JobType>(ResourceLoaderService.GetResourceValue("StormManagerContext_GetAllJobTypes"));
+
             return this;
         }
 
@@ -36,6 +43,12 @@ namespace StormManager.UWP.Persistence.Repositories
         {
             Services.ServerKeyService.IServerKeyService service = await Services.ServerKeyService.ServerKeyService.CreateAsync();
             return string.Format(ConnectionSting, service.UserId, service.Password);
+        }
+
+        private async Task InitialiseStoredProceduresAsync()
+        {
+            var routines = await WebApiService.GetAsync<Routine>("GetAll_StoredProcedures");
+            StoredProcedures = routines;
         }
 
         private async Task<RepoSet<TEntity>> InitialiseRepoSet<TEntity>(string storedProcedureName) where TEntity : class, INotifyPropertyChanged

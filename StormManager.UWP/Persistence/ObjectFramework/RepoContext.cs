@@ -18,7 +18,7 @@ namespace StormManager.UWP.Persistence.ObjectFramework
 
         protected IWebApiService InitialiseWebApiService(string connectionString)
         {
-            return WebApiService = App.Container.Resolve<IWebApiService>(new NamedParameter("connectionString", connectionString));
+            return WebApiService = App.Container.Resolve<IWebApiService>(new TypedParameter(typeof(string), connectionString));
         }
 
         public virtual async Task<int> SaveChangesAsync()

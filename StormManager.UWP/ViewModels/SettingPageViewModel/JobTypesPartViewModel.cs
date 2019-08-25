@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml.Controls;
 using StormManager.UWP.Common;
 using StormManager.UWP.Models;
 using StormManager.UWP.Mvvm;
@@ -13,6 +16,10 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class JobTypesPartViewModel : ViewModelBase
     {
+        private const int AddButtonId = -1;
+
+        private static int _newJobTypeId = int.MaxValue; 
+
         public static IEnumerable<JobType> PersistedJobTypes;
 
         public ObservableCollection<JobType> JobTypes { get; set; }
@@ -37,7 +44,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private void AddDummyJobTypeForAddButton()
         {
-            JobTypes.Add(new JobType {Id = 0});
+            JobTypes.Add(new JobType {Id = AddButtonId});
         }
 
         private void AttachEventHandlers()
@@ -53,7 +60,18 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private static void JobTypes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Debugger.Break();
+            ManageAddedItems(e);
+        }
+
+        private static void ManageAddedItems(NotifyCollectionChangedEventArgs e)
+        {
+            foreach (var addedItem in e.NewItems)
+            {
+                if (!(addedItem is JobType jobType))
+                    continue;
+
+                App.UnitOfWork.JobTypes.AddJobType(jobType);
+            }
         }
 
         private static void JobTypes_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -61,8 +79,14 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             if (sender == null || sender.GetType() != typeof(JobType))
                 return;
 
-            if (!PersistedJobTypes.Contains((JobType) sender))
-                App.UnitOfWork.JobTypes.UpdateJobType((JobType) sender);
+            var jobType = sender as JobType;
+            if (JobWasUpdated(jobType))
+                App.UnitOfWork.JobTypes.UpdateJobType(jobType);
+        }
+
+        private static bool JobWasUpdated(JobType jobType)
+        {
+            return jobType?.Id != AddButtonId && !PersistedJobTypes.Contains(jobType);
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
@@ -70,6 +94,27 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             await base.OnNavigatedFromAsync(pageState, suspending);
 
             await App.UnitOfWork.CompleteAsync();
+        }
+
+        public void JobTypesGridView_OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is JobType selection && selection.Id != AddButtonId)
+                return;
+
+            // TODO: Add logic to add a new Job Type
+            // TODO: Default color should be configurable at runtime
+            JobTypes.Add(new JobType
+            {
+                Id = _newJobTypeId--,
+                Category = "New Category", // TODO: Add this to resources
+                SubCategory = "New Sub Category", // TODO: Add this to resources
+                IsUsed = true,
+                NewJobColorWindowUi = Color.FromArgb(255,105,105,105),
+                AgingJobColorWindowUi = Color.FromArgb(255, 0, 0, 0),
+                DateUpdated = DateTime.UtcNow,
+                UpdatedBy = "sqladmin" // TODO: This needs to be updated
+            });
+
         }
     }
 }

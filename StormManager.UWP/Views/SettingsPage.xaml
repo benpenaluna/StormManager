@@ -188,7 +188,7 @@
                               ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}" 
                               ItemTemplateSelector="{StaticResource TemplateSelector}"
                               IsItemClickEnabled="True"
-                              ItemClick="JobTypesGridView_OnItemClick" >
+                              ItemClick="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesGridView_OnItemClick}" >
                     </GridView>
                 </ScrollViewer>
             </PivotItem>
