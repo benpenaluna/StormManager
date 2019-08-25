@@ -1,17 +1,18 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Autofac;
 using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Persistence.ObjectFramework
 {
-    public class RepoContext
+    public abstract class RepoContext
     {
         protected IWebApiService WebApiService;
 
-        public RepoContext() {}
+        protected RepoContext() {}
 
-        public RepoContext(string connectionString)
+        protected RepoContext(string connectionString)
         {
             InitialiseWebApiService(connectionString);
         }
@@ -51,5 +52,7 @@ namespace StormManager.UWP.Persistence.ObjectFramework
 
             return stateEntriesWritten;
         }
+
+        public abstract RepoSet<TEntity> Set<TEntity>() where TEntity : class, INotifyPropertyChanged;
     }
 }

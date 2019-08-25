@@ -18,7 +18,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
     {
         private const int AddButtonId = -1;
 
-        private static int _newJobTypeId = int.MaxValue; 
+        private static int newJobTypeId = int.MaxValue; 
 
         public static IEnumerable<JobType> PersistedJobTypes;
 
@@ -60,17 +60,13 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private static void JobTypes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            ManageAddedItems(e);
-        }
-
-        private static void ManageAddedItems(NotifyCollectionChangedEventArgs e)
-        {
             foreach (var addedItem in e.NewItems)
             {
                 if (!(addedItem is JobType jobType))
                     continue;
 
-                App.UnitOfWork.JobTypes.AddJobType(jobType);
+                //App.UnitOfWork.JobTypes.AddJobType(jobType);
+                App.UnitOfWork.JobTypes.Add(jobType);
             }
         }
 
@@ -105,7 +101,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             // TODO: Default color should be configurable at runtime
             JobTypes.Add(new JobType
             {
-                Id = _newJobTypeId--,
+                Id = newJobTypeId--,
                 Category = "New Category", // TODO: Add this to resources
                 SubCategory = "New Sub Category", // TODO: Add this to resources
                 IsUsed = true,

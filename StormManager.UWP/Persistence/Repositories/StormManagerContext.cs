@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using System.Threading.Tasks;
+using MvvmCross.Binding.BindingContext;
 using StormManager.Standard.Models.InformationSchema;
 using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Models;
 using StormManager.UWP.Persistence.ObjectFramework;
 using StormManager.UWP.Services.ResourceLoaderService;
+using StormManager.UWP.ViewModels.LogisticsPageViewModel;
 
 namespace StormManager.UWP.Persistence.Repositories
 {
@@ -62,6 +65,20 @@ namespace StormManager.UWP.Persistence.Repositories
             {
                 return new RepoSet<TEntity>(); // TODO: Load data from Local SqlLite database once configured
             }
+        }
+
+        public override RepoSet<TEntity> Set<TEntity>()
+        {
+            var myProperties = GetType().GetProperties();
+            foreach (var prop in myProperties)
+            {
+                var propType = prop.PropertyType;
+                var targetType = typeof(RepoSet<TEntity>);
+                if (propType == targetType)
+                    return prop.GetValue(this) as RepoSet<TEntity>;
+            }
+
+            return new RepoSet<TEntity>(); // TODO: Remove this, as it is only here to satisfy the compiler
         }
     }
 }

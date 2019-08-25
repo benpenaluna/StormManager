@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using StormManager.UWP.Core.Repositories;
 using StormManager.UWP.Persistence.ObjectFramework;
 
 namespace StormManager.UWP.Persistence.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, INotifyPropertyChanged
     {
         protected readonly RepoContext Context;
 
@@ -37,7 +38,7 @@ namespace StormManager.UWP.Persistence.Repositories
 
         public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            Context.Set<TEntity>().Add(entity);
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
