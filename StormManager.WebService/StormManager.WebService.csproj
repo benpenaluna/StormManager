@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201908250258336_GetAll_StoredProcedures.Designer.cs">
       <DependentUpon>201908250258336_GetAll_StoredProcedures.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908261053498_AddStoredProceduresTable.cs" />
+    <Compile Include="Migrations\201908261053498_AddStoredProceduresTable.Designer.cs">
+      <DependentUpon>201908261053498_AddStoredProceduresTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -223,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908250258336_GetAll_StoredProcedures.resx">
       <DependentUpon>201908250258336_GetAll_StoredProcedures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908261053498_AddStoredProceduresTable.resx">
+      <DependentUpon>201908261053498_AddStoredProceduresTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
