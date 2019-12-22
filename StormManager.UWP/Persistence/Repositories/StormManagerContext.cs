@@ -1,15 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
+﻿using System.ComponentModel;
 using System.Threading.Tasks;
-using MvvmCross.Binding.BindingContext;
-using StormManager.Standard.Models.InformationSchema;
 using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Models;
 using StormManager.UWP.Persistence.ObjectFramework;
 using StormManager.UWP.Services.ResourceLoaderService;
-using StormManager.UWP.ViewModels.LogisticsPageViewModel;
+using StormManager.UWP.Services.StoredProcedureService;
 
 namespace StormManager.UWP.Persistence.Repositories
 {
@@ -19,7 +14,7 @@ namespace StormManager.UWP.Persistence.Repositories
         
         public virtual RepoSet<JobType> JobTypes { get; set; }
 
-        private IEnumerable<Routine> StoredProcedures { get; set; }
+        private StoredProcedureService StoredProcedureService { get; set; }
 
         private StormManagerContext() {}
 
@@ -34,8 +29,8 @@ namespace StormManager.UWP.Persistence.Repositories
             var connectionString = await GetConnectionStringAsync();
             InitialiseWebApiService(connectionString); // TODO: Exception handling of unable to populate connection string
 
-            var routines = InitialiseStoredProceduresAsync();
-            await Task.WhenAll(routines);
+            var service = InitialiseStoredProcedureService();
+            await Task.WhenAll(service);
 
             JobTypes = await InitialiseRepoSet<JobType>(ResourceLoaderService.GetResourceValue("StormManagerContext_GetAllJobTypes"));
 
@@ -48,14 +43,20 @@ namespace StormManager.UWP.Persistence.Repositories
             return string.Format(ConnectionSting, service.UserId, service.Password);
         }
 
-        private async Task InitialiseStoredProceduresAsync()
+        private async Task InitialiseStoredProcedureService()
         {
-            var routines = await WebApiService.GetAsync<Routine>(ResourceLoaderService.GetResourceValue("StormManagerContext_GetAll_StoredProcedures"));
-            StoredProcedures = routines;
+            StoredProcedureService = await StoredProcedureService.CreateAsync(WebApiService);
         }
 
         private async Task<RepoSet<TEntity>> InitialiseRepoSet<TEntity>(string storedProcedureName) where TEntity : class, INotifyPropertyChanged
         {
+            var repoSet = new RepoSet<TEntity>
+            {
+                AddStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Insertion),
+                UpdateStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Update),
+                DeleteStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Deletion)
+            };
+
             try
             {
                 var entityCollection = await WebApiService.GetAsync<TEntity>(storedProcedureName);  

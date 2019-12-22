@@ -8,6 +8,12 @@ namespace StormManager.UWP.Persistence.ObjectFramework
 {
     public class RepoSet<TEntity> : ObservableCollectionEx<TEntity> where TEntity : class, INotifyPropertyChanged
     {
+        internal string AddStoredProcedureName { get; set; }
+        internal string UpdateStoredProcedureName { get; set; }
+        internal string DeleteStoredProcedureName { get; set; }
+        internal string GetAllStoredProcedureName { get; set; }
+
+
         internal RepoSet()
         {
             Initialise();
@@ -51,11 +57,11 @@ namespace StormManager.UWP.Persistence.ObjectFramework
         {
             foreach (var addedItem in e.NewItems)
             {
-                if (!(addedItem is TEntity entity))
+                if (!(addedItem is TEntity entity) || RepoChanges.QueueContains(entity))
                     continue;
 
-                if (!RepoChanges.QueueContains(entity))
-                    RepoChanges.Changes.Enqueue(new StateChange(entity, DataManipulation.Insertion));
+                RepoChanges.Changes.Enqueue(new StateChange(entity, DataManipulation.Insertion));
+                entity.PropertyChanged += ItemOnPropertyChanged;
             }
         }
     }
