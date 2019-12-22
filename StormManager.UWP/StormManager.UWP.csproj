@@ -204,6 +204,10 @@
     <Compile Include="Mvvm\ViewModelBase.cs" />
     <Compile Include="Persistence\ObjectFramework\DataManipulation.cs" />
     <Compile Include="Persistence\ObjectFramework\RepoChanges.cs" />
+    <Compile Include="Services\StoredProcedureService\IStoredProcedureHelper.cs" />
+    <Compile Include="Services\StoredProcedureService\IStoredProcedureService.cs" />
+    <Compile Include="Services\StoredProcedureService\StoredProcedureHelper.cs" />
+    <Compile Include="Services\StoredProcedureService\StoredProcedureService.cs" />
     <Compile Include="Persistence\ObjectFramework\StateChange.cs" />
     <Compile Include="Persistence\ObjectFramework\RepoContext.cs" />
     <Compile Include="Persistence\ObjectFramework\RepoSet.cs" />

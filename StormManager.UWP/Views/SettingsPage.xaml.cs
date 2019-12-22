@@ -21,7 +21,7 @@ namespace StormManager.UWP.Views
             MyPivot.SelectedIndex = index;
         }
 
-        //private void JobTypesGridView_OnItemClick(object sender, ItemClickEventArgs e)
+        //private void JobTypesListView_OnItemClick(object sender, ItemClickEventArgs e)
         //{
         //    if (e.ClickedItem is JobType selection && selection.Id != 0)
         //        return;

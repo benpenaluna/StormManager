@@ -17,9 +17,9 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <behaviors:JobTypeTemplateSelector x:Name="TemplateSelector"
+        <!--<behaviors:JobTypeTemplateSelector x:Name="TemplateSelector"
                                            OriginalTemplate="{StaticResource JobTypesDataTemplate}"
-                                           AddTemplate ="{StaticResource AddButtonTemplate}" />
+                                           AddTemplate ="{StaticResource AddButtonTemplate}" />-->
         <converter:ValueWhenConverter x:Name="FalseWhenTrueConverter">
             <converter:ValueWhenConverter.When>
                 <x:Boolean>True</x:Boolean>
@@ -32,7 +32,7 @@
             </converter:ValueWhenConverter.Otherwise>
         </converter:ValueWhenConverter>
         <DataTemplate x:Name="JobTypesDataTemplate" x:DataType="data:JobType">
-            <StackPanel Orientation="Horizontal" Margin="10">
+            <!--<StackPanel Orientation="Horizontal" Margin="10">
                 <StackPanel.Background>
                     <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
                         <LinearGradientBrush.GradientStops>
@@ -57,9 +57,14 @@
                                                 Content="Aging Job" 
                                                 Color="{x:Bind AgingJobColorWindowUi, Mode=TwoWay}"/>
                 </StackPanel>
+            </StackPanel>-->
+
+            <StackPanel>
+                <TextBlock Text="{x:Bind Category}" />
+                <TextBlock Text="{x:Bind SubCategory}" />
             </StackPanel>
         </DataTemplate>
-        <DataTemplate x:Name="AddButtonTemplate" x:DataType="data:JobType">
+        <!--<DataTemplate x:Name="AddButtonTemplate" x:DataType="data:JobType">
             <StackPanel Orientation="Horizontal" Margin="10"
                         Width="460" Height="120">
                 <StackPanel.Background>
@@ -67,7 +72,7 @@
                 </StackPanel.Background>
                 <TextBlock Text="Add" FontSize="16" Margin="10,10,10,0" TextAlignment="Left" />
             </StackPanel>
-        </DataTemplate>
+        </DataTemplate>-->
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -183,14 +188,46 @@
                 <PivotItem.Header>
                     <TextBlock x:Uid="JobTypesPivotItem" />
                 </PivotItem.Header>
-                <ScrollViewer Margin="0,0,-12,0" VerticalScrollBarVisibility="Auto">
+                <!--<ScrollViewer Margin="0,0,-12,0" VerticalScrollBarVisibility="Auto">
                     <GridView x:Name="JobTypesGridView"
                               ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}" 
                               ItemTemplateSelector="{StaticResource TemplateSelector}"
                               IsItemClickEnabled="True"
                               ItemClick="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesGridView_OnItemClick}" >
                     </GridView>
-                </ScrollViewer>
+                </ScrollViewer>-->
+                <SplitView x:Name="jobTypesSplitView" IsPaneOpen="True" DisplayMode="Inline">
+                    <SplitView.Pane>
+                        <StackPanel>
+                            <TextBlock Text ="Job Type"/>
+                            <ListView x:Name="JobTypesListView" 
+                                      Width="600"
+                                      ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}"
+                                      ItemTemplate="{StaticResource JobTypesDataTemplate}"
+                                      ItemClick="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesListView_OnItemClick}"
+                                      SelectionMode="Single"
+                                      SelectionChanged="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesListView_OnSelectionChanged}"
+                                      ScrollViewer.VerticalScrollMode="Auto"/>
+                        </StackPanel>
+                    </SplitView.Pane>
+                    
+                    <SplitView.Content>
+                        <StackPanel x:Name="JobTypesContent">
+                            <TextBlock Text="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.Category, Mode=TwoWay}" />
+                            <TextBlock Text="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.SubCategory, Mode=TwoWay}" />
+                            <CheckBox Content="Is Used"  IsChecked="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.IsUsed, Mode=TwoWay}"/>
+                            <controls:ColorPickerButton Name="NewJobColorPickerButton"
+                                                        Content="New Job" 
+                                                        HorizontalAlignment="Left"
+                                                        Color="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.NewJobColorWindowUi, Mode=TwoWay}"/>
+                            <controls:ColorPickerButton Name="AgingJobColorPickerButton"
+                                                        Content="Aging Job" 
+                                                        HorizontalAlignment="Left"
+                                                        Color="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.AgingJobColorWindowUi, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </SplitView.Content>
+
+                </SplitView>
             </PivotItem>
 
             <!--  about  -->
