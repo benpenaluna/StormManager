@@ -196,19 +196,26 @@
                               ItemClick="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesGridView_OnItemClick}" >
                     </GridView>
                 </ScrollViewer>-->
-                <SplitView x:Name="jobTypesSplitView" IsPaneOpen="True" DisplayMode="Inline">
+                <SplitView x:Name="jobTypesSplitView" 
+                           IsPaneOpen="True" 
+                           DisplayMode="Inline" 
+                           OpenPaneLength="450">
                     <SplitView.Pane>
-                        <StackPanel>
-                            <TextBlock Text ="Job Type"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" 
+                                       Text ="Job Type"/>
                             <ListView x:Name="JobTypesListView" 
-                                      Width="600"
+                                      Grid.Row="1"
                                       ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}"
                                       ItemTemplate="{StaticResource JobTypesDataTemplate}"
-                                      ItemClick="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesListView_OnItemClick}"
                                       SelectionMode="Single"
                                       SelectionChanged="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesListView_OnSelectionChanged}"
                                       ScrollViewer.VerticalScrollMode="Auto"/>
-                        </StackPanel>
+                        </Grid>
                     </SplitView.Pane>
                     
                     <SplitView.Content>
