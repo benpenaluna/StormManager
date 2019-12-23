@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using StormManager.UWP.Common;
 using StormManager.UWP.Models;
 using StormManager.UWP.Mvvm;
+using StormManager.UWP.Views.JobTypes;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
@@ -20,15 +21,22 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         //private static int _newJobTypeId = int.MaxValue;
 
-        private JobType selectedJobType = new JobType();
+        private JobType _selectedJobType = new JobType();
 
         public JobType SelectedJobType
         {
-            get => selectedJobType;
-            set { selectedJobType = value; RaisePropertyChanged(); }
+            get => _selectedJobType;
+            set { _selectedJobType = value; RaisePropertyChanged(); }
         }
 
+        private Frame _selectedFrame = new Frame();
 
+        public Frame SelectedFrame
+        {
+            get => _selectedFrame;
+            set { _selectedFrame = value; RaisePropertyChanged(); }
+        }
+        
         public static IEnumerable<JobType> PersistedJobTypes;
 
         public ObservableCollection<JobType> JobTypes { get; set; }
@@ -134,6 +142,8 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             {
                 SelectedJobType = selection;
             }
+
+            SelectedFrame.Navigate(typeof(JobTypesViewMode), SelectedJobType);
         }
     }
 }

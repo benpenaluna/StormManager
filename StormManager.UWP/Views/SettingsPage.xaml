@@ -17,9 +17,9 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <!--<behaviors:JobTypeTemplateSelector x:Name="TemplateSelector"
-                                           OriginalTemplate="{StaticResource JobTypesDataTemplate}"
-                                           AddTemplate ="{StaticResource AddButtonTemplate}" />-->
+        <behaviors:JobTypeTemplateSelector x:Name="TemplateSelector"
+                                           OriginalTemplate="{StaticResource JobTypeFirstTemplate}"
+                                           AddTemplate ="{StaticResource JobTypesDataTemplate}" />
         <converter:ValueWhenConverter x:Name="FalseWhenTrueConverter">
             <converter:ValueWhenConverter.When>
                 <x:Boolean>True</x:Boolean>
@@ -31,6 +31,20 @@
                 <x:Boolean>True</x:Boolean>
             </converter:ValueWhenConverter.Otherwise>
         </converter:ValueWhenConverter>
+        <DataTemplate x:Name="JobTypeFirstTemplate" x:DataType="data:JobType">
+            <Grid>
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Test"
+                           Grid.Row="0"
+                           Grid.Column="0" />
+            </Grid>
+        </DataTemplate>
         <DataTemplate x:Name="JobTypesDataTemplate" x:DataType="data:JobType">
             <!--<StackPanel Orientation="Horizontal" Margin="10">
                 <StackPanel.Background>
@@ -219,19 +233,8 @@
                     </SplitView.Pane>
                     
                     <SplitView.Content>
-                        <StackPanel x:Name="JobTypesContent">
-                            <TextBlock Text="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.Category, Mode=TwoWay}" />
-                            <TextBlock Text="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.SubCategory, Mode=TwoWay}" />
-                            <CheckBox Content="Is Used"  IsChecked="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.IsUsed, Mode=TwoWay}"/>
-                            <controls:ColorPickerButton Name="NewJobColorPickerButton"
-                                                        Content="New Job" 
-                                                        HorizontalAlignment="Left"
-                                                        Color="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.NewJobColorWindowUi, Mode=TwoWay}"/>
-                            <controls:ColorPickerButton Name="AgingJobColorPickerButton"
-                                                        Content="Aging Job" 
-                                                        HorizontalAlignment="Left"
-                                                        Color="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType.AgingJobColorWindowUi, Mode=TwoWay}"/>
-                        </StackPanel>
+                        
+                        <Frame Content="{x:Bind ViewModel.JobTypesPartViewModel.SelectedFrame}"/>
                     </SplitView.Content>
 
                 </SplitView>

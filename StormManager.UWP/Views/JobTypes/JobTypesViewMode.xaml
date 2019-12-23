@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="StormManager.UWP.Views.JobTypes.JobTypesViewMode"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StormManager.UWP.Views.JobTypes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:StormManager.UWP.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel x:Name="JobTypesContent">
+        <TextBlock Text="{x:Bind JobType.Category}" />
+        <TextBlock Text="{x:Bind JobType.SubCategory}" />
+        <CheckBox Content="Is Used" 
+                  IsChecked="{x:Bind JobType.IsUsed}"/>
+        <controls:ColorPickerButton Name="NewJobColorPickerButton"
+                                    Content="New Job" 
+                                    HorizontalAlignment="Left"
+                                    Color="{x:Bind JobType.NewJobColorWindowUi}"/>
+        <controls:ColorPickerButton Name="AgingJobColorPickerButton"
+                                    Content="Aging Job" 
+                                    HorizontalAlignment="Left"
+                                    Color="{x:Bind JobType.AgingJobColorWindowUi}"/>
+    </StackPanel>
+</Page>

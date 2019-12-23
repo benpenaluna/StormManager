@@ -1,6 +1,5 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using StormManager.UWP.Models;
 
 namespace StormManager.UWP.Views
 {
@@ -20,14 +19,5 @@ namespace StormManager.UWP.Views
             var index = int.Parse(_serializationService.Deserialize(e.Parameter?.ToString()).ToString());
             MyPivot.SelectedIndex = index;
         }
-
-        //private void JobTypesListView_OnItemClick(object sender, ItemClickEventArgs e)
-        //{
-        //    if (e.ClickedItem is JobType selection && selection.Id != 0)
-        //        return;
-
-        //    // TODO: Add logic to add a new Job Type
-        //    throw new System.NotImplementedException();
-        //}
     }
 }
