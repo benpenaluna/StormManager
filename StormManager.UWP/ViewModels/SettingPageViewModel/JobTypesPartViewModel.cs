@@ -4,7 +4,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Store;
 using Windows.UI.Xaml.Controls;
 using StormManager.UWP.Common;
 using StormManager.UWP.Models;
@@ -18,15 +17,6 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         private const int AddButtonId = -1;
 
         //private static int _newJobTypeId = int.MaxValue;
-
-        private double _jobTypesOpenPaneLength = 450.0D;
-        public double JobTypesOpenPaneLength
-        {
-            get => _jobTypesOpenPaneLength;
-            set { _jobTypesOpenPaneLength = value; RaisePropertyChanged(); }
-        }
-
-
 
         private JobType _selectedJobType = new JobType();
         private Frame _selectedFrame = new Frame();
