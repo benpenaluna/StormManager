@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.UI;
+using Windows.ApplicationModel.Store;
 using Windows.UI.Xaml.Controls;
 using StormManager.UWP.Common;
 using StormManager.UWP.Models;
@@ -21,7 +19,22 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         //private static int _newJobTypeId = int.MaxValue;
 
+        private double _jobTypesOpenPaneLength = 450.0D;
+        public double JobTypesOpenPaneLength
+        {
+            get => _jobTypesOpenPaneLength;
+            set { _jobTypesOpenPaneLength = value; RaisePropertyChanged(); }
+        }
+
+
+
         private JobType _selectedJobType = new JobType();
+        private Frame _selectedFrame = new Frame();
+        public Frame SelectedFrame
+        {
+            get => _selectedFrame;
+            set { _selectedFrame = value; RaisePropertyChanged(); }
+        }
 
         public JobType SelectedJobType
         {
@@ -29,14 +42,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             set { _selectedJobType = value; RaisePropertyChanged(); }
         }
 
-        private Frame _selectedFrame = new Frame();
 
-        public Frame SelectedFrame
-        {
-            get => _selectedFrame;
-            set { _selectedFrame = value; RaisePropertyChanged(); }
-        }
-        
         public static IEnumerable<JobType> PersistedJobTypes;
 
         public ObservableCollection<JobType> JobTypes { get; set; }

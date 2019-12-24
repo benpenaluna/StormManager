@@ -73,9 +73,9 @@
                 </StackPanel>
             </StackPanel>-->
 
-            <StackPanel>
-                <TextBlock Text="{x:Bind Category}" />
-                <TextBlock Text="{x:Bind SubCategory}" />
+            <StackPanel >
+                <TextBlock Text="{x:Bind Category}" Padding="2,10,0,0"/>
+                <TextBlock Text="{x:Bind SubCategory}" Padding="2,0,0,10"/>
             </StackPanel>
         </DataTemplate>
         <!--<DataTemplate x:Name="AddButtonTemplate" x:DataType="data:JobType">
@@ -213,7 +213,7 @@
                 <SplitView x:Name="jobTypesSplitView" 
                            IsPaneOpen="True" 
                            DisplayMode="Inline" 
-                           OpenPaneLength="450">
+                           OpenPaneLength="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesOpenPaneLength}">
                     <SplitView.Pane>
                         <Grid>
                             <Grid.RowDefinitions>
