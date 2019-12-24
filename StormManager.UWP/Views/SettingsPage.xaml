@@ -210,10 +210,10 @@
                               ItemClick="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesGridView_OnItemClick}" >
                     </GridView>
                 </ScrollViewer>-->
-                <SplitView x:Name="jobTypesSplitView" 
+                <SplitView x:Name="JobTypesSplitView" 
                            IsPaneOpen="True" 
-                           DisplayMode="Inline" 
-                           OpenPaneLength="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesOpenPaneLength}">
+                           DisplayMode="Inline"
+                           SizeChanged="JobTypesSplitView_OnSizeChanged">
                     <SplitView.Pane>
                         <Grid>
                             <Grid.RowDefinitions>
