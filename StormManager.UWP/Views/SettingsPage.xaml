@@ -73,7 +73,14 @@
                 </StackPanel>
             </StackPanel>-->
 
-            <StackPanel >
+            <StackPanel>
+                <StackPanel.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemWithTagsStyle}" Tag="Edit" Text="Edit"/>
+                        <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemWithTagsStyle}" Tag="Delete" Text="Delete"/>
+                    </MenuFlyout>
+                </StackPanel.ContextFlyout>
+                
                 <TextBlock Text="{x:Bind Category}" Padding="2,10,0,0"/>
                 <TextBlock Text="{x:Bind SubCategory}" Padding="2,0,0,10"/>
             </StackPanel>
@@ -235,11 +242,15 @@
                                         Grid.Column="1"
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Right">
-                                <Button Content="Test"
-                                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+                                <Button FontFamily="Segoe MDL2 Assets"
+                                        Content="&#xE710;"
+                                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                                    <ToolTipService.ToolTip>
+                                        <TextBlock x:Uid="AddJobTypeButtonToolTip" />
+                                    </ToolTipService.ToolTip>
+                                </Button>
                             </StackPanel>
-                            <ListView x:Name="JobTypesListView" 
-                                      Grid.Row="1"
+                            <ListView Grid.Row="1"
                                       Grid.Column="0"
                                       Grid.ColumnSpan="2"
                                       ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}"

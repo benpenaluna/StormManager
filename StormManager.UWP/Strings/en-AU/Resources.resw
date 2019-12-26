@@ -125,6 +125,10 @@
     <value>Add</value>
     <comment>Views.SettingsPage.JobTypesPivotItem</comment>
   </data>
+  <data name="AddJobTypeButtonToolTip.Text" xml:space="preserve">
+    <value>Add Job Type</value>
+    <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
   <data name="AppDescription" xml:space="preserve">
     <value>Storm Manager faciliates the management of multiple storm operations at a local level.</value>
     <comment>Description of the app</comment>
