@@ -52,14 +52,7 @@
             </controls:PageHeader.SecondaryCommands>
         </controls:PageHeader>
 
-        <Rectangle Fill="{StaticResource CustomColorBrush}"
-                   Height="49" Width="Auto"
-                   Margin="-1,-1,0,0"
-                   RelativePanel.AlignLeftWithPanel="True"
-                   RelativePanel.AlignRightWithPanel="True"
-                   RelativePanel.Below="PageHeader" />
-
-        <Pivot EntranceNavigationTransitionInfo.IsTargetElement="True"
+       <Pivot EntranceNavigationTransitionInfo.IsTargetElement="True"
                RelativePanel.AlignBottomWithPanel="True"
                RelativePanel.AlignLeftWithPanel="True"
                RelativePanel.AlignRightWithPanel="True"
