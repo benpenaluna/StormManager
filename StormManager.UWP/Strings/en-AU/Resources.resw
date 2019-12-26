@@ -137,6 +137,10 @@
     <value>Assignments</value>
     <comment>Views.LogisticsPage.Pivot.PivotItem</comment>
   </data>
+  <data name="AutoSuggestBoxSearch.PlaceholderText" xml:space="preserve">
+    <value>Search</value>
+    <comment>To be used as the default placeholder text for AutoSuggestBoxes</comment>
+  </data>
   <data name="BusyText" xml:space="preserve">
     <value>Please wait...</value>
     <comment>Text to be displayed when app is busy</comment>

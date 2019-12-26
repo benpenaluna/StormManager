@@ -3,8 +3,11 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using StormManager.UWP.Common;
 using StormManager.UWP.Models;
 using StormManager.UWP.Mvvm;
@@ -19,7 +22,11 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         //private static int _newJobTypeId = int.MaxValue;
 
         private JobType _selectedJobType = new JobType();
-        private Frame _selectedFrame = new Frame();
+        private Frame _selectedFrame = new Frame()
+        {
+            Background=(SolidColorBrush)Application.Current.Resources["CustomColorBrush"]
+        };
+        
         public Frame SelectedFrame
         {
             get => _selectedFrame;

@@ -213,27 +213,44 @@
                 <SplitView x:Name="JobTypesSplitView" 
                            IsPaneOpen="True" 
                            DisplayMode="Inline"
-                           SizeChanged="JobTypesSplitView_OnSizeChanged">
+                           SizeChanged="JobTypesSplitView_OnSizeChanged"
+                           PaneBackground="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <SplitView.Pane>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" 
-                                       Text ="Job Type"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <AutoSuggestBox x:Uid="AutoSuggestBoxSearch"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            QueryIcon="Find"
+                                            HorizontalAlignment="Left"
+                                            Width="350" />
+                            <StackPanel Grid.Row="0"
+                                        Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Right">
+                                <Button Content="Test"
+                                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+                            </StackPanel>
                             <ListView x:Name="JobTypesListView" 
                                       Grid.Row="1"
+                                      Grid.Column="0"
+                                      Grid.ColumnSpan="2"
                                       ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}"
                                       ItemTemplate="{StaticResource JobTypesDataTemplate}"
                                       SelectionMode="Single"
                                       SelectionChanged="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesListView_OnSelectionChanged}"
-                                      ScrollViewer.VerticalScrollMode="Auto"/>
+                                      ScrollViewer.VerticalScrollMode="Auto" />
                         </Grid>
                     </SplitView.Pane>
                     
                     <SplitView.Content>
-                        
                         <Frame Content="{x:Bind ViewModel.JobTypesPartViewModel.SelectedFrame}"/>
                     </SplitView.Content>
 
