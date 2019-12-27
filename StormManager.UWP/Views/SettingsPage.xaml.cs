@@ -40,9 +40,9 @@ namespace StormManager.UWP.Views
             sender.ItemsSource = DetermineEligibleSuggestions(sender.Text, JobTypesListView.Items);
         }
 
-        private static ObservableCollection<string> DetermineEligibleSuggestions(string userSearchText, ItemCollection items)
+        private static ObservableCollection<JobType> DetermineEligibleSuggestions(string userSearchText, ItemCollection items)
         {
-            var options = new ObservableCollection<string>();
+            var options = new ObservableCollection<JobType>();
             foreach (var item in items)
             {
                 var jobType = GetJobType(item);
@@ -50,7 +50,7 @@ namespace StormManager.UWP.Views
                     continue;
 
                 if (jobType.Category.Contains(userSearchText) || jobType.SubCategory.Contains(userSearchText))
-                    options.Add(jobType.ToString());
+                    options.Add(jobType);
             }
 
             return options;
@@ -64,6 +64,14 @@ namespace StormManager.UWP.Views
         public void AutoSuggestBoxSearch_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             // Set sender.Text. You can use args.SelectedItem to build your text string.
+            //if (args.SelectedItem.GetType() != typeof(JobType))
+            //    return;
+
+            if (JobTypesListView.Items != null && JobTypesListView.Items.Contains(args.SelectedItem))
+            {
+                JobTypesListView.SelectedItem = args.SelectedItem;
+                JobTypesListView.ScrollIntoView(args.SelectedItem);
+            }
         }
 
 
@@ -71,7 +79,7 @@ namespace StormManager.UWP.Views
         {
             if (args.ChosenSuggestion != null)
             {
-
+                
             }
             //else
             //{
