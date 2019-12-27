@@ -67,7 +67,7 @@ namespace StormManager.UWP.Views
                 return;
             
             JobTypesListView.SelectedItem = args.SelectedItem;
-            JobTypesListView.ScrollIntoView(args.SelectedItem);
+            JobTypesListView.ScrollIntoView(args.SelectedItem,ScrollIntoViewAlignment.Leading);
         }
     }
 }

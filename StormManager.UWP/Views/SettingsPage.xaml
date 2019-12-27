@@ -43,19 +43,53 @@
                            Grid.Column="0" />
             </Grid>
         </DataTemplate>
+        
         <DataTemplate x:Name="JobTypesDataTemplate" x:DataType="data:JobType">
-            <StackPanel>
-                <StackPanel.ContextFlyout>
+            <Grid BorderBrush="Black" BorderThickness="1">
+                
+
+                <Grid.ContextFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemWithTagsStyle}" Tag="Edit" Text="Edit"/>
                         <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemWithTagsStyle}" Tag="Delete" Text="Delete"/>
                     </MenuFlyout>
-                </StackPanel.ContextFlyout>
+                </Grid.ContextFlyout>
                 
-                <TextBlock Text="{x:Bind Category}" Padding="2,10,0,0"/>
-                <TextBlock Text="{x:Bind SubCategory}" Padding="2,0,0,10"/>
-            </StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="52"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle Grid.Row="0" Grid.Column="0" 
+                           Grid.RowSpan="2"
+                           Margin="2,10,10,10">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
+                            <GradientStopCollection>
+                                <GradientStop Offset="0" Color="{x:Bind NewJobColorWindowUi}"/>
+                                <GradientStop Offset="1" Color="{x:Bind AgingJobColorWindowUi}"/>
+                            </GradientStopCollection>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Text="{x:Bind Category}"
+                           Grid.Row="0" Grid.Column="1" 
+                           Padding="2,10,0,0" />
+                <TextBlock Text="{x:Bind SubCategory}"
+                           Grid.Row="1" Grid.Column="1" 
+                           Padding="2,0,0,10"/>
+            </Grid>
         </DataTemplate>
+
+        <!--Source: https://blog.mzikmund.com/2017/02/tip-stretching-list-items-in-uwp/-->
+        <Style x:Key="ListViewItemStretchStyle" TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="0"/>
+        </Style>
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -212,6 +246,7 @@
                                       Grid.ColumnSpan="2"
                                       ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}"
                                       ItemTemplate="{StaticResource JobTypesDataTemplate}"
+                                      ItemContainerStyle="{StaticResource ListViewItemStretchStyle}"
                                       SelectionMode="Single"
                                       SelectionChanged="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesListView_OnSelectionChanged}"
                                       ScrollViewer.VerticalScrollMode="Auto" />
