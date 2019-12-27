@@ -237,7 +237,10 @@
                                             Grid.Column="0"
                                             QueryIcon="Find"
                                             HorizontalAlignment="Left"
-                                            Width="350" />
+                                            Width="350"
+                                            TextChanged="AutoSuggestBoxSearch_TextChanged"
+                                            QuerySubmitted="AutoSuggestBoxSearch_QuerySubmitted"
+                                            SuggestionChosen="AutoSuggestBoxSearch_SuggestionChosen"/>
                             <StackPanel Grid.Row="0"
                                         Grid.Column="1"
                                         Orientation="Horizontal"
@@ -250,7 +253,8 @@
                                     </ToolTipService.ToolTip>
                                 </Button>
                             </StackPanel>
-                            <ListView Grid.Row="1"
+                            <ListView x:Name="JobTypesListView"
+                                      Grid.Row="1"
                                       Grid.Column="0"
                                       Grid.ColumnSpan="2"
                                       ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}"
