@@ -130,5 +130,14 @@ namespace StormManager.UWP.Models
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString()
+        {
+            var suggestionText = Category;
+            if (!string.IsNullOrEmpty(SubCategory))
+                suggestionText += ": " + SubCategory;
+
+            return suggestionText;
+        }
     }
 }

@@ -50,10 +50,7 @@ namespace StormManager.UWP.Views
                     continue;
 
                 if (jobType.Category.Contains(userSearchText) || jobType.SubCategory.Contains(userSearchText))
-                {
-                    var suggestionText = DetermineSuggestionText(jobType);
-                    options.Add(suggestionText);
-                }
+                    options.Add(jobType.ToString());
             }
 
             return options;
@@ -62,15 +59,6 @@ namespace StormManager.UWP.Views
         private static JobType GetJobType(object item)
         {
             return item.GetType() == typeof(JobType) ? item as JobType : null;
-        }
-
-        private static string DetermineSuggestionText(JobType jobType)
-        {
-            var suggestionText = jobType.Category;
-            if (!string.IsNullOrEmpty(jobType.SubCategory))
-                suggestionText += ": " + jobType.SubCategory;
-
-            return suggestionText;
         }
 
         public void AutoSuggestBoxSearch_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
