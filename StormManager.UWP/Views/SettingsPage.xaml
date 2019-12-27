@@ -45,9 +45,7 @@
         </DataTemplate>
         
         <DataTemplate x:Name="JobTypesDataTemplate" x:DataType="data:JobType">
-            <Grid BorderBrush="Black" BorderThickness="1">
-                
-
+            <Grid>
                 <Grid.ContextFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemWithTagsStyle}" Tag="Edit" Text="Edit"/>
