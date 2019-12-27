@@ -7,8 +7,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:StormManager.UWP.ViewModels.SettingPageViewModel"
       xmlns:data="using:StormManager.UWP.Models"
-      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:behaviors="using:StormManager.UWP.Behaviors"
       mc:Ignorable="d">
 
@@ -46,33 +44,6 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Name="JobTypesDataTemplate" x:DataType="data:JobType">
-            <!--<StackPanel Orientation="Horizontal" Margin="10">
-                <StackPanel.Background>
-                    <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStopCollection>
-                                <GradientStop Offset="0" Color="{Binding Color, ElementName=NewJobColorPickerButton, Mode=OneWay}"/>
-                                <GradientStop Offset="1" Color="{Binding Color, ElementName=AgingJobColorPickerButton, Mode=OneWay}"/>
-                            </GradientStopCollection>
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </StackPanel.Background>
-                <StackPanel Margin="10" Width="300">
-                    <TextBlock Text="{x:Bind Category}" FontSize="16" Margin="10,10,10,0" TextAlignment="Left" />
-                    <TextBlock Text="{x:Bind SubCategory}" FontSize="12" Margin="10,10,10,10" TextAlignment="Left" />
-                    <CheckBox Content="Is Used?" IsChecked="{x:Bind IsUsed, Mode=TwoWay}"/>
-                </StackPanel>
-                <StackPanel Margin="10" Width="120">
-                    <controls:ColorPickerButton Name="NewJobColorPickerButton"
-                                                Content="New Job" 
-                                                Color="{x:Bind NewJobColorWindowUi, Mode=TwoWay}"
-                                                HorizontalAlignment="Stretch"/>
-                    <controls:ColorPickerButton Name="AgingJobColorPickerButton"
-                                                Content="Aging Job" 
-                                                Color="{x:Bind AgingJobColorWindowUi, Mode=TwoWay}"/>
-                </StackPanel>
-            </StackPanel>-->
-
             <StackPanel>
                 <StackPanel.ContextFlyout>
                     <MenuFlyout>
@@ -85,15 +56,6 @@
                 <TextBlock Text="{x:Bind SubCategory}" Padding="2,0,0,10"/>
             </StackPanel>
         </DataTemplate>
-        <!--<DataTemplate x:Name="AddButtonTemplate" x:DataType="data:JobType">
-            <StackPanel Orientation="Horizontal" Margin="10"
-                        Width="460" Height="120">
-                <StackPanel.Background>
-                    <SolidColorBrush>CornflowerBlue</SolidColorBrush>                     
-                </StackPanel.Background>
-                <TextBlock Text="Add" FontSize="16" Margin="10,10,10,0" TextAlignment="Left" />
-            </StackPanel>
-        </DataTemplate>-->
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -209,14 +171,6 @@
                 <PivotItem.Header>
                     <TextBlock x:Uid="JobTypesPivotItem" />
                 </PivotItem.Header>
-                <!--<ScrollViewer Margin="0,0,-12,0" VerticalScrollBarVisibility="Auto">
-                    <GridView x:Name="JobTypesGridView"
-                              ItemsSource="{x:Bind ViewModel.JobTypesPartViewModel.JobTypes}" 
-                              ItemTemplateSelector="{StaticResource TemplateSelector}"
-                              IsItemClickEnabled="True"
-                              ItemClick="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesGridView_OnItemClick}" >
-                    </GridView>
-                </ScrollViewer>-->
                 <SplitView x:Name="JobTypesSplitView" 
                            IsPaneOpen="True" 
                            DisplayMode="Inline"
@@ -239,7 +193,6 @@
                                             HorizontalAlignment="Left"
                                             Width="350"
                                             TextChanged="AutoSuggestBoxSearch_TextChanged"
-                                            QuerySubmitted="AutoSuggestBoxSearch_QuerySubmitted"
                                             SuggestionChosen="AutoSuggestBoxSearch_SuggestionChosen"/>
                             <StackPanel Grid.Row="0"
                                         Grid.Column="1"
@@ -315,6 +268,5 @@
         </Pivot>
 
     </RelativePanel>
-
 </Page>
 

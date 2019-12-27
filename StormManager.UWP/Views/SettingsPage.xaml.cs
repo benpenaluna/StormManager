@@ -63,28 +63,11 @@ namespace StormManager.UWP.Views
 
         public void AutoSuggestBoxSearch_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            // Set sender.Text. You can use args.SelectedItem to build your text string.
-            //if (args.SelectedItem.GetType() != typeof(JobType))
-            //    return;
-
-            if (JobTypesListView.Items != null && JobTypesListView.Items.Contains(args.SelectedItem))
-            {
-                JobTypesListView.SelectedItem = args.SelectedItem;
-                JobTypesListView.ScrollIntoView(args.SelectedItem);
-            }
-        }
-
-
-        public void AutoSuggestBoxSearch_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
-        {
-            if (args.ChosenSuggestion != null)
-            {
-                
-            }
-            //else
-            //{
-            //    // Use args.QueryText to determine what to do.
-            //}
+            if (JobTypesListView.Items == null || !JobTypesListView.Items.Contains(args.SelectedItem)) 
+                return;
+            
+            JobTypesListView.SelectedItem = args.SelectedItem;
+            JobTypesListView.ScrollIntoView(args.SelectedItem);
         }
     }
 }
