@@ -64,7 +64,9 @@
 
                 <Rectangle Grid.Row="0" Grid.Column="0" 
                            Grid.RowSpan="2"
-                           Margin="2,10,10,10">
+                           Margin="2,10,10,10"
+                           RadiusX="5"
+                           RadiusY="5">
                     <Rectangle.Fill>
                         <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
                             <GradientStopCollection>
