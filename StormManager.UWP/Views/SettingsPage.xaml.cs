@@ -1,6 +1,9 @@
+using System;
 using System.Collections.ObjectModel;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using StormManager.UWP.Models;
 
@@ -10,7 +13,7 @@ namespace StormManager.UWP.Views
     {
         readonly Services.SerializationService.ISerializationService _serializationService;
 
-        private const double JobTypeContentFrameWidth = 450.0D;
+        private const double _jobTypeContentFrameWidth = 500.0D;
 
         public SettingsPage()
         {
@@ -27,9 +30,9 @@ namespace StormManager.UWP.Views
 
         private void JobTypesSplitView_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            JobTypesSplitView.OpenPaneLength = JobTypesSplitView.ActualWidth > JobTypeContentFrameWidth ?
-                                               JobTypesSplitView.ActualWidth - JobTypeContentFrameWidth :
-                                               0.0D;
+            JobTypesSplitView.OpenPaneLength = JobTypesSplitView.ActualWidth > _jobTypeContentFrameWidth
+                ? JobTypesSplitView.ActualWidth - _jobTypeContentFrameWidth
+                : 0.0D;
         }
 
         public void AutoSuggestBoxSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -40,7 +43,8 @@ namespace StormManager.UWP.Views
             sender.ItemsSource = DetermineEligibleSuggestions(sender.Text, JobTypesListView.Items);
         }
 
-        private static ObservableCollection<JobType> DetermineEligibleSuggestions(string userSearchText, ItemCollection items)
+        private static ObservableCollection<JobType> DetermineEligibleSuggestions(string userSearchText,
+            ItemCollection items)
         {
             var options = new ObservableCollection<JobType>();
             foreach (var item in items)
@@ -61,13 +65,14 @@ namespace StormManager.UWP.Views
             return item.GetType() == typeof(JobType) ? item as JobType : null;
         }
 
-        public void AutoSuggestBoxSearch_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        public void AutoSuggestBoxSearch_SuggestionChosen(AutoSuggestBox sender,
+            AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            if (JobTypesListView.Items == null || !JobTypesListView.Items.Contains(args.SelectedItem)) 
+            if (JobTypesListView.Items == null || !JobTypesListView.Items.Contains(args.SelectedItem))
                 return;
-            
+
             JobTypesListView.SelectedItem = args.SelectedItem;
-            JobTypesListView.ScrollIntoView(args.SelectedItem,ScrollIntoViewAlignment.Leading);
+            JobTypesListView.ScrollIntoView(args.SelectedItem, ScrollIntoViewAlignment.Leading);
         }
     }
 }

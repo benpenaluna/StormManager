@@ -9,18 +9,61 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel x:Name="JobTypesContent">
-        <TextBlock Text="{x:Bind JobType.Category}" />
-        <TextBlock Text="{x:Bind JobType.SubCategory}" />
-        <CheckBox Content="Is Used" 
-                  IsChecked="{x:Bind JobType.IsUsed}"/>
-        <controls:ColorPickerButton Name="NewJobColorPickerButton"
-                                    Content="New Job" 
-                                    HorizontalAlignment="Left"
-                                    Color="{x:Bind JobType.NewJobColorWindowUi}"/>
-        <controls:ColorPickerButton Name="AgingJobColorPickerButton"
-                                    Content="Aging Job" 
-                                    HorizontalAlignment="Left"
-                                    Color="{x:Bind JobType.AgingJobColorWindowUi}"/>
-    </StackPanel>
+    <Grid x:Name="JobTypesContent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" 
+              Background="{ThemeResource UnusedPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.Column="0" 
+                       Margin="10"
+                       Height="{x:Bind ColorRectangleGridLength}"
+                       Width="{x:Bind ColorRectangleGridLength}"
+                       RadiusX="5" RadiusY="5">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0 0" EndPoint="1 0">
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="{x:Bind JobType.NewJobColorWindowUi}"/>
+                            <GradientStop Offset="1" Color="{x:Bind JobType.AgingJobColorWindowUi}"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{x:Bind JobType.Category}"
+                           TextWrapping="WrapWholeWords" 
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Margin="5,10,5,5" />
+                <TextBlock Text="{x:Bind JobType.SubCategory}"
+                           TextWrapping="WrapWholeWords"
+                           FontSize="20"
+                           Margin="5,5,5,10" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="1">
+            <CheckBox Content="Is Used" 
+                      IsChecked="{x:Bind JobType.IsUsed}"/>
+            <controls:ColorPickerButton Name="NewJobColorPickerButton"
+                                        Content="New Job" 
+                                        HorizontalAlignment="Left"
+                                        Color="{x:Bind JobType.NewJobColorWindowUi}"/>
+            <controls:ColorPickerButton Name="AgingJobColorPickerButton"
+                                        Content="Aging Job" 
+                                        HorizontalAlignment="Left"
+                                        Color="{x:Bind JobType.AgingJobColorWindowUi}"/>
+        </StackPanel>
+    </Grid>
 </Page>

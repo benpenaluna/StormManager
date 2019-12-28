@@ -12,6 +12,8 @@ namespace StormManager.UWP.Views.JobTypes
     /// </summary>
     public sealed partial class JobTypesViewMode : Page
     {
+        private double ColorRectangleGridLength => 100.0D;
+
         public JobType JobType
         {
             get => (JobType)GetValue(MyPropertyProperty);

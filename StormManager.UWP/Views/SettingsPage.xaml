@@ -15,9 +15,9 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <behaviors:JobTypeTemplateSelector x:Name="TemplateSelector"
+        <!--<behaviors:JobTypeTemplateSelector x:Name="TemplateSelector"
                                            OriginalTemplate="{StaticResource JobTypeFirstTemplate}"
-                                           AddTemplate ="{StaticResource JobTypesDataTemplate}" />
+                                           AddTemplate ="{StaticResource JobTypesDataTemplate}" />-->
         <converter:ValueWhenConverter x:Name="FalseWhenTrueConverter">
             <converter:ValueWhenConverter.When>
                 <x:Boolean>True</x:Boolean>
@@ -29,7 +29,7 @@
                 <x:Boolean>True</x:Boolean>
             </converter:ValueWhenConverter.Otherwise>
         </converter:ValueWhenConverter>
-        <DataTemplate x:Name="JobTypeFirstTemplate" x:DataType="data:JobType">
+        <!--<DataTemplate x:Name="JobTypeFirstTemplate" x:DataType="data:JobType">
             <Grid>
                 <Grid.RowDefinitions >
                     <RowDefinition Height="*"/>
@@ -42,7 +42,7 @@
                            Grid.Row="0"
                            Grid.Column="0" />
             </Grid>
-        </DataTemplate>
+        </DataTemplate>-->
         
         <DataTemplate x:Name="JobTypesDataTemplate" x:DataType="data:JobType">
             <Grid>
@@ -78,7 +78,8 @@
                 </Rectangle>
                 <TextBlock Text="{x:Bind Category}"
                            Grid.Row="0" Grid.Column="1" 
-                           Padding="2,10,0,0" />
+                           Padding="2,10,0,0"
+                           FontWeight="Bold"/>
                 <TextBlock Text="{x:Bind SubCategory}"
                            Grid.Row="1" Grid.Column="1" 
                            Padding="2,0,0,10"/>
@@ -220,6 +221,7 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
+
                             <AutoSuggestBox x:Uid="AutoSuggestBoxSearch"
                                             Grid.Row="0"
                                             Grid.Column="0"
@@ -254,7 +256,7 @@
                     </SplitView.Pane>
                     
                     <SplitView.Content>
-                        <Frame Content="{x:Bind ViewModel.JobTypesPartViewModel.SelectedFrame}"/>
+                        <Frame Content="{x:Bind ViewModel.JobTypesPartViewModel.SelectedFrame}" />
                     </SplitView.Content>
 
                 </SplitView>

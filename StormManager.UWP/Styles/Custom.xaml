@@ -40,7 +40,10 @@
             <SolidColorBrush x:Key="RadioButtonBorderBrushDisabled" Color="Transparent" />
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled" Color="{StaticResource SystemBaseMediumLowColor}" />
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke" Color="{ThemeResource SystemAccentColor}" />
-            
+
+            <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="#33000000" />
+
+
             <Style TargetType="controls:HamburgerMenu">
                 <Setter Property="HamburgerBackground" Value="{StaticResource SystemAccentColor}" />
                 <Setter Property="HamburgerForeground" Value="White" />
@@ -101,6 +104,8 @@
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled" Color="{StaticResource SystemBaseMediumLowColor}" />
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke" Color="{ThemeResource SystemAccentColor}" />
 
+            <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="{StaticResource CustomColor}" />
+            
             <Style TargetType="controls:HamburgerMenu">
                 <Setter Property="HamburgerBackground" Value="{StaticResource SystemAccentColor}" />
                 <Setter Property="HamburgerForeground" Value="White" />
@@ -156,6 +161,9 @@
             <SolidColorBrush x:Key="RadioButtonBorderBrushDisabled" Color="Transparent" />
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStrokeDisabled" Color="{StaticResource SystemColorGrayTextColor}" />
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke" Color="{ThemeResource SystemColorHighlightColor}" />
+
+            <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="White" />
+
 
             <Style TargetType="controls:HamburgerMenu">
                 <Setter Property="PaneBorderThickness" Value="0" />

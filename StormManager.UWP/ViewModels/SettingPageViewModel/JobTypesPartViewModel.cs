@@ -19,9 +19,10 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         private const int AddButtonId = -1;
 
         private JobType _selectedJobType = new JobType();
+        
         private Frame _selectedFrame = new Frame()
         {
-            Background=(SolidColorBrush)Application.Current.Resources["CustomColorBrush"]
+            Background=(SolidColorBrush)Application.Current.Resources["UnusedPageBackgroundThemeBrush"]
         };
         
         public Frame SelectedFrame
