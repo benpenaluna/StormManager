@@ -16,7 +16,9 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" 
-              Background="{ThemeResource UnusedPageBackgroundThemeBrush}">
+              Background="{ThemeResource UnusedPageBackgroundThemeBrush}"
+              BorderBrush="{ThemeResource SplitViewContentBorderThemeBrush}"
+              BorderThickness="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -40,11 +42,10 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
                 <TextBlock Text="{x:Bind JobType.Category}"
                            TextWrapping="WrapWholeWords" 
-                           FontSize="24"
-                           FontWeight="Bold"
+                           FontSize="24" FontWeight="Bold"
                            Margin="5,10,5,5" />
                 <TextBlock Text="{x:Bind JobType.SubCategory}"
                            TextWrapping="WrapWholeWords"
@@ -53,17 +54,53 @@
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="1">
-            <CheckBox Content="Is Used" 
-                      IsChecked="{x:Bind JobType.IsUsed}"/>
-            <controls:ColorPickerButton Name="NewJobColorPickerButton"
-                                        Content="New Job" 
-                                        HorizontalAlignment="Left"
-                                        Color="{x:Bind JobType.NewJobColorWindowUi}"/>
-            <controls:ColorPickerButton Name="AgingJobColorPickerButton"
-                                        Content="Aging Job" 
-                                        HorizontalAlignment="Left"
-                                        Color="{x:Bind JobType.AgingJobColorWindowUi}"/>
+        <StackPanel Grid.Row="1"
+                    Padding="10"
+                    BorderBrush="{ThemeResource SplitViewContentBorderThemeBrush}"
+                    BorderThickness="1,0,1,1">
+            <Grid Margin="0,10,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Job Type" 
+                           Grid.Column="0"
+                           FontSize="14" FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+                <HyperlinkButton Grid.Column="1" 
+                                 FontSize="14"
+                                 FontWeight="Bold"
+                                 HorizontalAlignment="Right">
+                    <HyperlinkButton.Content>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="&#xE70F;"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="Edit"
+                                       VerticalAlignment="Center"
+                                       Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </HyperlinkButton.Content>
+                </HyperlinkButton>
+            </Grid>
+
+            <Grid BorderBrush="{ThemeResource SplitViewContentBorderThemeBrush}"
+                  BorderThickness="0,1,0,0">
+                <StackPanel>
+                    <CheckBox Content="Is Used" 
+                              IsChecked="{x:Bind JobType.IsUsed}"/>
+                    <controls:ColorPickerButton Name="NewJobColorPickerButton"
+                                                Content="New Job" 
+                                                HorizontalAlignment="Left"
+                                                Color="{x:Bind JobType.NewJobColorWindowUi}"/>
+                    <controls:ColorPickerButton Name="AgingJobColorPickerButton"
+                                                Content="Aging Job" 
+                                                HorizontalAlignment="Left"
+                                                Color="{x:Bind JobType.AgingJobColorWindowUi}"/>
+                </StackPanel>
+            </Grid>
+            
         </StackPanel>
     </Grid>
 </Page>

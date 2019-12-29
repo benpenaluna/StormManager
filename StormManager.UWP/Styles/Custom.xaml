@@ -42,7 +42,7 @@
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke" Color="{ThemeResource SystemAccentColor}" />
 
             <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="#33000000" />
-
+            <SolidColorBrush x:Key="SplitViewContentBorderThemeBrush" Color="Gray" />
 
             <Style TargetType="controls:HamburgerMenu">
                 <Setter Property="HamburgerBackground" Value="{StaticResource SystemAccentColor}" />
@@ -105,8 +105,10 @@
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke" Color="{ThemeResource SystemAccentColor}" />
 
             <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="{StaticResource CustomColor}" />
-            
-            <Style TargetType="controls:HamburgerMenu">
+            <SolidColorBrush x:Key="SplitViewContentBorderThemeBrush" Color="Gray" />
+
+
+<Style TargetType="controls:HamburgerMenu">
                 <Setter Property="HamburgerBackground" Value="{StaticResource SystemAccentColor}" />
                 <Setter Property="HamburgerForeground" Value="White" />
                 <Setter Property="NavAreaBackground" Value="{StaticResource CustomColorBrush}" />
@@ -163,6 +165,7 @@
             <SolidColorBrush x:Key="RadioButtonOuterEllipseCheckedStroke" Color="{ThemeResource SystemColorHighlightColor}" />
 
             <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="White" />
+            <SolidColorBrush x:Key="SplitViewContentBorderThemeBrush" Color="Black" />
 
 
             <Style TargetType="controls:HamburgerMenu">
