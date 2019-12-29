@@ -21,6 +21,8 @@
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="{StaticResource ContrastColor}" />
             <SolidColorBrush x:Key="SystemAccentBrush" Color="{StaticResource SystemAccentColor}" />
 
+            <SolidColorBrush x:Key="MediumBaseThemeBrush" Color="Gray" />
+
             <SolidColorBrush x:Key="TitleBarBackgroundThemeBrush" Color="{StaticResource SystemAccentColor}" />
             <SolidColorBrush x:Key="TitleBarButtonHoverThemeBrush" Color="#FF343434" />
             <SolidColorBrush x:Key="TitleBarButtonPressedThemeBrush" Color="#FF4C4C4C" />
@@ -83,6 +85,8 @@
             <SolidColorBrush x:Key="ExtendedSplashBackground" Color="{StaticResource SystemAccentColor}" />
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="{StaticResource ContrastColor}" />
             <SolidColorBrush x:Key="SystemAccentBrush" Color="{StaticResource SystemAccentColor}" />
+
+            <SolidColorBrush x:Key="MediumBaseThemeBrush" Color="Gray" />
 
             <SolidColorBrush x:Key="TitleBarBackgroundThemeBrush" Color="{StaticResource SystemAccentColor}" />
             <SolidColorBrush x:Key="TitleBarButtonHoverThemeBrush" Color="#FF343434" />
@@ -147,6 +151,8 @@
             <SolidColorBrush x:Key="ExtendedSplashBackground" Color="Black" />
             <SolidColorBrush x:Key="ExtendedSplashForeground" Color="White" />
             <SolidColorBrush x:Key="SystemAccentBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+
+            <SolidColorBrush x:Key="MediumBaseThemeBrush" Color="White" />
 
             <SolidColorBrush x:Key="RadioButtonForeground" Color="{StaticResource SystemColorButtonTextColor}" />
             <SolidColorBrush x:Key="RadioButtonBorderBrush" Color="Transparent" />

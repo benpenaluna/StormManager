@@ -1,9 +1,6 @@
-using System;
 using System.Collections.ObjectModel;
-using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using StormManager.UWP.Models;
 
@@ -13,7 +10,7 @@ namespace StormManager.UWP.Views
     {
         readonly Services.SerializationService.ISerializationService _serializationService;
 
-        private const double _jobTypeContentFrameWidth = 500.0D;
+        private const double JobTypeContentFrameWidth = 500.0D;
 
         public SettingsPage()
         {
@@ -30,8 +27,8 @@ namespace StormManager.UWP.Views
 
         private void JobTypesSplitView_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            JobTypesSplitView.OpenPaneLength = JobTypesSplitView.ActualWidth > _jobTypeContentFrameWidth
-                ? JobTypesSplitView.ActualWidth - _jobTypeContentFrameWidth
+            JobTypesSplitView.OpenPaneLength = JobTypesSplitView.ActualWidth > JobTypeContentFrameWidth
+                ? JobTypesSplitView.ActualWidth - JobTypeContentFrameWidth
                 : 0.0D;
         }
 

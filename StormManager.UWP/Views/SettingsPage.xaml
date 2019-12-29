@@ -228,20 +228,33 @@
                                             QueryIcon="Find"
                                             HorizontalAlignment="Left"
                                             Width="350"
+                                            Margin="0,7,0,0"
                                             TextChanged="AutoSuggestBoxSearch_TextChanged"
                                             SuggestionChosen="AutoSuggestBoxSearch_SuggestionChosen"/>
-                            <StackPanel Grid.Row="0"
-                                        Grid.Column="1"
-                                        Orientation="Horizontal"
-                                        HorizontalAlignment="Right">
-                                <Button FontFamily="Segoe MDL2 Assets"
-                                        Content="&#xE710;"
-                                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            <CommandBar Grid.Row="0" Grid.Column="1"
+                                        FontSize="12"
+                                        Background="Transparent" 
+                                        IsOpen="False"
+                                        DefaultLabelPosition="Right">
+                                <AppBarButton x:Uid="AddJobTypeAppBarButton"
+                                              VerticalAlignment="Center">
+                                    <AppBarButton.Icon>
+                                        <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;"/>
+                                    </AppBarButton.Icon>
                                     <ToolTipService.ToolTip>
                                         <TextBlock x:Uid="AddJobTypeButtonToolTip" />
                                     </ToolTipService.ToolTip>
-                                </Button>
-                            </StackPanel>
+                                </AppBarButton>
+                                <AppBarButton x:Uid="JobTypeExportAppBarButton"
+                                              VerticalAlignment="Center">
+                                    <AppBarButton.Icon>
+                                        <PathIcon Style="{StaticResource ExportPathIconStyle}" />
+                                    </AppBarButton.Icon>
+                                    <ToolTipService.ToolTip>
+                                        <TextBlock x:Uid="JobTypeExportButtonToolTip" />
+                                    </ToolTipService.ToolTip>
+                                </AppBarButton>
+                            </CommandBar>
                             <ListView x:Name="JobTypesListView"
                                       Grid.Row="1"
                                       Grid.Column="0"

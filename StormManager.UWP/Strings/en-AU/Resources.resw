@@ -121,6 +121,10 @@
     <value>About</value>
     <comment>Views.MainPage.PageHeader.SecondaryCommands</comment>
   </data>
+  <data name="AddJobTypeAppBarButton.Label" xml:space="preserve">
+    <value>Add</value>
+    <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
   <data name="AddJobTypeButton.Content" xml:space="preserve">
     <value>Add</value>
     <comment>Views.SettingsPage.JobTypesPivotItem</comment>
@@ -128,6 +132,10 @@
   <data name="AddJobTypeButtonToolTip.Text" xml:space="preserve">
     <value>Add Job Type</value>
     <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="AgeingJobColourTextBlock.Text" xml:space="preserve">
+    <value>Ageing Job Colour</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
   </data>
   <data name="AppDescription" xml:space="preserve">
     <value>Storm Manager faciliates the management of multiple storm operations at a local level.</value>
@@ -149,9 +157,21 @@
     <value>Please wait...</value>
     <comment>Text to be displayed when app is busy</comment>
   </data>
+  <data name="CategoryTextBlock.Text" xml:space="preserve">
+    <value>Category</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
   <data name="DebriefPivotItem.Text" xml:space="preserve">
     <value>Debrief</value>
     <comment>Views.OperationsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="DeleteJobTypeAppBarButton.Label" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="DeleteJobTypeButtonToolTip.Text" xml:space="preserve">
+    <value>DeleteJobType</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
   </data>
   <data name="DutyTimesPivotItem.Text" xml:space="preserve">
     <value>Duty Times</value>
@@ -161,9 +181,37 @@
     <value>Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID={0};Password={1};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework</value>
     <comment>Persistence.Repositories.StormManagerContext</comment>
   </data>
+  <data name="IsUsedCheckBox.Content" xml:space="preserve">
+    <value>Is Used?</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="IsUsedTextBlock.Text" xml:space="preserve">
+    <value>Is Used?</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="JobTypeEditHyperlinkButton.Text" xml:space="preserve">
+    <value>Edit</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="JobTypeExportAppBarButton.Label" xml:space="preserve">
+    <value>Export</value>
+    <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="JobTypeExportButtonToolTip.Text" xml:space="preserve">
+    <value>Export all Job Types</value>
+    <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="JobTypeExportHyperlinkButton.Text" xml:space="preserve">
+    <value>Export</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
   <data name="JobTypesPivotItem.Text" xml:space="preserve">
     <value>Job Types</value>
     <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="JobTypeText.Text" xml:space="preserve">
+    <value>Job Type</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
   </data>
   <data name="KeyFileLocation" xml:space="preserve">
     <value>ms-appx:///Assets/key.txt</value>
@@ -192,6 +240,10 @@
   <data name="MapPivotItem.Text" xml:space="preserve">
     <value>Map</value>
     <comment>Views.OperationsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="NewJobColourTextBlock.Text" xml:space="preserve">
+    <value>New Job Colour</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
   </data>
   <data name="OperationsPageHeader.Content" xml:space="preserve">
     <value>Operations</value>
@@ -261,6 +313,10 @@
     <value>{0} is not a recognised type.</value>
     <comment>Persistence.SqlParameters</comment>
   </data>
+  <data name="StatisticsText.Text" xml:space="preserve">
+    <value>Statistics</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
   <data name="StormManagerContext_GetAllJobTypes" xml:space="preserve">
     <value>GetAllJobTypes</value>
     <comment>Persistence.Repositories.StormManagerContext</comment>
@@ -268,6 +324,10 @@
   <data name="StormManagerContext_GetAll_StoredProcedures" xml:space="preserve">
     <value>GetAll_StoredProcedures</value>
     <comment>Persistence.Repositories.StormManagerContext</comment>
+  </data>
+  <data name="SubCategoryTextBlock.Text" xml:space="preserve">
+    <value>Sub Category</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
   </data>
   <data name="TaskAssignmentPivotItem.Text" xml:space="preserve">
     <value>Task Assignments</value>
