@@ -133,6 +133,10 @@
     <value>Add Job Type</value>
     <comment>Views.SettingsPage.Pivot.PivotItem</comment>
   </data>
+  <data name="AgeingJobColorPickerButton.Content" xml:space="preserve">
+    <value>Ageing Job</value>
+    <comment>Views.JobTypes.JobTypesEditMode</comment>
+  </data>
   <data name="AgeingJobColourTextBlock.Text" xml:space="preserve">
     <value>Ageing Job Colour</value>
     <comment>Views.JobTypes.JobTypesViewMode</comment>
@@ -153,9 +157,16 @@
     <value>Search</value>
     <comment>To be used as the default placeholder text for AutoSuggestBoxes</comment>
   </data>
+  <data name="AvailableStatisticsMessage.Text" xml:space="preserve">
+    <value>Any available statistics will show here</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
   <data name="BusyText" xml:space="preserve">
     <value>Please wait...</value>
     <comment>Text to be displayed when app is busy</comment>
+  </data>
+  <data name="CancelButton.Content" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="CategoryTextBlock.Text" xml:space="preserve">
     <value>Category</value>
@@ -188,6 +199,18 @@
   <data name="IsUsedTextBlock.Text" xml:space="preserve">
     <value>Is Used?</value>
     <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="IsUsedToggleSwitch.OffContent" xml:space="preserve">
+    <value>Users may not use this job type</value>
+    <comment>Views.JobTypes.JobTypesEditMode</comment>
+  </data>
+  <data name="IsUsedToggleSwitch.OnContent" xml:space="preserve">
+    <value>Users may use this job type</value>
+    <comment>Views.JobTypes.JobTypesEditMode</comment>
+  </data>
+  <data name="JobTransitionColoursTextBlock.Text" xml:space="preserve">
+    <value>Job Transition Colours</value>
+    <comment>Views.JobTypes.JobTypesEditMode</comment>
   </data>
   <data name="JobTypeEditHyperlinkButton.Text" xml:space="preserve">
     <value>Edit</value>
@@ -241,9 +264,17 @@
     <value>Map</value>
     <comment>Views.OperationsPage.Pivot.PivotItem</comment>
   </data>
+  <data name="NewJobColorPickerButton.Content" xml:space="preserve">
+    <value>New Job</value>
+    <comment>Views.JobTypes.JobTypesEditMode</comment>
+  </data>
   <data name="NewJobColourTextBlock.Text" xml:space="preserve">
     <value>New Job Colour</value>
     <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="NewJobTypeText.Text" xml:space="preserve">
+    <value>New Job Type</value>
+    <comment>Views.JobTypes.JobTypesEditMode</comment>
   </data>
   <data name="OperationsPageHeader.Content" xml:space="preserve">
     <value>Operations</value>
@@ -272,6 +303,9 @@
   <data name="RfaPivotItem.Text" xml:space="preserve">
     <value>Requests For Assistance</value>
     <comment>Views.OperationsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="SaveButton.Content" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="ServerKeyFileLocation" xml:space="preserve">
     <value>ms-appx:///Assets/serverkey.txt</value>

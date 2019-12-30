@@ -151,6 +151,10 @@
             <Grid BorderBrush="{ThemeResource SplitViewContentBorderThemeBrush}"
                   BorderThickness="0,1,0,0"
                   Padding="0,20,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -176,32 +180,28 @@
                                  FontWeight="Bold"
                                  HorizontalAlignment="Right">
                     <HyperlinkButton.Content>
-                        <StackPanel Orientation="Horizontal" 
-                                    HorizontalAlignment="Center" VerticalAlignment="Center">
-                             <!--<Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>-->
-                            <!--<Canvas Grid.Row="0" 
-                                    Margin="0,0,24,0">
-                                <FontIcon FontSize="16" 
-                                          FontFamily="Segoe MDL2 Assets" Glyph="&#xE7C3;"/>
-                                <FontIcon FontSize="12" FontWeight="ExtraBold"
-                                          FontFamily="Segoe MDL2 Assets" Glyph="&#xE72A;"
-                                          Canvas.Left="10" Canvas.Top="5" />
-                            </Canvas>-->
-                            <!--<TextBlock x:Uid="JobTypeExportHyperlinkButton"
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       Margin="5,0,0,0"/>-->
-                            <PathIcon Style="{StaticResource ExportPathIconStyle}" />
-                            <TextBlock x:Uid="JobTypeExportHyperlinkButton"
-                                       VerticalAlignment="Center"
-                                       Margin="5,0,0,0"/>
-                        </StackPanel>
+                            <Grid HorizontalAlignment="Right">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <PathIcon Grid.Column="0"
+                                          Data="M 1 0 L 1 15 L 12 15 L 12 12 L 6 12 L 6 8 L 12 8 L 12 3 L 10 0 L 1 0 L 1 1
+                                          M 7 9.5 L 15 9.5 L 15 10.5 L 7 10.5 L 7 9.5
+                                          M 15 6 L 19 10 L 15 14"/>
+                                <TextBlock x:Uid="JobTypeExportHyperlinkButton"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           Margin="5,0,0,0"/>
+                            </Grid>
                     </HyperlinkButton.Content>
                 </HyperlinkButton>
-                <!--</StackPanel>-->
+
+                <TextBlock x:Uid="AvailableStatisticsMessage" 
+                           Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                           FontSize="13"
+                           Margin="0,10,0,0"/>
             </Grid>
         </StackPanel>
     </Grid>

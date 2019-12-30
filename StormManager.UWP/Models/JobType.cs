@@ -88,7 +88,14 @@ namespace StormManager.UWP.Models
             }
         }
 
-        public JobType() {}
+        public JobType()
+        {
+            IsUsed = true;
+            
+            // TODO: Consider making the default values configuarable at run--time
+            NewJobColorWindowUi=Windows.UI.Color.FromArgb(255,105,105,105); 
+            AgingJobColorWindowUi = Windows.UI.Color.FromArgb(0,0,0,0);
+        }
 
         public JobType(JobType jobType)
         {

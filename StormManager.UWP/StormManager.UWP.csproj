@@ -326,6 +326,9 @@
     <Compile Include="Views\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\JobTypes\JobTypesEditMode.xaml.cs">
+      <DependentUpon>JobTypesEditMode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\JobTypes\JobTypesViewMode.xaml.cs">
       <DependentUpon>JobTypesViewMode.xaml</DependentUpon>
     </Compile>
@@ -399,6 +402,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\JobTypes\JobTypesEditMode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

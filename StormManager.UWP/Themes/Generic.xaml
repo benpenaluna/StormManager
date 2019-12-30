@@ -1377,11 +1377,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ColorPickerButton">
-                    <StackPanel Margin="10" Width ="100">
+                    <!--<StackPanel Margin="10" Width ="100">-->
+                    <StackPanel>
                         <Button x:Name="BaseButton"
                                 Content="{TemplateBinding Content}"  
-                                FontSize="12"
-                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                                FontSize="{TemplateBinding FontSize}"
+                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}">
                             <FlyoutBase.AttachedFlyout>
                                 <Flyout>
                                     <RelativePanel>

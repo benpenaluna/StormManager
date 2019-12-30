@@ -237,7 +237,8 @@
                                         IsOpen="False"
                                         DefaultLabelPosition="Right">
                                 <AppBarButton x:Uid="AddJobTypeAppBarButton"
-                                              VerticalAlignment="Center">
+                                              VerticalAlignment="Center"
+                                              Click="{x:Bind ViewModel.JobTypesPartViewModel.AddAppBarButton_OnClick}">
                                     <AppBarButton.Icon>
                                         <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;"/>
                                     </AppBarButton.Icon>
