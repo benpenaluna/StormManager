@@ -264,6 +264,7 @@
                                       ItemTemplate="{StaticResource JobTypesDataTemplate}"
                                       ItemContainerStyle="{StaticResource ListViewItemStretchStyle}"
                                       SelectionMode="Single"
+                                      SelectedItem="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType, Mode=OneWay}"
                                       SelectionChanged="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesListView_OnSelectionChanged}"
                                       ScrollViewer.VerticalScrollMode="Auto" />
                         </Grid>

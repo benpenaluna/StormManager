@@ -6,8 +6,13 @@
     xmlns:local="using:StormManager.UWP.Views.JobTypes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:JobTypesEditModePartViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
     <Page.Resources>
         <Style x:Name="PageSectionStyle" TargetType="Grid">
@@ -105,27 +110,29 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0"
-                        Style="{StaticResource PageSubSectionStyle}" >
+                            Style="{StaticResource PageSubSectionStyle}" >
                     <TextBlock x:Uid="CategoryTextBlock"
-                           Style="{StaticResource TextBlockStyle}" />
+                               Style="{StaticResource TextBlockStyle}" />
                     <TextBox x:Name="CategoryTextBox" 
-                         Text="{x:Bind JobType.Category, Mode=TwoWay}"
-                         Style="{StaticResource TextBoxStyle}" />
+                             Text="{x:Bind ViewModel.JobType.Category, Mode=TwoWay}"
+                             Style="{StaticResource TextBoxStyle}"
+                             TextChanged="{x:Bind ViewModel.CategoryTextBox_OnTextChanged}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1"
-                        Style="{StaticResource PageSubSectionStyle}">
+                            Style="{StaticResource PageSubSectionStyle}">
                     <TextBlock x:Uid="SubCategoryTextBlock"
-                           Style="{StaticResource TextBlockStyle}" />
+                               Style="{StaticResource TextBlockStyle}" />
                     <TextBox x:Name="SubCategoryTextBox" 
-                         Text="{x:Bind JobType.SubCategory, Mode=TwoWay}"
-                         Style="{StaticResource TextBoxStyle}" />
+                             Text="{x:Bind ViewModel.JobType.SubCategory, Mode=TwoWay}"
+                             Style="{StaticResource TextBoxStyle}"
+                             TextChanged="{x:Bind ViewModel.SubCategoryTextBox_OnTextChanged}"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2"
-                        Style="{StaticResource PageSubSectionStyle}">
+                            Style="{StaticResource PageSubSectionStyle}">
                     <TextBlock x:Uid="JobTransitionColoursTextBlock"
-                           Style="{StaticResource TextBlockStyle}" />
+                               Style="{StaticResource TextBlockStyle}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -133,28 +140,31 @@
                         </Grid.ColumnDefinitions>
 
                         <controls:ColorPickerButton x:Name="NewJobColorPicker" 
-                                                x:Uid="NewJobColorPickerButton"
-                                                Grid.Column="0"
-                                                Style="{StaticResource ColourPickerButtonStyle}"
-                                                Margin="0,12,5,10"
-                                                Color="{x:Bind JobType.NewJobColorWindowUi, Mode=TwoWay}"/>
+                                                    x:Uid="NewJobColorPickerButton"
+                                                    Grid.Column="0"
+                                                    Style="{StaticResource ColourPickerButtonStyle}"
+                                                    Margin="0,12,5,10"
+                                                    Color="{x:Bind ViewModel.JobType.NewJobColorWindowUi, Mode=TwoWay}"
+                                                    ColorChanged="{x:Bind ViewModel.NewJobColorPicker_OnColorChanged}" />
                         <controls:ColorPickerButton x:Name="AgingJobColorPicker" 
-                                                x:Uid="AgeingJobColorPickerButton" 
-                                                Grid.Column="1"
-                                                Style="{StaticResource ColourPickerButtonStyle}"
-                                                Margin="5,12,0,10"
-                                                Color="{x:Bind JobType.AgingJobColorWindowUi, Mode=TwoWay}"/>
+                                                    x:Uid="AgeingJobColorPickerButton" 
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource ColourPickerButtonStyle}"
+                                                    Margin="5,12,0,10"
+                                                    Color="{x:Bind ViewModel.JobType.AgingJobColorWindowUi, Mode=TwoWay}"
+                                                    ColorChanged="{x:Bind ViewModel.AgingJobColorPicker_OnColorChanged}" />
                     </Grid>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3"
-                        Style="{StaticResource PageSubSectionStyle}">
+                            Style="{StaticResource PageSubSectionStyle}">
                     <TextBlock x:Uid="IsUsedTextBlock"
-                           Style="{StaticResource TextBlockStyle}" />
+                               Style="{StaticResource TextBlockStyle}" />
                     <ToggleSwitch x:Uid="IsUsedToggleSwitch" 
                                   FontSize="14"
-                                  IsOn="{x:Bind JobType.IsUsed, Mode=TwoWay}"
-                                  Margin="0,12,0,10" />
+                                  IsOn="{x:Bind ViewModel.JobType.IsUsed, Mode=TwoWay}"
+                                  Margin="0,12,0,10"
+                                  Toggled="{x:Bind ViewModel.ToggleSwitch_OnToggled}"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
@@ -168,11 +178,14 @@
             <Button x:Uid="SaveButton" 
                     Grid.Column="0"
                     Style="{StaticResource CompletionButtonStyle}"
-                    Margin="5,26,5,12"/>
+                    Background="{ThemeResource SaveButtonBackgroundThemeBrush}"
+                    Margin="5,26,5,12"
+                    IsEnabled="{x:Bind ViewModel.SaveButtonEnabled, Mode=OneWay}" />
             <Button x:Uid="CancelButton"
                     Grid.Column="1"
                     Style="{StaticResource CompletionButtonStyle}"
-                    Margin="5,26,5,12"/>
+                    Margin="5,26,5,12"
+                    Click="{x:Bind ViewModel.CancelButton_OnClick}"/>
         </Grid>
     </Grid>
 </Page>

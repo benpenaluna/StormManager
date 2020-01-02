@@ -120,6 +120,8 @@
     <Compile Include="Common\ChangedEventArgs.cs" />
     <Compile Include="Common\DeferralManager.cs" />
     <Compile Include="Common\DispatcherWrapper.cs" />
+    <Compile Include="Common\Editing\CompletionState.cs" />
+    <Compile Include="Common\Editing\EditCompletion.cs" />
     <Compile Include="Common\EventThrottleHelper.cs" />
     <Compile Include="Common\Exceptions\InternetConnectionUnavailableException.cs" />
     <Compile Include="Common\ExtensionMethods\MapLocationExtensions.cs" />
@@ -313,6 +315,7 @@
     <Compile Include="ViewModels\PlanningPageViewModel\ReconnaissancePartViewModel.cs" />
     <Compile Include="ViewModels\OperationsPageViewModel\RfaPartViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\ISettingsPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingPageViewModel\JobTypesManipulationViewModels\JobTypesEditModePartViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\JobTypesPartViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\SettingsPartViewModel.cs" />

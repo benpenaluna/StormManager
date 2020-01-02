@@ -45,6 +45,7 @@
 
             <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="#33000000" />
             <SolidColorBrush x:Key="SplitViewContentBorderThemeBrush" Color="Gray" />
+            <SolidColorBrush x:Key="SaveButtonBackgroundThemeBrush" Color="{StaticResource SystemAccentColor}" />
 
             <Style TargetType="controls:HamburgerMenu">
                 <Setter Property="HamburgerBackground" Value="{StaticResource SystemAccentColor}" />
@@ -110,9 +111,9 @@
 
             <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="{StaticResource CustomColor}" />
             <SolidColorBrush x:Key="SplitViewContentBorderThemeBrush" Color="Gray" />
-
-
-<Style TargetType="controls:HamburgerMenu">
+            <SolidColorBrush x:Key="SaveButtonBackgroundThemeBrush" Color="{StaticResource SystemAccentColor}" />
+            
+            <Style TargetType="controls:HamburgerMenu">
                 <Setter Property="HamburgerBackground" Value="{StaticResource SystemAccentColor}" />
                 <Setter Property="HamburgerForeground" Value="White" />
                 <Setter Property="NavAreaBackground" Value="{StaticResource CustomColorBrush}" />
@@ -172,7 +173,7 @@
 
             <SolidColorBrush x:Key="UnusedPageBackgroundThemeBrush" Color="White" />
             <SolidColorBrush x:Key="SplitViewContentBorderThemeBrush" Color="Black" />
-
+            <SolidColorBrush x:Key="SaveButtonBackgroundThemeBrush" Color="{StaticResource SystemColorHighlightColor}" />
 
             <Style TargetType="controls:HamburgerMenu">
                 <Setter Property="PaneBorderThickness" Value="0" />

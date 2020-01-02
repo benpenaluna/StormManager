@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -73,6 +74,7 @@ namespace StormManager.UWP.Controls
         private void MyColorPicker_ColorChanged(ColorPicker sender, ColorChangedEventArgs args)
         {
             Color = args.NewColor;
+            ColorChanged?.Invoke(this, args);
         }
 
         private void BaseButton_Tapped(object sender, TappedRoutedEventArgs args)
@@ -84,6 +86,8 @@ namespace StormManager.UWP.Controls
         {
             Color = _originalColor;
         }
+
+        public event TypedEventHandler<object,ColorChangedEventArgs> ColorChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

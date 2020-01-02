@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using StormManager.UWP.Common;
+using StormManager.UWP.Common.Editing;
 using StormManager.UWP.Models;
 using StormManager.UWP.Mvvm;
 using StormManager.UWP.Views.JobTypes;
@@ -17,6 +19,21 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
     public class JobTypesPartViewModel : ViewModelBase
     {
         private const int AddButtonId = -1;
+
+        private static EditCompletion _editModeCompletion;
+        protected static EditCompletion EditModeCompletion
+        {
+            get => _editModeCompletion;
+            set
+            {
+                _editModeCompletion = value;
+
+                if (value == EditCompletion.Complete)
+                    OnEditModeCompleted?.Invoke(new object(), new EventArgs());
+            }
+        }
+
+        protected static CompletionState  EditCompletionState { get; set; }
 
         private JobType _selectedJobType = new JobType();
         
@@ -37,7 +54,6 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             set { _selectedJobType = value; RaisePropertyChanged(); }
         }
 
-
         public static IEnumerable<JobType> PersistedJobTypes;
 
         public ObservableCollection<JobType> JobTypes { get; set; }
@@ -48,6 +64,8 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             AttachEventHandlers();
         }
 
+        public static event EventHandler OnEditModeCompleted; 
+
         private void InitialiseCollections()
         {
             JobTypes = new ObservableCollectionEx<JobType>();
@@ -57,6 +75,17 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             {
                 JobTypes.Add(new JobType(jobType));
             }
+
+            if (JobTypes.Count > 0)
+                SelectedJobType = JobTypes.FirstOrDefault();
+
+            SetEditCompletionProperties();
+        }
+
+        private static void SetEditCompletionProperties()
+        {
+            EditCompletionState = CompletionState.Undetermined;
+            EditModeCompletion = EditCompletion.Incomplete;
         }
 
         private void AttachEventHandlers()
@@ -68,6 +97,36 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
             JobTypes.CollectionChanged += JobTypes_CollectionChanged;
             ((INotifyPropertyChanged) JobTypes).PropertyChanged += JobTypes_PropertyChanged;
+
+            OnEditModeCompleted += JobTypesPartViewModel_EditModeCompleted;
+        }
+
+        private void JobTypesPartViewModel_EditModeCompleted(object sender, EventArgs e)
+        {
+            switch (EditCompletionState)
+            {
+                case CompletionState.Undetermined:
+                
+                case CompletionState.Cancelled:
+                    ResetFrameToViewMode();
+                    break;
+                
+                case CompletionState.Completed:
+                    break;
+                
+                case CompletionState.Deleted:
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            SetEditCompletionProperties();
+        }
+
+        private void ResetFrameToViewMode()
+        {
+            SelectedFrame.Navigate(typeof(JobTypesViewMode), SelectedJobType);
         }
 
         private static void JobTypes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
