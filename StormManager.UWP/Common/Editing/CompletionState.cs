@@ -3,8 +3,9 @@
     public enum CompletionState
     {
         Cancelled,
-        Completed,
+        Addition,
         Deleted,
+        Updated,
         Undetermined
     }
 }

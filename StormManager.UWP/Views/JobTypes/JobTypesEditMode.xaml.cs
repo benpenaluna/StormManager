@@ -1,11 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using StormManager.UWP.Models;
+using StormManager.UWP.Common.Editing;
 using StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationViewModels;
 
 namespace StormManager.UWP.Views.JobTypes
 {
-    public sealed partial class JobTypesEditMode : Page
+    public sealed partial class JobTypesEditMode
     {
         private double ColorRectangleGridLength => 100.0D; 
         
@@ -16,9 +16,10 @@ namespace StormManager.UWP.Views.JobTypes
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter != null && e.Parameter.GetType() == typeof(JobType))
+            if (e.Parameter != null && e.Parameter.GetType() == typeof(JobEdit))
             {
-                ((JobTypesEditModePartViewModel)DataContext).JobType = (JobType) e.Parameter;
+                ((JobTypesEditModePartViewModel)DataContext).JobType = ((JobEdit) e.Parameter).JobType;
+                ((JobTypesEditModePartViewModel)DataContext).CompletionState = ((JobEdit) e.Parameter).CompletionState;
             }
 
             base.OnNavigatedTo(e);

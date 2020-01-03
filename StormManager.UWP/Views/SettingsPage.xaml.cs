@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using StormManager.UWP.Models;
+using StormManager.UWP.ViewModels.SettingPageViewModel;
 
 namespace StormManager.UWP.Views
 {
@@ -30,6 +31,13 @@ namespace StormManager.UWP.Views
             JobTypesSplitView.OpenPaneLength = JobTypesSplitView.ActualWidth > JobTypeContentFrameWidth
                 ? JobTypesSplitView.ActualWidth - JobTypeContentFrameWidth
                 : 0.0D;
+        }
+
+        public void JobTypesListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ((SettingsPageViewModel)DataContext).JobTypesPartViewModel.JobTypesListView_OnSelectionChanged(sender, e);
+            
+            JobTypesListView.ScrollIntoView(JobTypesListView.SelectedItem, ScrollIntoViewAlignment.Leading);
         }
 
         public void AutoSuggestBoxSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -69,7 +77,6 @@ namespace StormManager.UWP.Views
                 return;
 
             JobTypesListView.SelectedItem = args.SelectedItem;
-            JobTypesListView.ScrollIntoView(args.SelectedItem, ScrollIntoViewAlignment.Leading);
         }
     }
 }

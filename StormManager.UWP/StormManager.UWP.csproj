@@ -122,6 +122,8 @@
     <Compile Include="Common\DispatcherWrapper.cs" />
     <Compile Include="Common\Editing\CompletionState.cs" />
     <Compile Include="Common\Editing\EditCompletion.cs" />
+    <Compile Include="Common\Editing\IJobEdit.cs" />
+    <Compile Include="Common\Editing\JobEdit.cs" />
     <Compile Include="Common\EventThrottleHelper.cs" />
     <Compile Include="Common\Exceptions\InternetConnectionUnavailableException.cs" />
     <Compile Include="Common\ExtensionMethods\MapLocationExtensions.cs" />

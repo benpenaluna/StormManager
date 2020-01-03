@@ -9,6 +9,8 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
     {
         private bool _pageLoaded;
 
+        public CompletionState CompletionState { get; set; }
+
         private JobType _jobType;
         public JobType JobType
         {
@@ -84,9 +86,15 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
             return true;
         }
 
+        public void SaveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            EditedJobType = JobType;
+            EditCompletionState = CompletionState;
+            EditModeCompletion = EditCompletion.Complete;
+        }
+
         public void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //EditCompletion.EditingComplete = true;
             EditCompletionState = CompletionState.Cancelled;
             EditModeCompletion = EditCompletion.Complete;
         }

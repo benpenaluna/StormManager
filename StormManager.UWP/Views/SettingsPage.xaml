@@ -7,7 +7,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:StormManager.UWP.ViewModels.SettingPageViewModel"
       xmlns:data="using:StormManager.UWP.Models"
-      xmlns:behaviors="using:StormManager.UWP.Behaviors"
       mc:Ignorable="d">
 
     <Page.DataContext>
@@ -15,9 +14,6 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <!--<behaviors:JobTypeTemplateSelector x:Name="TemplateSelector"
-                                           OriginalTemplate="{StaticResource JobTypeFirstTemplate}"
-                                           AddTemplate ="{StaticResource JobTypesDataTemplate}" />-->
         <converter:ValueWhenConverter x:Name="FalseWhenTrueConverter">
             <converter:ValueWhenConverter.When>
                 <x:Boolean>True</x:Boolean>
@@ -29,20 +25,6 @@
                 <x:Boolean>True</x:Boolean>
             </converter:ValueWhenConverter.Otherwise>
         </converter:ValueWhenConverter>
-        <!--<DataTemplate x:Name="JobTypeFirstTemplate" x:DataType="data:JobType">
-            <Grid>
-                <Grid.RowDefinitions >
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Test"
-                           Grid.Row="0"
-                           Grid.Column="0" />
-            </Grid>
-        </DataTemplate>-->
         
         <DataTemplate x:Name="JobTypesDataTemplate" x:DataType="data:JobType">
             <Grid>
@@ -265,7 +247,7 @@
                                       ItemContainerStyle="{StaticResource ListViewItemStretchStyle}"
                                       SelectionMode="Single"
                                       SelectedItem="{x:Bind ViewModel.JobTypesPartViewModel.SelectedJobType, Mode=OneWay}"
-                                      SelectionChanged="{x:Bind ViewModel.JobTypesPartViewModel.JobTypesListView_OnSelectionChanged}"
+                                      SelectionChanged="{x:Bind JobTypesListView_OnSelectionChanged}"
                                       ScrollViewer.VerticalScrollMode="Auto" />
                         </Grid>
                     </SplitView.Pane>

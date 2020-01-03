@@ -18,9 +18,12 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class JobTypesPartViewModel : ViewModelBase
     {
-        private const int AddButtonId = -1;
+        public static int NewJobId = int.MaxValue; 
+        
+        public static JobType EditedJobType { get; set; }
 
         private static EditCompletion _editModeCompletion;
+        
         protected static EditCompletion EditModeCompletion
         {
             get => _editModeCompletion;
@@ -84,6 +87,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private static void SetEditCompletionProperties()
         {
+            EditedJobType = new JobType();
             EditCompletionState = CompletionState.Undetermined;
             EditModeCompletion = EditCompletion.Incomplete;
         }
@@ -106,15 +110,20 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             switch (EditCompletionState)
             {
                 case CompletionState.Undetermined:
-                
                 case CompletionState.Cancelled:
                     ResetFrameToViewMode();
                     break;
                 
-                case CompletionState.Completed:
+                case CompletionState.Addition:
+                    JobTypes.Add(EditedJobType);
+                    SelectedJobType = EditedJobType;
+                    ResetFrameToViewMode();
                     break;
                 
                 case CompletionState.Deleted:
+                    break;
+
+                case CompletionState.Updated:
                     break;
                 
                 default:
@@ -152,7 +161,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private static bool JobWasUpdated(JobType jobType)
         {
-            return jobType?.Id != AddButtonId && !PersistedJobTypes.Contains(jobType);
+            return !PersistedJobTypes.Contains(jobType);
         }
 
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
@@ -177,7 +186,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         public void AddAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobType());
+            SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(new JobType() { Id=NewJobId-- }, CompletionState.Addition));
         }
     }
 }
