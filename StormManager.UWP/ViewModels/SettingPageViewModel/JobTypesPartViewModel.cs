@@ -71,6 +71,12 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private void InitialiseCollections()
         {
+            InitialiseJobTypesCollection();
+            InitialiseEditCompletionProperties();
+        }
+
+        private void InitialiseJobTypesCollection()
+        {
             JobTypes = new ObservableCollectionEx<JobType>();
 
             PersistedJobTypes = App.UnitOfWork.JobTypes.GetAllJobTypes();
@@ -81,11 +87,9 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
             if (JobTypes.Count > 0)
                 SelectedJobType = JobTypes.FirstOrDefault();
-
-            SetEditCompletionProperties();
         }
 
-        private static void SetEditCompletionProperties()
+        private static void InitialiseEditCompletionProperties()
         {
             EditedJobType = new JobType();
             EditCompletionState = CompletionState.Undetermined;
@@ -109,33 +113,32 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         {
             switch (EditCompletionState)
             {
-                case CompletionState.Undetermined:
-                case CompletionState.Cancelled:
-                    ResetFrameToViewMode();
-                    break;
-                
                 case CompletionState.Addition:
-                    JobTypes.Add(EditedJobType);
-                    SelectedJobType = EditedJobType;
-                    ResetFrameToViewMode();
+                    AddNewJobToCollection();
                     break;
                 
-                case CompletionState.Deleted:
-                    break;
-
                 case CompletionState.Updated:
                     break;
-                
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
-            
-            SetEditCompletionProperties();
+
+            ResetFrameToViewMode();
+            ResetEditCompletionProperties();
+        }
+
+        private void AddNewJobToCollection()
+        {
+            JobTypes.Add(EditedJobType);
+            SelectedJobType = EditedJobType;
         }
 
         private void ResetFrameToViewMode()
         {
             SelectedFrame.Navigate(typeof(JobTypesViewMode), SelectedJobType);
+        }
+
+        private static void ResetEditCompletionProperties()
+        {
+            InitialiseEditCompletionProperties();
         }
 
         private static void JobTypes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
