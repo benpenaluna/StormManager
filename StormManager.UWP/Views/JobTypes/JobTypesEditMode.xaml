@@ -144,14 +144,22 @@
                                                     Style="{StaticResource ColourPickerButtonStyle}"
                                                     Margin="0,12,5,10"
                                                     Color="{x:Bind ViewModel.JobType.NewJobColorWindowUi, Mode=TwoWay}"
-                                                    ColorChanged="{x:Bind ViewModel.NewJobColorPicker_OnColorChanged}" />
+                                                    ColorChanged="{x:Bind ViewModel.NewJobColorPicker_OnColorChanged}">
+                            <ToolTipService.ToolTip>
+                                <TextBlock x:Uid="NewJobColorPickerButtonToolTip" />
+                            </ToolTipService.ToolTip>
+                        </controls:ColorPickerButton>
                         <controls:ColorPickerButton x:Name="AgingJobColorPicker" 
                                                     x:Uid="AgeingJobColorPickerButton" 
                                                     Grid.Column="1"
                                                     Style="{StaticResource ColourPickerButtonStyle}"
                                                     Margin="5,12,0,10"
                                                     Color="{x:Bind ViewModel.JobType.AgingJobColorWindowUi, Mode=TwoWay}"
-                                                    ColorChanged="{x:Bind ViewModel.AgingJobColorPicker_OnColorChanged}" />
+                                                    ColorChanged="{x:Bind ViewModel.AgingJobColorPicker_OnColorChanged}">
+                            <ToolTipService.ToolTip>
+                                <TextBlock x:Uid="AgingJobColorPickerButtonToolTip" />
+                            </ToolTipService.ToolTip>
+                        </controls:ColorPickerButton>
                     </Grid>
                 </StackPanel>
 

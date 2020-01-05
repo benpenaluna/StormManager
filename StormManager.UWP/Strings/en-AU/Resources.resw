@@ -141,6 +141,10 @@
     <value>Ageing Job Colour</value>
     <comment>Views.JobTypes.JobTypesViewMode</comment>
   </data>
+  <data name="AgingJobColorPickerButtonToolTip.Text" xml:space="preserve">
+    <value>The colour that this job type will transition to as it ages</value>
+    <comment>Views.JobTypes.JobTypesEditMode</comment>
+  </data>
   <data name="AppDescription" xml:space="preserve">
     <value>Storm Manager faciliates the management of multiple storm operations at a local level.</value>
     <comment>Description of the app</comment>
@@ -266,6 +270,10 @@
   </data>
   <data name="NewJobColorPickerButton.Content" xml:space="preserve">
     <value>New Job</value>
+    <comment>Views.JobTypes.JobTypesEditMode</comment>
+  </data>
+  <data name="NewJobColorPickerButtonToolTip.Text" xml:space="preserve">
+    <value>The colour the new job will display as when created</value>
     <comment>Views.JobTypes.JobTypesEditMode</comment>
   </data>
   <data name="NewJobColourTextBlock.Text" xml:space="preserve">
