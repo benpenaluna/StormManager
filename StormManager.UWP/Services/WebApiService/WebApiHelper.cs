@@ -71,7 +71,7 @@ namespace StormManager.UWP.Services.WebApiService
                         {
                             cmd.Parameters.AddRange(payload.GetSqlParameters());
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.ExecuteNonQuery();
+                            await cmd.ExecuteNonQueryAsync();
                         }
                     }
                 }

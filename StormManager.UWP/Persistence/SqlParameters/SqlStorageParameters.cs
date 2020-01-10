@@ -22,7 +22,7 @@ namespace StormManager.UWP.Persistence.SqlParameters
             // TODO: find a way to remove literal strings here. If this changes in the future then we don't want to be updating this class
             return new[]
             {
-                new SqlParameter("@id", SqlDbType.Int) {Value = payload.Id},
+                //new SqlParameter("@id", SqlDbType.Int) {Value = payload.Id},
                 new SqlParameter("@category", SqlDbType.NVarChar) {Value = payload.Category},
                 new SqlParameter("@subCategory", SqlDbType.NVarChar) {Value = payload.SubCategory},
                 new SqlParameter("@isUsed", SqlDbType.Bit) {Value = payload.IsUsed},

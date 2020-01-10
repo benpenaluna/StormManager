@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using StormManager.UWP.Common.Editing;
 using StormManager.UWP.Models;
@@ -88,6 +89,9 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
 
         public void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
+            JobType.DateUpdated = DateTime.UtcNow;
+            JobType.UpdatedBy = "sqladmin"; // TODO: Update 'sqladmin' to the logged on user when user is created
+            
             EditedJobType = JobType;
             EditCompletionState = CompletionState;
             EditModeCompletion = EditCompletion.Complete;

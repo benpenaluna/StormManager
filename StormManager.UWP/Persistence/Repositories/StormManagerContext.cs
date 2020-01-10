@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Models;
@@ -50,22 +52,39 @@ namespace StormManager.UWP.Persistence.Repositories
 
         private async Task<RepoSet<TEntity>> InitialiseRepoSet<TEntity>(string storedProcedureName) where TEntity : class, INotifyPropertyChanged
         {
-            var repoSet = new RepoSet<TEntity>
+            IEnumerable<TEntity> entityCollection;
+            try
+            {
+                entityCollection = await WebApiService.GetAsync<TEntity>(storedProcedureName);  
+            }
+            catch (InternetConnectionUnavailableException)
+            {
+                return InitialiseFromLocalDatabase<TEntity>();
+            }
+
+            if (entityCollection == null)
+                return InitialiseFromLocalDatabase<TEntity>();
+
+            return new RepoSet<TEntity>(entityCollection)
             {
                 AddStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Insertion),
                 UpdateStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Update),
                 DeleteStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Deletion)
             };
 
-            try
-            {
-                var entityCollection = await WebApiService.GetAsync<TEntity>(storedProcedureName);  
-                return entityCollection != null ? new RepoSet<TEntity>(entityCollection): new RepoSet<TEntity>();
-            }
-            catch (InternetConnectionUnavailableException)
-            {
-                return new RepoSet<TEntity>(); // TODO: Load data from Local SqlLite database once configured
-            }
+        }
+
+        private static RepoSet<TEntity> InitialiseFromLocalDatabase<TEntity>() where TEntity : class, INotifyPropertyChanged
+        {
+            return new RepoSet<TEntity>(); 
+            
+            // TODO: Load data from Local SqlLite database once configured
+            // TODO: Initialise StoredProcedureNames
+        }
+
+        public override async Task<int> SaveChangesAsync()
+        {
+            return await SaveChangesAsync(JobTypes); // TODO: Determine what to do when there are more RepoSets
         }
 
         public override RepoSet<TEntity> Set<TEntity>()

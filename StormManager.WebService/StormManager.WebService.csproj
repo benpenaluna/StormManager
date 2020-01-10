@@ -158,6 +158,30 @@
     <Compile Include="Migrations\201908261056281_ChangeGetAll_StoredProcedures_Procedure.Designer.cs">
       <DependentUpon>201908261056281_ChangeGetAll_StoredProcedures_Procedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001051019521_UpdateAddJobTypeStoredProcedure1.cs" />
+    <Compile Include="Migrations\202001051019521_UpdateAddJobTypeStoredProcedure1.Designer.cs">
+      <DependentUpon>202001051019521_UpdateAddJobTypeStoredProcedure1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001051033190_UpdateAddJobTypeStoredProcedure2.cs" />
+    <Compile Include="Migrations\202001051033190_UpdateAddJobTypeStoredProcedure2.Designer.cs">
+      <DependentUpon>202001051033190_UpdateAddJobTypeStoredProcedure2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001051046323_UpdateAddJobTypeStoredProcedure3.cs" />
+    <Compile Include="Migrations\202001051046323_UpdateAddJobTypeStoredProcedure3.Designer.cs">
+      <DependentUpon>202001051046323_UpdateAddJobTypeStoredProcedure3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001051057206_UpdateAddJobTypeStoredProcedure4.cs" />
+    <Compile Include="Migrations\202001051057206_UpdateAddJobTypeStoredProcedure4.Designer.cs">
+      <DependentUpon>202001051057206_UpdateAddJobTypeStoredProcedure4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001100915273_CorrectJobTypesIdProperties.cs" />
+    <Compile Include="Migrations\202001100915273_CorrectJobTypesIdProperties.Designer.cs">
+      <DependentUpon>202001100915273_CorrectJobTypesIdProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001100924332_RecreateJobTypesTableWithIdentity.cs" />
+    <Compile Include="Migrations\202001100924332_RecreateJobTypesTableWithIdentity.Designer.cs">
+      <DependentUpon>202001100924332_RecreateJobTypesTableWithIdentity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -237,6 +261,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908261056281_ChangeGetAll_StoredProcedures_Procedure.resx">
       <DependentUpon>201908261056281_ChangeGetAll_StoredProcedures_Procedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051019521_UpdateAddJobTypeStoredProcedure1.resx">
+      <DependentUpon>202001051019521_UpdateAddJobTypeStoredProcedure1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051033190_UpdateAddJobTypeStoredProcedure2.resx">
+      <DependentUpon>202001051033190_UpdateAddJobTypeStoredProcedure2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051046323_UpdateAddJobTypeStoredProcedure3.resx">
+      <DependentUpon>202001051046323_UpdateAddJobTypeStoredProcedure3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001051057206_UpdateAddJobTypeStoredProcedure4.resx">
+      <DependentUpon>202001051057206_UpdateAddJobTypeStoredProcedure4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001100915273_CorrectJobTypesIdProperties.resx">
+      <DependentUpon>202001100915273_CorrectJobTypesIdProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001100924332_RecreateJobTypesTableWithIdentity.resx">
+      <DependentUpon>202001100924332_RecreateJobTypesTableWithIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
