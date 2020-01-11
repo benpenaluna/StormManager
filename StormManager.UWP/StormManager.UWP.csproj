@@ -318,6 +318,7 @@
     <Compile Include="ViewModels\OperationsPageViewModel\RfaPartViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\ISettingsPageViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\JobTypesManipulationViewModels\JobTypesEditModePartViewModel.cs" />
+    <Compile Include="ViewModels\SettingPageViewModel\JobTypesManipulationViewModels\JobTypesViewModePartViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\JobTypesPartViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\SettingPageViewModel\SettingsPartViewModel.cs" />

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -51,6 +52,20 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             set { _selectedFrame = value; RaisePropertyChanged(); }
         }
 
+        private static bool _navigateToEditMode;
+
+        protected static bool NavigateToEditMode
+        {
+            get => _navigateToEditMode;
+            set
+            {
+                _navigateToEditMode = value;
+
+                if (value)
+                    NavigateToEditMode_OnChange?.Invoke(new object(), new EventArgs());
+            }
+        }
+
         public JobType SelectedJobType
         {
             get => _selectedJobType;
@@ -68,6 +83,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         }
 
         public static event EventHandler OnEditModeCompleted; 
+        protected static event EventHandler NavigateToEditMode_OnChange;
 
         private void InitialiseCollections()
         {
@@ -107,6 +123,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             ((INotifyPropertyChanged) JobTypes).PropertyChanged += JobTypes_PropertyChanged;
 
             OnEditModeCompleted += JobTypesPartViewModel_EditModeCompleted;
+            NavigateToEditMode_OnChange += NavigateToEditMode_OnChanged;
         }
 
         private void JobTypesPartViewModel_EditModeCompleted(object sender, EventArgs e)
@@ -123,6 +140,14 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
             ResetFrameToViewMode();
             ResetEditCompletionProperties();
+        }
+
+        private void NavigateToEditMode_OnChanged(object sender, EventArgs e)
+        {
+            if (NavigateToEditMode)
+                SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(SelectedJobType, CompletionState.Updated));
+            
+            NavigateToEditMode = false;
         }
 
         private void AddNewJobToCollection()

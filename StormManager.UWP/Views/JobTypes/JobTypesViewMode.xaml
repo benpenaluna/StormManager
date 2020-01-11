@@ -6,8 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:StormManager.UWP.Controls"
+    xmlns:vm="using:StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:JobTypesViewModePartViewModel x:Name="ViewModel" />
+    </Page.DataContext>
 
     <Grid x:Name="JobTypesContent">
         <Grid.RowDefinitions>
@@ -89,10 +94,12 @@
                            Grid.Row="0" Grid.Column="0"
                            FontSize="15" FontWeight="Bold"
                            VerticalAlignment="Center"/>
-                <HyperlinkButton Grid.Row ="0" Grid.Column="1" 
+                <HyperlinkButton x:Name="EditHyperlinkButton" 
+                                 Grid.Row ="0" Grid.Column="1" 
                                  FontSize="14"
                                  FontWeight="Bold"
-                                 HorizontalAlignment="Right">
+                                 HorizontalAlignment="Right"
+                                 Click="{x:Bind ViewModel.EditHyperlinkButton_OnClick}">
                     <HyperlinkButton.Content>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="&#xE70F;"
