@@ -228,6 +228,16 @@
                                         <TextBlock x:Uid="AddJobTypeButtonToolTip" />
                                     </ToolTipService.ToolTip>
                                 </AppBarButton>
+                                <AppBarButton x:Uid="FilterJobTypeAppBarButton"
+                                              VerticalAlignment="Center"
+                                              Click="{x:Bind ViewModel.JobTypesPartViewModel.FilterAppBarButton_OnClick}">
+                                    <AppBarButton.Icon>
+                                        <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE71C;"/>
+                                    </AppBarButton.Icon>
+                                    <ToolTipService.ToolTip>
+                                        <TextBlock x:Uid="FilterJobTypeButtonToolTip" />
+                                    </ToolTipService.ToolTip>
+                                </AppBarButton>
                                 <AppBarButton x:Uid="JobTypeExportAppBarButton"
                                               VerticalAlignment="Center">
                                     <AppBarButton.Icon>

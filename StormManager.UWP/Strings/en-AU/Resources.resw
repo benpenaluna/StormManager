@@ -200,6 +200,14 @@
     <value>Server=tcp:stormmanagerserver.database.windows.net,1433;Initial Catalog=StormManager;Persist Security Info=False;User ID={0};Password={1};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;App=EntityFramework</value>
     <comment>Persistence.Repositories.StormManagerContext</comment>
   </data>
+  <data name="FilterJobTypeAppBarButton.Label" xml:space="preserve">
+    <value>Filter</value>
+    <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
+  <data name="FilterJobTypeButtonToolTip.Text" xml:space="preserve">
+    <value>Filter Job Types</value>
+    <comment>Views.SettingsPage.Pivot.PivotItem</comment>
+  </data>
   <data name="IsUsedCheckBox.Content" xml:space="preserve">
     <value>Is Used?</value>
     <comment>Views.JobTypes.JobTypesViewMode</comment>

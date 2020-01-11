@@ -211,10 +211,15 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
             SelectedFrame.Navigate(typeof(JobTypesViewMode), SelectedJobType);
         }
-
+        
         public void AddAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
             SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(new JobType() { Id=NewJobId-- }, CompletionState.Addition));
+        }
+
+        public void FilterAppBarButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
