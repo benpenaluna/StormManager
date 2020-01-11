@@ -63,7 +63,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:Uid="NewJobTypeText"
+            <TextBlock Text="{x:Bind ViewModel.TitleText, Mode=OneWay}"
                        Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                        FontWeight="Bold"
                        VerticalAlignment="Center"

@@ -62,7 +62,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
                 _navigateToEditMode = value;
 
                 if (value)
-                    NavigateToEditMode_OnChange?.Invoke(new object(), new EventArgs());
+                    NavigateToEditModeOnChange?.Invoke(new object(), new EventArgs());
             }
         }
 
@@ -83,7 +83,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         }
 
         public static event EventHandler OnEditModeCompleted; 
-        protected static event EventHandler NavigateToEditMode_OnChange;
+        protected static event EventHandler NavigateToEditModeOnChange;
 
         private void InitialiseCollections()
         {
@@ -123,7 +123,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             ((INotifyPropertyChanged) JobTypes).PropertyChanged += JobTypes_PropertyChanged;
 
             OnEditModeCompleted += JobTypesPartViewModel_EditModeCompleted;
-            NavigateToEditMode_OnChange += NavigateToEditMode_OnChanged;
+            NavigateToEditModeOnChange += NavigateToEditMode_OnChanged;
         }
 
         private void JobTypesPartViewModel_EditModeCompleted(object sender, EventArgs e)

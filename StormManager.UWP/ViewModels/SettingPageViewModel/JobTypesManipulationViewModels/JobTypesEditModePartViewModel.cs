@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using StormManager.UWP.Common.Editing;
 using StormManager.UWP.Models;
+using StormManager.UWP.Services.ResourceLoaderService;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationViewModels
 {
@@ -10,7 +11,17 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
     {
         private bool _pageLoaded;
 
-        public CompletionState CompletionState { get; set; }
+        private CompletionState  _completionState;
+
+        public CompletionState CompletionState
+        {
+            get => _completionState;
+            set
+            {
+                _completionState = value;
+                UpdateTitleText();
+            }
+        }
 
         private JobType _jobType;
         public JobType JobType
@@ -25,7 +36,15 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
             get => _saveButtonEnabled;
             set { _saveButtonEnabled = value; RaisePropertyChanged(); }
         }
-        
+
+        private string _titleText;
+
+        public string TitleText
+        {
+            get => _titleText;
+            set { _titleText = value; RaisePropertyChanged(); }
+        }
+
         public JobTypesEditModePartViewModel()
         {
             InitialiseProperties();
@@ -45,6 +64,11 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
         private void EnableSaveButton()
         {
             SaveButtonEnabled = true;
+        }
+
+        private void UpdateTitleText()
+        {
+            TitleText = ResourceLoaderService.GetResourceValue(CompletionState == CompletionState.Updated ? "EditJobTypeTitleText" : "NewJobTypeTitleText");
         }
 
         public void CategoryTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
