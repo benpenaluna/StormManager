@@ -119,12 +119,16 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
             EditedJobType = JobType;
             EditCompletionState = CompletionState;
             EditModeCompletion = EditCompletion.Complete;
+
+            NavigateToEditMode = false;
         }
 
         public void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
             EditCompletionState = CompletionState.Cancelled;
             EditModeCompletion = EditCompletion.Complete;
+
+            NavigateToEditMode = false;
         }
     }
 }

@@ -145,8 +145,6 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         {
             if (NavigateToEditMode)
                 SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(SelectedJobType, CompletionState.Updated));
-            
-            NavigateToEditMode = false;
         }
 
         private void AddNewJobToCollection()
