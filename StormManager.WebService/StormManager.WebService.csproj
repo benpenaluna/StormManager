@@ -182,6 +182,10 @@
     <Compile Include="Migrations\202001100924332_RecreateJobTypesTableWithIdentity.Designer.cs">
       <DependentUpon>202001100924332_RecreateJobTypesTableWithIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.cs" />
+    <Compile Include="Migrations\202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.Designer.cs">
+      <DependentUpon>202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -279,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001100924332_RecreateJobTypesTableWithIdentity.resx">
       <DependentUpon>202001100924332_RecreateJobTypesTableWithIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.resx">
+      <DependentUpon>202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
