@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,7 +18,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class JobTypesPartViewModel : ViewModelBase
     {
-        public static int NewJobId = int.MaxValue; 
+        public static int NewJobId = int.MinValue; 
         
         public static JobType EditedJobType { get; set; }
 
@@ -214,7 +213,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         
         public void AddAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(new JobType() { Id=NewJobId-- }, CompletionState.Addition));
+            SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(new JobType() { Id=NewJobId++ }, CompletionState.Addition));
         }
 
         public void FilterAppBarButton_OnClick(object sender, RoutedEventArgs e)

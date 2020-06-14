@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using StormManager.UWP.Models;
@@ -17,12 +18,16 @@ namespace StormManager.UWP.Persistence.SqlParameters
             throw new ArgumentException(string.Format(message, typeof(T)));
         }
 
+        private static SqlParameter[] GetJobTypeSqlParameters_Add(JobType payload)
+        {
+            return GetJobTypeSqlParameters(payload);
+        }
+        
         private static SqlParameter[] GetJobTypeSqlParameters(JobType payload)
         {
             // TODO: find a way to remove literal strings here. If this changes in the future then we don't want to be updating this class
-            return new[]
+            var parameters = new List<SqlParameter>()
             {
-                //new SqlParameter("@id", SqlDbType.Int) {Value = payload.Id},
                 new SqlParameter("@category", SqlDbType.NVarChar) {Value = payload.Category},
                 new SqlParameter("@subCategory", SqlDbType.NVarChar) {Value = payload.SubCategory},
                 new SqlParameter("@isUsed", SqlDbType.Bit) {Value = payload.IsUsed},
@@ -31,6 +36,11 @@ namespace StormManager.UWP.Persistence.SqlParameters
                 new SqlParameter("@dateUpdated", SqlDbType.DateTime) {Value = payload.DateUpdated},
                 new SqlParameter("@updatedBy", SqlDbType.NVarChar) {Value = payload.UpdatedBy}
             };
+
+            if (payload.Id >= 0)
+                parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = payload.Id });
+
+            return parameters.ToArray();
         }
     }
 }
