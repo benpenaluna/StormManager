@@ -115,14 +115,17 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         {
             foreach (var jobType in JobTypes)
             {
-                jobType.PropertyChanged += JobTypes_PropertyChanged;
+               jobType.PropertyChanged += JobTypes_PropertyChanged;
             }
 
             JobTypes.CollectionChanged += JobTypes_CollectionChanged;
             ((INotifyPropertyChanged) JobTypes).PropertyChanged += JobTypes_PropertyChanged;
 
-            OnEditModeCompleted += JobTypesPartViewModel_EditModeCompleted;
-            NavigateToEditModeOnChange += NavigateToEditMode_OnChanged;
+            if (OnEditModeCompleted is null)
+                OnEditModeCompleted += new WeakEventHandler<EventArgs>(JobTypesPartViewModel_EditModeCompleted).Handler;
+            
+            if (NavigateToEditModeOnChange is null)
+                NavigateToEditModeOnChange += new WeakEventHandler<EventArgs>(NavigateToEditMode_OnChanged).Handler;
         }
 
         private void JobTypesPartViewModel_EditModeCompleted(object sender, EventArgs e)
@@ -144,7 +147,9 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         private void NavigateToEditMode_OnChanged(object sender, EventArgs e)
         {
             if (NavigateToEditMode)
+            {
                 SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(SelectedJobType, CompletionState.Updated));
+            }
         }
 
         private void AddNewJobToCollection()

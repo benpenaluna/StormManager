@@ -140,6 +140,7 @@
     <Compile Include="Common\StateItems.cs" />
     <Compile Include="Common\TemplatePartNotFoundException.cs" />
     <Compile Include="Common\TypedEventHandler.cs" />
+    <Compile Include="Common\WeakEventHandler.cs" />
     <Compile Include="Common\WeakReference.cs" />
     <Compile Include="Common\WindowWrapper.cs" />
     <Compile Include="Controls\ColorPickerButton.cs" />
