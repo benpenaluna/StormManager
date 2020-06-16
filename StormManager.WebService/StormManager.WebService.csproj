@@ -186,6 +186,10 @@
     <Compile Include="Migrations\202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.Designer.cs">
       <DependentUpon>202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006162337477_CreateDeleteJobTypeStoredProcedure.cs" />
+    <Compile Include="Migrations\202006162337477_CreateDeleteJobTypeStoredProcedure.Designer.cs">
+      <DependentUpon>202006162337477_CreateDeleteJobTypeStoredProcedure.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -286,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.resx">
       <DependentUpon>202001171018118_AddKeyInParametersColumnToGetAllStoredProcedures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006162337477_CreateDeleteJobTypeStoredProcedure.resx">
+      <DependentUpon>202006162337477_CreateDeleteJobTypeStoredProcedure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
