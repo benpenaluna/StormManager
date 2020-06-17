@@ -190,6 +190,10 @@
     <Compile Include="Migrations\202006162337477_CreateDeleteJobTypeStoredProcedure.Designer.cs">
       <DependentUpon>202006162337477_CreateDeleteJobTypeStoredProcedure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006170001433_InsertDeleteJobTypesIntoRoutines.cs" />
+    <Compile Include="Migrations\202006170001433_InsertDeleteJobTypesIntoRoutines.Designer.cs">
+      <DependentUpon>202006170001433_InsertDeleteJobTypesIntoRoutines.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StormManagerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -293,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006162337477_CreateDeleteJobTypeStoredProcedure.resx">
       <DependentUpon>202006162337477_CreateDeleteJobTypeStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006170001433_InsertDeleteJobTypesIntoRoutines.resx">
+      <DependentUpon>202006170001433_InsertDeleteJobTypesIntoRoutines.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
