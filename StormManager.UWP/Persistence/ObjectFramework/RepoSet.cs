@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using StormManager.UWP.Common;
+using StormManager.UWP.Common.SqlTransactions;
 
 namespace StormManager.UWP.Persistence.ObjectFramework
 {
@@ -45,7 +46,7 @@ namespace StormManager.UWP.Persistence.ObjectFramework
         private void ItemOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (!RepoChanges.QueueContains(sender))
-                RepoChanges.Changes.Enqueue(new StateChange(sender, DataManipulation.Update));
+                RepoChanges.Changes.Enqueue(new StateChange(sender, SqlTransactionType.Update));
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -60,9 +61,11 @@ namespace StormManager.UWP.Persistence.ObjectFramework
                 if (!(addedItem is TEntity entity) || RepoChanges.QueueContains(entity))
                     continue;
 
-                RepoChanges.Changes.Enqueue(new StateChange(entity, DataManipulation.Insertion));
+                RepoChanges.Changes.Enqueue(new StateChange(entity, SqlTransactionType.Insertion));
                 entity.PropertyChanged += ItemOnPropertyChanged;
             }
+
+            // TODO: Update for deleted items
         }
     }
 }

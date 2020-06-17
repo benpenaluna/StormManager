@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Autofac;
+using StormManager.UWP.Common.SqlTransactions;
 using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Persistence.ObjectFramework
@@ -56,18 +57,18 @@ namespace StormManager.UWP.Persistence.ObjectFramework
             return stateEntriesWritten;
         }
 
-        private static string DetermineStoredProcedureName<TEntity>(RepoSet<TEntity> repoSet, StateChange nextChange) where TEntity : class, INotifyPropertyChanged
+        private static StoredProcedureAttributes DetermineStoredProcedureName<TEntity>(RepoSet<TEntity> repoSet, StateChange nextChange) where TEntity : class, INotifyPropertyChanged
         {
             switch (nextChange.DataManipulation)
             {
-                case DataManipulation.Insertion:
-                    return repoSet.AddStoredProcedureName;
+                case SqlTransactionType.Insertion:
+                    return new StoredProcedureAttributes(repoSet.AddStoredProcedureName, SqlTransactionType.Insertion);
 
-                case DataManipulation.Update:
-                    return repoSet.UpdateStoredProcedureName;
+                case SqlTransactionType.Update:
+                    return new StoredProcedureAttributes(repoSet.UpdateStoredProcedureName, SqlTransactionType.Update);
 
-                case DataManipulation.Deletion:
-                    return repoSet.DeleteStoredProcedureName;
+                case SqlTransactionType.Deletion:
+                    return new StoredProcedureAttributes(repoSet.DeleteStoredProcedureName, SqlTransactionType.Deletion);
 
                 default:
                     throw new ArgumentOutOfRangeException();

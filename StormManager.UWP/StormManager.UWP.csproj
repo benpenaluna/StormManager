@@ -136,6 +136,7 @@
     <Compile Include="Common\ObservableCollectionEx.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\ObservableItemCollection.cs" />
+    <Compile Include="Common\SqlTransactions\SqlTransactionType.cs" />
     <Compile Include="Common\StateItemKey.cs" />
     <Compile Include="Common\StateItems.cs" />
     <Compile Include="Common\TemplatePartNotFoundException.cs" />
@@ -207,8 +208,8 @@
     <Compile Include="Mvvm\IBindable.cs" />
     <Compile Include="Mvvm\IChangedCommand.cs" />
     <Compile Include="Mvvm\ViewModelBase.cs" />
-    <Compile Include="Persistence\ObjectFramework\DataManipulation.cs" />
     <Compile Include="Persistence\ObjectFramework\RepoChanges.cs" />
+    <Compile Include="Services\WebApiService\StoredProcedureAttributes.cs" />
     <Compile Include="Services\StoredProcedureService\IStoredProcedureHelper.cs" />
     <Compile Include="Services\StoredProcedureService\IStoredProcedureService.cs" />
     <Compile Include="Services\StoredProcedureService\StoredProcedureHelper.cs" />

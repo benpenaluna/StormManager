@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using StormManager.UWP.Persistence.ObjectFramework;
+using StormManager.UWP.Common.SqlTransactions;
 using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Services.StoredProcedureService
@@ -24,9 +24,9 @@ namespace StormManager.UWP.Services.StoredProcedureService
             return this;
         }
 
-        public string GetStoredProcedureName(Type entity, DataManipulation dataManipulationType)
+        public string GetStoredProcedureName(Type entity, SqlTransactionType sqlTransactionType)
         {
-            return Helper.GetStoredProcedureName(entity, dataManipulationType);
+            return Helper.GetStoredProcedureName(entity, sqlTransactionType);
         }
     }
 }

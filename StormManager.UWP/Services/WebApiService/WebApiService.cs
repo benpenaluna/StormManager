@@ -28,11 +28,11 @@ namespace StormManager.UWP.Services.WebApiService
             return null;
         }
 
-        public async Task PutAsync<T>(string storedProcedureName, T payload)
+        public async Task PutAsync<T>(StoredProcedureAttributes storedProcedureAttributes, T payload)
         {
             try
             {
-                await Helper.PutAsync(storedProcedureName, payload);
+                await Helper.PutAsync(storedProcedureAttributes, payload);
             }
             catch (ArgumentException e)
             {

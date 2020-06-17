@@ -57,7 +57,7 @@ namespace StormManager.UWP.Services.WebApiService
             return null;
         }
 
-        public async Task PutAsync<T>(string storedProcedureName, T payload)
+        public async Task PutAsync<T>(StoredProcedureAttributes storedProcedureAttributes, T payload)
         {
             try
             {
@@ -67,9 +67,9 @@ namespace StormManager.UWP.Services.WebApiService
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        using (var cmd = new SqlCommand(storedProcedureName, conn))
+                        using (var cmd = new SqlCommand(storedProcedureAttributes.StoredProcedureName, conn))
                         {
-                            cmd.Parameters.AddRange(payload.GetSqlParameters());
+                            cmd.Parameters.AddRange(payload.GetSqlParameters(storedProcedureAttributes.TransactionType));
                             cmd.CommandType = CommandType.StoredProcedure;
                             await cmd.ExecuteNonQueryAsync();
                         }

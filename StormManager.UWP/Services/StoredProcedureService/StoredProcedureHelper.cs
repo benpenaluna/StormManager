@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StormManager.Standard.Models.InformationSchema;
-using StormManager.UWP.Persistence.ObjectFramework;
+using StormManager.UWP.Common.SqlTransactions;
 using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Services.StoredProcedureService
@@ -32,13 +32,13 @@ namespace StormManager.UWP.Services.StoredProcedureService
             return this;
         }
 
-        public string GetStoredProcedureName(Type entity, DataManipulation dataManipulationType)
+        public string GetStoredProcedureName(Type entity, SqlTransactionType sqlTransactionType)
         {
             // TODO: Determine what to do here if the request information is not contained in StoredProcedures
             try
             {
                 return StoredProcedures.First(x => x.TableName == entity.Name &&
-                                                   x.TransactionType == dataManipulationType.ToString())?.StoredProcedureName;
+                                                   x.TransactionType == sqlTransactionType.ToString())?.StoredProcedureName;
             }
             catch (InvalidOperationException)
             {

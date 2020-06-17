@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using StormManager.UWP.Common.Exceptions;
+using StormManager.UWP.Common.SqlTransactions;
 using StormManager.UWP.Models;
 using StormManager.UWP.Persistence.ObjectFramework;
 using StormManager.UWP.Services.ResourceLoaderService;
@@ -67,9 +67,9 @@ namespace StormManager.UWP.Persistence.Repositories
 
             return new RepoSet<TEntity>(entityCollection)
             {
-                AddStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Insertion),
-                UpdateStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Update),
-                DeleteStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), DataManipulation.Deletion)
+                AddStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), SqlTransactionType.Insertion),
+                UpdateStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), SqlTransactionType.Update),
+                DeleteStoredProcedureName = StoredProcedureService.GetStoredProcedureName(typeof(TEntity), SqlTransactionType.Deletion)
             };
 
         }
