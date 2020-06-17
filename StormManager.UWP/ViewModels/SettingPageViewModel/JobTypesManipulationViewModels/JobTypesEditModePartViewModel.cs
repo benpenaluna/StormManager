@@ -117,13 +117,16 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
             JobType.UpdatedBy = "sqladmin"; // TODO: Update 'sqladmin' to the logged on user when user is created
             
             EditedJobType = JobType;
-            EditCompletionState = CompletionState;
-            EditModeCompletion = EditCompletion.Complete;
 
-            NavigateToEditMode = false;
+            NavigateBackToViewMode();
         }
 
         public void CancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            NavigateBackToViewMode();
+        }
+
+        private static void NavigateBackToViewMode()
         {
             EditCompletionState = CompletionState.Cancelled;
             EditModeCompletion = EditCompletion.Complete;

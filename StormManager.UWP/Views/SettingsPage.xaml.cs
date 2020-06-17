@@ -16,7 +16,7 @@ namespace StormManager.UWP.Views
         public SettingsPage()
         {
             InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Disabled;
+            NavigationCacheMode = NavigationCacheMode.Required;
             _serializationService = Services.SerializationService.SerializationService.Json;
         }
 
