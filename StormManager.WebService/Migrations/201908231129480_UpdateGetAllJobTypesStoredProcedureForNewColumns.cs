@@ -1,8 +1,7 @@
 namespace StormManager.WebService.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UpdateGetAllJobTypesStoredProcedureForNewColumns : DbMigration
     {
         public override void Up()
@@ -20,7 +19,7 @@ namespace StormManager.WebService.Migrations
                                           FOR JSON AUTO)"
             );
         }
-        
+
         public override void Down()
         {
             DropStoredProcedure("GetAllJobTypes");

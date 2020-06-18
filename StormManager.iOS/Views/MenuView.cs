@@ -1,5 +1,4 @@
 ﻿using CoreGraphics;
-using MvvmCross.iOS.Support.SidePanels;
 using MvvmCross.iOS.Views;
 using StormManager.Core.ViewModels;
 using UIKit;

@@ -1,8 +1,7 @@
 namespace StormManager.WebService.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class RecreateJobTypesTableWithIdentity : DbMigration
     {
         public override void Up()

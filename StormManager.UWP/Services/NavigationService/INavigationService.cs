@@ -1,11 +1,11 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Services.ViewService;
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
-using StormManager.UWP.Common;
-using StormManager.UWP.Services.ViewService;
 
 namespace StormManager.UWP.Services.NavigationService
 {

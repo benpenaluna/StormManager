@@ -1,6 +1,4 @@
-﻿    using Windows.Services.Maps;
-
-namespace StormManager.UWP.Models.Mapping
+﻿namespace StormManager.UWP.Models.Mapping
 {
     public interface IMapLocationSuggestion
     {

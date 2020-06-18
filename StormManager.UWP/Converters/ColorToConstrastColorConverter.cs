@@ -1,9 +1,9 @@
-﻿using System;
-using Windows.UI;
-using Windows.UI.Xaml.Data;
-using Autofac;
+﻿using Autofac;
 using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Converters.ConversionHelpers;
+using System;
+using Windows.UI;
+using Windows.UI.Xaml.Data;
 
 namespace StormManager.UWP.Converters
 {
@@ -13,7 +13,7 @@ namespace StormManager.UWP.Converters
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            var color = (Color) value;
+            var color = (Color)value;
             return ConvertToConstractColor(color);
         }
 
@@ -44,7 +44,7 @@ namespace StormManager.UWP.Converters
 
         public static bool MidPointExists(double fromColorContrastValue, double toColorContrastValue)
         {
-            return (fromColorContrastValue <= MidPoint && toColorContrastValue > MidPoint) || 
+            return (fromColorContrastValue <= MidPoint && toColorContrastValue > MidPoint) ||
                    (fromColorContrastValue > MidPoint && toColorContrastValue <= MidPoint);
         }
 

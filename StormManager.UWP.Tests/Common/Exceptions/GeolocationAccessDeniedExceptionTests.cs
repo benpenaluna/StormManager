@@ -1,5 +1,5 @@
-﻿using System;
-using StormManager.UWP.Common.Exceptions;
+﻿using StormManager.UWP.Common.Exceptions;
+using System;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Common.Exceptions
@@ -50,7 +50,7 @@ namespace StormManager.UWP.Tests.Common.Exceptions
         {
             throw new GeolocationAccessDeniedException(_message, Ex);
         }
-        
+
         #endregion
     }
 }

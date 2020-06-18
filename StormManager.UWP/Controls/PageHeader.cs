@@ -1,8 +1,8 @@
-﻿using Windows.UI.Xaml;
+﻿using StormManager.UWP.Utils;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Shapes;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Controls
 {
@@ -18,8 +18,10 @@ namespace StormManager.UWP.Controls
             // behaviors
             var behavior = new Behaviors.EllipsisBehavior();
             RegisterPropertyChangedCallback(EllipsisVisibilityProperty, (s, e) => behavior.Visibility = EllipsisVisibility);
-            var collection = new Microsoft.Xaml.Interactivity.BehaviorCollection();
-            collection.Add(behavior);
+            var collection = new Microsoft.Xaml.Interactivity.BehaviorCollection
+            {
+                behavior
+            };
             SetValue(Microsoft.Xaml.Interactivity.Interaction.BehaviorsProperty, collection);
 
             TabIndex = 5000;
@@ -175,8 +177,7 @@ namespace StormManager.UWP.Controls
 
         private T GetTemplateChild<T>(string name) where T : DependencyObject
         {
-            var child = GetTemplateChild(name) as T;
-            if (child == null)
+            if (!(GetTemplateChild(name) is T child))
             {
                 throw new Common.TemplatePartNotFoundException($"Control part {name} not found in Template.");
             }

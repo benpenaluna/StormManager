@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Services.WebApiService;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StormManager.UWP.Tests.Services.WebApiService
 {
@@ -27,7 +27,7 @@ namespace StormManager.UWP.Tests.Services.WebApiService
             return JsonConvert.DeserializeObject<IEnumerable<T>>(JsonJobTypeSample);
         }
 
-        public async Task PutAsync<T>(string storedProcedureName, T payload)
+        public async Task PutAsync<T>(StoredProcedureAttributes storedProcedureAttributes, T payload)
         {
             await Task.Delay(400);
         }

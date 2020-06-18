@@ -1,6 +1,6 @@
+using StormManager.UWP.Mvvm;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using StormManager.UWP.Mvvm;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace StormManager.Standard.Models.InformationSchema
+﻿namespace StormManager.Standard.Models.InformationSchema
 {
     public class Routine
     {

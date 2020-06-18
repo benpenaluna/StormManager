@@ -43,8 +43,8 @@ namespace StormManager.UWP.Utils
             };
 
             NullablePrimitives = (from t in Primitives
-                where t.GetTypeInfo().IsValueType
-                select typeof(Nullable<>).MakeGenericType(t)).ToArray();
+                                  where t.GetTypeInfo().IsValueType
+                                  select typeof(Nullable<>).MakeGenericType(t)).ToArray();
 
             AllPrimitives = Primitives.Concat(NullablePrimitives).ToArray();
         }

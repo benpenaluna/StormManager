@@ -1,10 +1,10 @@
-﻿using System;
+﻿using StormManager.UWP.Common.SqlTransactions;
+using StormManager.UWP.Models;
+using StormManager.UWP.Services.ResourceLoaderService;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using StormManager.UWP.Common.SqlTransactions;
-using StormManager.UWP.Models;
-using StormManager.UWP.Services.ResourceLoaderService;
 
 namespace StormManager.UWP.Persistence.SqlParameters
 {
@@ -23,7 +23,7 @@ namespace StormManager.UWP.Persistence.SqlParameters
         {
             if (sqlTransactionType == SqlTransactionType.Deletion)
                 return new List<SqlParameter>()
-                { 
+                {
                     JobTypeKey(payload)
                 }.ToArray();
 

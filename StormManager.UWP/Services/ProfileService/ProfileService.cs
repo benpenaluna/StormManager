@@ -1,6 +1,6 @@
-﻿using System;
+﻿using StormManager.UWP.Mvvm;
+using System;
 using System.Linq;
-using StormManager.UWP.Mvvm;
 
 namespace StormManager.UWP.Services.ProfileService
 {

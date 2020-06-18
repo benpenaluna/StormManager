@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using StormManager.UWP.Tests.Common.ExtensionMethods;
 using System.Threading.Tasks;
-using StormManager.UWP.Common.ExtensionMethods;
-using StormManager.UWP.Services.ServerKeyService;
-using StormManager.UWP.Tests.Common.ExtensionMethods;
-using StormManager.UWP.Tests.Services.ServerKeyService;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.ServerKeyService

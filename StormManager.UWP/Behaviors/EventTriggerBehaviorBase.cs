@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Xaml.Interactivity;
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
-using Microsoft.Xaml.Interactivity;
 
 namespace StormManager.UWP.Behaviors
 {
@@ -203,8 +203,7 @@ namespace StormManager.UWP.Behaviors
             }
             else if (!this.isLoadedEventRegistered)
             {
-                FrameworkElement element = this.resolvedSource as FrameworkElement;
-                if (element != null && !EventTriggerBehaviorBase.IsElementLoaded(element))
+                if (this.resolvedSource is FrameworkElement element && !EventTriggerBehaviorBase.IsElementLoaded(element))
                 {
                     this.isLoadedEventRegistered = true;
                     element.Loaded += this.OnEvent;

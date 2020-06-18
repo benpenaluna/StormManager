@@ -1,4 +1,8 @@
-﻿using System;
+﻿using StormManager.UWP.Services.NavigationService;
+using StormManager.UWP.Services.PopupService;
+using StormManager.UWP.Services.ViewService;
+using StormManager.UWP.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,10 +15,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using StormManager.UWP.Services.NavigationService;
-using StormManager.UWP.Services.PopupService;
-using StormManager.UWP.Services.ViewService;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Common
 {
@@ -52,7 +52,7 @@ namespace StormManager.UWP.Common
 
         #region Debug
 
-        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = Services.LoggingService.Severities.Template10, [CallerMemberName]string caller = null) =>
+        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = Services.LoggingService.Severities.Template10, [CallerMemberName] string caller = null) =>
             Services.LoggingService.LoggingService.WriteLine(text, severity, caller: $"BootStrapper.{caller}");
 
         #endregion
@@ -204,7 +204,7 @@ namespace StormManager.UWP.Common
         /// </summary>
         private async Task InternalLaunchAsync(ILaunchActivatedEventArgs e)
         {
-            DebugWrite($"Previous:{e.PreviousExecutionState.ToString()}");
+            DebugWrite($"Previous:{e.PreviousExecutionState}");
 
             OriginalActivatedArgs = e;
 
@@ -242,7 +242,7 @@ namespace StormManager.UWP.Common
                         */
 
 
-                        restored = await CallAutoRestoreAsync(e, restored);
+                        restored = await CallAutoRestoreAsync(e);
                         break;
                     }
                 case ApplicationExecutionState.ClosedByUser:
@@ -254,9 +254,8 @@ namespace StormManager.UWP.Common
             // handle pre-launch
             if ((e as LaunchActivatedEventArgs)?.PrelaunchActivated ?? false)
             {
-                var runOnStartAsync = false;
                 _HasOnPrelaunchAsync = true;
-                await OnPrelaunchAsync(e, out runOnStartAsync);
+                await OnPrelaunchAsync(e, out bool runOnStartAsync);
                 if (!runOnStartAsync)
                     return;
             }
@@ -273,8 +272,6 @@ namespace StormManager.UWP.Common
         private void BackHandler(object sender, BackRequestedEventArgs args)
         {
             DebugWrite();
-
-            var handled = false;
             //if (ApiInformation.IsApiContractPresent(nameof(Windows.Phone.PhoneContract), 1, 0))
             //{
             //    if (NavigationService?.CanGoBack == true)
@@ -284,7 +281,7 @@ namespace StormManager.UWP.Common
             //}
             //else
             //{
-                handled = (NavigationService?.CanGoBack == false);
+            bool handled = NavigationService?.CanGoBack == false;
             //}
 
             RaiseBackRequested(ref handled);
@@ -498,10 +495,9 @@ namespace StormManager.UWP.Common
 
             // this is always okay to check, default or not
             // expire any state (based on expiry)
-            DateTime cacheDate;
             // default the cache age to very fresh if not known
             var otherwise = DateTime.MinValue.ToString();
-            if (DateTime.TryParse(navigationService.FrameFacade.GetFrameState(CacheDateKey, otherwise), out cacheDate))
+            if (DateTime.TryParse(navigationService.FrameFacade.GetFrameState(CacheDateKey, otherwise), out DateTime cacheDate))
             {
                 var cacheAge = DateTime.Now.Subtract(cacheDate);
                 if (cacheAge >= CacheMaxDuration)
@@ -545,7 +541,8 @@ namespace StormManager.UWP.Common
                 _currentState = value;
             }
         }
-        Dictionary<string, States> CurrentStateHistory = new Dictionary<string, States>();
+
+        readonly Dictionary<string, States> CurrentStateHistory = new Dictionary<string, States>();
 
         private async Task InitializeFrameAsync(IActivatedEventArgs e)
         {
@@ -573,7 +570,7 @@ namespace StormManager.UWP.Common
 
         #endregion
 
-        WindowLogic _WindowLogic = new WindowLogic();
+        readonly WindowLogic _WindowLogic = new WindowLogic();
         private void CallActivateWindow(WindowLogic.ActivateWindowSources source)
         {
             _WindowLogic.ActivateWindow(source, _SplashLogic);
@@ -581,7 +578,7 @@ namespace StormManager.UWP.Common
         }
 
         #region Workers
-        
+
         /// <summary>
         ///  By default, Template 10 will setup the root element to be a Template 10
         ///  Modal Dialog control. If you desire something different, you can set it here.
@@ -608,8 +605,10 @@ namespace StormManager.UWP.Common
                 if (key == typeof(Controls.CustomTitleBar))
                 {
                     var style = resource.Value as Style;
-                    var title = new Controls.CustomTitleBar();
-                    title.Style = style;
+                    var title = new Controls.CustomTitleBar
+                    {
+                        Style = style
+                    };
                 }
                 count--;
                 if (count == 0) break;
@@ -658,7 +657,7 @@ namespace StormManager.UWP.Common
             CurrentState = States.AfterStart;
         }
 
-        SplashLogic _SplashLogic = new SplashLogic();
+        readonly SplashLogic _SplashLogic = new SplashLogic();
         private void CallShowSplashScreen(IActivatedEventArgs e)
         {
             DebugWrite();
@@ -683,7 +682,8 @@ namespace StormManager.UWP.Common
         public bool AutoRestoreAfterTerminated { get; set; } = true;
         public bool AutoExtendExecutionSession { get; set; } = true;
         public bool AutoSuspendAllFrames { get; set; } = true;
-        LifecycleLogic _LifecycleLogic = new LifecycleLogic();
+
+        readonly LifecycleLogic _LifecycleLogic = new LifecycleLogic();
 
         private async void CallResuming(object sender, object e)
         {
@@ -703,7 +703,7 @@ namespace StormManager.UWP.Common
             }
         }
 
-        private async Task<bool> CallAutoRestoreAsync(ILaunchActivatedEventArgs e, bool restored)
+        private async Task<bool> CallAutoRestoreAsync(ILaunchActivatedEventArgs e)
         {
             if (!EnableAutoRestoreAfterTerminated || !AutoRestoreAfterTerminated)
                 return false;
@@ -717,7 +717,7 @@ namespace StormManager.UWP.Common
             {
                 if (AutoSuspendAllFrames)
                 {
-                    await _LifecycleLogic.AutoSuspendAllFramesAsync(sender, e, AutoExtendExecutionSession);
+                    await _LifecycleLogic.AutoSuspendAllFramesAsync(AutoExtendExecutionSession);
                 }
                 await OnSuspendingAsync(sender, e, (OriginalActivatedArgs as LaunchActivatedEventArgs)?.PrelaunchActivated ?? false);
             }
@@ -803,7 +803,7 @@ namespace StormManager.UWP.Common
                 return restored;
             }
 
-            public async Task AutoSuspendAllFramesAsync(object sender, SuspendingEventArgs e, bool autoExtendExecutionSession)
+            public async Task AutoSuspendAllFramesAsync(bool autoExtendExecutionSession)
             {
                 DebugWrite($"autoExtendExecutionSession: {autoExtendExecutionSession}");
 

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Windows.Services.Maps;
-using Moq;
+﻿using Moq;
 using StormManager.UWP.Models.Mapping;
+using System.Collections.Generic;
+using Windows.Services.Maps;
 
 namespace StormManager.UWP.Tests.Models.Mapping
 {

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using StormManager.UWP.Common.Exceptions;
+using System;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using StormManager.UWP.Common.Exceptions;
 
 namespace StormManager.UWP.Services.LocationService
 {
@@ -12,7 +12,7 @@ namespace StormManager.UWP.Services.LocationService
         public BasicGeoposition Position { get; private set; }
 
         private LocationHelper() { }
-        
+
         public static Task<ILocationHelper> CreateAsync(ILocationHelper helper = null)
         {
             var result = new LocationHelper();
@@ -56,7 +56,7 @@ namespace StormManager.UWP.Services.LocationService
 
             try
             {
-                var locator = new Geolocator {DesiredAccuracyInMeters = 0};
+                var locator = new Geolocator { DesiredAccuracyInMeters = 0 };
                 var position = await locator.GetGeopositionAsync();
                 return CreateBasicGeoposition(position.Coordinate.Point.Position.Latitude,
                     position.Coordinate.Point.Position.Longitude);

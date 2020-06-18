@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xaml.Interactivity;
+using StormManager.UWP.Services.NavigationService;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media.Animation;
-using StormManager.UWP.Services.NavigationService;
 
 namespace StormManager.UWP.Behaviors
 {
@@ -22,10 +22,9 @@ namespace StormManager.UWP.Behaviors
 
             var nav = NavigationService.GetForFrame(Frame);
             if (nav == null)
-                throw new NullReferenceException($"Cannot find NavigationService for {Frame.ToString()}.");
+                throw new NullReferenceException($"Cannot find NavigationService for {Frame}.");
 
-            IXamlMetadataProvider metadataProvider = Application.Current as IXamlMetadataProvider;
-            if (metadataProvider == null)
+            if (!(Application.Current is IXamlMetadataProvider metadataProvider))
             {
                 throw new Exception($"1 Cannot find type {Page}");
             }

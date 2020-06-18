@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Windows.Storage;
 
 namespace StormManager.UWP.Services.FileService
@@ -40,7 +40,7 @@ namespace StormManager.UWP.Services.FileService
                 // fetch file
                 var file = await GetIfFileExistsAsync(key, location);
                 if (file == null)
-                    return default(T);
+                    return default;
                 // read content
                 var readValue = await FileIO.ReadTextAsync(file);
                 // convert to obj

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using StormManager.UWP.Models.Mapping;
 using System.Linq;
-using Moq;
-using StormManager.UWP.Models.Mapping;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Models.Mapping

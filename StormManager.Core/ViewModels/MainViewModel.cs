@@ -1,5 +1,5 @@
-using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
+using System.Threading.Tasks;
 
 namespace StormManager.Core.ViewModels
 {
@@ -8,14 +8,14 @@ namespace StormManager.Core.ViewModels
         public MainViewModel()
         {
         }
-        
+
         public override Task Initialize()
         {
             //TODO: Add starting logic here
-		    
+
             return base.Initialize();
         }
-        
+
         public IMvxCommand ResetTextCommand => new MvxCommand(ResetText);
         private void ResetText()
         {

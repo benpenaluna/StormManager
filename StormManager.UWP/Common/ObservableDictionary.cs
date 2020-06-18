@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using StormManager.UWP.Utils;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation.Collections;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Common
 {
@@ -21,7 +21,7 @@ namespace StormManager.UWP.Common
             public K Key { get; private set; }
         }
 
-        private Dictionary<K, V> _dictionary = new Dictionary<K, V>();
+        private readonly Dictionary<K, V> _dictionary = new Dictionary<K, V>();
 
         public event MapChangedEventHandler<K, V> MapChanged;
 
@@ -50,8 +50,7 @@ namespace StormManager.UWP.Common
 
         public bool Remove(KeyValuePair<K, V> item)
         {
-            V currentValue;
-            if (_dictionary.TryGetValue(item.Key, out currentValue) &&
+            if (_dictionary.TryGetValue(item.Key, out V currentValue) &&
                 Equals(item.Value, currentValue) && _dictionary.Remove(item.Key))
             {
                 RaiseMapChanged(CollectionChange.ItemRemoved, item.Key);

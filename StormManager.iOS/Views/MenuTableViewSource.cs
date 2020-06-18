@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-
-using CoreGraphics;
-using Foundation;
-using MvvmCross.iOS.Support.SidePanels;
+﻿using Foundation;
 using MvvmCross.Platform;
 using StormManager.Core.Models;
+using System;
+using System.Collections.Generic;
 using UIKit;
 
 namespace StormManager.iOS.Views

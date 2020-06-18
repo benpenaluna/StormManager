@@ -1,8 +1,8 @@
-using Windows.UI.Xaml;
 using Autofac;
 using StormManager.UWP.Controls;
 using StormManager.UWP.Services.NavigationService;
 using StormManager.UWP.Services.SettingsServices;
+using Windows.UI.Xaml;
 
 namespace StormManager.UWP.Views
 {

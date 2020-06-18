@@ -1,5 +1,5 @@
-﻿using System;
-using StormManager.UWP.Mvvm;
+﻿using StormManager.UWP.Mvvm;
+using System;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {

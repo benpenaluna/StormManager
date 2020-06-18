@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StormManager.UWP.Services.NavigationService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -7,7 +8,6 @@ using Windows.ApplicationModel.Core;
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using StormManager.UWP.Services.NavigationService;
 
 namespace StormManager.UWP.Common
 {
@@ -17,7 +17,7 @@ namespace StormManager.UWP.Common
     {
         #region Debug
 
-        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = Services.LoggingService.Severities.Template10, [CallerMemberName]string caller = null) =>
+        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = Services.LoggingService.Severities.Template10, [CallerMemberName] string caller = null) =>
             Services.LoggingService.LoggingService.WriteLine(text, severity, caller: $"WindowWrapper.{caller}");
 
         #endregion

@@ -1,9 +1,9 @@
+using StormManager.UWP.Mvvm;
+using StormManager.UWP.Services.NavigationService;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using StormManager.UWP.Mvvm;
-using StormManager.UWP.Services.NavigationService;
 
 namespace StormManager.UWP.ViewModels.MainPageViewModel
 {

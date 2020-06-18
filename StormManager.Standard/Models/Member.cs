@@ -1,10 +1,6 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using StormManager.Standard.Annotations;
-
 namespace StormManager.Standard.Models
 {
-   public class Member
+    public class Member
     {
         public virtual string Id { get; set; }
         public virtual string FirstName { get; set; }

@@ -1,11 +1,10 @@
-using System.Data.Entity;
 using StormManager.Standard.Models;
+using System.Data.Entity;
 
 namespace StormManager.WebService.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UpdateJobTypeStoredProcedure : DbMigration
     {
         public override void Up()
@@ -14,9 +13,9 @@ namespace StormManager.WebService.Migrations
             modelBuilder
                 .Entity<JobType>()
                 .MapToStoredProcedures();
-            
+
         }
-        
+
         public override void Down()
         {
             DropStoredProcedure("JobType_Insert");

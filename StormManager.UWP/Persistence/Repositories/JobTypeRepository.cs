@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using StormManager.UWP.Core.Repositories;
+﻿using StormManager.UWP.Core.Repositories;
 using StormManager.UWP.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StormManager.UWP.Persistence.Repositories
 {
     public class JobTypeRepository : Repository<JobType>, IJobTypeRepository
     {
-        public JobTypeRepository(StormManagerContext context) : base(context) {}
+        public JobTypeRepository(StormManagerContext context) : base(context) { }
 
         public IEnumerable<JobType> GetAllJobTypes()
         {
@@ -30,7 +30,7 @@ namespace StormManager.UWP.Persistence.Repositories
                 if (persistedJobTypePropValue.Equals(jobTypePropValue) == false)
                     prop.SetValue(persistedJobType, jobTypePropValue);
             }
-        } 
+        }
 
         public StormManagerContext StormManagerContext => Context as StormManagerContext;
     }

@@ -1,5 +1,5 @@
-﻿using System;
-using StormManager.UWP.Common.SqlTransactions;
+﻿using StormManager.UWP.Common.SqlTransactions;
+using System;
 
 namespace StormManager.UWP.Services.StoredProcedureService
 {

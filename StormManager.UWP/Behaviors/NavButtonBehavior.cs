@@ -1,11 +1,11 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Microsoft.Xaml.Interactivity;
-using System;
-using System.Runtime.CompilerServices;
-using Windows.UI.Xaml.Navigation;
+﻿using Microsoft.Xaml.Interactivity;
 using StormManager.UWP.Common;
 using StormManager.UWP.Utils;
+using System;
+using System.Runtime.CompilerServices;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace StormManager.UWP.Behaviors
 {
@@ -18,7 +18,7 @@ namespace StormManager.UWP.Behaviors
         private readonly EventThrottleHelper _throttleHelper;
         private DeviceUtils _deviceUtils;
 
-        Button element => AssociatedObject as Button;
+        Button Element => AssociatedObject as Button;
 
         public DependencyObject AssociatedObject { get; set; }
 
@@ -44,15 +44,15 @@ namespace StormManager.UWP.Behaviors
             // process start
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
-                element.Visibility = Visibility.Visible;
+                Element.Visibility = Visibility.Visible;
             }
             else
             {
                 // handle click
-                element.Click += new Common.WeakReference<NavButtonBehavior, object, RoutedEventArgs>(this)
+                Element.Click += new Common.WeakReference<NavButtonBehavior, object, RoutedEventArgs>(this)
                 {
-                    EventAction = (i, s, e) => i.Element_Click(s, e),
-                    DetachAction = (i, w) => element.Click -= w.Handler,
+                    EventAction = (i, s, e) => i.Element_Click(),
+                    DetachAction = (i, w) => Element.Click -= w.Handler,
                 }.Handler;
                 CalculateThrottled();
                 if (BootStrapper.Current != null) BootStrapper.Current.ShellBackButtonUpdated += Current_ShellBackButtonUpdated;
@@ -85,7 +85,8 @@ namespace StormManager.UWP.Behaviors
             _throttleHelper?.DispatchTriggerEvent(null);
         }
 
-        private void Element_Click(object sender, RoutedEventArgs e)
+        //private void Element_Click(object sender, RoutedEventArgs e)
+        private void Element_Click()
         {
             var nav = Services.NavigationService.NavigationService.GetForFrame(Frame);
             if (nav == null)
@@ -125,7 +126,7 @@ namespace StormManager.UWP.Behaviors
         private void Calculate()
         {
             // just in case
-            if (element == null)
+            if (Element == null)
                 return;
 
             // make changes on UI thread
@@ -135,12 +136,12 @@ namespace StormManager.UWP.Behaviors
                 {
                     case Directions.Back:
                         {
-                            element.Visibility = NavButtonsHelper.CalculateBackVisibility(Frame);
+                            Element.Visibility = NavButtonsHelper.CalculateBackVisibility(Frame);
                             break;
                         }
                     case Directions.Forward:
                         {
-                            element.Visibility = NavButtonsHelper.CalculateForwardVisibility(Frame);
+                            Element.Visibility = NavButtonsHelper.CalculateForwardVisibility(Frame);
                             break;
                         }
                 }
@@ -175,8 +176,7 @@ namespace StormManager.UWP.Behaviors
             {
                 return;
             }
-            FrameEventRegistration eventReg;
-            if (behavior._eventRegistrationInfo.TryGetValue(frame, out eventReg))
+            if (behavior._eventRegistrationInfo.TryGetValue(frame, out FrameEventRegistration eventReg))
             {
                 // events already attached
                 return;
@@ -195,8 +195,7 @@ namespace StormManager.UWP.Behaviors
             {
                 return;
             }
-            FrameEventRegistration eventReg;
-            if (!behavior._eventRegistrationInfo.TryGetValue(frame, out eventReg))
+            if (!behavior._eventRegistrationInfo.TryGetValue(frame, out FrameEventRegistration eventReg))
             {
                 // events already detached
                 return;

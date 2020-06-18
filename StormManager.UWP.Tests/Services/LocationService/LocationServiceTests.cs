@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Windows.Devices.Geolocation;
-using StormManager.Core.Common.Results;
+﻿using StormManager.Core.Common.Results;
 using StormManager.UWP.Services.LocationService;
+using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.LocationService
@@ -20,7 +20,7 @@ namespace StormManager.UWP.Tests.Services.LocationService
         [InlineData(66.0, -142.0)]
         public async void LocationService_CanDeterminePositionFollwingConstruction(double latitude, double longitude)
         {
-            var expected = new BasicGeoposition(){Latitude = latitude, Longitude = longitude};
+            var expected = new BasicGeoposition() { Latitude = latitude, Longitude = longitude };
 
             var service = LocationHelperMockFactory.CreateMockLocationHelper(latitude, longitude);
             ILocationService sut = await UWP.Services.LocationService.LocationService.CreateAsync(service.Object);

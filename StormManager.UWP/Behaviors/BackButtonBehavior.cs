@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xaml.Interactivity;
+using StormManager.UWP.Common;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
-using StormManager.UWP.Common;
 
 namespace StormManager.UWP.Behaviors
 {
@@ -16,13 +16,11 @@ namespace StormManager.UWP.Behaviors
     [ContentProperty(Name = nameof(Actions))]
     public class BackButtonBehavior : DependencyObject, IBehavior
     {
-        private DispatcherWrapper _dispatcher;
         public DependencyObject AssociatedObject { get; set; }
 
         public void Attach(DependencyObject associatedObject)
         {
             AssociatedObject = associatedObject;
-            _dispatcher = WindowWrapper.Current().Dispatcher;
             BootStrapper.BackRequested += BootStrapper_BackRequested;
         }
 

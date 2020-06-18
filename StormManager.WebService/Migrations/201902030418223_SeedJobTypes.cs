@@ -1,8 +1,7 @@
 namespace StormManager.WebService.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class SeedJobTypes : DbMigration
     {
         public override void Up()
@@ -175,7 +174,7 @@ namespace StormManager.WebService.Migrations
             Sql("INSERT INTO JobTypes (Id, Category, SubCategory, IsUsed, NewJobArgb, AgingJobArgb) VALUES (166, 'Warning', 'Tsunami', 0, 0xFF696969, 0xFF000000)");
             Sql("INSERT INTO JobTypes (Id, Category, SubCategory, IsUsed, NewJobArgb, AgingJobArgb) VALUES (167, 'Wrong Location', '', 0, 0xFF696969, 0xFF000000)");
         }
-        
+
         public override void Down()
         {
             Sql("DELETE FROM JobTypes");

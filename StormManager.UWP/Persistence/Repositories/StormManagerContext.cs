@@ -1,24 +1,24 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using StormManager.UWP.Common.Exceptions;
+﻿using StormManager.UWP.Common.Exceptions;
 using StormManager.UWP.Common.SqlTransactions;
 using StormManager.UWP.Models;
 using StormManager.UWP.Persistence.ObjectFramework;
 using StormManager.UWP.Services.ResourceLoaderService;
 using StormManager.UWP.Services.StoredProcedureService;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace StormManager.UWP.Persistence.Repositories
 {
     public class StormManagerContext : RepoContext
     {
         private static readonly string ConnectionSting = ResourceLoaderService.GetResourceValue("ExternalDbConnectionString");
-        
+
         public virtual RepoSet<JobType> JobTypes { get; set; }
 
         private StoredProcedureService StoredProcedureService { get; set; }
 
-        private StormManagerContext() {}
+        private StormManagerContext() { }
 
         public static Task<StormManagerContext> CreateAsync()
         {
@@ -55,7 +55,7 @@ namespace StormManager.UWP.Persistence.Repositories
             IEnumerable<TEntity> entityCollection;
             try
             {
-                entityCollection = await WebApiService.GetAsync<TEntity>(storedProcedureName);  
+                entityCollection = await WebApiService.GetAsync<TEntity>(storedProcedureName);
             }
             catch (InternetConnectionUnavailableException)
             {
@@ -76,8 +76,8 @@ namespace StormManager.UWP.Persistence.Repositories
 
         private static RepoSet<TEntity> InitialiseFromLocalDatabase<TEntity>() where TEntity : class, INotifyPropertyChanged
         {
-            return new RepoSet<TEntity>(); 
-            
+            return new RepoSet<TEntity>();
+
             // TODO: Load data from Local SqlLite database once configured
             // TODO: Initialise StoredProcedureNames
         }

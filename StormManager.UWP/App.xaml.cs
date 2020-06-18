@@ -1,20 +1,20 @@
 using Autofac;
-using System.Threading.Tasks;
 using StormManager.UWP.Controls;
 using StormManager.UWP.Controls.ControlHelpers;
 using StormManager.UWP.Converters.ConversionHelpers;
+using StormManager.UWP.Core;
 using StormManager.UWP.Core.Repositories;
 using StormManager.UWP.Models.Mapping;
+using StormManager.UWP.Persistence;
 using StormManager.UWP.Persistence.Repositories;
 using StormManager.UWP.Services.MapKeyService;
+using StormManager.UWP.Services.NetworkAvailableService;
 using StormManager.UWP.Services.SettingsServices;
 using StormManager.UWP.Services.WebApiService;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using StormManager.UWP.Core;
-using StormManager.UWP.Persistence;
-using StormManager.UWP.Services.NetworkAvailableService;
 
 namespace StormManager.UWP
 {

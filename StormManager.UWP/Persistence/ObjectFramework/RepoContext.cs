@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using StormManager.UWP.Common.SqlTransactions;
 using StormManager.UWP.Services.WebApiService;
+using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace StormManager.UWP.Persistence.ObjectFramework
 {
@@ -11,7 +11,7 @@ namespace StormManager.UWP.Persistence.ObjectFramework
     {
         protected IWebApiService WebApiService;
 
-        protected RepoContext() {}
+        protected RepoContext() { }
 
         protected RepoContext(string connectionString)
         {

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Common.SqlTransactions;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
-using StormManager.UWP.Common;
-using StormManager.UWP.Common.SqlTransactions;
 
 namespace StormManager.UWP.Persistence.ObjectFramework
 {

@@ -1,5 +1,4 @@
 ﻿using MvvmCross.Binding.ExtensionMethods;
-using StormManager.Standard.Models;
 using StormManager.UWP.Common.Exceptions;
 using Xunit;
 using JobType = StormManager.UWP.Models.JobType;
@@ -29,7 +28,7 @@ namespace StormManager.UWP.Tests.Services.WebApiService
         [Fact]
         public void WebApiService_ThrowsExceptionWhenNoConnectivity()
         {
-            var helper = new MockWebApiHelper { MockInternetConnectionExists=false };
+            var helper = new MockWebApiHelper { MockInternetConnectionExists = false };
             var result = new UWP.Services.WebApiService.WebApiService(ConnectionString, helper);
             Assert.ThrowsAsync<InternetConnectionUnavailableException>(async () => await result.GetAsync<JobType>(StoredProcedureName));
         }

@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using StormManager.UWP.Services.ServerKeyService;
+﻿using StormManager.UWP.Services.ServerKeyService;
 using StormManager.UWP.Tests.Common.ExtensionMethods;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.ServerKeyService

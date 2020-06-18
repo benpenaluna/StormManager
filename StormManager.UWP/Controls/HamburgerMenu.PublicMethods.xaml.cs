@@ -1,8 +1,8 @@
-﻿using System;
+﻿using StormManager.UWP.Utils;
+using System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Controls
 {

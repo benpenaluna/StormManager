@@ -1,13 +1,13 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Services.SerializationService;
+using StormManager.UWP.Services.SettingsServices;
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using System.Runtime.CompilerServices;
-using StormManager.UWP.Common;
-using StormManager.UWP.Services.SerializationService;
-using StormManager.UWP.Services.SettingsServices;
 
 namespace StormManager.UWP.Services.NavigationService
 {
@@ -17,7 +17,7 @@ namespace StormManager.UWP.Services.NavigationService
     {
         #region Debug
 
-        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = LoggingService.Severities.Template10, [CallerMemberName]string caller = null) =>
+        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = LoggingService.Severities.Template10, [CallerMemberName] string caller = null) =>
             LoggingService.LoggingService.WriteLine(text, severity, caller: $"{nameof(FrameFacade)}.{caller}");
 
         #endregion

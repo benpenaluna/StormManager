@@ -1,10 +1,10 @@
-﻿using System;
+﻿using StormManager.Standard.Models.InformationSchema;
+using StormManager.UWP.Common.SqlTransactions;
+using StormManager.UWP.Services.WebApiService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using StormManager.Standard.Models.InformationSchema;
-using StormManager.UWP.Common.SqlTransactions;
-using StormManager.UWP.Services.WebApiService;
 
 namespace StormManager.UWP.Services.StoredProcedureService
 {

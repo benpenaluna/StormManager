@@ -11,6 +11,6 @@ namespace StormManager.UWP.Persistence.ObjectFramework
         {
             Item = item;
             DataManipulation = sqlTransactionType;
-        } 
+        }
     }
 }

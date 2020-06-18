@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StormManager.UWP.Common.ExtensionMethods;
+﻿using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Services.MapKeyService;
 using StormManager.UWP.Tests.Common.ExtensionMethods;
-using StormManager.UWP.Tests.Services.LocationService;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.MapKeyService

@@ -9,12 +9,12 @@ namespace StormManager.UWP.Services.KeyboardService
     {
         #region Debug
 
-        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = LoggingService.Severities.Template10, [CallerMemberName]string caller = null) =>
+        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = LoggingService.Severities.Template10, [CallerMemberName] string caller = null) =>
             LoggingService.LoggingService.WriteLine(text, severity, caller: $"{nameof(KeyboardService)}.{caller}");
 
         #endregion
 
-        KeyboardHelper _helper;
+        readonly KeyboardHelper _helper;
 
         public static KeyboardService Instance { get; private set; } = new KeyboardService();
 

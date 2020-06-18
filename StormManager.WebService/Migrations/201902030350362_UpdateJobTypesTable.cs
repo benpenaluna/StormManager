@@ -1,8 +1,7 @@
 namespace StormManager.WebService.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UpdateJobTypesTable : DbMigration
     {
         public override void Up()
@@ -13,7 +12,7 @@ namespace StormManager.WebService.Migrations
             AddColumn("dbo.JobTypes", "SubCategory", c => c.String());
             DropColumn("dbo.JobTypes", "Name");
         }
-        
+
         public override void Down()
         {
             AddColumn("dbo.JobTypes", "Name", c => c.String());

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Utils;
+using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using StormManager.UWP.Common;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Mvvm
 {
@@ -13,7 +13,7 @@ namespace StormManager.UWP.Mvvm
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public virtual bool Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
+        public virtual bool Set<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (object.Equals(storage, value))
                 return false;
@@ -23,7 +23,7 @@ namespace StormManager.UWP.Mvvm
             return true;
         }
 
-        public virtual void RaisePropertyChanged([CallerMemberName]string propertyName = null)
+        public virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
                 return;

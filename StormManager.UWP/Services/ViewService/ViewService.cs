@@ -1,10 +1,10 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using StormManager.UWP.Common;
 using static StormManager.UWP.Services.LoggingService.LoggingService;
 
 namespace StormManager.UWP.Services.ViewService

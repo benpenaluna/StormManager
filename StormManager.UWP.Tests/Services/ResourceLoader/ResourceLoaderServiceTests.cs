@@ -1,5 +1,4 @@
-﻿using Moq;
-using StormManager.UWP.Services.ResourceLoaderService;
+﻿using StormManager.UWP.Services.ResourceLoaderService;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.ResourceLoader

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Services.KeyboardService;
+using StormManager.UWP.Services.NavigationService;
+using StormManager.UWP.Utils;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -16,10 +20,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
-using StormManager.UWP.Common;
-using StormManager.UWP.Services.KeyboardService;
-using StormManager.UWP.Services.NavigationService;
-using StormManager.UWP.Utils;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -35,7 +35,7 @@ namespace StormManager.UWP.Controls
 
         #region Debug
 
-        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = Services.LoggingService.Severities.Template10, [CallerMemberName]string caller = null) =>
+        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = Services.LoggingService.Severities.Template10, [CallerMemberName] string caller = null) =>
             Services.LoggingService.LoggingService.WriteLine(text, severity, caller: $"HamburgerMenu.{caller}");
 
         #endregion
@@ -284,12 +284,12 @@ namespace StormManager.UWP.Controls
 
         #region property changed handlers
 
-        partial void InternalHeaderContentChanged(ChangedEventArgs<UIElement> e) => UpdatePaneMarginToShowHamburgerButton();
+        partial void InternalHeaderContentChanged() => UpdatePaneMarginToShowHamburgerButton();
         partial void InternalAccentColorChanged(ChangedEventArgs<Color> e) => RefreshStyles(e.NewValue);
         partial void InternalIsFullScreenChanged(ChangedEventArgs<bool> e) => UpdateControl(e.NewValue);
-        partial void InternalVisualStateNarrowDisplayModeChanged(ChangedEventArgs<SplitViewDisplayMode> e) => UpdateVisualStates();
-        partial void InternalVisualStateNormalDisplayModeChanged(ChangedEventArgs<SplitViewDisplayMode> e) => UpdateVisualStates();
-        partial void InternalVisualStateWideDisplayModeChanged(ChangedEventArgs<SplitViewDisplayMode> e) => UpdateVisualStates();
+        partial void InternalVisualStateNarrowDisplayModeChanged() => UpdateVisualStates();
+        partial void InternalVisualStateNormalDisplayModeChanged() => UpdateVisualStates();
+        partial void InternalVisualStateWideDisplayModeChanged() => UpdateVisualStates();
         partial void InternalIsOpenChanged(ChangedEventArgs<bool> e)
         {
             UpdateIsPaneOpen(e.NewValue);
@@ -297,7 +297,7 @@ namespace StormManager.UWP.Controls
             UpdateControl();
         }
 
-        partial void InternalDisplayModeChanged(ChangedEventArgs<SplitViewDisplayMode> e)
+        partial void InternalDisplayModeChanged()
         {
             UpdateControl();
             UpdateHamburgerButtonGridWidthToFillAnyGap();
@@ -415,18 +415,6 @@ namespace StormManager.UWP.Controls
             buttons = buttons.Where(x => Equals(x.HamburgerButtonInfo.PageParameter, null) || Equals(x.HamburgerButtonInfo.PageParameter, pageParam));
             var button = buttons.Select(x => x.HamburgerButtonInfo).FirstOrDefault();
             Selected = button;
-        }
-
-        async Task ResetValueAsync(DependencyProperty prop, object tempValue, int wait = 50)
-        {
-            if (GetValue(prop) == DependencyProperty.UnsetValue)
-            {
-                return;
-            }
-            var original = GetValue(prop);
-            SetValue(prop, tempValue);
-            await Task.Delay(wait);
-            SetValue(prop, original);
         }
 
         private void UpdateIsPaneOpen(bool open)

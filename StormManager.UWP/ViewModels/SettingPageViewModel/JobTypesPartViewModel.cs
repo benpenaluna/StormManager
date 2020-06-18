@@ -1,4 +1,9 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Common.Editing;
+using StormManager.UWP.Models;
+using StormManager.UWP.Mvvm;
+using StormManager.UWP.Views.JobTypes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -8,22 +13,17 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using StormManager.UWP.Common;
-using StormManager.UWP.Common.Editing;
-using StormManager.UWP.Models;
-using StormManager.UWP.Mvvm;
-using StormManager.UWP.Views.JobTypes;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class JobTypesPartViewModel : ViewModelBase
     {
-        public static int NewJobId = int.MinValue; 
-        
+        public static int NewJobId = int.MinValue;
+
         public static JobType EditedJobType { get; set; }
 
         private static EditCompletion _editModeCompletion;
-        
+
         protected static EditCompletion EditModeCompletion
         {
             get => _editModeCompletion;
@@ -36,15 +36,15 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             }
         }
 
-        protected static CompletionState  EditCompletionState { get; set; }
+        protected static CompletionState EditCompletionState { get; set; }
 
         private JobType _selectedJobType = new JobType();
-        
+
         private Frame _selectedFrame = new Frame()
         {
-            Background=(SolidColorBrush)Application.Current.Resources["UnusedPageBackgroundThemeBrush"]
+            Background = (SolidColorBrush)Application.Current.Resources["UnusedPageBackgroundThemeBrush"]
         };
-        
+
         public Frame SelectedFrame
         {
             get => _selectedFrame;
@@ -81,7 +81,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             AttachEventHandlers();
         }
 
-        public static event EventHandler OnEditModeCompleted; 
+        public static event EventHandler OnEditModeCompleted;
         protected static event EventHandler NavigateToEditModeOnChange;
 
         private void InitialiseCollections()
@@ -115,15 +115,15 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         {
             foreach (var jobType in JobTypes)
             {
-               jobType.PropertyChanged += JobTypes_PropertyChanged;
+                jobType.PropertyChanged += JobTypes_PropertyChanged;
             }
 
             JobTypes.CollectionChanged += JobTypes_CollectionChanged;
-            ((INotifyPropertyChanged) JobTypes).PropertyChanged += JobTypes_PropertyChanged;
+            ((INotifyPropertyChanged)JobTypes).PropertyChanged += JobTypes_PropertyChanged;
 
             if (OnEditModeCompleted is null)
                 OnEditModeCompleted += new WeakEventHandler<EventArgs>(JobTypesPartViewModel_EditModeCompleted).Handler;
-            
+
             if (NavigateToEditModeOnChange is null)
                 NavigateToEditModeOnChange += new WeakEventHandler<EventArgs>(NavigateToEditMode_OnChanged).Handler;
         }
@@ -135,7 +135,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
                 case CompletionState.Addition:
                     AddNewJobToCollection();
                     break;
-                
+
                 case CompletionState.Updated:
                     break;
             }
@@ -213,10 +213,10 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
             SelectedFrame.Navigate(typeof(JobTypesViewMode), SelectedJobType);
         }
-        
+
         public void AddAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
-            SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(new JobType() { Id=NewJobId++ }, CompletionState.Addition));
+            SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(new JobType() { Id = NewJobId++ }, CompletionState.Addition));
         }
 
         public void FilterAppBarButton_OnClick(object sender, RoutedEventArgs e)

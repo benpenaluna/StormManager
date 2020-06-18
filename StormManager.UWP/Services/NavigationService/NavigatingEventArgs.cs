@@ -1,7 +1,7 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using StormManager.UWP.Common;
 
 namespace StormManager.UWP.Services.NavigationService
 {

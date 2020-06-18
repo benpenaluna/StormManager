@@ -1,4 +1,8 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Services.SerializationService;
+using StormManager.UWP.Services.ViewService;
+using StormManager.UWP.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,10 +12,6 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using StormManager.UWP.Common;
-using StormManager.UWP.Services.SerializationService;
-using StormManager.UWP.Services.ViewService;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Services.NavigationService
 {
@@ -38,7 +38,7 @@ namespace StormManager.UWP.Services.NavigationService
 
         #region Debug
 
-        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = Services.LoggingService.Severities.Template10, [CallerMemberName]string caller = null) =>
+        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = Services.LoggingService.Severities.Template10, [CallerMemberName] string caller = null) =>
             Services.LoggingService.LoggingService.WriteLine(text, severity, caller: $"NavigationService.{caller}");
 
         #endregion
@@ -192,6 +192,8 @@ namespace StormManager.UWP.Services.NavigationService
 
         public async Task<bool> NavigateAsync(Type page, object parameter = null, NavigationTransitionInfo infoOverride = null)
         {
+            await Task.Delay(1);
+            
             DebugWrite($"Page: {page}, Parameter: {parameter}, NavigationTransitionInfo: {infoOverride}");
 
             if (page == null)

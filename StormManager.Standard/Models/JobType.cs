@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Data.Common;
 using System.Drawing;
 
 namespace StormManager.Standard.Models
 {
     public class JobType
     {
-#region Mapped Properties
+        #region Mapped Properties
         public virtual int Id { get; set; }
         public virtual string Category { get; set; }
         public virtual string SubCategory { get; set; }
@@ -23,11 +22,11 @@ namespace StormManager.Standard.Models
         }
         public virtual DateTime DateUpdated { get; set; }
         public virtual string UpdatedBy { get; set; }
-#endregion
+        #endregion
 
-#region Not Mapped Properties
+        #region Not Mapped Properties
         public Color NewJobColor { get; set; }
         public Color AgingJobColor { get; set; }
-#endregion 
+        #endregion
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using StormManager.UWP.Common.ExtensionMethods;
+using System;
 using System.Text;
-using System.Threading.Tasks;
-using StormManager.UWP.Common.ExtensionMethods;
 
 namespace StormManager.UWP.Tests.Common.ExtensionMethods
 {

@@ -57,8 +57,7 @@ namespace StormManager.UWP.Behaviors
         {
             get
             {
-                var actions = base.GetValue(ActionsProperty) as ActionCollection;
-                if (actions == null)
+                if (!(base.GetValue(ActionsProperty) is ActionCollection actions))
                 {
                     actions = new ActionCollection();
                     SetValue(ActionsProperty, actions);

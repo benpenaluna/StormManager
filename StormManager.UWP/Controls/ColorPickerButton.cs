@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StormManager.Standard.Annotations;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.Foundation;
@@ -6,7 +7,6 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using StormManager.Standard.Annotations;
 
 namespace StormManager.UWP.Controls
 {
@@ -20,7 +20,7 @@ namespace StormManager.UWP.Controls
 
         public Color Color
         {
-            get => (Color) GetValue(ColorProperty);
+            get => (Color)GetValue(ColorProperty);
             set => SetValue(ColorProperty, value);
         }
         public static readonly DependencyProperty ColorProperty =
@@ -87,7 +87,7 @@ namespace StormManager.UWP.Controls
             Color = _originalColor;
         }
 
-        public event TypedEventHandler<object,ColorChangedEventArgs> ColorChanged;
+        public event TypedEventHandler<object, ColorChangedEventArgs> ColorChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

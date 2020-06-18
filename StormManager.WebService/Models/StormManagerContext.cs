@@ -1,13 +1,13 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
 using StormManager.Standard.Models;
 using StormManager.Standard.Models.InformationSchema;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 
 namespace StormManager.WebService.Models
 {
     public class StormManagerContext : DbContext
     {
-        public StormManagerContext() : base("name=StormManagerContext") {}
+        public StormManagerContext() : base("name=StormManagerContext") { }
 
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<JobType> JobTypes { get; set; }
@@ -25,7 +25,7 @@ namespace StormManager.WebService.Models
                 .HasMaxLength(8);
 
             modelBuilder.Entity<Routine>()
-                .HasKey(x => new {x.TableName, x.TransactionType});
+                .HasKey(x => new { x.TableName, x.TransactionType });
         }
     }
 }

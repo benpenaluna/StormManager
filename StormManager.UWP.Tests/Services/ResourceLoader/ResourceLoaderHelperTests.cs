@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using StormManager.UWP.Services.ResourceLoaderService;
+﻿using StormManager.UWP.Services.ResourceLoaderService;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.ResourceLoader

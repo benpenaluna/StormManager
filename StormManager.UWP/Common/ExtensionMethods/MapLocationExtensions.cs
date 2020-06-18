@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Windows.Services.Maps;
-using StormManager.UWP.Models.Mapping;
+﻿using StormManager.UWP.Models.Mapping;
+using System.Collections.Generic;
 
 namespace StormManager.UWP.Common.ExtensionMethods
 {

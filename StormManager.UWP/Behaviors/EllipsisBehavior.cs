@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xaml.Interactivity;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using System.Linq;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml.Media;
 using StormManager.UWP.Controls;
 using StormManager.UWP.Utils;
+using System.Linq;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace StormManager.UWP.Behaviors
 {
@@ -14,24 +14,24 @@ namespace StormManager.UWP.Behaviors
     [TypeConstraint(typeof(CommandBar))]
     public class EllipsisBehavior : DependencyObject, IBehavior
     {
-        private CommandBar commandBar => AssociatedObject as CommandBar;
+        private CommandBar CommandBar => AssociatedObject as CommandBar;
 
         public DependencyObject AssociatedObject { get; private set; }
 
         public void Attach(DependencyObject associatedObject)
         {
             AssociatedObject = associatedObject;
-            commandBar.Loaded += CommandBar_Loaded;
-            commandBar.PrimaryCommands.VectorChanged += Commands_VectorChanged;
-            commandBar.SecondaryCommands.VectorChanged += Commands_VectorChanged;
+            CommandBar.Loaded += CommandBar_Loaded;
+            CommandBar.PrimaryCommands.VectorChanged += Commands_VectorChanged;
+            CommandBar.SecondaryCommands.VectorChanged += Commands_VectorChanged;
             Update();
         }
 
         public void Detach()
         {
-            commandBar.Loaded -= CommandBar_Loaded;
-            commandBar.PrimaryCommands.VectorChanged -= Commands_VectorChanged;
-            commandBar.SecondaryCommands.VectorChanged -= Commands_VectorChanged;
+            CommandBar.Loaded -= CommandBar_Loaded;
+            CommandBar.PrimaryCommands.VectorChanged -= Commands_VectorChanged;
+            CommandBar.SecondaryCommands.VectorChanged -= Commands_VectorChanged;
         }
 
         private void CommandBar_Loaded(object sender, RoutedEventArgs e) => Update();
@@ -50,14 +50,14 @@ namespace StormManager.UWP.Behaviors
 
         private Button FindButtonInternal()
         {
-            return (commandBar as PageHeader)?.GetMoreButton();
+            return (CommandBar as PageHeader)?.GetMoreButton();
         }
 
         private Button FindButtonByName()
         {
-            if (VisualTreeHelper.GetChildrenCount(commandBar) > 0)
+            if (VisualTreeHelper.GetChildrenCount(CommandBar) > 0)
             {
-                var child = VisualTreeHelper.GetChild(commandBar, 0) as FrameworkElement; /* Templated root */
+                var child = VisualTreeHelper.GetChild(CommandBar, 0) as FrameworkElement; /* Templated root */
                 return child?.FindName("MoreButton") as Button;
             }
             return null;
@@ -65,13 +65,13 @@ namespace StormManager.UWP.Behaviors
 
         private Button FindButtonByTreeEnum()
         {
-            var controls = XamlUtils.AllChildren<Control>(commandBar);
+            var controls = XamlUtils.AllChildren<Control>(CommandBar);
             return controls.OfType<Button>().FirstOrDefault(x => x.Name.Equals("MoreButton"));
         }
 
         private Button FindButton()
         {
-            if (commandBar == null)
+            if (CommandBar == null)
             {
                 return null;
             }
@@ -104,8 +104,8 @@ namespace StormManager.UWP.Behaviors
                     button.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
                     break;
                 case Visibilities.Auto:
-                    var count = commandBar.PrimaryCommands.OfType<Control>().Count(x => x.Visibility.Equals(Windows.UI.Xaml.Visibility.Visible));
-                    count += commandBar.SecondaryCommands.OfType<Control>().Count(x => x.Visibility.Equals(Windows.UI.Xaml.Visibility.Visible));
+                    var count = CommandBar.PrimaryCommands.OfType<Control>().Count(x => x.Visibility.Equals(Windows.UI.Xaml.Visibility.Visible));
+                    count += CommandBar.SecondaryCommands.OfType<Control>().Count(x => x.Visibility.Equals(Windows.UI.Xaml.Visibility.Visible));
                     button.Visibility = (count > 0) ? Windows.UI.Xaml.Visibility.Visible : Windows.UI.Xaml.Visibility.Collapsed;
                     break;
             }

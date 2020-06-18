@@ -1,16 +1,15 @@
 ﻿using Autofac;
+using StormManager.UWP.Common.ExtensionMethods;
+using StormManager.UWP.Controls.ControlHelpers;
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
-using Windows.ApplicationModel.Store;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using StormManager.UWP.Common.ExtensionMethods;
-using StormManager.UWP.Controls.ControlHelpers;
 
 namespace StormManager.UWP.Controls
 {
@@ -33,7 +32,7 @@ namespace StormManager.UWP.Controls
 
         public IMapIconControlHelper MapIconControlHelper { get; set; }
 
-        public event EventHandler<RoutedEventArgs> RemoveClicked; 
+        public event EventHandler<RoutedEventArgs> RemoveClicked;
 
         public Brush DescriptionBackgroundColor
         {
@@ -127,7 +126,7 @@ namespace StormManager.UWP.Controls
 
         public Visibility StatusVisible
         {
-            get => (Visibility )GetValue(StatusVisibleProperty);
+            get => (Visibility)GetValue(StatusVisibleProperty);
             set => SetValue(StatusVisibleProperty, value);
         }
         public static readonly DependencyProperty StatusVisibleProperty =

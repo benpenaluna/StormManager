@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using StormManager.Standard.Annotations;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using StormManager.Standard.Annotations;
 
 namespace StormManager.Standard.Models
 {

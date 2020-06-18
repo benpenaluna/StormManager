@@ -1,12 +1,12 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Services.NavigationService;
+using StormManager.UWP.Utils;
+using System;
 using System.Collections.ObjectModel;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using StormManager.UWP.Common;
-using StormManager.UWP.Services.NavigationService;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Controls
 {
@@ -307,10 +307,10 @@ namespace StormManager.UWP.Controls
                 {
                     WriteDebug(nameof(DisplayMode), e);
                     (d as HamburgerMenu).DisplayModeChanged?.Invoke(d, e.ToChangedEventArgs<SplitViewDisplayMode>());
-                    (d as HamburgerMenu).InternalDisplayModeChanged(e.ToChangedEventArgs<SplitViewDisplayMode>());
+                    (d as HamburgerMenu).InternalDisplayModeChanged();
                 }));
         public event EventHandler<ChangedEventArgs<SplitViewDisplayMode>> DisplayModeChanged;
-        partial void InternalDisplayModeChanged(ChangedEventArgs<SplitViewDisplayMode> e);
+        partial void InternalDisplayModeChanged();
 
 
         public SplitViewDisplayMode VisualStateNarrowDisplayMode
@@ -324,10 +324,10 @@ namespace StormManager.UWP.Controls
                 {
                     WriteDebug(nameof(VisualStateNarrowDisplayMode), e);
                     (d as HamburgerMenu).VisualStateNarrowDisplayModeChanged?.Invoke(d, e.ToChangedEventArgs<SplitViewDisplayMode>());
-                    (d as HamburgerMenu).InternalVisualStateNarrowDisplayModeChanged(e.ToChangedEventArgs<SplitViewDisplayMode>());
+                    (d as HamburgerMenu).InternalVisualStateNarrowDisplayModeChanged();
                 }));
         public event EventHandler<ChangedEventArgs<SplitViewDisplayMode>> VisualStateNarrowDisplayModeChanged;
-        partial void InternalVisualStateNarrowDisplayModeChanged(ChangedEventArgs<SplitViewDisplayMode> e);
+        partial void InternalVisualStateNarrowDisplayModeChanged();
 
 
         public SplitViewDisplayMode VisualStateNormalDisplayMode
@@ -341,10 +341,10 @@ namespace StormManager.UWP.Controls
                 {
                     WriteDebug(nameof(VisualStateNormalDisplayMode), e);
                     (d as HamburgerMenu).VisualStateNormalDisplayModeChanged?.Invoke(d, e.ToChangedEventArgs<SplitViewDisplayMode>());
-                    (d as HamburgerMenu).InternalVisualStateNormalDisplayModeChanged(e.ToChangedEventArgs<SplitViewDisplayMode>());
+                    (d as HamburgerMenu).InternalVisualStateNormalDisplayModeChanged();
                 }));
         public event EventHandler<ChangedEventArgs<SplitViewDisplayMode>> VisualStateNormalDisplayModeChanged;
-        partial void InternalVisualStateNormalDisplayModeChanged(ChangedEventArgs<SplitViewDisplayMode> e);
+        partial void InternalVisualStateNormalDisplayModeChanged();
 
 
         public SplitViewDisplayMode VisualStateWideDisplayMode
@@ -358,10 +358,10 @@ namespace StormManager.UWP.Controls
                 {
                     WriteDebug(nameof(VisualStateWideDisplayMode), e);
                     (d as HamburgerMenu).VisualStateWideDisplayModeChanged?.Invoke(d, e.ToChangedEventArgs<SplitViewDisplayMode>());
-                    (d as HamburgerMenu).InternalVisualStateWideDisplayModeChanged(e.ToChangedEventArgs<SplitViewDisplayMode>());
+                    (d as HamburgerMenu).InternalVisualStateWideDisplayModeChanged();
                 }));
         public event EventHandler<ChangedEventArgs<SplitViewDisplayMode>> VisualStateWideDisplayModeChanged;
-        partial void InternalVisualStateWideDisplayModeChanged(ChangedEventArgs<SplitViewDisplayMode> e);
+        partial void InternalVisualStateWideDisplayModeChanged();
 
 
         /// <summary>
@@ -672,10 +672,10 @@ namespace StormManager.UWP.Controls
          {
              WriteDebug(nameof(HeaderContent), e);
              (d as HamburgerMenu).HeaderContentChanged?.Invoke(d, e.ToChangedEventArgs<UIElement>());
-             (d as HamburgerMenu).InternalHeaderContentChanged(e.ToChangedEventArgs<UIElement>());
+             (d as HamburgerMenu).InternalHeaderContentChanged();
          }));
         public event EventHandler<ChangedEventArgs<UIElement>> HeaderContentChanged;
-        partial void InternalHeaderContentChanged(ChangedEventArgs<UIElement> e);
+        partial void InternalHeaderContentChanged();
 
 
         /// <summary>

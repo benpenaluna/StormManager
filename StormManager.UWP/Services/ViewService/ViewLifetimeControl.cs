@@ -20,13 +20,13 @@
 // certain objects may be bound to UI on given threads. Properties of those objects should only be updated
 // on that UI thread.
 
+using StormManager.UWP.Common;
+using StormManager.UWP.Services.NavigationService;
 using System;
 using System.Collections.Concurrent;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using StormManager.UWP.Common;
-using StormManager.UWP.Services.NavigationService;
 
 namespace StormManager.UWP.Services.ViewService
 {

@@ -5,19 +5,19 @@ namespace StormManager.UWP.Services.LoggingService
 {
     // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/LoggingService/LoggingService.cs
 
-    public delegate void DebugWriteDelegate(string text = null, Severities severity = Severities.Info, Targets target = Targets.Debug, [CallerMemberName]string caller = null);
-    
+    public delegate void DebugWriteDelegate(string text = null, Severities severity = Severities.Info, Targets target = Targets.Debug, [CallerMemberName] string caller = null);
+
     public enum Severities { Template10, Info, Warning, Error, Critical }
-    
+
     public enum Targets { Debug, Log }
-    
+
     public static class LoggingService
     {
         public static bool Enabled { get; set; } = true;
-        
+
         public static DebugWriteDelegate WriteLine { get; set; } = new DebugWriteDelegate(WriteLineInternal);
-        
-        private static void WriteLineInternal(string text = null, Severities severity = Severities.Info, Targets target = Targets.Debug, [CallerMemberName]string caller = null)
+
+        private static void WriteLineInternal(string text = null, Severities severity = Severities.Info, Targets target = Targets.Debug, [CallerMemberName] string caller = null)
         {
             switch (target)
             {

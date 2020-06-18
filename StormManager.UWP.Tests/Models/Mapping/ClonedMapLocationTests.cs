@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
-using StormManager.UWP.Models.Mapping;
+﻿using StormManager.UWP.Models.Mapping;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Models.Mapping

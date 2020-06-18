@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using StormManager.UWP.Core;
 using StormManager.UWP.Core.Repositories;
 using StormManager.UWP.Persistence.Repositories;
+using System;
+using System.Threading.Tasks;
 
 namespace StormManager.UWP.Persistence
 {
@@ -13,7 +13,7 @@ namespace StormManager.UWP.Persistence
 
         private StormManagerContext _context;
 
-        private UnitOfWork() {}
+        private UnitOfWork() { }
 
         public static Task<UnitOfWork> CreateAsync()
         {

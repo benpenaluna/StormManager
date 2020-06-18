@@ -1,6 +1,6 @@
 ﻿using System;
-using Windows.UI.Xaml.Data;
 using System.Reflection;
+using Windows.UI.Xaml.Data;
 
 namespace StormManager.UWP.Converters
 {

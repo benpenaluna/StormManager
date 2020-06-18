@@ -1,4 +1,7 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using StormManager.UWP.Controls;
+using StormManager.UWP.Services.NavigationService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,9 +9,6 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
-using StormManager.UWP.Common;
-using StormManager.UWP.Controls;
-using StormManager.UWP.Services.NavigationService;
 
 namespace StormManager.UWP.Utils
 {

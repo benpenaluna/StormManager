@@ -1,6 +1,6 @@
-﻿using System;
+﻿using StormManager.UWP.Core.Repositories;
+using System;
 using System.Threading.Tasks;
-using StormManager.UWP.Core.Repositories;
 
 namespace StormManager.UWP.Core
 {

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using StormManager.UWP.Models;
+﻿using StormManager.UWP.Models;
+using System.Collections.Generic;
 
 namespace StormManager.UWP.Core.Repositories
 {

@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
-using System.Runtime;
-using Windows.Devices.Geolocation;
+﻿using Windows.Devices.Geolocation;
 using Windows.Services.Maps;
 
 namespace StormManager.UWP.Models.Mapping

@@ -1,9 +1,6 @@
-﻿using System.Reflection;
-using Windows.Devices.Geolocation;
-using Windows.Devices.PointOfService;
-using Moq;
-using MvvmCross.Core.ViewModels.Hints;
+﻿using Moq;
 using StormManager.UWP.Models.Mapping;
+using Windows.Devices.Geolocation;
 
 namespace StormManager.UWP.Tests.Models.Mapping
 {

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Autofac;
+using Newtonsoft.Json;
+using StormManager.UWP.Common.Exceptions;
+using StormManager.UWP.Persistence.SqlParameters;
+using StormManager.UWP.Services.NetworkAvailableService;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Autofac;
-using Newtonsoft.Json;
-using StormManager.UWP.Common.Exceptions;
-using StormManager.UWP.Persistence.SqlParameters;
-using StormManager.UWP.Services.NetworkAvailableService;
 
 namespace StormManager.UWP.Services.WebApiService
 {
@@ -20,7 +20,7 @@ namespace StormManager.UWP.Services.WebApiService
         {
             ConnectionString = connectionString;
         }
-        
+
         public async Task<IEnumerable<T>> GetAsync<T>(string storedProcedureName)
         {
             if (await InternetConnectionExistsAsync() == false)

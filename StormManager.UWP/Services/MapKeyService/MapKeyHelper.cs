@@ -1,9 +1,9 @@
-﻿using System;
+﻿using StormManager.UWP.Common.ExtensionMethods;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Streams;
-using StormManager.UWP.Common.ExtensionMethods;
 
 namespace StormManager.UWP.Services.MapKeyService
 {
@@ -25,7 +25,7 @@ namespace StormManager.UWP.Services.MapKeyService
                 key = await GetMapKeyAsync();
 
             Key = key.IsValidMapKey() ? key : string.Empty;
-             
+
             return this;
         }
 

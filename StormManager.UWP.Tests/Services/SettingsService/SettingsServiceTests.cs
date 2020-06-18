@@ -1,6 +1,6 @@
-﻿using System;
+﻿using StormManager.UWP.Services.SettingsServices;
+using System;
 using Windows.UI.Xaml;
-using StormManager.UWP.Services.SettingsServices;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.SettingsService

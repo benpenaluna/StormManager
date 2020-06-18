@@ -1,9 +1,9 @@
-﻿using System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using StormManager.UWP.Common.Editing;
+﻿using StormManager.UWP.Common.Editing;
 using StormManager.UWP.Models;
 using StormManager.UWP.Services.ResourceLoaderService;
+using System;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationViewModels
 {
@@ -11,7 +11,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
     {
         private bool _pageLoaded;
 
-        private CompletionState  _completionState;
+        private CompletionState _completionState;
 
         public CompletionState CompletionState
         {
@@ -93,7 +93,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
 
         public void ToggleSwitch_OnToggled(object sender, RoutedEventArgs e)
         {
-            if (HandleToggleSwitchLoadBehaviour(e.OriginalSource)) 
+            if (HandleToggleSwitchLoadBehaviour(e.OriginalSource))
                 return;
 
             EnableSaveButton();
@@ -104,9 +104,9 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
             if (toggleSwitch == null || toggleSwitch.GetType() != typeof(ToggleSwitch))
                 return true;
 
-            if (_pageLoaded && (toggleSwitch as ToggleSwitch)?.IsOn != JobType.IsUsed) 
+            if (_pageLoaded && (toggleSwitch as ToggleSwitch)?.IsOn != JobType.IsUsed)
                 return false;
-            
+
             _pageLoaded = true;
             return true;
         }
@@ -115,7 +115,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
         {
             JobType.DateUpdated = DateTime.UtcNow;
             JobType.UpdatedBy = "sqladmin"; // TODO: Update 'sqladmin' to the logged on user when user is created
-            
+
             EditedJobType = JobType;
 
             NavigateBackToViewMode();

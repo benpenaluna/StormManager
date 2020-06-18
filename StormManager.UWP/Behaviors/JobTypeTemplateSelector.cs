@@ -1,6 +1,6 @@
-﻿using Windows.UI.Xaml;
+﻿using StormManager.UWP.Models;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using StormManager.UWP.Models;
 
 namespace StormManager.UWP.Behaviors
 {

@@ -1,6 +1,6 @@
-﻿using System;
-using Plugin.Geolocator;
+﻿using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using System;
 using System.Threading.Tasks;
 
 namespace StormManager.Core.Services.LocationService

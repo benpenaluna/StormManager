@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StormManager.UWP.Properties;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
@@ -6,7 +7,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using StormManager.UWP.Properties;
 
 namespace StormManager.UWP.Controls
 {

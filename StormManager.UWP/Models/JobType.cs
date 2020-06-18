@@ -1,8 +1,8 @@
-﻿using System;
+﻿using StormManager.Standard.Annotations;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
-using StormManager.Standard.Annotations;
 
 namespace StormManager.UWP.Models
 {
@@ -91,10 +91,10 @@ namespace StormManager.UWP.Models
         public JobType()
         {
             IsUsed = true;
-            
+
             // TODO: Consider making the default values configuarable at run--time
-            NewJobColorWindowUi=Windows.UI.Color.FromArgb(255,105,105,105); 
-            AgingJobColorWindowUi = Windows.UI.Color.FromArgb(0,0,0,0);
+            NewJobColorWindowUi = Windows.UI.Color.FromArgb(255, 105, 105, 105);
+            AgingJobColorWindowUi = Windows.UI.Color.FromArgb(0, 0, 0, 0);
         }
 
         public JobType(JobType jobType)
@@ -114,7 +114,7 @@ namespace StormManager.UWP.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
         public override bool Equals(object obj)
         {
             return obj.GetType() == typeof(JobType) && Equals(obj as JobType);

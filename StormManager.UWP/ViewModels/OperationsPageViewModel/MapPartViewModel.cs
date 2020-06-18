@@ -1,7 +1,7 @@
+using StormManager.UWP.Mvvm;
 using System.Collections.Generic;
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls.Maps;
-using StormManager.UWP.Mvvm;
 
 namespace StormManager.UWP.ViewModels.OperationsPageViewModel
 {
@@ -29,7 +29,7 @@ namespace StormManager.UWP.ViewModels.OperationsPageViewModel
                 RaisePropertyChanged();
             }
         }
-        
+
         private MapScene _mapScene;
         public MapScene MapScene
         {

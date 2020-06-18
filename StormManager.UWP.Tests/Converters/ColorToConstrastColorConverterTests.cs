@@ -1,8 +1,8 @@
-﻿using System;
+﻿using StormManager.UWP.Converters;
+using StormManager.UWP.Converters.ConversionHelpers;
+using System;
 using System.Collections.Generic;
 using Windows.UI;
-using StormManager.UWP.Converters;
-using StormManager.UWP.Converters.ConversionHelpers;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Converters
@@ -51,7 +51,7 @@ namespace StormManager.UWP.Tests.Converters
             var targetType = typeof(Color);
             var parameter = new object();
             var language = string.Empty;
-            var resultBlack =converter.ConvertBack(expectedBlack, targetType, parameter, language);
+            var resultBlack = converter.ConvertBack(expectedBlack, targetType, parameter, language);
             var resultWhite = converter.ConvertBack(expectedWhite, targetType, parameter, language);
 
             Assert.Equal(expectedBlack, resultBlack);
@@ -105,7 +105,7 @@ namespace StormManager.UWP.Tests.Converters
         {
             var baseColor = Color.FromArgb(a, r, g, b);
             var expected = ExpectedLightenedColor(baseColor, factor);
-            
+
             var result = ColorToConstrastColorConverter.LightenColor(baseColor, factor);
 
             Assert.Equal(expected, result);

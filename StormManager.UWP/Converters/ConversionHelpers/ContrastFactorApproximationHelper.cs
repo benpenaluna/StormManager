@@ -1,5 +1,5 @@
-﻿using Windows.UI;
-using StormManager.UWP.Common.ExtensionMethods;
+﻿using StormManager.UWP.Common.ExtensionMethods;
+using Windows.UI;
 
 namespace StormManager.UWP.Converters.ConversionHelpers
 {

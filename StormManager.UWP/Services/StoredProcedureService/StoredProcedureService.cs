@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using StormManager.UWP.Common.SqlTransactions;
+﻿using StormManager.UWP.Common.SqlTransactions;
 using StormManager.UWP.Services.WebApiService;
+using System;
+using System.Threading.Tasks;
 
 namespace StormManager.UWP.Services.StoredProcedureService
 {
@@ -9,7 +9,7 @@ namespace StormManager.UWP.Services.StoredProcedureService
     {
         public IStoredProcedureHelper Helper { get; set; }
 
-        private StoredProcedureService() {}
+        private StoredProcedureService() { }
 
 
         public static Task<StoredProcedureService> CreateAsync(IWebApiService webApiService, IStoredProcedureHelper helper = null)

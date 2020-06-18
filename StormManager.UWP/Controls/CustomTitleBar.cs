@@ -10,7 +10,7 @@ namespace StormManager.UWP.Controls
 
     public class CustomTitleBar : Control
     {
-        private ApplicationViewTitleBar _titleBar;
+        private readonly ApplicationViewTitleBar _titleBar;
         //private StatusBar _statusBar;
         internal CustomTitleBar()
         {
@@ -163,8 +163,10 @@ namespace StormManager.UWP.Controls
                 if (k == typeof(Controls.CustomTitleBar))
                 {
                     var s = resource.Value as Style;
-                    var t = new Controls.CustomTitleBar();
-                    t.Style = s;
+                    var t = new Controls.CustomTitleBar
+                    {
+                        Style = s
+                    };
                 }
                 count--;
                 if (count == 0) break;

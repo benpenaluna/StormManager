@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Windows.UI.Xaml;
-using Autofac;
+﻿using Autofac;
+using StormManager.UWP.Mvvm;
 using StormManager.UWP.Services.ResourceLoaderService;
 using StormManager.UWP.Services.SettingsServices;
-using StormManager.UWP.Mvvm;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {

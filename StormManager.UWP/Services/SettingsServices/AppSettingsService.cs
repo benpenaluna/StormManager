@@ -1,6 +1,6 @@
+using Autofac;
 using System;
 using Windows.UI.Xaml;
-using Autofac;
 
 namespace StormManager.UWP.Services.SettingsServices
 {

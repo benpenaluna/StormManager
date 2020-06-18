@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StormManager.UWP.Common.ExtensionMethods;
+﻿using StormManager.UWP.Common.ExtensionMethods;
+using System;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Common.ExtensionMethods
@@ -46,8 +42,8 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         }
 
         [Theory]
-        [InlineData(1,0)]
-        [InlineData(1,24)]
+        [InlineData(1, 0)]
+        [InlineData(1, 24)]
         public void MinutesOnlyFormat_CorrectlyFormats1minute(int minutes, int seconds)
         {
             const string expected = "1 minute ago";
@@ -60,11 +56,11 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         }
 
         [Theory]
-        [InlineData(0,24)]
-        [InlineData(8,0)]
-        [InlineData(32,0)]
-        [InlineData(64,0)]
-        [InlineData(1444,0)]
+        [InlineData(0, 24)]
+        [InlineData(8, 0)]
+        [InlineData(32, 0)]
+        [InlineData(64, 0)]
+        [InlineData(1444, 0)]
         public void MinutesOnlyFormat_CorrectlyFormatsMoreThan1minute(int minutes, int seconds)
         {
             var expected = $"{minutes} minutes ago";

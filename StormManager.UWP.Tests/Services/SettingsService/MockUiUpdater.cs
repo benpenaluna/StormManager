@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StormManager.UWP.Services.SettingsServices;
+using System;
 using Windows.UI.Xaml;
-using StormManager.UWP.Services.SettingsServices;
 
 namespace StormManager.UWP.Tests.Services.SettingsService
 {

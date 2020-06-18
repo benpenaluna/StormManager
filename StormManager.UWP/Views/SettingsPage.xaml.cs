@@ -1,9 +1,9 @@
+using StormManager.UWP.Models;
+using StormManager.UWP.ViewModels.SettingPageViewModel;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using StormManager.UWP.Models;
-using StormManager.UWP.ViewModels.SettingPageViewModel;
 
 namespace StormManager.UWP.Views
 {
@@ -36,7 +36,7 @@ namespace StormManager.UWP.Views
         public void JobTypesListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ((SettingsPageViewModel)DataContext).JobTypesPartViewModel.JobTypesListView_OnSelectionChanged(sender, e);
-            
+
             JobTypesListView.ScrollIntoView(JobTypesListView.SelectedItem, ScrollIntoViewAlignment.Leading);
         }
 

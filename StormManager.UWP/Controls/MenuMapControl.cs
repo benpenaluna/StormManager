@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using StormManager.UWP.Common.ExtensionMethods;
+using StormManager.UWP.Controls.ControlHelpers;
+using StormManager.UWP.Models.Mapping;
+using System;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Store;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
-using Autofac;
-using StormManager.UWP.Common.ExtensionMethods;
-using StormManager.UWP.Controls.ControlHelpers;
-using StormManager.UWP.Models.Mapping;
 
 namespace StormManager.UWP.Controls
 {
@@ -72,7 +68,7 @@ namespace StormManager.UWP.Controls
                 if (value < 1.0)
                     throw new ArgumentException(nameof(RadiusAroundNewPushPin) + " must be greater than or equal to 1 meters.");
 
-                SetValue(RadiusAroundNewPushPinProperty, value);    
+                SetValue(RadiusAroundNewPushPinProperty, value);
             }
         }
         public static readonly DependencyProperty RadiusAroundNewPushPinProperty =
@@ -123,11 +119,11 @@ namespace StormManager.UWP.Controls
         {
             DefaultStyleKey = typeof(MenuMapControl);
         }
-        
+
         public event EventHandler<object> MapLoading;
 
         public event EventHandler<RoutedEventArgs> MapLoaded;
-        
+
         protected override void OnApplyTemplate()
         {
             InitialiseControlReferences();
@@ -145,7 +141,7 @@ namespace StormManager.UWP.Controls
             _terrainStyleRadioButton = GetTemplateChild<MapRadioButton>("TerrainStyleRadioButton");
             _toggleSwitch3D = GetTemplateChild<ToggleSwitch>("ToggleSwitch3D");
         }
-        
+
         private T GetTemplateChild<T>(string name) where T : DependencyObject
         {
             if (!(GetTemplateChild(name) is T child))
@@ -160,7 +156,7 @@ namespace StormManager.UWP.Controls
         {
             _myMapControl.Loading += (s, e) => MapLoading?.Invoke(s, e);
             _myMapControl.Loaded += (s, e) => MapLoaded?.Invoke(s, e);
-            
+
             AttachSuggestBoxEvents();
             AttachStyleEvents();
         }
@@ -187,7 +183,7 @@ namespace StormManager.UWP.Controls
                 return;
             }
 
-             var finderResult = await FindLocationsAsync(sender.Text);
+            var finderResult = await FindLocationsAsync(sender.Text);
             DisplayAndCacheLocationSuggestions(finderResult);
         }
 
@@ -281,7 +277,7 @@ namespace StormManager.UWP.Controls
         {
             _myMapControl.Children.Remove(sender as UIElement);
         }
-        
+
         private void SetMapSceneForMapIconAddition(IClonedMapLocation location)
         {
             _myMapControl.Scene = MapScene.CreateFromLocationAndRadius(location.Point, RadiusAroundNewPushPin, _myMapControl.Heading, _myMapControl.Pitch);
@@ -290,7 +286,7 @@ namespace StormManager.UWP.Controls
         private void TryPinLocationToMap(MapLocationSuggestion suggestion)
         {
             var location = suggestion.MapLocation;
-            
+
             AddMapIconAndSetScene(location);
         }
 

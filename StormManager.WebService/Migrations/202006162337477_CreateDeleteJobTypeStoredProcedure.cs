@@ -1,4 +1,3 @@
-using System;
 using System.Data.Entity.Migrations;
 
 namespace StormManager.WebService.Migrations
@@ -14,7 +13,7 @@ namespace StormManager.WebService.Migrations
             @"DELETE FROM dbo.JobTypes 
               WHERE Id = @id;");
         }
-        
+
         public override void Down()
         {
             DropStoredProcedure("Delete_JobType");

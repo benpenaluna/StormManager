@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using StormManager.UWP.Common.ExtensionMethods;
+﻿using StormManager.UWP.Common.ExtensionMethods;
 using StormManager.UWP.Services.MapKeyService;
 using StormManager.UWP.Tests.Common.ExtensionMethods;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.MapKeyService
@@ -9,7 +9,7 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
     public class MapKeyHelperTests
     {
         private const int ArbitrarySeed = -8837746;
-        
+
         [Fact]
         public async Task MapKeynHelper_CanCreateAsyncronously()
         {
@@ -34,12 +34,12 @@ namespace StormManager.UWP.Tests.Services.MapKeyService
         {
             var expected = string.Empty;
 
-            var randomKey = KeyGenerator.GenerateValidKey(KeyExtensions.MapKeyLength -1, ArbitrarySeed);
+            var randomKey = KeyGenerator.GenerateValidKey(KeyExtensions.MapKeyLength - 1, ArbitrarySeed);
             var service = MapKeyHelperMockFactory.CreateMockMapKeyHelper(randomKey);
 
             var sut = await MapKeyHelper.CreateAsync(service.Object.Key);
             var result = sut.Key;
-            
+
             Assert.Equal(expected, result);
         }
     }

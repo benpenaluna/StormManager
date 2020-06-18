@@ -1,5 +1,5 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace StormManager.UWP.Services.SerializationService
@@ -7,14 +7,14 @@ namespace StormManager.UWP.Services.SerializationService
     // Source: https://github.com/Windows-XAML/Template10/blob/version_1.1.12/Template10%20(Library)/Services/SerializationService/JsonSerializationService.cs
 
     using System.Runtime.Serialization.Formatters;
-    
+
     public sealed class JsonSerializationService : ISerializationService
     {
         private readonly JsonSerializerSettings settings;
 
         #region Debug
 
-        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = LoggingService.Severities.Template10, [CallerMemberName]string caller = null) =>
+        static void DebugWrite(string text = null, Services.LoggingService.Severities severity = LoggingService.Severities.Template10, [CallerMemberName] string caller = null) =>
             LoggingService.LoggingService.WriteLine(text, severity, caller: $"{nameof(JsonSerializationService)}.{caller}");
 
         #endregion

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xaml.Interactivity;
+using StormManager.UWP.Utils;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Behaviors
 {

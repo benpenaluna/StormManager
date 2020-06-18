@@ -12,7 +12,7 @@ namespace StormManager.iOS
             : base(applicationDelegate, window)
         {
         }
-        
+
         public Setup(IMvxApplicationDelegate applicationDelegate, IMvxIosViewPresenter presenter)
             : base(applicationDelegate, presenter)
         {
@@ -22,7 +22,7 @@ namespace StormManager.iOS
         {
             return new Core.App();
         }
-        
+
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();

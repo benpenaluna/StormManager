@@ -12,7 +12,7 @@ namespace StormManager.UWP.Controls.ControlHelpers
             {ColorAnimationType.Flood, typeof(FloodColorAnimation) },
             {ColorAnimationType.TreeDown, typeof(TreeDownColorAnimation) }
         };
-        
+
         public static IMapIconControlHelper Create(ColorAnimationType colorAnimationType)
         {
             AnimationToTypeMapping.TryGetValue(colorAnimationType, out var value);

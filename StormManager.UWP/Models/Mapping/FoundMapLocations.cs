@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using StormManager.UWP.Utils;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.Services.Maps;
-using StormManager.UWP.Utils;
 
 namespace StormManager.UWP.Models.Mapping
 {

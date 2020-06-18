@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using StormManager.UWP.Services.LocationService;
+using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
-using StormManager.UWP.Services.LocationService;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Services.LocationService

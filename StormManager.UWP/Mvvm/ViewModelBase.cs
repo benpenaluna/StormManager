@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Windows.UI.Xaml.Navigation;
+﻿using Newtonsoft.Json;
 using StormManager.UWP.Common;
 using StormManager.UWP.Services.NavigationService;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Windows.UI.Xaml.Navigation;
 
 namespace StormManager.UWP.Mvvm
 {

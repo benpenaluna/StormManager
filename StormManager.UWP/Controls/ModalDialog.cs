@@ -1,9 +1,9 @@
-﻿using System;
+﻿using StormManager.UWP.Common;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
-using StormManager.UWP.Common;
 
 namespace StormManager.UWP.Controls
 {
@@ -64,8 +64,7 @@ namespace StormManager.UWP.Controls
 
         private T GetTemplatedChild<T>(string name) where T : DependencyObject
         {
-            var child = GetTemplateChild(name) as T;
-            if (child == null)
+            if (!(GetTemplateChild(name) is T child))
                 throw new NullReferenceException(name);
             return child;
         }

@@ -1,9 +1,4 @@
 ﻿using StormManager.UWP.Common.ExtensionMethods;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace StormManager.UWP.Tests.Common.ExtensionMethods
@@ -22,7 +17,7 @@ namespace StormManager.UWP.Tests.Common.ExtensionMethods
         public void MaxAsciiValue_Returns126()
         {
             const int expected = 126;
-            var actual = KeyExtensions.MaxAsciiValue ;
+            var actual = KeyExtensions.MaxAsciiValue;
             Assert.Equal(expected, actual);
         }
 

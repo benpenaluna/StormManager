@@ -1,6 +1,6 @@
-﻿using Windows.Devices.Geolocation;
-using Moq;
+﻿using Moq;
 using StormManager.UWP.Services.LocationService;
+using Windows.Devices.Geolocation;
 
 namespace StormManager.UWP.Tests.Services.LocationService
 {

@@ -121,14 +121,14 @@ namespace StormManager.UWP.Utils
                 case DeviceFamilies.Xbox: return DeviceDispositions.Xbox;
                 case DeviceFamilies.HoloLens: return DeviceDispositions.HoloLens;
                 case DeviceFamilies.Mobile:
-                {
-                    if (IsContinuum())
-                        return DeviceDispositions.Continuum;
-                    else if (IsPhone())
-                        return DeviceDispositions.Phone;
-                    else
-                        return DeviceDispositions.Mobile;
-                }
+                    {
+                        if (IsContinuum())
+                            return DeviceDispositions.Continuum;
+                        else if (IsPhone())
+                            return DeviceDispositions.Phone;
+                        else
+                            return DeviceDispositions.Mobile;
+                    }
                 case DeviceFamilies.Unknown:
                 default: return DeviceDispositions.Unknown;
             }

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using StormManager.UWP.Mvvm;
+using System;
 using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media.Animation;
-using StormManager.UWP.Mvvm;
 
 namespace StormManager.UWP.Controls
 {

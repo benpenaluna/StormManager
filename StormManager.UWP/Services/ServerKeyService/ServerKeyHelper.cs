@@ -12,7 +12,7 @@ namespace StormManager.UWP.Services.ServerKeyService
         public string Password { get; set; }
 
         private ServerKeyHelper() { }
-        
+
         public static Task<IServerKeyHelper> CreateAsync(string secret = null)
         {
             var result = new ServerKeyHelper();
@@ -24,7 +24,7 @@ namespace StormManager.UWP.Services.ServerKeyService
             if (secret == null)
                 secret = await GetServerKeyAsync();
 
-            var secretSplits = secret.Split(new char[] {','}, StringSplitOptions.None);
+            var secretSplits = secret.Split(new char[] { ',' }, StringSplitOptions.None);
             try
             {
                 UserId = secretSplits[0];
