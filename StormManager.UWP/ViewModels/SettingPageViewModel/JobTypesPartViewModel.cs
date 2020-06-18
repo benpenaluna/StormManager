@@ -197,8 +197,23 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         public override async Task OnNavigatedFromAsync(IDictionary<string, object> pageState, bool suspending)
         {
             await base.OnNavigatedFromAsync(pageState, suspending);
+            
+            UnloadStaticEventHandlers();
 
             await App.UnitOfWork.CompleteAsync();
+        }
+
+        private static void UnloadStaticEventHandlers()
+        {
+            foreach (var d in OnEditModeCompleted.GetInvocationList())
+            {
+                OnEditModeCompleted -= (d as EventHandler);
+            }
+
+            foreach (var d in NavigateToEditModeOnChange.GetInvocationList())
+            {
+                NavigateToEditModeOnChange -= (d as EventHandler);
+            }
         }
 
         public void JobTypesListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
