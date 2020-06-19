@@ -48,7 +48,7 @@ namespace StormManager.UWP.Persistence.Repositories
 
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            Context.Set<TEntity>().Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)

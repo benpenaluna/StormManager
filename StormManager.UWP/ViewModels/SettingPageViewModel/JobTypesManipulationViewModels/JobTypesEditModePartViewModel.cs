@@ -118,17 +118,19 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationV
 
             EditedJobType = JobType;
 
+            EditCompletionState = CompletionState;
             NavigateBackToViewMode();
         }
 
         public void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
+            EditCompletionState = CompletionState.Cancelled;
+            
             NavigateBackToViewMode();
         }
 
         private static void NavigateBackToViewMode()
         {
-            EditCompletionState = CompletionState.Cancelled;
             EditModeCompletion = EditCompletion.Complete;
 
             NavigateToEditMode = false;

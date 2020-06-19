@@ -37,7 +37,8 @@ namespace StormManager.UWP.Views
         {
             ((SettingsPageViewModel)DataContext).JobTypesPartViewModel.JobTypesListView_OnSelectionChanged(sender, e);
 
-            JobTypesListView.ScrollIntoView(JobTypesListView.SelectedItem, ScrollIntoViewAlignment.Default);
+            if (JobTypesListView.SelectedItem != null)
+                JobTypesListView.ScrollIntoView(JobTypesListView.SelectedItem, ScrollIntoViewAlignment.Default);
         }
 
         public void AutoSuggestBoxSearch_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)

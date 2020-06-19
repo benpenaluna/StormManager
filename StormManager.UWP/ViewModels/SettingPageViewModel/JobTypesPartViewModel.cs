@@ -155,10 +155,13 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private void DeletionRequested_OnChanged(object sender, EventArgs e)
         {
-            //if (NavigateToEditMode)
-            //{
-            //    SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(SelectedJobType, CompletionState.Updated));
-            //}
+            var jobForDeletion = new JobType(SelectedJobType);
+
+            var index = JobTypes.IndexOf(SelectedJobType);
+
+            SelectedJobType = index + 1 <= JobTypes.Count - 2 ? JobTypes[index + 1] : JobTypes[JobTypes.Count - 2];
+
+            JobTypes.Remove(jobForDeletion);
         }
 
         private void JobTypesPartViewModel_EditModeCompleted(object sender, EventArgs e)
@@ -203,12 +206,32 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private static void JobTypes_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.NewItems != null)
+                ProcessAdditions(e);
+
+            if (e.OldItems != null)
+                ProcessDeletions(e);
+        }
+
+        private static void ProcessAdditions(NotifyCollectionChangedEventArgs e)
+        {
             foreach (var addedItem in e.NewItems)
             {
                 if (!(addedItem is JobType jobType))
                     continue;
 
                 App.UnitOfWork.JobTypes.Add(jobType);
+            }
+        }
+
+        private static void ProcessDeletions(NotifyCollectionChangedEventArgs e)
+        {
+            foreach (var deletedItem in e.OldItems)
+            {
+                if (!(deletedItem is JobType jobType))
+                    continue;
+
+                App.UnitOfWork.JobTypes.Remove(jobType);
             }
         }
 
@@ -238,19 +261,18 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private static void DetachNavigationEventHandlers()
         {
-            foreach (var d in DeletionRequestedOnChange.GetInvocationList())
-            {
-                DeletionRequestedOnChange -= (d as EventHandler);
-            }
-            
-            foreach (var d in OnEditModeCompleted.GetInvocationList())
-            {
-                OnEditModeCompleted -= (d as EventHandler);
-            }
+            DetachSubscribersFrom(DeletionRequestedOnChange);
 
-            foreach (var d in NavigateToEditModeOnChange.GetInvocationList())
+            DetachSubscribersFrom(OnEditModeCompleted);
+
+            DetachSubscribersFrom(NavigateToEditModeOnChange);
+        }
+
+        private static void DetachSubscribersFrom(EventHandler evnt)
+        {
+            foreach (var subscriber in evnt.GetInvocationList())
             {
-                NavigateToEditModeOnChange -= (d as EventHandler);
+                evnt -= (subscriber as EventHandler);
             }
         }
 

@@ -58,24 +58,34 @@ namespace StormManager.UWP.Persistence.ObjectFramework
         {
             // TODO: Think about this. If item is added and then deleted, then the deletion should negate the addition and the
             // addition should be dequeued - we don't want to be sending two updates to the server unncessarily
-            
-            foreach (var addedItem in e.NewItems)
+
+            ProcessInsertions(e);
+
+            ProcessDeletions(e);
+        }
+
+        private void ProcessInsertions(NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+                ProcessModifications(e.NewItems, SqlTransactionType.Insertion);
+        }
+
+        private void ProcessModifications(System.Collections.IList collection, SqlTransactionType sqlTransactionType)
+        {
+            foreach (var modification in collection)
             {
-                if (!(addedItem is TEntity entity) || RepoChanges.QueueContains(entity))
+                if (!(modification is TEntity entity) || RepoChanges.QueueContains(entity))
                     continue;
 
-                RepoChanges.Changes.Enqueue(new StateChange(entity, SqlTransactionType.Insertion));
+                RepoChanges.Changes.Enqueue(new StateChange(entity, sqlTransactionType));
                 entity.PropertyChanged += ItemOnPropertyChanged;
             }
+        }
 
-            foreach (var deletedItem in e.OldItems)
-            {
-                if (!(deletedItem is TEntity entity) || RepoChanges.QueueContains(entity))
-                    continue;
-
-                RepoChanges.Changes.Enqueue(new StateChange(entity, SqlTransactionType.Deletion));
-                entity.PropertyChanged += ItemOnPropertyChanged;
-            }
+        private void ProcessDeletions(NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+                ProcessModifications(e.OldItems, SqlTransactionType.Deletion);
         }
     }
 }
