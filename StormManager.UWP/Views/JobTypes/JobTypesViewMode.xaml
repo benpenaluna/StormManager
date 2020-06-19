@@ -38,7 +38,8 @@
                         Background="Transparent" 
                         IsOpen="False"
                         DefaultLabelPosition="Right">
-                <AppBarButton x:Uid="DeleteJobTypeAppBarButton">
+                <AppBarButton x:Uid="DeleteJobTypeAppBarButton"
+                              Click="DeleteJobTypeAppBarButton_OnClick">
                     <AppBarButton.Icon>
                         <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="&#xE74D;"/>
                     </AppBarButton.Icon>
@@ -47,6 +48,11 @@
                     </ToolTipService.ToolTip>
                 </AppBarButton>
             </CommandBar>
+
+            <ContentDialog x:Name="Delete_ContentDialog"
+                           x:Uid="DeleteContentDialog"
+                           DefaultButton="Primary">
+            </ContentDialog>
 
             <Rectangle Grid.Row="1" Grid.Column="0" 
                        Margin="10"

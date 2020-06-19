@@ -1,4 +1,5 @@
 ﻿using StormManager.UWP.Models;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -33,6 +34,16 @@ namespace StormManager.UWP.Views.JobTypes
                 JobType = (JobType)e.Parameter;
 
             base.OnNavigatedTo(e);
+        }
+
+        private async void DeleteJobTypeAppBarButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var result = await Delete_ContentDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                ViewModel.DeleteJobTypeAppBarButton_OnClick(sender, e);
+            }
         }
     }
 }

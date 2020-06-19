@@ -18,12 +18,24 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 {
     public class JobTypesPartViewModel : ViewModelBase
     {
-        public static int NewJobId = int.MinValue;
+        private static bool _deletionRequested;
+        protected static bool DeletionRequested
+        {
+            get { return _deletionRequested; }
+            set 
+            { 
+                _deletionRequested = value;
+                
+                if (value)
+                    DeletionRequestedOnChange?.Invoke(new object(), new EventArgs());
+            }
+        }
+
+        protected static CompletionState EditCompletionState { get; set; }
 
         public static JobType EditedJobType { get; set; }
 
         private static EditCompletion _editModeCompletion;
-
         protected static EditCompletion EditModeCompletion
         {
             get => _editModeCompletion;
@@ -35,24 +47,10 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
                     OnEditModeCompleted?.Invoke(new object(), new EventArgs());
             }
         }
-
-        protected static CompletionState EditCompletionState { get; set; }
-
-        private JobType _selectedJobType = new JobType();
-
-        private Frame _selectedFrame = new Frame()
-        {
-            Background = (SolidColorBrush)Application.Current.Resources["UnusedPageBackgroundThemeBrush"]
-        };
-
-        public Frame SelectedFrame
-        {
-            get => _selectedFrame;
-            set { _selectedFrame = value; RaisePropertyChanged(); }
-        }
+        
+        public ObservableCollection<JobType> JobTypes { get; set; }
 
         private static bool _navigateToEditMode;
-
         protected static bool NavigateToEditMode
         {
             get => _navigateToEditMode;
@@ -65,15 +63,26 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             }
         }
 
+        public static int NewJobId = int.MinValue;
+
+        public static IEnumerable<JobType> PersistedJobTypes;
+
+        private Frame _selectedFrame = new Frame()
+        {
+            Background = (SolidColorBrush)Application.Current.Resources["UnusedPageBackgroundThemeBrush"]
+        };
+        public Frame SelectedFrame
+        {
+            get => _selectedFrame;
+            set { _selectedFrame = value; RaisePropertyChanged(); }
+        }
+        
+        private JobType _selectedJobType = new JobType();
         public JobType SelectedJobType
         {
             get => _selectedJobType;
             set { _selectedJobType = value; RaisePropertyChanged(); }
         }
-
-        public static IEnumerable<JobType> PersistedJobTypes;
-
-        public ObservableCollection<JobType> JobTypes { get; set; }
 
         public JobTypesPartViewModel()
         {
@@ -81,7 +90,10 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
             AttachEventHandlers();
         }
 
+        protected static event EventHandler DeletionRequestedOnChange;
+
         public static event EventHandler OnEditModeCompleted;
+        
         protected static event EventHandler NavigateToEditModeOnChange;
 
         private void InitialiseCollections()
@@ -113,6 +125,13 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private void AttachEventHandlers()
         {
+            AttachJobTypeCollectionEventHandlers();
+
+            AttachNavigationEventHanders();
+        }
+
+        private void AttachJobTypeCollectionEventHandlers()
+        {
             foreach (var jobType in JobTypes)
             {
                 jobType.PropertyChanged += JobTypes_PropertyChanged;
@@ -120,12 +139,26 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
             JobTypes.CollectionChanged += JobTypes_CollectionChanged;
             ((INotifyPropertyChanged)JobTypes).PropertyChanged += JobTypes_PropertyChanged;
+        }
+
+        private void AttachNavigationEventHanders()
+        {
+            if (DeletionRequestedOnChange is null)
+                DeletionRequestedOnChange += new WeakEventHandler<EventArgs>(DeletionRequested_OnChanged).Handler;
 
             if (OnEditModeCompleted is null)
                 OnEditModeCompleted += new WeakEventHandler<EventArgs>(JobTypesPartViewModel_EditModeCompleted).Handler;
 
             if (NavigateToEditModeOnChange is null)
                 NavigateToEditModeOnChange += new WeakEventHandler<EventArgs>(NavigateToEditMode_OnChanged).Handler;
+        }
+
+        private void DeletionRequested_OnChanged(object sender, EventArgs e)
+        {
+            //if (NavigateToEditMode)
+            //{
+            //    SelectedFrame.Navigate(typeof(JobTypesEditMode), new JobEdit(SelectedJobType, CompletionState.Updated));
+            //}
         }
 
         private void JobTypesPartViewModel_EditModeCompleted(object sender, EventArgs e)
@@ -198,13 +231,18 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
         {
             await base.OnNavigatedFromAsync(pageState, suspending);
             
-            UnloadStaticEventHandlers();
+            DetachNavigationEventHandlers();
 
             await App.UnitOfWork.CompleteAsync();
         }
 
-        private static void UnloadStaticEventHandlers()
+        private static void DetachNavigationEventHandlers()
         {
+            foreach (var d in DeletionRequestedOnChange.GetInvocationList())
+            {
+                DeletionRequestedOnChange -= (d as EventHandler);
+            }
+            
             foreach (var d in OnEditModeCompleted.GetInvocationList())
             {
                 OnEditModeCompleted -= (d as EventHandler);

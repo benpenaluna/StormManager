@@ -180,6 +180,22 @@
     <value>Debrief</value>
     <comment>Views.OperationsPage.Pivot.PivotItem</comment>
   </data>
+  <data name="DeleteContentDialog.CloseButtonText" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="DeleteContentDialog.Content" xml:space="preserve">
+    <value>Do you want to permanently delete this Job Type?</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="DeleteContentDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Ok</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
+  <data name="DeleteContentDialog.Title" xml:space="preserve">
+    <value>Confirm Deletion</value>
+    <comment>Views.JobTypes.JobTypesViewMode</comment>
+  </data>
   <data name="DeleteJobTypeAppBarButton.Label" xml:space="preserve">
     <value>Delete</value>
     <comment>Views.JobTypes.JobTypesViewMode</comment>
