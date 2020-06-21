@@ -1,5 +1,6 @@
 ﻿using StormManager.UWP.Common.Editing;
 using StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationViewModels;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace StormManager.UWP.Views.JobTypes
@@ -22,6 +23,11 @@ namespace StormManager.UWP.Views.JobTypes
             }
 
             base.OnNavigatedTo(e);
+        }
+
+        private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            CategoryTextBox.Focus(Windows.UI.Xaml.FocusState.Programmatic);
         }
     }
 }

@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:StormManager.UWP.ViewModels.SettingPageViewModel.JobTypesManipulationViewModels"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
 
     <Page.DataContext>
         <vm:JobTypesEditModePartViewModel x:Name="ViewModel" />
@@ -115,7 +116,8 @@
                     <TextBox x:Name="CategoryTextBox" 
                              Text="{x:Bind ViewModel.JobType.Category, Mode=TwoWay}"
                              Style="{StaticResource TextBoxStyle}"
-                             TextChanged="{x:Bind ViewModel.CategoryTextBox_OnTextChanged}"/>
+                             TextChanged="{x:Bind ViewModel.CategoryTextBox_OnTextChanged}" 
+                             TabIndex="0"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="1"
@@ -125,7 +127,8 @@
                     <TextBox x:Name="SubCategoryTextBox" 
                              Text="{x:Bind ViewModel.JobType.SubCategory, Mode=TwoWay}"
                              Style="{StaticResource TextBoxStyle}"
-                             TextChanged="{x:Bind ViewModel.SubCategoryTextBox_OnTextChanged}"/>
+                             TextChanged="{x:Bind ViewModel.SubCategoryTextBox_OnTextChanged}" 
+                             TabIndex="1"/>
                 </StackPanel>
 
                 <StackPanel Grid.Row="2"
@@ -144,7 +147,8 @@
                                                     Style="{StaticResource ColourPickerButtonStyle}"
                                                     Margin="0,12,5,10"
                                                     Color="{x:Bind ViewModel.JobType.NewJobColorWindowUi, Mode=TwoWay}"
-                                                    ColorChanged="{x:Bind ViewModel.NewJobColorPicker_OnColorChanged}">
+                                                    ColorChanged="{x:Bind ViewModel.NewJobColorPicker_OnColorChanged}" 
+                                                    TabIndex="2">
                             <ToolTipService.ToolTip>
                                 <TextBlock x:Uid="NewJobColorPickerButtonToolTip" />
                             </ToolTipService.ToolTip>
@@ -155,7 +159,8 @@
                                                     Style="{StaticResource ColourPickerButtonStyle}"
                                                     Margin="5,12,0,10"
                                                     Color="{x:Bind ViewModel.JobType.AgingJobColorWindowUi, Mode=TwoWay}"
-                                                    ColorChanged="{x:Bind ViewModel.AgingJobColorPicker_OnColorChanged}">
+                                                    ColorChanged="{x:Bind ViewModel.AgingJobColorPicker_OnColorChanged}" 
+                                                    TabIndex="3">
                             <ToolTipService.ToolTip>
                                 <TextBlock x:Uid="AgingJobColorPickerButtonToolTip" />
                             </ToolTipService.ToolTip>
@@ -171,7 +176,8 @@
                                   FontSize="14"
                                   IsOn="{x:Bind ViewModel.JobType.IsUsed, Mode=TwoWay}"
                                   Margin="0,12,0,10"
-                                  Toggled="{x:Bind ViewModel.ToggleSwitch_OnToggled}"/>
+                                  Toggled="{x:Bind ViewModel.ToggleSwitch_OnToggled}" 
+                                  TabIndex="4"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
@@ -188,12 +194,14 @@
                     Background="{ThemeResource SaveButtonBackgroundThemeBrush}"
                     Margin="5,26,5,12"
                     IsEnabled="{x:Bind ViewModel.SaveButtonEnabled, Mode=OneWay}"
-                    Click="{x:Bind ViewModel.SaveButton_OnClick}"/>
+                    Click="{x:Bind ViewModel.SaveButton_OnClick}" 
+                    TabIndex="5"/>
             <Button x:Uid="CancelButton"
                     Grid.Column="1"
                     Style="{StaticResource CompletionButtonStyle}"
                     Margin="5,26,5,12"
-                    Click="{x:Bind ViewModel.CancelButton_OnClick}"/>
+                    Click="{x:Bind ViewModel.CancelButton_OnClick}" 
+                    TabIndex="6"/>
         </Grid>
     </Grid>
 </Page>
