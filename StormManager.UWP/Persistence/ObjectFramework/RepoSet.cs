@@ -56,9 +56,6 @@ namespace StormManager.UWP.Persistence.ObjectFramework
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // TODO: Think about this. If item is added and then deleted, then the deletion should negate the addition and the
-            // addition should be dequeued - we don't want to be sending two updates to the server unncessarily
-
             ProcessInsertions(e);
 
             ProcessDeletions(e);

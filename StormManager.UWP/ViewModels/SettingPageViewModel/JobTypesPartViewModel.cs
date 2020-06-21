@@ -190,8 +190,37 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         private void AddNewJobToCollection()
         {
+            var editedJobType = new JobType(EditedJobType);
+
             JobTypes.Add(EditedJobType);
-            SelectedJobType = EditedJobType;
+            ReOrderJobTypes();
+            AttachJobTypeCollectionEventHandlers();
+            
+            UpdateSelectedJobType(editedJobType);
+        }
+
+        private void ReOrderJobTypes()
+        {
+            var reOrderedJobTypes = JobTypes.OrderBy(x => x.Category).ThenBy(x => x.SubCategory).ToList();
+            JobTypes.Clear();
+            foreach(var jobType in reOrderedJobTypes)
+            {
+                JobTypes.Add(jobType);
+            }
+        }
+
+        private void UpdateSelectedJobType(JobType editedJobType)
+        {
+            if (JobTypes != null)
+            {
+                var newEditedJobType = JobTypes.Where(x => x.Id == editedJobType.Id);
+
+                SelectedJobType = newEditedJobType != null ? newEditedJobType.FirstOrDefault() : JobTypes.FirstOrDefault();
+
+                return;
+            }
+
+            SelectedJobType = JobTypes.FirstOrDefault();
         }
 
         private void ResetFrameToViewMode()
