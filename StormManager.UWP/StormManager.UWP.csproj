@@ -185,6 +185,7 @@
     <Compile Include="Converters\ColorToConstrastColorConverter.cs" />
     <Compile Include="Converters\DateTimeOffsetConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\ValueWhenConverter.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repositories\IJobTypeRepository.cs" />

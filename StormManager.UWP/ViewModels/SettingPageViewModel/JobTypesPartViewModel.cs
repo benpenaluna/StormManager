@@ -325,7 +325,7 @@ namespace StormManager.UWP.ViewModels.SettingPageViewModel
 
         public void FilterAppBarButton_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

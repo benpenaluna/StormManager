@@ -73,6 +73,12 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="0"/>
         </Style>
+
+        <Style x:Key="MenuFlyoutButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
     </Page.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -237,6 +243,13 @@
                                     <ToolTipService.ToolTip>
                                         <TextBlock x:Uid="FilterJobTypeButtonToolTip" />
                                     </ToolTipService.ToolTip>
+                                    <AppBarButton.Flyout>
+                                        <MenuFlyout Placement="Bottom">
+                                            <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemWithTagsStyle}" Tag="None" Text="All Job Types" />
+                                            <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemWithTagsStyle}" Tag="None" Text="Used Job Types" />
+                                            <MenuFlyoutItem Style="{StaticResource MenuFlyoutItemWithTagsStyle}" Tag="None" Text="Unused Job Types" />
+                                        </MenuFlyout>
+                                    </AppBarButton.Flyout>
                                 </AppBarButton>
                                 <AppBarButton x:Uid="JobTypeExportAppBarButton"
                                               VerticalAlignment="Center">
